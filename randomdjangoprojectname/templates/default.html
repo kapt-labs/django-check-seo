@@ -1,0 +1,42 @@
+{% load cms_tags %}
+
+<p>a</p>
+
+<h1>Check Django SEO</h1>
+
+<p>An app that will look at your content and help you solve your SEO problems.</p>
+
+<hr />
+
+<p>
+  <strong> {{ problems.len }} problèmes trouvés, et {{ warnings.len }} avertissements levés.</strong>
+</p>
+
+<ul>
+  {% for problem in problems %}
+    <li>
+      <strong>{{ problem.name }}</strong> : {{ problem.description }}<br />
+      <i>{{ problem.context }}</i>
+    </li>
+  {% endfor %}
+</ul>
+
+<ul>
+  {% for warning in warnings %}
+    <li>
+      <strong>{{ warning.name }}</strong> : {{ warning.description }}<br />
+      <i>{{ warning.context }}</i>
+    </li>
+  {% endfor %}
+</ul>
+
+<hr />
+
+<details>
+  <summary>
+    See parsed html
+  </summary>
+  <pre>
+    {{ parsehtml }}
+  </pre>
+</details>
