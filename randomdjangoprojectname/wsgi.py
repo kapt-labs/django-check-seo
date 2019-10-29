@@ -7,10 +7,13 @@ For more information on this file, see
 https://docs.djangoproject.com/en/2.2/howto/deployment/wsgi/
 """
 
+# Standard Library
 import os
 
+# Third party
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'randomdjangoprojectname.settings')
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "randomdjangoprojectname.settings")
 
 application = get_wsgi_application()
