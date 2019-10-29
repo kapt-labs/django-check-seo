@@ -1,0 +1,83 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# kapt <dev@kapt.mobi>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-10-29 16:03+0100\n"
+"PO-Revision-Date: 2019-10-29 16:09+0100\n"
+"Last-Translator: kapt <dev@kapt.mobi>\n"
+"Language-Team: français <dev@kapt.mobi>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Gtranslator 2.91.7\n"
+
+#: views.py:50
+msgid "No meta keywords"
+msgstr "Pas de mots clefs meta"
+
+#: views.py:51
+msgid ""
+"Meta keywords were important in this meta tag, however django-check-seo uses "
+"these keywords to check all other tests related to keywords. You will be "
+"flooded with problems and warnings and this SEO tool will not work as well "
+"as it should if you don't add some keywords."
+msgstr ""
+"La présence de mots clefs était important dans ce meta tag, mais django-"
+"check-seo utilise ces mots comme base pour vérifier tous les autres tests "
+"relatifs à des mots clefs. Vous allez être submergé de problèmes & "
+"d'avertissements, et cet outil de SEO ne fonctionnera pas aussi bien qu'il "
+"le devrait si vous n'ajoutez pas quelques mots clefs."
+
+#: views.py:58
+msgid "No title tag"
+msgstr "Pas de titre meta"
+
+#: views.py:59
+msgid ""
+"Titles tags are ones of the most important things to add to your pages, "
+"sinces they are the main text displayed on result search pages."
+msgstr ""
+"Le meta tag title est un des tags les plus importants à ajouter à vos pages, "
+"puisque ce sera principalement lui qui sera affiché dans les résultats des "
+"moteurs de recherches."
+
+#: views.py:66
+msgid "Title tag is too short"
+msgstr "Le meta tag title est trop court"
+
+#: views.py:67
+msgid ""
+"Titles tags need to describe the content of the page, and need to contain at "
+"least a few words (settings: >="
+msgstr ""
+"Les tags de titre doivent décrire le contenu de la page, et doivent contenir "
+"au moins quelques mots (valeur des paramètres : >="
+
+#: views.py:67
+#, python-brace-format
+msgid "{title_length} word"
+msgid_plural "{title_length} words"
+msgstr[0] "{title_length} mot"
+msgstr[1] "{title_length} mots"
+
+#: views.py:72
+msgid "Title tag is too long"
+msgstr "Le meta tag title est trop long"
+
+#: views.py:73
+msgid ""
+"Only the first ~55-60 chars are displayed on modern search engines results. "
+"Writing a longer title is not really required and can lead to make the user "
+"miss informations."
+msgstr ""
+"Seuls les ~55-60 premiers caractères sont affichés sur les résultats des "
+"moteurs de recherche moderne. Écrire un plus long titre n'est pas vraiment "
+"requis, et peut mener l'utilisateur à louper des informations."

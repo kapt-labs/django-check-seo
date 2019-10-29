@@ -1,42 +1,60 @@
 {% load cms_tags %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Django check SEO</title>
+    <style>
+      body{margin-top: 48px;}
+    </style>
+  </head>
+  <body>
+    <h1>Django check SEO</h1>
 
-<p>a</p>
+    <p>An app that will look at your content and help you solve your SEO problems.</p>
 
-<h1>Django Check SEO</h1>
+    <hr />
 
-<p>An app that will look at your content and help you solve your SEO problems.</p>
+    <p>
+      <strong> {{ problems|length }} problèmes trouvés, et {{ warnings|length }} avertissements levés.</strong>
+    </p>
 
-<hr />
+    <ul>
+      {% for problem in problems %}
+        <li>
+          <strong>{{ problem.name }}</strong> : {{ problem.description }}<br />
+          <i>{{ problem.context }}</i>
+        </li>
+      {% endfor %}
+    </ul>
 
-<p>
-  <strong> {{ problems.len }} problèmes trouvés, et {{ warnings.len }} avertissements levés.</strong>
-</p>
+    <ul>
+      {% for warning in warnings %}
+        <li>
+          <strong>{{ warning.name }}</strong> : {{ warning.description }}<br />
+          <i>{{ warning.context }}</i>
+        </li>
+      {% endfor %}
+    </ul>
 
-<ul>
-  {% for problem in problems %}
-    <li>
-      <strong>{{ problem.name }}</strong> : {{ problem.description }}<br />
-      <i>{{ problem.context }}</i>
-    </li>
-  {% endfor %}
-</ul>
+    <hr />
 
-<ul>
-  {% for warning in warnings %}
-    <li>
-      <strong>{{ warning.name }}</strong> : {{ warning.description }}<br />
-      <i>{{ warning.context }}</i>
-    </li>
-  {% endfor %}
-</ul>
+    <details>
+      <summary>
+        See parsed html
+      </summary>
+      <pre>
+{{ parsehtml }}
+      </pre>
+    </details>
+    <details>
+      <summary>
+        See settings
+      </summary>
+      <pre>
+{{ settings }}
+      </pre>
+    </details>
 
-<hr />
-
-<details>
-  <summary>
-    See parsed html
-  </summary>
-  <pre>
-    {{ parsehtml }}
-  </pre>
-</details>
+  </body>
+</html>
