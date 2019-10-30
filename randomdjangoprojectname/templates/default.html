@@ -22,8 +22,10 @@
     <ul>
       {% for problem in problems %}
         <li>
-          <strong>{{ problem.name }}</strong> <i>(settings: {% autoescape off %}{{ problem.settings }})</i><br />
-          {{ problem.description }}{% endautoescape %}<br />
+          <details>
+            <summary><strong>{{ problem.name }}</strong> <i>(settings: {% autoescape off %}{{ problem.settings }})</i></summary>
+            {{ problem.description }}{% endautoescape %}<br />
+          </details>
         </li>
       {% endfor %}
     </ul>
