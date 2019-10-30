@@ -22,8 +22,8 @@
     <ul>
       {% for problem in problems %}
         <li>
-          <strong>{{ problem.name }}</strong> : {{ problem.description }}<br />
-          <i>{{ problem.context }}</i>
+          <strong>{{ problem.name }}</strong> <i>(settings: {% autoescape off %}{{ problem.settings }})</i><br />
+          {{ problem.description }}{% endautoescape %}<br />
         </li>
       {% endfor %}
     </ul>
@@ -31,8 +31,8 @@
     <ul>
       {% for warning in warnings %}
         <li>
-          <strong>{{ warning.name }}</strong> : {{ warning.description }}<br />
-          <i>{{ warning.context }}</i>
+          <strong>{{ warning.name }}</strong> <i>(settings: {% autoescape off %}{{ warning.settings }})</i><br />
+          {{ warning.description }}{% endautoescape %}<br />
         </li>
       {% endfor %}
     </ul>

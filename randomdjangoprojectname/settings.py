@@ -230,9 +230,4 @@ THUMBNAIL_PROCESSORS = (
 META_SITE_PROTOCOL = "http"
 META_USE_SITES = True
 
-DJANGO_CHECK_SEO_SETTINGS = {
-    "content_words_number": [700, 1000],
-    "internal_links": [1, 5],
-    "external_links": [2, 5],
-    "keywords_repeat": [2, 5],
-}
+DJANGO_CHECK_SEO_SETTINGS = {}
