@@ -229,7 +229,7 @@ class DjangoCheckSeo:
         if not any(i >= settings.SEO_SETTINGS["keywords_repeat"][0] for i in occurence):
             self.problems.append(
                 {
-                    "name": _("Not enough keyword repeat"),
+                    "name": _("Not enough keyword occurences"),
                     "settings": "&ge;{}".format(
                         settings.SEO_SETTINGS["keywords_repeat"][0]
                     ),
@@ -246,7 +246,7 @@ class DjangoCheckSeo:
             ):
                 self.problems.append(
                     {
-                        "name": _("Too many keyword repeat"),
+                        "name": _("Too many keyword occurences"),
                         "settings": "&le;{}".format(
                             settings.SEO_SETTINGS["keywords_repeat"][1]
                         ),
