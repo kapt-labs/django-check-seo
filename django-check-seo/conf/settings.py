@@ -4,7 +4,7 @@ from django.conf import settings
 
 # define basic SEO settings
 SEO_SETTINGS = {
-    "content_words_number": [700, 1000],
+    "content_words_number": [300, 600],
     "internal_links": [1, 15],
     "external_links": [1, 5],
     "keywords_repeat": [2, 5],

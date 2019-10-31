@@ -5,12 +5,14 @@ import re
 
 # Third party
 from bs4 import BeautifulSoup
-from django.utils.translation import gettext as _
+from django.utils.translation import get_language, gettext as _
 from django.views import generic
 import requests
+from stop_words import get_stop_words
 
 # Local application / specific library imports
 from .conf import settings
+from .google_stop_words import get_stop_words as gsw
 
 
 class IndexView(generic.base.TemplateView):
@@ -19,9 +21,17 @@ class IndexView(generic.base.TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
 
-        full_url = os.environ["DOMAIN_NAME"] + self.request.GET.get("page", None)
+        if "http" not in self.request.GET.get("page", None):
+            full_url = (
+                "http://"
+                + os.environ["DOMAIN_NAME"]
+                + self.request.GET.get("page", None)
+            )
+        else:
+            full_url = self.request.GET.get("page", None)
+
         # do not get cached page (useful ?)
-        r = requests.get("http://" + full_url, headers={"Cache-Control": "no-cache"})
+        r = requests.get(full_url, headers={"Cache-Control": "no-cache"})
         context["parsehtml"] = r.text
         soup = BeautifulSoup(r.text, features="lxml")
 
@@ -51,6 +61,11 @@ class DjangoCheckSeo:
         self.warnings = []
 
     def check(self):
+        """Magic happens here.
+
+        Returns:
+            tuple -- Two arrays of dict of form {name, settings, description}.
+        """
         self.check_keywords()
         self.check_title()
         self.check_description()
@@ -59,11 +74,15 @@ class DjangoCheckSeo:
         self.check_keyword_url()
         self.check_h1()
         self.check_h2()
+        self.check_images()
+        self.check_url_depth()
+        self.count_words_without_stopwords()
 
         return (self.problems, self.warnings)
 
-    # first check to ensure that keywords are present
     def check_keywords(self):
+        """First check to ensure that keywords are present.
+        """
         meta = self.soup.find_all("meta")
         for tag in meta:
             if tag.attrs["name"] == "keywords" and tag.attrs["content"] != "":
@@ -83,7 +102,7 @@ class DjangoCheckSeo:
         )
 
     def check_title(self):
-        """Check all title-related conditions
+        """Check all title-related conditions.
         """
         # title presence
         if self.soup.title == "None":
@@ -398,7 +417,6 @@ class DjangoCheckSeo:
 
     def check_h2(self):
         h2 = self.soup.find_all("h2")
-        print(h2)
         if not h2:
             self.warnings.append(
                 {
@@ -435,3 +453,53 @@ class DjangoCheckSeo:
                         ),
                     }
                 )
+
+    def check_images(self):
+        images = self.content.find_all("img")
+
+        for image in images:
+            if not image.attrs["alt"] or image.attrs["alt"] == "None":
+                self.problems.append(
+                    {
+                        "name": _("Img lack alt tag"),
+                        "settings": _("all images"),
+                        "description": _(
+                            'Your images should always have an alt tag, because it improves accessibility for visually impaired people.<br />The name of your image is important too, because Google will look at it to know what the picture is about (<a href="https://support.google.com/webmasters/answer/114016">source</a>).<br /><a href="{img_url}">This is the image</a> without alt tag.'.format(
+                                img_url=image.attrs["src"]
+                            )
+                        ),
+                    }
+                )
+
+    def check_url_depth(self):
+        # do not count first slash after domain name, nor // in the "http://"
+        url_without_two_points_slash_slash = self.full_url.replace("://", "")
+        number_of_slashes = url_without_two_points_slash_slash.count("/") - 1
+
+        if number_of_slashes > settings.SEO_SETTINGS["max_link_depth"]:
+            self.problems.append(
+                {
+                    "name": _("Too many levels in path"),
+                    "settings": "&le;{settings}, found {path_depth}".format(
+                        settings=settings.SEO_SETTINGS["max_link_depth"],
+                        path_depth=number_of_slashes,
+                    ),
+                    "description": _(
+                        'Google recommand to organize your content by adding depth in your url, but advises against putting too much repertories (<a href="https://support.google.com/webmasters/answer/7451184">source</a>).<br />Yoast says that "In a perfect world, we would place everything in one sublevel at most. Today, many sites use secondary menus to accommodate for additional content" (<a href="https://yoast.com/how-to-clean-site-structure/">source</a>).'
+                    ),
+                }
+            )
+
+    def count_words_without_stopwords(self):
+        language = get_language()
+        stop_words = get_stop_words(language) + gsw.get_stop_words(language)
+        content = re.findall(r"\w+", self.content.text.lower())
+
+        nb_words = len(content)
+
+        print(nb_words)
+
+        for stop_word in stop_words:
+            nb_words -= content.count(stop_word)
+
+        print(nb_words)
