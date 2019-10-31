@@ -53,10 +53,12 @@ class DjangoCheckSeo:
     def check(self):
         self.check_keywords()
         self.check_title()
+        self.check_description()
         self.check_links()
         self.check_keyword_occurence()
         self.check_keyword_url()
         self.check_h1()
+        self.check_h2()
 
         return (self.problems, self.warnings)
 
@@ -132,9 +134,76 @@ class DjangoCheckSeo:
                 {
                     "name": _("Title do not contain any keyword"),
                     "settings": _("at least 1"),
-                    "description": _("Titles tags need to contain some keywords."),
+                    "description": _(
+                        "Titles tags need to contain at least one keyword, since they are one of the most important content of the page for search engines."
+                    ),
                 }
             )
+
+    def check_description(self):
+        meta = self.soup.find_all("meta")
+        for tag in meta:
+            if tag.attrs["name"] == "description" and tag.attrs["content"] != "":
+                if (
+                    len(tag.attrs["content"])
+                    < settings.SEO_SETTINGS["meta_description_length"][0]
+                ):
+                    self.problems.append(
+                        {
+                            "name": _("Meta description is too short"),
+                            "settings": _("needed"),
+                            "description": _(
+                                "Meta description can be displayed below your page title in search results. If Google find your description too short or not relevant, it will generate it's own description, based on your page content. This generated description will be less accurate than a good writen description."
+                            ),
+                        }
+                    )
+                elif (
+                    len(tag.attrs["content"])
+                    > settings.SEO_SETTINGS["meta_description_length"][1]
+                ):
+                    self.problems.append(
+                        {
+                            "name": _("Meta description is too long"),
+                            "settings": _("needed"),
+                            "description": _(
+                                "Meta description can be displayed below your page title in search results. If Google find your description too long, it may crop it and your potential visitors will not be able to read all its content. Sometimes, long pertinent meta descriptions will be displayed, but in the vast majority of the results, the description's lengths are 150-170 chars."
+                            ),
+                        }
+                    )
+
+                occurence = []
+                for keyword in self.keywords:
+                    occurence.append(
+                        sum(
+                            1
+                            for _ in re.finditer(
+                                r"\b%s\b" % re.escape(keyword.lower()),
+                                tag.attrs["content"].lower(),
+                            )
+                        )
+                    )
+                # if no keyword is found in h1
+                if not any(i > 0 for i in occurence):
+                    self.warnings.append(
+                        {
+                            "name": _("No keyword in meta description"),
+                            "settings": _("at least 1"),
+                            "description": _(
+                                "Meta description is not used by search engines to calculate the rank of the page, but users will read it (if the meta description is selected by Google). The bonus point is that Google will put the keywords searched by the users in bold, so the users can eaily verify that the content of your page fit their needs."
+                            ),
+                        }
+                    )
+
+                return
+        self.problems.append(
+            {
+                "name": _("No meta description"),
+                "settings": _("needed"),
+                "description": _(
+                    'Even if search engines states that they don\'t use meta description for ranking (<a href="https://webmasters.googleblog.com/2009/09/google-does-not-use-keywords-meta-tag.html">source</a>), they can be displayed below the title of your page in search results. Since search engines uses users clics to rank your website, an appealing description can make the difference.<br />Google has affirmed that they display a shorter text (~155 chars) below the title of the page (<a href="https://twitter.com/dannysullivan/status/996065145443893249">source</a>).'
+                ),
+            }
+        )
 
     def check_links(self):
         """Check all link-related conditions
@@ -242,13 +311,16 @@ class DjangoCheckSeo:
         else:
             # there is at least 1 keyword that is repeated > ["keywords_repeat"][1]
             if not all(
-                i < settings.SEO_SETTINGS["keywords_repeat"][1] for i in occurence
+                i <= settings.SEO_SETTINGS["keywords_repeat"][1] for i in occurence
             ):
                 self.problems.append(
                     {
                         "name": _("Too many keyword occurences"),
-                        "settings": "&le;{}".format(
-                            settings.SEO_SETTINGS["keywords_repeat"][1]
+                        # settings: ≤5, found X "keyword"
+                        "settings": '&le;{settings}, found {kw_count} "{kw}"'.format(
+                            settings=settings.SEO_SETTINGS["keywords_repeat"][1],
+                            kw_count=max(occurence),
+                            kw=self.keywords[occurence.index(max(occurence))],
                         ),
                         "description": _(
                             "Some SEO websites advise you to get 1% of your words to be keywords. For other websites (like Yoast) it's 0.25-0.5%. We use a constant for keywords repetition. Too many keywords on a page will lead search engines to think that you're doing some keyword stuffing (put too many keywords in order to manipulate the page rank)."
@@ -283,7 +355,7 @@ class DjangoCheckSeo:
                     "name": _("Too much h1 tags"),
                     "settings": _("exactly 1"),
                     "description": _(
-                        'Google has told that they do not consider using multiple h1 a bad thing (<a href="https://www.youtube.com/watch?v=WsgrSxCmMbM">source</a>), but Google is not the unique search engine out there. Bing webmaster guidelines says "Use only one <H1> tag per page".'
+                        'Google has told that they do not consider using multiple h1 a bad thing (<a href="https://www.youtube.com/watch?v=WsgrSxCmMbM">source</a>), but Google is not the unique search engine out there. Bing webmaster guidelines says "Use only one <h1> tag per page".'
                     ),
                 }
             )
@@ -302,15 +374,16 @@ class DjangoCheckSeo:
         else:
             occurence = []
             for keyword in self.keywords:
-                occurence.append(
-                    sum(
-                        1
-                        for _ in re.finditer(
-                            r"\b%s\b" % re.escape(keyword.lower()),
-                            self.content.text.lower(),
+                for single_h1 in h1:
+                    occurence.append(
+                        sum(
+                            1
+                            for _ in re.finditer(
+                                r"\b%s\b" % re.escape(keyword.lower()),
+                                single_h1.text.lower(),
+                            )
                         )
                     )
-                )
             # if no keyword is found in h1
             if not any(i > 0 for i in occurence):
                 self.problems.append(
@@ -319,6 +392,46 @@ class DjangoCheckSeo:
                         "settings": _("at least 1"),
                         "description": _(
                             "H1 are crawled by search engines as the title of your page. You may populate them with appropriate content in order to be sure that search engines correctly understand what your pages are all about."
+                        ),
+                    }
+                )
+
+    def check_h2(self):
+        h2 = self.soup.find_all("h2")
+        print(h2)
+        if not h2:
+            self.warnings.append(
+                {
+                    "name": _("No h2 tag"),
+                    "settings": _("at least 1"),
+                    "description": _(
+                        'H2 tags are useful because they are explored by search engines and can help them understand the subject of your page (<a href="https://robsnell.com/matt-cutts-transcript.html">source</a>). It\'s a "section title", so every time you start talking about a new topic, you can put an h2 tag, which will explain what the content will be about.'
+                    ),
+                }
+            )
+        else:
+            occurence = []
+            # check if each keyword
+            for keyword in self.keywords:
+                # is present at least
+                for single_h2 in h2:
+                    occurence.append(
+                        sum(
+                            1
+                            for _ in re.finditer(
+                                r"\b%s\b" % re.escape(keyword.lower()),
+                                single_h2.text.lower(),
+                            )
+                        )
+                    )
+            # if no keyword is found in h2
+            if not any(i > 0 for i in occurence):
+                self.problems.append(
+                    {
+                        "name": _("No keyword in h2"),
+                        "settings": _("at least 1"),
+                        "description": _(
+                            'Matt Cutts (creator of SafeSearch) <a href="https://robsnell.com/matt-cutts-transcript.html">stated in 2009</a> that "[...] we use things in the title, things in the URL, even things that are really highlighted, like h2 tags and stuff like that. ". Even if there is not really a more recent acknowledgement, h2 titles are important (but maybe not as important as h1 & title tags).'
                         ),
                     }
                 )

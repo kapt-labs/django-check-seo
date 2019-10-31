@@ -33,8 +33,10 @@
     <ul>
       {% for warning in warnings %}
         <li>
-          <strong>{{ warning.name }}</strong> <i>(settings: {% autoescape off %}{{ warning.settings }})</i><br />
-          {{ warning.description }}{% endautoescape %}<br />
+          <details>
+            <summary><strong>{{ warning.name }}</strong> <i>(settings: {% autoescape off %}{{ warning.settings }})</i></summary>
+            {{ warning.description }}{% endautoescape %}<br />
+          </details>
         </li>
       {% endfor %}
     </ul>
