@@ -244,7 +244,7 @@ class DjangoCheckSeo:
 
         # not enough internal links
         if internal_links < settings.SEO_SETTINGS["internal_links"][0]:
-            self.problems.append(
+            self.wagnings.append(
                 {
                     "name": _("Not enough internal links"),
                     "settings": "&ge;{}".format(
@@ -258,7 +258,7 @@ class DjangoCheckSeo:
 
         # too much internal links
         if internal_links > settings.SEO_SETTINGS["internal_links"][1]:
-            self.problems.append(
+            self.wagnings.append(
                 {
                     "name": _("Too many internal links"),
                     "settings": "&le;{}".format(
@@ -272,7 +272,7 @@ class DjangoCheckSeo:
 
         # not enough external links
         if external_links < settings.SEO_SETTINGS["external_links"][0]:
-            self.problems.append(
+            self.wagnings.append(
                 {
                     "name": _("Not enough external links"),
                     "settings": "&ge;{}".format(
@@ -286,7 +286,7 @@ class DjangoCheckSeo:
 
         # too much external links
         if external_links > settings.SEO_SETTINGS["external_links"][1]:
-            self.problems.append(
+            self.wagnings.append(
                 {
                     "name": _("Too many external links"),
                     "settings": "&le;{}".format(
