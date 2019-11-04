@@ -76,6 +76,7 @@ class DjangoCheckSeo:
         self.check_h2()
         self.check_images()
         self.check_url_depth()
+        self.keyword_present_in_first_paragraph()
         self.count_words_without_stopwords()
 
         return (self.problems, self.warnings)
@@ -490,6 +491,29 @@ class DjangoCheckSeo:
                 }
             )
 
+    def keyword_present_in_first_paragraph(self):
+        """Get [keywords_in_first_words] first words of the content, and ensure that there is a keyword among them.
+        """
+        content = self.content.text.lower().split()[
+            : settings.SEO_SETTINGS["keywords_in_first_words"]
+        ]
+
+        for keyword in self.keywords:
+            if keyword in content:
+                return
+
+        self.problems.append(
+            {
+                "name": _("No keyword in first sentence."),
+                "settings": "before {settings} words".format(
+                    settings=settings.SEO_SETTINGS["keywords_in_first_words"]
+                ),
+                "description": _(
+                    'Yoast advises to put a keyword in the first sentence of your content. The person who will read it will be relieved since he searched this keyword (<a href="https://yoast.com/text-structure-important-seo/">source</a>).'
+                ),
+            }
+        )
+
     def count_words_without_stopwords(self):
         language = get_language()
         stop_words = get_stop_words(language) + gsw.get_stop_words(language)
@@ -501,5 +525,7 @@ class DjangoCheckSeo:
 
         for stop_word in stop_words:
             nb_words -= content.count(stop_word)
+            content = list(filter((stop_word).__ne__, content))
 
+        print(content)
         print(nb_words)

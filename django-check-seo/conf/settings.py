@@ -10,7 +10,7 @@ SEO_SETTINGS = {
     "keywords_repeat": [2, 5],
     "meta_title_length": [30, 60],
     "meta_description_length": [50, 160],
-    "keywords_in_first_words": 80,
+    "keywords_in_first_words": 50,
     "important_semanticals_tags": ["img", "em", "strong", "i", "b"],
     "minimum_used_semantical_tags": 3,
     "max_link_depth": 3,
