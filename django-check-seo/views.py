@@ -38,7 +38,10 @@ class IndexView(generic.base.TemplateView):
         context["settings"] = json.dumps(settings.SEO_SETTINGS, indent=4)
 
         django_check_seo = DjangoCheckSeo(soup, full_url)
+
         (context["problems"], context["warnings"]) = django_check_seo.check()
+
+        context["content"] = django_check_seo.content
 
         return context
 
@@ -504,12 +507,12 @@ class DjangoCheckSeo:
 
         self.problems.append(
             {
-                "name": _("No keyword in first sentence."),
+                "name": _("No keyword in first sentence"),
                 "settings": "before {settings} words".format(
                     settings=settings.SEO_SETTINGS["keywords_in_first_words"]
                 ),
                 "description": _(
-                    'Yoast advises to put a keyword in the first sentence of your content. The person who will read it will be relieved since he searched this keyword (<a href="https://yoast.com/text-structure-important-seo/">source</a>).'
+                    'Yoast advises to put a keyword in the first sentence of your content. The person who reads it will be relieved because he will quickly retrieve the keyword he was looking for (<a href="https://yoast.com/text-structure-important-seo/">source</a>).'
                 ),
             }
         )
