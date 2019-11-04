@@ -7,7 +7,7 @@ SEO_SETTINGS = {
     "content_words_number": [300, 600],
     "internal_links": [1, 15],
     "external_links": [1, 5],
-    "keywords_repeat": [2, 5],
+    "keywords_repeat": [0.0025, 0.01],
     "meta_title_length": [30, 60],
     "meta_description_length": [50, 160],
     "keywords_in_first_words": 50,

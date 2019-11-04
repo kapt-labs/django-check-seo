@@ -244,7 +244,7 @@ class DjangoCheckSeo:
 
         # not enough internal links
         if internal_links < settings.SEO_SETTINGS["internal_links"][0]:
-            self.wagnings.append(
+            self.warnings.append(
                 {
                     "name": _("Not enough internal links"),
                     "settings": "&ge;{}".format(
@@ -258,7 +258,7 @@ class DjangoCheckSeo:
 
         # too much internal links
         if internal_links > settings.SEO_SETTINGS["internal_links"][1]:
-            self.wagnings.append(
+            self.warnings.append(
                 {
                     "name": _("Too many internal links"),
                     "settings": "&le;{}".format(
@@ -272,7 +272,7 @@ class DjangoCheckSeo:
 
         # not enough external links
         if external_links < settings.SEO_SETTINGS["external_links"][0]:
-            self.wagnings.append(
+            self.warnings.append(
                 {
                     "name": _("Not enough external links"),
                     "settings": "&ge;{}".format(
@@ -286,7 +286,7 @@ class DjangoCheckSeo:
 
         # too much external links
         if external_links > settings.SEO_SETTINGS["external_links"][1]:
-            self.wagnings.append(
+            self.warnings.append(
                 {
                     "name": _("Too many external links"),
                     "settings": "&le;{}".format(
@@ -314,14 +314,28 @@ class DjangoCheckSeo:
                     )
                 )
             )
+        if not occurence:
+            occurence = [0]
 
-        # if no keyword is repeated more than ["keywords_repeat"][0]
-        if not any(i >= settings.SEO_SETTINGS["keywords_repeat"][0] for i in occurence):
+        content = re.findall(r"\w+", self.content.text.lower())
+        nb_words = len(content)
+
+        print(occurence[0])
+        print(nb_words)
+        print(occurence[0] / nb_words)
+
+        # if no keyword is repeated more than ["keywords_repeat"][0] %
+        if not any(
+            i / nb_words >= settings.SEO_SETTINGS["keywords_repeat"][0]
+            for i in occurence
+        ):
             self.problems.append(
                 {
                     "name": _("Not enough keyword occurences"),
-                    "settings": "&ge;{}".format(
-                        settings.SEO_SETTINGS["keywords_repeat"][0]
+                    "settings": "&ge;{min}%, max found is {actual:.2f}% ({actual_nb} times)".format(
+                        min=settings.SEO_SETTINGS["keywords_repeat"][0] * 100,
+                        actual=max(occurence) / nb_words,
+                        actual_nb=max(occurence),
                     ),
                     "description": _(
                         'Presence of keywords are important for search engines like Google, who will "understand" what your content is about, and will better serve your page in answer to structured queries that uses your keywords.'
@@ -332,15 +346,17 @@ class DjangoCheckSeo:
         else:
             # there is at least 1 keyword that is repeated > ["keywords_repeat"][1]
             if not all(
-                i <= settings.SEO_SETTINGS["keywords_repeat"][1] for i in occurence
+                i / nb_words <= settings.SEO_SETTINGS["keywords_repeat"][1]
+                for i in occurence
             ):
                 self.problems.append(
                     {
                         "name": _("Too many keyword occurences"),
                         # settings: ≤5, found X "keyword"
-                        "settings": '&le;{settings}, found {kw_count} "{kw}"'.format(
-                            settings=settings.SEO_SETTINGS["keywords_repeat"][1],
-                            kw_count=max(occurence),
+                        "settings": '&le;{max}%, found {actual:.2f}% ({actual_nb} times) of "{kw}"'.format(
+                            max=settings.SEO_SETTINGS["keywords_repeat"][1] * 100,
+                            actual=max(occurence) / nb_words * 100,
+                            actual_nb=max(occurence),
                             kw=self.keywords[occurence.index(max(occurence))],
                         ),
                         "description": _(
