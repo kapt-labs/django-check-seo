@@ -318,11 +318,7 @@ class DjangoCheckSeo:
             occurence = [0]
 
         content = re.findall(r"\w+", self.content.text.lower())
-        nb_words = len(content)
-
-        print(occurence[0])
-        print(nb_words)
-        print(occurence[0] / nb_words)
+        nb_words = len(content) if len(content) > 0 else 1
 
         # if no keyword is repeated more than ["keywords_repeat"][0] %
         if not any(
