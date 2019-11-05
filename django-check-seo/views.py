@@ -76,7 +76,7 @@ class DjangoCheckSeo:
         self.check_h1()
         self.check_h2()
         self.check_images()
-        self.check_url_depth()
+        self.check_url()
         self.keyword_present_in_first_paragraph()
         self.count_words_without_stopwords()
 
@@ -458,12 +458,12 @@ class DjangoCheckSeo:
                     )
             # if no keyword is found in h2
             if not any(i > 0 for i in occurence):
-                self.problems.append(
+                self.warnings.append(
                     {
                         "name": _("No keyword in h2"),
                         "settings": _("at least 1"),
                         "description": _(
-                            'Matt Cutts (creator of SafeSearch) <a href="https://robsnell.com/matt-cutts-transcript.html">stated in 2009</a> that "[...] we use things in the title, things in the URL, even things that are really highlighted, like h2 tags and stuff like that. ". Even if there is not really a more recent acknowledgement, h2 titles are important (but maybe not as important as h1 & title tags).'
+                            'Matt Cutts (creator of Google SafeSearch) <a href="https://robsnell.com/matt-cutts-transcript.html">stated in 2009</a> that "[...] we use things in the title, things in the URL, even things that are really highlighted, like h2 tags and stuff like that. ". Even if there is not really a more recent acknowledgement, h2 titles are important (but maybe not as important as h1 & title tags).'
                         ),
                     }
                 )
@@ -485,7 +485,11 @@ class DjangoCheckSeo:
                     }
                 )
 
-    def check_url_depth(self):
+    def check_url(self):
+        """All the url-related checks.
+        """
+
+        # check url depth
         # do not count first slash after domain name, nor // in the "http://"
         url_without_two_points_slash_slash = self.full_url.replace("://", "")
         number_of_slashes = url_without_two_points_slash_slash.count("/") - 1
@@ -500,6 +504,24 @@ class DjangoCheckSeo:
                     ),
                     "description": _(
                         'Google recommand to organize your content by adding depth in your url, but advises against putting too much repertories (<a href="https://support.google.com/webmasters/answer/7451184">source</a>).<br />Yoast says that "In a perfect world, we would place everything in one sublevel at most. Today, many sites use secondary menus to accommodate for additional content" (<a href="https://yoast.com/how-to-clean-site-structure/">source</a>).'
+                    ),
+                }
+            )
+
+        # check url length
+        url_without_protocol = self.full_url.replace("http://", "").replace(
+            "https://", ""
+        )
+        if len(url_without_protocol) > settings.SEO_SETTINGS["max_url_length"]:
+            self.warnings.append(
+                {
+                    "name": _("URL is too long"),
+                    "settings": "&le;{settings}, found {len_url} chars".format(
+                        settings=settings.SEO_SETTINGS["max_url_length"],
+                        len_url=len(url_without_protocol),
+                    ),
+                    "description": _(
+                        'A study from 2016 found a correlation between URL length & ranking (<a href="https://backlinko.com/search-engine-ranking">source</a>).'
                     ),
                 }
             )

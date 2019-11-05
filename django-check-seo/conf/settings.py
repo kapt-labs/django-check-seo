@@ -14,6 +14,7 @@ SEO_SETTINGS = {
     "important_semanticals_tags": ["img", "em", "strong", "i", "b"],
     "minimum_used_semantical_tags": 3,
     "max_link_depth": 3,
+    "max_url_length": 70,
 }
 
 # update SEO settings with values from projectname/settings.py
