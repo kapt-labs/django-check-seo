@@ -6,6 +6,13 @@
     <title>Django check SEO</title>
     <style>
       body{margin-top: 48px;}
+      pre{
+        padding: 3px;
+        margin: 5px;
+        white-space: pre-wrap;
+        background-color: #eef;
+        border: 1px solid grey;
+      }
     </style>
   </head>
   <body>
@@ -49,6 +56,14 @@
       </summary>
       <pre>
 {{ parsehtml }}
+      </pre>
+    </details>
+    <details>
+      <summary>
+        See extracted html
+      </summary>
+      <pre>
+{{ contenthtml }}
       </pre>
     </details>
     <details>
