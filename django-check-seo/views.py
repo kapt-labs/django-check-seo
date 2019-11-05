@@ -472,7 +472,7 @@ class DjangoCheckSeo:
         images = self.content.find_all("img")
 
         for image in images:
-            if not image.attrs["alt"] or image.attrs["alt"] == "None":
+            if "alt" not in image.attrs or image.attrs["alt"] == "None":
                 self.problems.append(
                     {
                         "name": _("Img lack alt tag"),
