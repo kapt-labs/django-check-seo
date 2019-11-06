@@ -71,20 +71,23 @@ class Site:
 
         self.soup = soup
 
-        # Get content of the page (exclude header/footer)
+        # remove footers
+        if self.soup.find("footer"):
+            self.soup.find("footer").extract()
+
+        # remove menus
+        if self.soup.find("ul", {"class": "nav"}):
+            self.soup.find("ul", {"class": "nav"}).extract()
+        elif self.soup.find("ul", {"class": "navbar"}):
+            self.soup.find("ul", {"class": "navbar"}).extract()
+        elif self.soup.find("nav"):
+            self.soup.find("nav").extract()
+
+        # Get all content blocks of the page
         self.content = self.soup.select(".container")
 
         if self.content is None:
             self.content = ""
-
-        for c in self.content:
-            # remove ul with nav class from content (<ul class="nav">, <ul class="navbar">, or <nav>)
-            if c.find("ul", {"class": "nav"}):
-                c.find("ul", {"class": "nav"}).extract()
-            elif c.find("ul", {"class": "navbar"}):
-                c.find("ul", {"class": "navbar"}).extract()
-            elif c.find("nav"):
-                c.find("nav").extract()
 
         # get content without doublewords thx to custom separator ("<h1>Title</h1><br /><p>Content</p>" -> TitleContent)
         self.content_text = ""
