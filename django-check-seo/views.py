@@ -85,7 +85,11 @@ class Site:
         elif self.content.find("nav"):
             self.content.find("nav").extract()
 
-        self.content_text = re.sub(r"\n+(?=\n)", "\n", self.content.text)
+        # get content without doublewords thx to separator ("<h1>Title</h1><br /><p>Content</p>" -> TitleContent)
+        self.content_text = self.content.get_text(separator=" ")
+        # strip multiple carriage return (with optional space) to only one
+        self.content_text = re.sub(r"(\n( ?))+", "\n", self.content_text)
+        # strip multiples spaces (>3) to only 2 (for title readability)
         self.content_text = re.sub(r"   +", "  ", self.content_text)
 
         self.full_url = full_url

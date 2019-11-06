@@ -15,7 +15,6 @@ def launch_checks(site):
     from .check_title import check_title
     from .check_url import check_url
     from .content_words_number import content_words_number
-    from .count_words import count_words
     from .keyword_present_first_paragraph import keyword_present_first_paragraph
 
     # add your file here pls
@@ -30,6 +29,5 @@ def launch_checks(site):
     check_title(site)
     check_url(site)
     content_words_number(site)
-    count_words(site)
     keyword_present_first_paragraph(site)
     # add your function here pls
