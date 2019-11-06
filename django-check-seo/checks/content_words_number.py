@@ -15,7 +15,7 @@ def run(site):
     """Count number of words in content.
     """
 
-    nb_words = len(site.content_text)
+    nb_words = len(site.content_text.split())
 
     # too few words
     if nb_words < site.settings.SEO_SETTINGS["content_words_number"][0]:

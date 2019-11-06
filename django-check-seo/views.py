@@ -83,11 +83,12 @@ class Site:
         elif self.soup.find("nav"):
             self.soup.find("nav").extract()
 
-        # Get all content blocks of the page
+        # Search all content blocks of the page
         self.content = self.soup.select(".container")
 
-        if self.content is None:
-            self.content = ""
+        # If no content block is found, then select all the content
+        if self.content is None or self.content == []:
+            self.content = self.soup.find_all("body")
 
         # get content without doublewords thx to custom separator ("<h1>Title</h1><br /><p>Content</p>" -> TitleContent)
         self.content_text = ""
