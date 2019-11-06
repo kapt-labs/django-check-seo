@@ -43,10 +43,9 @@ class IndexView(generic.base.TemplateView):
 
         (context["problems"], context["warnings"]) = (site.problems, site.warnings)
 
-        context["parsehtml"] = r.text
         context["settings"] = json.dumps(settings.SEO_SETTINGS, indent=4)
-        context["contenthtml"] = site.content
-        context["content"] = site.content_text
+        context["html"] = site.content
+        context["text"] = site.content_text
 
         return context
 
@@ -73,20 +72,25 @@ class Site:
         self.soup = soup
 
         # Get content of the page (exclude header/footer)
-        self.content = self.soup.find("div", {"class": "container"})
+        self.content = self.soup.select(".container")
+
         if self.content is None:
             self.content = ""
 
-        # remove ul with nav class from content (<ul class="nav">, <ul class="navbar">, or <nav>)
-        if self.content.find("ul", {"class": "nav"}):
-            self.content.find("ul", {"class": "nav"}).extract()
-        elif self.content.find("ul", {"class": "navbar"}):
-            self.content.find("ul", {"class": "navbar"}).extract()
-        elif self.content.find("nav"):
-            self.content.find("nav").extract()
+        for c in self.content:
+            # remove ul with nav class from content (<ul class="nav">, <ul class="navbar">, or <nav>)
+            if c.find("ul", {"class": "nav"}):
+                c.find("ul", {"class": "nav"}).extract()
+            elif c.find("ul", {"class": "navbar"}):
+                c.find("ul", {"class": "navbar"}).extract()
+            elif c.find("nav"):
+                c.find("nav").extract()
 
-        # get content without doublewords thx to separator ("<h1>Title</h1><br /><p>Content</p>" -> TitleContent)
-        self.content_text = self.content.get_text(separator=" ")
+        # get content without doublewords thx to custom separator ("<h1>Title</h1><br /><p>Content</p>" -> TitleContent)
+        self.content_text = ""
+        for c in self.content:
+            self.content_text += c.get_text(separator=" ")
+
         # strip multiple carriage return (with optional space) to only one
         self.content_text = re.sub(r"(\n( ?))+", "\n", self.content_text)
         # strip multiples spaces (>3) to only 2 (for title readability)

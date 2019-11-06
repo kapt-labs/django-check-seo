@@ -5,10 +5,19 @@ import re
 from django.utils.translation import gettext as _
 
 
-def check_h2(self):
-    h2 = self.soup.find_all("h2")
+def importance():
+    """Scripts with higher importance will be executed in first.
+
+    Returns:
+        int -- Importance of the script.
+    """
+    return 1
+
+
+def run(site):
+    h2 = site.soup.find_all("h2")
     if not h2:
-        self.warnings.append(
+        site.warnings.append(
             {
                 "name": _("No h2 tag"),
                 "settings": _("at least 1"),
@@ -20,7 +29,7 @@ def check_h2(self):
     else:
         occurence = []
         # check if each keyword
-        for keyword in self.keywords:
+        for keyword in site.keywords:
             # is present at least
             for single_h2 in h2:
                 occurence.append(
@@ -34,7 +43,7 @@ def check_h2(self):
                 )
         # if no keyword is found in h2
         if not any(i > 0 for i in occurence):
-            self.warnings.append(
+            site.warnings.append(
                 {
                     "name": _("No keyword in h2"),
                     "settings": _("at least 1"),

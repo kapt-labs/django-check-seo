@@ -2,7 +2,16 @@
 from django.utils.translation import gettext as _
 
 
-def check_keyword_url(site):
+def importance():
+    """Scripts with higher importance will be executed in first.
+
+    Returns:
+        int -- Importance of the script.
+    """
+    return 1
+
+
+def run(site):
     """Check presence of keywords in url
     """
     for keyword in site.keywords:

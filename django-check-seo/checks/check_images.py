@@ -1,13 +1,26 @@
 # Third party
+import bs4
 from django.utils.translation import gettext as _
 
 
-def check_images(self):
-    images = self.content.find_all("img")
+def importance():
+    """Scripts with higher importance will be executed in first.
+
+    Returns:
+        int -- Importance of the script.
+    """
+    return 1
+
+
+def run(site):
+    images = bs4.element.ResultSet(None)
+
+    for c in site.content:
+        images += c.find_all("img")
 
     for image in images:
         if "alt" not in image.attrs or image.attrs["alt"] == "None":
-            self.problems.append(
+            site.problems.append(
                 {
                     "name": _("Img lack alt tag"),
                     "settings": _("all images"),

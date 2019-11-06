@@ -2,8 +2,18 @@
 from django.utils.translation import gettext as _
 
 
-def check_keywords(site):
-    """Ensure that all keywords are present.
+def importance():
+    """Scripts with higher importance will be executed in first.
+
+    Returns:
+        int -- Importance of the script.
+    """
+    return 5
+
+
+def run(site):
+    """Ensure that meta tag exists and contain at least one keyword.
+    Populate site.keywords list with keywords found.
     """
     meta = site.soup.find_all("meta")
     for tag in meta:

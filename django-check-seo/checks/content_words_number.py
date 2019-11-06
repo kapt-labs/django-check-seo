@@ -1,17 +1,21 @@
-# Standard Library
-import re
-
 # Third party
 from django.utils.translation import gettext as _
 
 
-def content_words_number(site):
+def importance():
+    """Scripts with higher importance will be executed in first.
+
+    Returns:
+        int -- Importance of the script.
+    """
+    return 1
+
+
+def run(site):
     """Count number of words in content.
     """
 
-    content = re.findall(r"\w+", site.content.text.lower())
-
-    nb_words = len(content)
+    nb_words = len(site.content_text)
 
     # too few words
     if nb_words < site.settings.SEO_SETTINGS["content_words_number"][0]:

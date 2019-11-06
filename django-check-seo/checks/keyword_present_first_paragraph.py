@@ -2,15 +2,24 @@
 from django.utils.translation import gettext as _
 
 
-def keyword_present_first_paragraph(site):
+def importance():
+    """Scripts with higher importance will be executed in first.
+
+    Returns:
+        int -- Importance of the script.
+    """
+    return 1
+
+
+def run(site):
     """Get [keywords_in_first_words] first words of the content, and ensure that there is a keyword among them.
     """
-    content = site.content.text.lower().split()[
+    first_N_words = site.content_text.split()[
         : site.settings.SEO_SETTINGS["keywords_in_first_words"]
     ]
 
     for keyword in site.keywords:
-        if keyword in content:
+        if keyword in first_N_words:
             return
 
     site.problems.append(

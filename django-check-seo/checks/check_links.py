@@ -2,13 +2,28 @@
 import os
 
 # Third party
+import bs4
 from django.utils.translation import gettext as _
 
 
-def check_links(site):
+def importance():
+    """Scripts with higher importance will be executed in first.
+
+    Returns:
+        int -- Importance of the script.
+    """
+    return 1
+
+
+def run(site):
     """Check all link-related conditions
     """
-    links = site.content.find_all("a")
+
+    links = bs4.element.ResultSet(None)
+
+    for c in site.content:
+        links = c.find_all("a")
+
     internal_links = 0
     external_links = 0
 
