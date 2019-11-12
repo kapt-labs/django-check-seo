@@ -1,4 +1,4 @@
-# Django-check-SEO
+# django-check-SEO
 
 Will tell you if you have problems concerning all SEO aspects of your pages.
 
@@ -32,9 +32,37 @@ Will tell you if you have problems concerning all SEO aspects of your pages.
 
 ----
 
-### Screenshot ?
+## Can I have a screenshot?
 
-Sure.
+Yep, here it is:
 
 
 ![](https://i.imgur.com/3W0CK4b.png)
+
+----
+
+## Install
+
+#### With pipenv
+
+ * Add `django-check-seo = { git = 'https://github.com/kapt-labs/django-check-seo.git' }` to your Pipfile below `[packages]`, then run `pipenv install`,
+ *or*
+ * Execute `pipenv install git+https://github.com/kapt-labs/django-check-seo#egg=django-check-seo` in your working directory,
+
+**and then**
+
+ * add `django-check-seo` to your `INSTALLED_APPS`,
+ * add the file [`cms_toolbars.py`](https://github.com/kapt-labs/django-check-seo/wiki/Toolbar-shortcut#cms_toolbarspy) inside your `django_project_name` folder,
+ * add `url(r"^django-check-seo/", include("django-check-seo.urls")),` to your `urlpatterns` in `urls.py`,
+ * export all the vars used in the application (or put them inside your `.env` file).
+
+*Start your django CMS project, log in, you should see the "Check SEO..." button and everything should be okay.*
+*[Example output](https://gist.github.com/corentinbettiol/f1e4b6630b7ae9afe2f9023b2185f3db) when setting up a project with django-check-seo.*
+
+#### Without pipenv
+
+*coming soon* 📝
+
+## Prerequisites
+
+You will need `djangocms` & `djangocms_page_meta` in order to made this application work.

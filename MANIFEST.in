@@ -1,0 +1,6 @@
+include LICENSE
+include README.md
+recursive-include django-check-seo/static *
+recursive-include django-check-seo/templates *
+recursive-include django-check-seo/checks *
+recursive-include django-check-seo/conf *
