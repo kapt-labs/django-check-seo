@@ -1,4 +1,4 @@
-{% load cms_tags %}
+{% load cms_tags i18n %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -18,12 +18,25 @@
   <body>
     <h1>Django check SEO</h1>
 
-    <p>An app that will look at your content and help you solve your SEO problems.</p>
+    <p>{% trans "An app that will look at your content and help you solve your SEO problems." %}</p>
 
     <hr />
 
     <p>
-      <strong> {{ problems|length }} problèmes trouvés, et {{ warnings|length }} avertissements levés.</strong>
+
+      <strong>
+{% blocktrans count nbproblems=problems|length %}
+{{ nbproblems }} problem found
+{% plural %}
+{{ nbproblems }} problems found
+{% endblocktrans %}
+{% blocktrans count nbwarnings=warnings|length %}
+, and {{ nbwarnings }} warning raised.
+{% plural %}
+, and {{ nbwarnings }} warnings raised.
+{% endblocktrans %}
+
+      </strong>
     </p>
 
     <ul>
@@ -52,7 +65,7 @@
 
     <details>
       <summary>
-        See extracted html
+        {% trans "See extracted html" %}
       </summary>
       <pre>
 {{ html }}
@@ -60,7 +73,7 @@
     </details>
     <details>
       <summary>
-        See extracted content
+        {% trans "See extracted content" %}
       </summary>
       <pre>
 {{ text }}
@@ -68,7 +81,7 @@
     </details>
     <details>
       <summary>
-        See settings
+        {% trans "See settings" %}
       </summary>
       <pre>
 {{ settings }}
