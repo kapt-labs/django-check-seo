@@ -17,27 +17,40 @@ def importance():
 def run(site):
     """Check all h1-related conditions
     """
+    too_much_name = _("Too much h1 tags")
+    too_much_settings = _("exactly 1")
+    too_much_description = _(
+        "Google is not really concerned about the number of h1 tags on your page, but Bing clearly indicates in its guidelines for webmasters to use only one h1 tag per page."
+    )
+
+    too_few_name = _("No h1 tag")
+    too_few_settings = _("exactly 1")
+    too_few_description = "H1 is the most visually notable content of your page for your users, and will help Search Engines to better understand the subject of your page."
+
+    keywords_name = _("No keyword in h1")
+    keywords_settings = _("at least 1")
+    keywords_description = _(
+        "H1 represent the main title of your page, and you may populate them with appropriate content in order to ensure that users (and search engines!) will understand correctly your page."
+    )
 
     h1 = site.soup.find_all("h1")
     if len(h1) > 1:
         site.problems.append(
             {
-                "name": _("Too much h1 tags"),
-                "settings": _("exactly 1"),
-                "description": _(
-                    'Google has told that they do not consider using multiple h1 a bad thing (<a href="https://www.youtube.com/watch?v=WsgrSxCmMbM">source</a>), but Google is not the unique search engine out there. Bing webmaster guidelines says "Use only one <h1> tag per page".'
-                ),
+                "name": too_much_name,
+                "settings": too_much_settings,
+                "found": len(h1),
+                "description": too_much_description,
             }
         )
 
     elif not h1:
         site.problems.append(
             {
-                "name": _("No h1 tag"),
-                "settings": _("exactly 1"),
-                "description": _(
-                    "H1 is the most visually notable content of your page for your users, and is one of the most important ranking factor for search engines. A good h1 tag content is required in order to progress in SERP."
-                ),
+                "name": too_few_name,
+                "settings": too_few_settings,
+                "found": _("none"),
+                "description": too_few_description,
             }
         )
 
@@ -58,10 +71,9 @@ def run(site):
         if not any(i > 0 for i in occurence):
             site.problems.append(
                 {
-                    "name": _("No keyword in h1"),
-                    "settings": _("at least 1"),
-                    "description": _(
-                        "H1 are crawled by search engines as the title of your page. You may populate them with appropriate content in order to be sure that search engines correctly understand what your pages are all about."
-                    ),
+                    "name": keywords_name,
+                    "settings": keywords_settings,
+                    "found": _("none"),
+                    "description": keywords_description,
                 }
             )

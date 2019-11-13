@@ -2,7 +2,7 @@
 import re
 
 # Third party
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext as _, ngettext, pgettext
 
 
 def importance():
@@ -15,6 +15,26 @@ def importance():
 
 
 def run(site):
+    name_length_short = _("Meta description is too short")
+    name_length_long = _("Meta description is too long")
+    description = _(
+        "The meta description tag can be displayed in search results if it has the right length, and can influence users. Knowing that Google classifies sites according to user behaviour, it is important to have a relevant description."
+    )
+    settings_length = _("between {rule_low} and {rule_high} chars ").format(
+        rule_low=site.settings.SEO_SETTINGS["meta_description_length"][0],
+        rule_high=site.settings.SEO_SETTINGS["meta_description_length"][1],
+    )
+
+    name_keywords = _("No keyword in meta description")
+    description_keywords = _(
+        "The meta description tag can be displayed in search results, and the keywords present in the search will be in bold. All this can influence users, and Google ranks sites according to users behaviour."
+    )
+    settings_keywords = "at least 1"
+
+    name_present = _("No meta description")
+    settings_present = "needed"
+    found_present = pgettext("description", "none")
+
     meta = site.soup.find_all("meta")
     for tag in meta:
         if (
@@ -23,44 +43,24 @@ def run(site):
             and "content" in tag.attrs
             and tag.attrs["content"] != ""
         ):
-            if (
-                len(tag.attrs["content"])
-                < site.settings.SEO_SETTINGS["meta_description_length"][0]
-            ):
+            length = len(tag.attrs["content"])
+            if length < site.settings.SEO_SETTINGS["meta_description_length"][0]:
                 site.problems.append(
                     {
-                        "name": _("Meta description is too short"),
-                        "settings": _(
-                            "&gt;{rule} chars, found {words}".format(
-                                rule=site.settings.SEO_SETTINGS[
-                                    "meta_description_length"
-                                ][0],
-                                words=len(tag.attrs["content"]),
-                            )
-                        ),
-                        "description": _(
-                            "Meta description can be displayed below your page title in search results. If Google find your description too short or not relevant, it will generate it's own description, based on your page content. This generated description will be less accurate than a good writen description."
-                        ),
+                        "name": name_length_short,
+                        "settings": settings_length,
+                        "found": ngettext("%(words)d char", "%(words)d chars", length)
+                        % {"words": length},
+                        "description": description,
                     }
                 )
-            elif (
-                len(tag.attrs["content"])
-                > site.settings.SEO_SETTINGS["meta_description_length"][1]
-            ):
+            elif length > site.settings.SEO_SETTINGS["meta_description_length"][1]:
                 site.problems.append(
                     {
-                        "name": _("Meta description is too long"),
-                        "settings": _(
-                            "&lt;{rule} chars, found {words}".format(
-                                rule=site.settings.SEO_SETTINGS[
-                                    "meta_description_length"
-                                ][1],
-                                words=len(tag.attrs["content"]),
-                            )
-                        ),
-                        "description": _(
-                            "Meta description can be displayed below your page title in search results. If Google find your description too long, it may crop it and your potential visitors will not be able to read all its content. Sometimes, long pertinent meta descriptions will be displayed, but in the vast majority of the results, the description's lengths are 150-170 chars."
-                        ),
+                        "name": name_length_long,
+                        "settings": settings_length,
+                        "found": str(length),
+                        "description": description,
                     }
                 )
 
@@ -79,21 +79,19 @@ def run(site):
             if not any(i > 0 for i in occurence):
                 site.warnings.append(
                     {
-                        "name": _("No keyword in meta description"),
-                        "settings": _("at least 1"),
-                        "description": _(
-                            "Meta description is not used by search engines to calculate the rank of the page, but users will read it (if the meta description is selected by Google). The bonus point is that Google will put the keywords searched by the users in bold, so the users can eaily verify that the content of your page fit their needs."
-                        ),
+                        "name": name_keywords,
+                        "settings": settings_keywords,
+                        "found": 0,
+                        "description": description_keywords,
                     }
                 )
 
             return
     site.problems.append(
         {
-            "name": _("No meta description"),
-            "settings": _("needed"),
-            "description": _(
-                'Even if search engines states that they don\'t use meta description for ranking (<a href="https://webmasters.googleblog.com/2009/09/google-does-not-use-keywords-meta-tag.html">source</a>), they can be displayed below the title of your page in search results. Since search engines uses users clics to rank your website, an appealing description can make the difference.<br />Google has affirmed that they display a shorter text (~155 chars) below the title of the page (<a href="https://twitter.com/dannysullivan/status/996065145443893249">source</a>).'
-            ),
+            "name": name_present,
+            "settings": settings_present,
+            "found": found_present,
+            "description": description,
         }
     )

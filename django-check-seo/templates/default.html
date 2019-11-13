@@ -26,14 +26,14 @@
 
       <strong>
 {% blocktrans count nbproblems=problems|length %}
-{{ nbproblems }} problem found
+{{ nbproblems }} problem found,
 {% plural %}
-{{ nbproblems }} problems found
+{{ nbproblems }} problems found,
 {% endblocktrans %}
 {% blocktrans count nbwarnings=warnings|length %}
-, and {{ nbwarnings }} warning raised.
+and {{ nbwarnings }} warning raised.
 {% plural %}
-, and {{ nbwarnings }} warnings raised.
+and {{ nbwarnings }} warnings raised.
 {% endblocktrans %}
 
       </strong>
@@ -43,7 +43,7 @@
       {% for problem in problems %}
         <li>
           <details>
-            <summary><strong>{{ problem.name }}</strong> <i>(settings: {% autoescape off %}{{ problem.settings }})</i></summary>
+            <summary><strong>{{ problem.name }}</strong> <i>({% trans "settings" %}: {% autoescape off %}{{ problem.settings }}, {% trans "found" %} {{ problem.found }})</i></summary>
             {{ problem.description }}{% endautoescape %}<br />
           </details>
         </li>

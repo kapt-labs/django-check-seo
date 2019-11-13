@@ -15,15 +15,26 @@ def importance():
 
 
 def run(site):
+    no_h2_name = _("No h2 tag")
+    no_h2_settings = _("at least 1")
+    no_h2_description = _(
+        "H2 tags are useful because they are explored by search engines and can help them understand the subject of your page."
+    )
+
+    no_keywords_name = _("No keyword in h2")
+    no_keywords_settings = _("at least 1")
+    no_keywords_description = _(
+        "Google uses h2 tags to better understand the subjects of your page."
+    )
+
     h2 = site.soup.find_all("h2")
     if not h2:
         site.warnings.append(
             {
-                "name": _("No h2 tag"),
-                "settings": _("at least 1"),
-                "description": _(
-                    'H2 tags are useful because they are explored by search engines and can help them understand the subject of your page (<a href="https://robsnell.com/matt-cutts-transcript.html">source</a>). It\'s a "section title", so every time you start talking about a new topic, you can put an h2 tag, which will explain what the content will be about.'
-                ),
+                "name": no_h2_name,
+                "settings": no_h2_settings,
+                "found": _("none"),
+                "description": no_h2_description,
             }
         )
     else:
@@ -45,10 +56,9 @@ def run(site):
         if not any(i > 0 for i in occurence):
             site.warnings.append(
                 {
-                    "name": _("No keyword in h2"),
-                    "settings": _("at least 1"),
-                    "description": _(
-                        'Matt Cutts (creator of Google SafeSearch) <a href="https://robsnell.com/matt-cutts-transcript.html">stated in 2009</a> that "[...] we use things in the title, things in the URL, even things that are really highlighted, like h2 tags and stuff like that. ". Even if there is not really a more recent acknowledgement, h2 titles are important (but maybe not as important as h1 & title tags).'
-                    ),
+                    "name": no_keywords_name,
+                    "settings": no_keywords_settings,
+                    "found": _("none"),
+                    "description": no_keywords_description,
                 }
             )

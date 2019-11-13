@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-13 10:55+0100\n"
-"PO-Revision-Date: 2019-11-13 10:58+0100\n"
+"POT-Creation-Date: 2019-11-13 16:14+0100\n"
+"PO-Revision-Date: 2019-11-13 16:14+0100\n"
 "Last-Translator: kapt <dev@kapt.mobi>\n"
 "Language-Team: français <dev@kapt.mobi>\n"
 "Language: fr\n"
@@ -19,110 +19,59 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Gtranslator 2.91.7\n"
 
-#: django-check-seo/checks/check_description.py:32
+#: django-check-seo/checks/check_description.py:20
+msgid ""
+"The meta description tag can be displayed in search results if it has the "
+"right length, and can influence users. Knowing that Google classifies sites "
+"according to user behaviour, it is important to have a relevant description."
+msgstr ""
+"La balise meta description peut être affichée dans les résultats de "
+"recherche si elle a la bonne longueur, et peut influencer les utilisateurs. "
+"Sachant que Google classe les sites en fonction du comportement des "
+"utilisateurs, il est important d'avoir une description pertinente."
+
+#: django-check-seo/checks/check_description.py:21
+#, python-brace-format
+msgid "between {rule_low} and {rule_high} chars "
+msgstr "entre {rule_low} et {rule_high} caractères"
+
+#: django-check-seo/checks/check_description.py:26
+#| msgid ""
+#| "The meta description tag can be displayed in search results, and the "
+#| "keywords present in the search will be in bold. All this can influence "
+#| "the user, and Google ranks sites according to user behaviour."
+msgid ""
+"The meta description tag can be displayed in search results, and the "
+"keywords present in the search will be in bold. All this can influence "
+"users, and Google ranks sites according to users behaviour."
+msgstr ""
+"La balise meta description peut être affichée dans les résultats de "
+"recherche, et les mots-clés présents dans la recherche seront en gras. Tout "
+"cela peut influencer les utilisateurs et Google classe les sites en fonction "
+"de leur comportement."
+
+#: django-check-seo/checks/check_description.py:46
 msgid "Meta description is too short"
 msgstr "La balise meta description est trop courte"
 
-#: django-check-seo/checks/check_description.py:34
-#, python-brace-format
-msgid "&gt;{rule} chars, found {words}"
-msgstr "&gt;{rule} caractères, {words} trouvés"
+#: django-check-seo/checks/check_description.py:48
+#, python-format
+msgid "%(words)d char found"
+msgid_plural "%(words)d chars found"
+msgstr[0] "%(words)d caractère trouvé"
+msgstr[1] "%(words)d caractères trouvés"
 
-#: django-check-seo/checks/check_description.py:42
-msgid ""
-"Meta description can be displayed below your page title in search results. "
-"If Google find your description too short or not relevant, it will generate "
-"it's own description, based on your page content. This generated description "
-"will be less accurate than a good writen description."
-msgstr ""
-"La description meta peut être affichée en dessous du titre de votre page "
-"dans les résultats des recherches. Si Google trouve votre description trop "
-"courte ou peu pertinente, il va générer sa propre description à partir du "
-"contenu de votre page. Cette description générée sera peut-être moins "
-"précise qu'une description bien écrite."
-
-#: django-check-seo/checks/check_description.py:52
+#: django-check-seo/checks/check_description.py:58
 msgid "Meta description is too long"
 msgstr "La balise meta description est trop longue"
 
-#: django-check-seo/checks/check_description.py:54
-#, python-brace-format
-msgid "&lt;{rule} chars, found {words}"
-msgstr "&lt;{rule} caractères, {words} trouvés"
-
-#: django-check-seo/checks/check_description.py:62
-msgid ""
-"Meta description can be displayed below your page title in search results. "
-"If Google find your description too long, it may crop it and your potential "
-"visitors will not be able to read all its content. Sometimes, long pertinent "
-"meta descriptions will be displayed, but in the vast majority of the "
-"results, the description's lengths are 150-170 chars."
-msgstr ""
-"La méta description peut être affichée sous le titre de votre page dans les "
-"résultats de recherche. Si Google trouve votre description trop longue, il "
-"peut la recadrer et vos visiteurs potentiels ne pourront pas lire tout son "
-"contenu. Parfois, de longues méta-descriptions pertinentes seront affichées, "
-"mais dans la grande majorité des résultats, la longueur des descriptions est "
-"de 150-170 caractères."
-
-#: django-check-seo/checks/check_description.py:82
+#: django-check-seo/checks/check_description.py:80
 msgid "No keyword in meta description"
 msgstr "Pas de mot-clef dans la balise meta de description"
 
-#: django-check-seo/checks/check_description.py:83
-#: django-check-seo/checks/check_h1.py:62
-#: django-check-seo/checks/check_h2.py:23
-#: django-check-seo/checks/check_h2.py:49
-#: django-check-seo/checks/check_keyword_url.py:23
-#: django-check-seo/checks/check_keywords.py:34
-#: django-check-seo/checks/check_title.py:22
-#: django-check-seo/checks/check_title.py:65
-msgid "at least 1"
-msgstr "au moins 1"
-
-#: django-check-seo/checks/check_description.py:85
-msgid ""
-"Meta description is not used by search engines to calculate the rank of the "
-"page, but users will read it (if the meta description is selected by "
-"Google). The bonus point is that Google will put the keywords searched by "
-"the users in bold, so the users can eaily verify that the content of your "
-"page fit their needs."
-msgstr ""
-"La méta description n'est pas utilisée par les moteurs de recherche pour "
-"calculer le rang de la page, mais les utilisateurs la liront (si la méta "
-"description est sélectionnée par Google). Le point bonus est que Google "
-"mettra en gras les mots-clés recherchés par les utilisateurs, afin que les "
-"utilisateurs puissent vérifier facilement que le contenu de votre page "
-"correspond à leurs besoins."
-
-#: django-check-seo/checks/check_description.py:93
+#: django-check-seo/checks/check_description.py:89
 msgid "No meta description"
 msgstr "Pas de balise meta description"
-
-#: django-check-seo/checks/check_description.py:94
-msgid "needed"
-msgstr "requis(e)"
-
-#: django-check-seo/checks/check_description.py:96
-msgid ""
-"Even if search engines states that they don't use meta description for "
-"ranking (<a href=\"https://webmasters.googleblog.com/2009/09/google-does-not-"
-"use-keywords-meta-tag.html\">source</a>), they can be displayed below the "
-"title of your page in search results. Since search engines uses users clics "
-"to rank your website, an appealing description can make the difference.<br /"
-">Google has affirmed that they display a shorter text (~155 chars) below the "
-"title of the page (<a href=\"https://twitter.com/dannysullivan/"
-"status/996065145443893249\">source</a>)."
-msgstr ""
-"Même si les moteurs de recherche indiquent qu'ils n'utilisent pas de méta-"
-"description pour le classement (<a href=\"https://webmasters.googleblog."
-"com/2009/09/google-does-not-use-keywords-meta-tag.html\">source</a>), ils "
-"peuvent être affichés sous le titre de votre page dans les résultats de "
-"recherche. Puisque les moteurs de recherche utilisent les clics des "
-"utilisateurs pour classer votre site Web, une description attrayante peut "
-"faire la différence. <br />Google a affirmé qu'ils affichent un texte plus "
-"court (~155 caractères) sous le titre de la page (<a href=\"https://twitter."
-"com/dannysullivan/status/996065145443893249\">source</a>)."
 
 #: django-check-seo/checks/check_h1.py:25
 msgid "Too much h1 tags"
@@ -164,6 +113,16 @@ msgstr ""
 #: django-check-seo/checks/check_h1.py:61
 msgid "No keyword in h1"
 msgstr "Pas de mot clef dans la balise H1"
+
+#: django-check-seo/checks/check_h1.py:62
+#: django-check-seo/checks/check_h2.py:23
+#: django-check-seo/checks/check_h2.py:49
+#: django-check-seo/checks/check_keyword_url.py:23
+#: django-check-seo/checks/check_keywords.py:34
+#: django-check-seo/checks/check_title.py:22
+#: django-check-seo/checks/check_title.py:65
+msgid "at least 1"
+msgstr "au moins 1"
 
 #: django-check-seo/checks/check_h1.py:64
 msgid ""
@@ -494,49 +453,33 @@ msgstr ""
 
 #: django-check-seo/templates/default.html:28
 #, python-format
-#| msgid ""
-#| "\n"
-#| "          %(problems)s problem found\n"
-#| "        "
-#| msgid_plural ""
-#| "\n"
-#| "          %(problems)s problems found\n"
-#| "        "
 msgid ""
 "\n"
-"%(nbproblems)s problem found\n"
+"%(nbproblems)s problem found,\n"
 msgid_plural ""
 "\n"
-"%(nbproblems)s problems found\n"
+"%(nbproblems)s problems found,\n"
 msgstr[0] ""
 "\n"
-"%(nbproblems)s problème trouvé\n"
+"%(nbproblems)s problème trouvé,\n"
 msgstr[1] ""
 "\n"
-"%(nbproblems)s problèmes trouvés\n"
+"%(nbproblems)s problèmes trouvés,\n"
 
 #: django-check-seo/templates/default.html:33
 #, python-format
-#| msgid ""
-#| "\n"
-#| "          , and %(warnings)s warning raised.\n"
-#| "        "
-#| msgid_plural ""
-#| "\n"
-#| "          , and %(warnings)s warnings raised.\n"
-#| "        "
 msgid ""
 "\n"
-", and %(nbwarnings)s warning raised.\n"
+"and %(nbwarnings)s warning raised.\n"
 msgid_plural ""
 "\n"
-", and %(nbwarnings)s warnings raised.\n"
+"and %(nbwarnings)s warnings raised.\n"
 msgstr[0] ""
 "\n"
-", et %(nbwarnings)s avertissement levé.\n"
+"et %(nbwarnings)s avertissement levé.\n"
 msgstr[1] ""
 "\n"
-", et %(nbwarnings)s avertissements levés.\n"
+"et %(nbwarnings)s avertissements levés.\n"
 
 #: django-check-seo/templates/default.html:68
 msgid "See extracted html"
@@ -549,6 +492,76 @@ msgstr "Voir contenu extrait"
 #: django-check-seo/templates/default.html:84
 msgid "See settings"
 msgstr "Voir les paramètres"
+
+#~ msgid "&gt;{rule} chars, found {words}"
+#~ msgstr "&gt;{rule} caractères, {words} trouvés"
+
+#~ msgid ""
+#~ "Meta description can be displayed below your page title in search "
+#~ "results. If Google find your description too short or not relevant, it "
+#~ "will generate it's own description, based on your page content. This "
+#~ "generated description will be less accurate than a good writen "
+#~ "description."
+#~ msgstr ""
+#~ "La description meta peut être affichée en dessous du titre de votre page "
+#~ "dans les résultats des recherches. Si Google trouve votre description "
+#~ "trop courte ou peu pertinente, il va générer sa propre description à "
+#~ "partir du contenu de votre page. Cette description générée sera peut-être "
+#~ "moins précise qu'une description bien écrite."
+
+#~ msgid "&lt;{rule} chars, found {words}"
+#~ msgstr "&lt;{rule} caractères, {words} trouvés"
+
+#~ msgid ""
+#~ "Meta description can be displayed below your page title in search "
+#~ "results. If Google find your description too long, it may crop it and "
+#~ "your potential visitors will not be able to read all its content. "
+#~ "Sometimes, long pertinent meta descriptions will be displayed, but in the "
+#~ "vast majority of the results, the description's lengths are 150-170 chars."
+#~ msgstr ""
+#~ "La méta description peut être affichée sous le titre de votre page dans "
+#~ "les résultats de recherche. Si Google trouve votre description trop "
+#~ "longue, il peut la recadrer et vos visiteurs potentiels ne pourront pas "
+#~ "lire tout son contenu. Parfois, de longues méta-descriptions pertinentes "
+#~ "seront affichées, mais dans la grande majorité des résultats, la longueur "
+#~ "des descriptions est de 150-170 caractères."
+
+#~ msgid ""
+#~ "Meta description is not used by search engines to calculate the rank of "
+#~ "the page, but users will read it (if the meta description is selected by "
+#~ "Google). The bonus point is that Google will put the keywords searched by "
+#~ "the users in bold, so the users can eaily verify that the content of your "
+#~ "page fit their needs."
+#~ msgstr ""
+#~ "La méta description n'est pas utilisée par les moteurs de recherche pour "
+#~ "calculer le rang de la page, mais les utilisateurs la liront (si la méta "
+#~ "description est sélectionnée par Google). Le point bonus est que Google "
+#~ "mettra en gras les mots-clés recherchés par les utilisateurs, afin que "
+#~ "les utilisateurs puissent vérifier facilement que le contenu de votre "
+#~ "page correspond à leurs besoins."
+
+#~ msgid "needed"
+#~ msgstr "requis(e)"
+
+#~ msgid ""
+#~ "Even if search engines states that they don't use meta description for "
+#~ "ranking (<a href=\"https://webmasters.googleblog.com/2009/09/google-does-"
+#~ "not-use-keywords-meta-tag.html\">source</a>), they can be displayed below "
+#~ "the title of your page in search results. Since search engines uses users "
+#~ "clics to rank your website, an appealing description can make the "
+#~ "difference.<br />Google has affirmed that they display a shorter text "
+#~ "(~155 chars) below the title of the page (<a href=\"https://twitter.com/"
+#~ "dannysullivan/status/996065145443893249\">source</a>)."
+#~ msgstr ""
+#~ "Même si les moteurs de recherche indiquent qu'ils n'utilisent pas de méta-"
+#~ "description pour le classement (<a href=\"https://webmasters.googleblog."
+#~ "com/2009/09/google-does-not-use-keywords-meta-tag.html\">source</a>), ils "
+#~ "peuvent être affichés sous le titre de votre page dans les résultats de "
+#~ "recherche. Puisque les moteurs de recherche utilisent les clics des "
+#~ "utilisateurs pour classer votre site Web, une description attrayante peut "
+#~ "faire la différence. <br />Google a affirmé qu'ils affichent un texte "
+#~ "plus court (~155 caractères) sous le titre de la page (<a href=\"https://"
+#~ "twitter.com/dannysullivan/status/996065145443893249\">source</a>)."
 
 #~ msgid ""
 #~ "Yoast provide us some knowledge : \"A blog post should contain at least "

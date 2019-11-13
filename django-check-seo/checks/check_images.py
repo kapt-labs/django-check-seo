@@ -13,6 +13,7 @@ def importance():
 
 
 def run(site):
+
     images = bs4.element.ResultSet(None)
 
     for c in site.content:
