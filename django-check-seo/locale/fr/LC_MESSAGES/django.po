@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-13 16:14+0100\n"
-"PO-Revision-Date: 2019-11-13 16:14+0100\n"
+"POT-Creation-Date: 2019-11-18 16:54+0100\n"
+"PO-Revision-Date: 2019-11-18 16:55+0100\n"
 "Last-Translator: kapt <dev@kapt.mobi>\n"
 "Language-Team: français <dev@kapt.mobi>\n"
 "Language: fr\n"
@@ -19,7 +19,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Gtranslator 2.91.7\n"
 
-#: django-check-seo/checks/check_description.py:20
+#: django-check-seo/checks/check_description.py:18
+msgid "Meta description is too short"
+msgstr "La balise meta description est trop courte"
+
+#: django-check-seo/checks/check_description.py:19
+msgid "Meta description is too long"
+msgstr "La balise meta description est trop longue"
+
+#: django-check-seo/checks/check_description.py:21
 msgid ""
 "The meta description tag can be displayed in search results if it has the "
 "right length, and can influence users. Knowing that Google classifies sites "
@@ -30,16 +38,16 @@ msgstr ""
 "Sachant que Google classe les sites en fonction du comportement des "
 "utilisateurs, il est important d'avoir une description pertinente."
 
-#: django-check-seo/checks/check_description.py:21
+#: django-check-seo/checks/check_description.py:23
 #, python-brace-format
 msgid "between {rule_low} and {rule_high} chars "
 msgstr "entre {rule_low} et {rule_high} caractères"
 
-#: django-check-seo/checks/check_description.py:26
-#| msgid ""
-#| "The meta description tag can be displayed in search results, and the "
-#| "keywords present in the search will be in bold. All this can influence "
-#| "the user, and Google ranks sites according to user behaviour."
+#: django-check-seo/checks/check_description.py:28
+msgid "No keyword in meta description"
+msgstr "Pas de mot-clef dans la balise meta de description"
+
+#: django-check-seo/checks/check_description.py:30
 msgid ""
 "The meta description tag can be displayed in search results, and the "
 "keywords present in the search will be in bold. All this can influence "
@@ -50,270 +58,190 @@ msgstr ""
 "cela peut influencer les utilisateurs et Google classe les sites en fonction "
 "de leur comportement."
 
-#: django-check-seo/checks/check_description.py:46
-msgid "Meta description is too short"
-msgstr "La balise meta description est trop courte"
-
-#: django-check-seo/checks/check_description.py:48
-#, python-format
-msgid "%(words)d char found"
-msgid_plural "%(words)d chars found"
-msgstr[0] "%(words)d caractère trouvé"
-msgstr[1] "%(words)d caractères trouvés"
-
-#: django-check-seo/checks/check_description.py:58
-msgid "Meta description is too long"
-msgstr "La balise meta description est trop longue"
-
-#: django-check-seo/checks/check_description.py:80
-msgid "No keyword in meta description"
-msgstr "Pas de mot-clef dans la balise meta de description"
-
-#: django-check-seo/checks/check_description.py:89
+#: django-check-seo/checks/check_description.py:34
 msgid "No meta description"
 msgstr "Pas de balise meta description"
 
-#: django-check-seo/checks/check_h1.py:25
+#: django-check-seo/checks/check_description.py:36
+msgctxt "description"
+msgid "none"
+msgstr "aucun"
+
+#: django-check-seo/checks/check_description.py:52
+#, python-format
+msgid "%(words)d char"
+msgid_plural "%(words)d chars"
+msgstr[0] "%(words)d caractère"
+msgstr[1] "%(words)d caractères"
+
+#: django-check-seo/checks/check_h1.py:20
 msgid "Too much h1 tags"
 msgstr "Trop de tags h1"
 
-#: django-check-seo/checks/check_h1.py:26
-#: django-check-seo/checks/check_h1.py:37
+#: django-check-seo/checks/check_h1.py:21
+#: django-check-seo/checks/check_h1.py:27
 msgid "exactly 1"
 msgstr "exactement 1"
 
-#: django-check-seo/checks/check_h1.py:28
+#: django-check-seo/checks/check_h1.py:23
 msgid ""
-"Google has told that they do not consider using multiple h1 a bad thing (<a "
-"href=\"https://www.youtube.com/watch?v=WsgrSxCmMbM\">source</a>), but Google "
-"is not the unique search engine out there. Bing webmaster guidelines says "
-"\"Use only one <h1> tag per page\"."
+"Google is not really concerned about the number of h1 tags on your page, but "
+"Bing clearly indicates in its guidelines for webmasters to use only one h1 "
+"tag per page."
 msgstr ""
-"Google a dit qu'ils ne considèrent pas l'utilisation de plusieurs h1 comme "
-"une mauvaise chose (<a href=\"https://www.youtube.com/watch?v=WsgrSxCmMbM"
-"\">source</a>), mais Google n'est pas le seul moteur de recherche là-bas. Le "
-"guide du webmaster de Bing dit : \"N'utilisez qu'une seule balise <h1> par "
-"page\"."
+"Google n'est pas vraiment préoccupé par le nombre de balises h1 sur votre "
+"page, mais Bing indique clairement dans ses directives pour les webmasters "
+"d'utiliser une seule balise h1 par page."
 
-#: django-check-seo/checks/check_h1.py:36
+#: django-check-seo/checks/check_h1.py:26
 msgid "No h1 tag"
 msgstr "Pas de titre h1"
 
-#: django-check-seo/checks/check_h1.py:39
-msgid ""
-"H1 is the most visually notable content of your page for your users, and is "
-"one of the most important ranking factor for search engines. A good h1 tag "
-"content is required in order to progress in SERP."
-msgstr ""
-"H1 est le contenu le plus visuellement remarquable de votre page pour vos "
-"utilisateurs, et est l'un des facteurs de classement les plus importants "
-"pour les moteurs de recherche. Un bon contenu de balises h1 est nécessaire "
-"pour progresser dans le SERP."
-
-#: django-check-seo/checks/check_h1.py:61
+#: django-check-seo/checks/check_h1.py:30
 msgid "No keyword in h1"
 msgstr "Pas de mot clef dans la balise H1"
 
-#: django-check-seo/checks/check_h1.py:62
-#: django-check-seo/checks/check_h2.py:23
-#: django-check-seo/checks/check_h2.py:49
+#: django-check-seo/checks/check_h1.py:31
+#: django-check-seo/checks/check_h2.py:19
+#: django-check-seo/checks/check_h2.py:25
 #: django-check-seo/checks/check_keyword_url.py:23
-#: django-check-seo/checks/check_keywords.py:34
-#: django-check-seo/checks/check_title.py:22
-#: django-check-seo/checks/check_title.py:65
+#: django-check-seo/checks/check_keywords.py:19
+#: django-check-seo/checks/check_title.py:19
+#: django-check-seo/checks/check_title.py:42
 msgid "at least 1"
 msgstr "au moins 1"
 
-#: django-check-seo/checks/check_h1.py:64
+#: django-check-seo/checks/check_h1.py:33
 msgid ""
-"H1 are crawled by search engines as the title of your page. You may populate "
-"them with appropriate content in order to be sure that search engines "
-"correctly understand what your pages are all about."
+"The H1 tag represent the main title of your page, and you may populate it "
+"with appropriate content in order to ensure that users (and search engines!) "
+"will understand correctly your page."
 msgstr ""
-"H1 sont explorés par les moteurs de recherche comme le titre de votre page. "
-"Vous pouvez les remplir avec un contenu approprié afin de vous assurer que "
-"les moteurs de recherche comprennent bien ce que vos pages représentent."
+"La balise H1 représente le titre principal de votre page, et vous pouvez la "
+"remplir avec le contenu approprié afin de vous assurer que les utilisateurs "
+"(et les moteurs de recherche !) comprendront correctement votre page."
 
-#: django-check-seo/checks/check_h2.py:22
+#: django-check-seo/checks/check_h1.py:52
+#: django-check-seo/checks/check_h1.py:76
+#: django-check-seo/checks/check_h2.py:36
+#: django-check-seo/checks/check_h2.py:61
+#: django-check-seo/checks/check_keyword_url.py:24
+#: django-check-seo/checks/check_keywords.py:20
+#: django-check-seo/checks/check_title.py:20
+#: django-check-seo/checks/keyword_present_first_paragraph.py:23
+msgid "none"
+msgstr "aucun"
+
+#: django-check-seo/checks/check_h2.py:18
 msgid "No h2 tag"
 msgstr "Pas de tag h2"
 
-#: django-check-seo/checks/check_h2.py:25
+#: django-check-seo/checks/check_h2.py:21
 msgid ""
 "H2 tags are useful because they are explored by search engines and can help "
-"them understand the subject of your page (<a href=\"https://robsnell.com/"
-"matt-cutts-transcript.html\">source</a>). It's a \"section title\", so every "
-"time you start talking about a new topic, you can put an h2 tag, which will "
-"explain what the content will be about."
+"them understand the subject of your page."
 msgstr ""
 "Les balises H2 sont utiles car elles sont explorées par les moteurs de "
-"recherche et peuvent les aider à comprendre le sujet de votre page (<a href="
-"\"https://robsnell.com/matt-cutts-transcript.html\">source</a>). C'est un "
-"\"titre de section\", donc chaque fois que vous commencez à parler d'un "
-"nouveau sujet, vous pouvez mettre une balise h2, qui expliquera de quoi il "
-"s'agit."
+"recherche et peuvent les aider à comprendre le sujet de votre page."
 
-#: django-check-seo/checks/check_h2.py:48
+#: django-check-seo/checks/check_h2.py:24
 msgid "No keyword in h2"
 msgstr "Pas de mot clef dans la balise h2"
 
-#: django-check-seo/checks/check_h2.py:51
-msgid ""
-"Matt Cutts (creator of Google SafeSearch) <a href=\"https://robsnell.com/"
-"matt-cutts-transcript.html\">stated in 2009</a> that \"[...] we use things "
-"in the title, things in the URL, even things that are really highlighted, "
-"like h2 tags and stuff like that. \". Even if there is not really a more "
-"recent acknowledgement, h2 titles are important (but maybe not as important "
-"as h1 & title tags)."
+#: django-check-seo/checks/check_h2.py:27
+msgid "Google uses h2 tags to better understand the subjects of your page."
 msgstr ""
-"Matt Cutts (créateur de Google SafeSearch) <a href=\"https://robsnell.com/"
-"matt-cutts-transcript.html\">a déclaré en 2009</a> que \"[...] nous "
-"utilisons des choses dans le titre, des choses dans l'URL, même des choses "
-"qui sont vraiment mises en évidence, comme des tags h2 et des choses comme "
-"ça. \". Même s'il n'y a pas vraiment de reconnaissance plus récente, les "
-"titres h2 sont importants (mais peut-être pas aussi importants que les "
-"balises h1 et title).\n"
-"\n"
-"Traduit avec www.DeepL.com/Translator"
+"Google utilise des balises h2 pour mieux comprendre les sujets abordés sur "
+"votre page."
 
-#: django-check-seo/checks/check_images.py:25
+#: django-check-seo/checks/check_images.py:17
 msgid "Img lack alt tag"
 msgstr "Il manque la balise alt sur une image"
 
-#: django-check-seo/checks/check_images.py:26
+#: django-check-seo/checks/check_images.py:18
 msgid "all images"
 msgstr "toutes les images"
 
-#: django-check-seo/checks/check_images.py:28
-#, python-brace-format
+#: django-check-seo/checks/check_images.py:20
 msgid ""
 "Your images should always have an alt tag, because it improves accessibility "
-"for visually impaired people.<br />The name of your image is important too, "
-"because Google will look at it to know what the picture is about (<a href="
-"\"https://support.google.com/webmasters/answer/114016\">source</a>).<br /><a "
-"href=\"{img_url}\">This is the image</a> without alt tag."
+"for visually impaired people. The name of the file is important too, because "
+"it helps Google understand what your image is about. For example, you could "
+"rename a file named \"IMG0001.jpg\" to \"tree_with_a_bird.jpg\"."
 msgstr ""
-"Vos images doivent toujours avoir une balise alt, car elle améliore "
-"l'accessibilité pour les personnes malvoyantes. <br />Le nom de votre image "
-"est important aussi, parce que Google va la regarder pour savoir de quoi il "
-"s'agit (<a href=\"https://support.google.com/webmasters/"
-"answer/114016\">source</a>).<br /><a href=\"{img_url}\">C'est l'image</a> "
-"sans balise alt."
+"Vos images devraient toujours avoir une balise alt, car elle améliore "
+"l'accessibilité pour les personnes malvoyantes. Le nom du fichier est "
+"également important, car il aide Google à comprendre de quoi parle votre "
+"image. Par exemple, vous pouvez renommer un fichier nommé \"IMG0001.jpg\" en "
+"\"tree_with_a_bird.jpg\"."
 
 #: django-check-seo/checks/check_keyword_url.py:22
 msgid "No keyword in URL"
 msgstr "Pas de mot clef dans l'url"
 
-#: django-check-seo/checks/check_keyword_url.py:25
+#: django-check-seo/checks/check_keyword_url.py:26
 msgid ""
-"Keywords in URL are a small ranking factor for Google (<a href=\"https://"
-"twitter.com/JohnMu/status/1070634500022001666\">source</a>), but it will "
-"help your users understand the organisation of your website (/?product=50 "
-"talk less than /products/camping/). On the other hand Bing says : \"<i>URL "
-"structure and keyword usage - keep it clean and keyword rich when possible</"
-"i>\" (<a href=\"https://www.bing.com/webmaster/help/webmaster-"
-"guidelines-30fba23a\">source</a>)."
+"Keywords in URL will help your users understand the organisation of your "
+"website, and are a small ranking factor for Google. On the other hand, Bing "
+"guidelines advises to \"<i>keep [your URL] clean and keyword rich when "
+"possible</i>\"."
 msgstr ""
-"Les mots-clés dans l'URL sont un petit facteur de classement pour Google (<a "
-"href=\"https://twitter.com/JohnMu/status/1070634500022001666\">source</a>), "
-"mais il aidera vos utilisateurs à comprendre l'organisation de votre site "
-"web (/?product=50 talk less than /products/camping/). D'autre part, Bing "
-"dit : \"<i>URL structure et utilisation des mots-clés - gardez-le propre et "
-"riche en mots-clés lorsque possible</i>\" (<a href=\"https://www.bing.com/"
-"webmaster/help/webmaster-guidelines-30fba23a\">source</a>)."
+"Les mots-clés dans l'URL aideront vos utilisateurs à comprendre "
+"l'organisation de votre site Web, et sont un petit facteur de classement "
+"pour Google. D'autre part, les directives de Bing conseillent de \"<i>garder "
+"[votre URL] propre et riche en mots-clés lorsque possible</i>\"."
 
-#: django-check-seo/checks/check_keywords.py:33
-msgid "No meta keywords"
-msgstr "Pas de mots clefs meta"
+#: django-check-seo/checks/check_keywords.py:18
+msgid "No keywords in meta keywords field"
+msgstr "Pas de mot-clef dans la balise meta keywords"
 
-#: django-check-seo/checks/check_keywords.py:36
+#: django-check-seo/checks/check_keywords.py:22
 msgid ""
-"Meta keywords were important in this meta tag, however django-check-seo uses "
-"these keywords to check all other tests related to keywords. You will be "
-"flooded with problems and warnings and this SEO tool will not work as well "
-"as it should if you don't add some keywords."
+"Django-check-seo uses the keywords in the meta keywords field to check all "
+"other tests related to the keywords. A series of problems and warnings are "
+"related to keywords, and will therefore systematically be activated if the "
+"keywords are not filled in."
 msgstr ""
-"La présence de mots clefs était important dans ce meta tag, mais django-"
-"check-seo utilise ces mots comme base pour vérifier tous les autres tests "
-"relatifs à des mots clefs. Vous allez être submergé de problèmes & "
-"d'avertissements, et cet outil de SEO ne fonctionnera pas aussi bien qu'il "
-"le devrait si vous n'ajoutez pas quelques mots clefs."
+"Django-check-seo utilise les mots-clés présents dans le champ meta keywords "
+"pour vérifier tous les autres tests liés aux mots-clés. Un certain nombre de "
+"problèmes et d'avertissements sont liés aux mots-clef, et vont donc "
+"systématiquement être activés si les mots clefs ne sont pas renseignés."
 
-#: django-check-seo/checks/check_links.py:43
+#: django-check-seo/checks/check_links.py:21
 msgid "Not enough internal links"
 msgstr "Pas assez de liens internes"
 
-#: django-check-seo/checks/check_links.py:48
+#: django-check-seo/checks/check_links.py:22
+#: django-check-seo/checks/check_links.py:30
+msgid "more than {}"
+msgstr "plus de {}"
+
+#: django-check-seo/checks/check_links.py:26
 msgid ""
-"Internal links are useful because they link your content and can give any "
-"search engine the structure of your website, so they can create a hierarchy "
-"of your pages."
+"Internal links are useful because they can give the structure of your "
+"website to search engines, so they can create a hierarchy of your pages."
 msgstr ""
-"Les liens internes sont utiles parce qu'ils lient votre contenu et peuvent "
-"donner à n'importe quel moteur de recherche la structure de votre site Web, "
-"de sorte qu'ils peuvent créer une hiérarchie de vos pages."
+"Les liens internes sont utiles car ils peuvent donner la structure de votre "
+"site Web aux moteurs de recherche, de sorte qu'ils peuvent créer une "
+"hiérarchie de vos pages."
 
-#: django-check-seo/checks/check_links.py:57
-msgid "Too many internal links"
-msgstr "Trop de liens internes"
-
-#: django-check-seo/checks/check_links.py:62
-msgid ""
-"Google is vague about the max number of internal links on your site. <a href="
-"\"https://neilpatel.com/blog/commandments-of-internal-linking/\">Neil Patel</"
-"a> advises 3 to 4 internal links in the content of your page (excluding "
-"header/footer), but he says that you can go up to 10-20 links if your "
-"content is long enough."
-msgstr ""
-"Google est vague sur le nombre maximum de liens internes sur votre site. <a "
-"href=\"https://neilpatel.com/blog/commandments-of-internal-linking/\">Neil "
-"Patel</a> conseille 3 à 4 liens internes dans le contenu de votre page (à "
-"l'exclusion de l'en-tête/pied de page), mais il dit que vous pouvez aller "
-"jusqu'à 10-20 liens si votre contenu est assez long."
-
-#: django-check-seo/checks/check_links.py:71
+#: django-check-seo/checks/check_links.py:29
 msgid "Not enough external links"
 msgstr "Pas assez de liens externes"
 
-#: django-check-seo/checks/check_links.py:76
+#: django-check-seo/checks/check_links.py:34
 msgid ""
-"Some recent SEO-related articles advise you to add some external links to "
-"help SEO on other websites (<a href=\"https://yoast.com/outbound-links/"
-"\">source</a>) while at the other end an old (2015) study found that links "
-"to websites with an high authority help incresing websites ranking (<a href="
-"\"https://www.rebootonline.com/blog/long-term-outgoing-link-experiment/"
-"\">source</a>)."
+"External links help your users to verify your point, and can save them from "
+"doing additional research."
 msgstr ""
-"Certains articles récents sur le référencement vous conseillent d'ajouter "
-"des liens externes pour aider le référencement sur d'autres sites Web (<a "
-"href=\"https://yoast.com/outbound-links/\">source</a>) tandis qu'à l'autre "
-"extrémité une vieille étude (2015) a constaté que les liens vers des sites "
-"Web avec une haute autorité aident à augmenter le classement des sites (< a "
-"href=\"https://www.rebootonline.com/blog/long-term-outgoing-link-experiment/"
-"\">source</a>)."
+"Des liens externes aident vos utilisateurs à vérifier votre propos, et "
+"peuvent leur éviter de faire des recherches supplémentaires."
 
-#: django-check-seo/checks/check_links.py:85
-msgid "Too many external links"
-msgstr "Trop de liens externes"
-
-#: django-check-seo/checks/check_links.py:90
-msgid ""
-"\"Thanks to updates like Google Penguin, Google now focuses on link quality "
-"(not just link quantity)\". There's no need to have too many external links "
-"on your main content, but the reputation of the websites you are linking to "
-"is important."
-msgstr ""
-"\"Grâce à des mises à jour comme Google Penguin, Google se concentre "
-"désormais sur la qualité des liens (pas seulement sur la quantité de "
-"liens)\". Il n'est pas nécessaire d'avoir trop de liens externes sur votre "
-"contenu principal, mais la réputation des sites vers lesquels vous pointez "
-"est importante."
-
-#: django-check-seo/checks/check_title.py:21
+#: django-check-seo/checks/check_title.py:18
 msgid "No title tag"
 msgstr "Pas de titre meta"
 
-#: django-check-seo/checks/check_title.py:24
+#: django-check-seo/checks/check_title.py:22
 msgid ""
 "Titles tags are ones of the most important things to add to your pages, "
 "sinces they are the main text displayed on result search pages."
@@ -322,11 +250,15 @@ msgstr ""
 "puisque ce sera principalement lui qui sera affiché dans les résultats des "
 "moteurs de recherches."
 
-#: django-check-seo/checks/check_title.py:34
+#: django-check-seo/checks/check_title.py:25
 msgid "Title tag is too short"
 msgstr "Le meta tag title est trop court"
 
-#: django-check-seo/checks/check_title.py:39
+#: django-check-seo/checks/check_title.py:26
+msgid "longer than {}"
+msgstr "plus long que {}"
+
+#: django-check-seo/checks/check_title.py:30
 msgid ""
 "Titles tags need to describe the content of the page, and need to contain at "
 "least a few words."
@@ -334,11 +266,17 @@ msgstr ""
 "Les balises de titres doivent décrire le contenu de la page, et doivent "
 "contenir au moins quelques mots."
 
-#: django-check-seo/checks/check_title.py:48
+#: django-check-seo/checks/check_title.py:33
 msgid "Title tag is too long"
 msgstr "Le meta tag title est trop long"
 
-#: django-check-seo/checks/check_title.py:53
+#: django-check-seo/checks/check_title.py:35
+#: django-check-seo/checks/check_url.py:18
+#: django-check-seo/checks/check_url.py:22
+msgid "less than {}"
+msgstr "moins de {}"
+
+#: django-check-seo/checks/check_title.py:38
 msgid ""
 "Only the first ~55-60 chars are displayed on modern search engines results. "
 "Writing a longer title is not really required and can lead to make the user "
@@ -348,11 +286,11 @@ msgstr ""
 "moteurs de recherche moderne. Écrire un plus long titre n'est pas vraiment "
 "requis, et peut mener l'utilisateur à louper des informations."
 
-#: django-check-seo/checks/check_title.py:64
+#: django-check-seo/checks/check_title.py:41
 msgid "Title do not contain any keyword"
 msgstr "Le titre ne contient aucun mot-clé"
 
-#: django-check-seo/checks/check_title.py:67
+#: django-check-seo/checks/check_title.py:45
 msgid ""
 "Titles tags need to contain at least one keyword, since they are one of the "
 "most important content of the page for search engines."
@@ -361,88 +299,60 @@ msgstr ""
 "constituent l'un des contenus les plus importants de la page pour les "
 "moteurs de recherche."
 
-#: django-check-seo/checks/check_url.py:26
+#: django-check-seo/checks/check_url.py:17
 msgid "Too many levels in path"
 msgstr "Trop de niveaux dans le chemin"
 
-#: django-check-seo/checks/check_url.py:32
+#: django-check-seo/checks/check_url.py:19
 msgid ""
 "Google recommand to organize your content by adding depth in your url, but "
-"advises against putting too much repertories (<a href=\"https://support."
-"google.com/webmasters/answer/7451184\">source</a>).<br />Yoast says that "
-"\"In a perfect world, we would place everything in one sublevel at most. "
-"Today, many sites use secondary menus to accommodate for additional content"
-"\" (<a href=\"https://yoast.com/how-to-clean-site-structure/\">source</a>)."
+"advises against putting too much depth."
 msgstr ""
 "Google recommande d'organiser votre contenu en ajoutant de la profondeur "
-"dans votre url, mais déconseille de mettre trop de répertoires (<a href="
-"\"https://support.google.com/webmasters/answer/7451184\">source</a>).<br/"
-">Yoast dit que \"Dans un monde parfait, nous placerions tout dans un sous "
-"niveau au maximum. Aujourd'hui, de nombreux sites utilisent des menus "
-"secondaires pour accueillir du contenu supplémentaire \" (<a href=\"https://"
-"yoast.com/how-to-clean-site-structure/\">source</a>)."
+"dans votre url, mais déconseille de trop en mettre."
 
-#: django-check-seo/checks/check_url.py:42
+#: django-check-seo/checks/check_url.py:21
 msgid "URL is too long"
 msgstr "L'URL est trop longue"
 
-#: django-check-seo/checks/check_url.py:48
-msgid ""
-"A study from 2016 found a correlation between URL length & ranking (<a href="
-"\"https://backlinko.com/search-engine-ranking\">source</a>)."
+#: django-check-seo/checks/check_url.py:23
+msgid "Shorter URLs tend to rank better than long URLs."
 msgstr ""
-"Une étude de 2016 a établi une corrélation entre la longueur de l'URL et le "
-"classement (<a href=\"https://backlinko.com/search-engine-ranking\">source</"
-"a>)."
+"Les URL plus courtes ont tendance à être mieux classées que les URL longues."
 
-#: django-check-seo/checks/content_words_number.py:24
-#: django-check-seo/checks/content_words_number.py:39
+#: django-check-seo/checks/content_words_number.py:17
 msgid "Content is too short"
 msgstr "Le contenu est trop court"
 
-#: django-check-seo/checks/content_words_number.py:31
-#: django-check-seo/checks/content_words_number.py:46
-msgid ""
-"Yoast provide us some knowledge : \"A blog post should contain at least 300 "
-"words in order to rank well in the search engines. Long posts will rank more "
-"easily than short posts. However, long posts require strong writing skills"
-"\" (<a href=\"https://yoast.com/blog-post-length/\">source</a>).<br />An "
-"article from Forbes from 2017 says that \"<i>content with 1,000 words or "
-"more tends to attract significantly more links and shares</i>\", and "
-"\"<i>the average content length for top 3 rankings was about 750 words, "
-"while the average content length for position 20 rankings was about 500 "
-"words</i>\" (<a href=\"https://web.archive.org/web/20190708230659/https://"
-"www.forbes.com/sites/jaysondemers/2017/07/18/how-long-should-your-content-be-"
-"for-optimal-seo/2\">source</a>)."
-msgstr ""
-"Yoast nous apporte des connaissances : \"Un billet de blog doit contenir au "
-"moins 300 mots pour être bien référencé dans les moteurs de recherche. Les "
-"messages longs se classeront plus facilement que les messages courts. "
-"Cependant, les messages longs exigent de bonnes compétences rédactionnelles "
-"\" (<a href=\"https://yoast.com/blog-post-length/\">source</a>).<br />Un "
-"article de Forbes de 2017 dit que \" <i>contenu avec 1 000 mots ou plus tend "
-"à attirer beaucoup plus de liens et de parts</i> \", et \" <i>la longueur "
-"moyenne des contenus des trois premiers classements était d'environ 750 "
-"mots, tandis que la longueur moyenne des contenus des 20 derniers est de 500 "
-"mots environ (<a href=\"https://web.archive.org/web/20190708230659/https://"
-"www.forbes.com/sites/jaysondemers/2017/07/18/how-long-should-your-content-be-"
-"for-optimal-seo/2\">source</a>)\"."
+#: django-check-seo/checks/content_words_number.py:18
+#, python-brace-format
+msgid "at least {min} words, more than {min2} if possible"
+msgstr "au moins {min} mots, plus de {min2} si possible"
 
-#: django-check-seo/checks/keyword_present_first_paragraph.py:27
+#: django-check-seo/checks/content_words_number.py:19
+msgid ""
+"Longer posts tend to be more highly ranked, but will require better writing "
+"skills than shorter articles."
+msgstr ""
+"Les articles plus longs ont tendance à être mieux classés, mais exigeront de "
+"meilleures compétences en rédaction que les articles plus courts."
+
+#: django-check-seo/checks/keyword_present_first_paragraph.py:17
 msgid "No keyword in first sentence"
 msgstr "Aucun mot-clé dans la première phrase"
 
-#: django-check-seo/checks/keyword_present_first_paragraph.py:32
+#: django-check-seo/checks/keyword_present_first_paragraph.py:19
+#, python-brace-format
+msgid "before {settings} words"
+msgstr "avant {settings} words"
+
+#: django-check-seo/checks/keyword_present_first_paragraph.py:25
 msgid ""
-"Yoast advises to put a keyword in the first sentence of your content. The "
-"person who reads it will be relieved because he will quickly retrieve the "
-"keyword he was looking for (<a href=\"https://yoast.com/text-structure-"
-"important-seo/\">source</a>)."
+"The reader will be relieved to find one of his keywords in the first "
+"paragraph of your page, and the same logic applies to Google."
 msgstr ""
-"Yoast vous conseille de mettre un mot-clé dans la première phrase de votre "
-"contenu. La personne qui le lit sera soulagée car elle retrouvera rapidement "
-"le mot-clé qu'elle cherchait (<a href=\"https://yoast.com/text-structure-"
-"important-seo/\">source</a>)."
+"Le lecteur sera soulagé de trouver un de ses mots-clés dans le premier "
+"paragraphe de votre page, et la même logique s'applique à Google."
 
 #: django-check-seo/templates/default.html:21
 msgid ""
@@ -481,6 +391,14 @@ msgstr[1] ""
 "\n"
 "et %(nbwarnings)s avertissements levés.\n"
 
+#: django-check-seo/templates/default.html:46
+msgid "settings"
+msgstr "paramètres"
+
+#: django-check-seo/templates/default.html:46
+msgid "found"
+msgstr "trouvé"
+
 #: django-check-seo/templates/default.html:68
 msgid "See extracted html"
 msgstr "Voir html extrait"
@@ -492,6 +410,203 @@ msgstr "Voir contenu extrait"
 #: django-check-seo/templates/default.html:84
 msgid "See settings"
 msgstr "Voir les paramètres"
+
+#~ msgid ""
+#~ "Google recommand to organize your content by adding depth in your url, "
+#~ "but advises against putting too much repertories (<a href=\"https://"
+#~ "support.google.com/webmasters/answer/7451184\">source</a>).<br />Yoast "
+#~ "says that \"In a perfect world, we would place everything in one sublevel "
+#~ "at most. Today, many sites use secondary menus to accommodate for "
+#~ "additional content\" (<a href=\"https://yoast.com/how-to-clean-site-"
+#~ "structure/\">source</a>)."
+#~ msgstr ""
+#~ "Google recommande d'organiser votre contenu en ajoutant de la profondeur "
+#~ "dans votre url, mais déconseille de mettre trop de répertoires (<a href="
+#~ "\"https://support.google.com/webmasters/answer/7451184\">source</a>).<br/"
+#~ ">Yoast dit que \"Dans un monde parfait, nous placerions tout dans un sous "
+#~ "niveau au maximum. Aujourd'hui, de nombreux sites utilisent des menus "
+#~ "secondaires pour accueillir du contenu supplémentaire \" (<a href="
+#~ "\"https://yoast.com/how-to-clean-site-structure/\">source</a>)."
+
+#~ msgid ""
+#~ "A study from 2016 found a correlation between URL length & ranking (<a "
+#~ "href=\"https://backlinko.com/search-engine-ranking\">source</a>)."
+#~ msgstr ""
+#~ "Une étude de 2016 a établi une corrélation entre la longueur de l'URL et "
+#~ "le classement (<a href=\"https://backlinko.com/search-engine-ranking"
+#~ "\">source</a>)."
+
+#~ msgid ""
+#~ "Yoast provide us some knowledge : \"A blog post should contain at least "
+#~ "300 words in order to rank well in the search engines. Long posts will "
+#~ "rank more easily than short posts. However, long posts require strong "
+#~ "writing skills\" (<a href=\"https://yoast.com/blog-post-length/\">source</"
+#~ "a>).<br />An article from Forbes from 2017 says that \"<i>content with "
+#~ "1,000 words or more tends to attract significantly more links and shares</"
+#~ "i>\", and \"<i>the average content length for top 3 rankings was about "
+#~ "750 words, while the average content length for position 20 rankings was "
+#~ "about 500 words</i>\" (<a href=\"https://web.archive.org/"
+#~ "web/20190708230659/https://www.forbes.com/sites/jaysondemers/2017/07/18/"
+#~ "how-long-should-your-content-be-for-optimal-seo/2\">source</a>)."
+#~ msgstr ""
+#~ "Yoast nous apporte des connaissances : \"Un billet de blog doit contenir "
+#~ "au moins 300 mots pour être bien référencé dans les moteurs de recherche. "
+#~ "Les messages longs se classeront plus facilement que les messages courts. "
+#~ "Cependant, les messages longs exigent de bonnes compétences "
+#~ "rédactionnelles \" (<a href=\"https://yoast.com/blog-post-length/"
+#~ "\">source</a>).<br />Un article de Forbes de 2017 dit que \" <i>contenu "
+#~ "avec 1 000 mots ou plus tend à attirer beaucoup plus de liens et de "
+#~ "parts</i> \", et \" <i>la longueur moyenne des contenus des trois "
+#~ "premiers classements était d'environ 750 mots, tandis que la longueur "
+#~ "moyenne des contenus des 20 derniers est de 500 mots environ (<a href="
+#~ "\"https://web.archive.org/web/20190708230659/https://www.forbes.com/sites/"
+#~ "jaysondemers/2017/07/18/how-long-should-your-content-be-for-optimal-"
+#~ "seo/2\">source</a>)\"."
+
+#~ msgid ""
+#~ "Google has told that they do not consider using multiple h1 a bad thing "
+#~ "(<a href=\"https://www.youtube.com/watch?v=WsgrSxCmMbM\">source</a>), but "
+#~ "Google is not the unique search engine out there. Bing webmaster "
+#~ "guidelines says \"Use only one <h1> tag per page\"."
+#~ msgstr ""
+#~ "Google a dit qu'ils ne considèrent pas l'utilisation de plusieurs h1 "
+#~ "comme une mauvaise chose (<a href=\"https://www.youtube.com/watch?"
+#~ "v=WsgrSxCmMbM\">source</a>), mais Google n'est pas le seul moteur de "
+#~ "recherche là-bas. Le guide du webmaster de Bing dit : \"N'utilisez qu'une "
+#~ "seule balise <h1> par page\"."
+
+#~ msgid ""
+#~ "H1 is the most visually notable content of your page for your users, and "
+#~ "is one of the most important ranking factor for search engines. A good h1 "
+#~ "tag content is required in order to progress in SERP."
+#~ msgstr ""
+#~ "H1 est le contenu le plus visuellement remarquable de votre page pour vos "
+#~ "utilisateurs, et est l'un des facteurs de classement les plus importants "
+#~ "pour les moteurs de recherche. Un bon contenu de balises h1 est "
+#~ "nécessaire pour progresser dans le SERP."
+
+#~ msgid ""
+#~ "H2 tags are useful because they are explored by search engines and can "
+#~ "help them understand the subject of your page (<a href=\"https://robsnell."
+#~ "com/matt-cutts-transcript.html\">source</a>). It's a \"section title\", "
+#~ "so every time you start talking about a new topic, you can put an h2 tag, "
+#~ "which will explain what the content will be about."
+#~ msgstr ""
+#~ "Les balises H2 sont utiles car elles sont explorées par les moteurs de "
+#~ "recherche et peuvent les aider à comprendre le sujet de votre page (<a "
+#~ "href=\"https://robsnell.com/matt-cutts-transcript.html\">source</a>). "
+#~ "C'est un \"titre de section\", donc chaque fois que vous commencez à "
+#~ "parler d'un nouveau sujet, vous pouvez mettre une balise h2, qui "
+#~ "expliquera de quoi il s'agit."
+
+#~ msgid ""
+#~ "Matt Cutts (creator of Google SafeSearch) <a href=\"https://robsnell.com/"
+#~ "matt-cutts-transcript.html\">stated in 2009</a> that \"[...] we use "
+#~ "things in the title, things in the URL, even things that are really "
+#~ "highlighted, like h2 tags and stuff like that. \". Even if there is not "
+#~ "really a more recent acknowledgement, h2 titles are important (but maybe "
+#~ "not as important as h1 & title tags)."
+#~ msgstr ""
+#~ "Matt Cutts (créateur de Google SafeSearch) <a href=\"https://robsnell.com/"
+#~ "matt-cutts-transcript.html\">a déclaré en 2009</a> que \"[...] nous "
+#~ "utilisons des choses dans le titre, des choses dans l'URL, même des "
+#~ "choses qui sont vraiment mises en évidence, comme des tags h2 et des "
+#~ "choses comme ça. \". Même s'il n'y a pas vraiment de reconnaissance plus "
+#~ "récente, les titres h2 sont importants (mais peut-être pas aussi "
+#~ "importants que les balises h1 et title).\n"
+#~ "\n"
+#~ "Traduit avec www.DeepL.com/Translator"
+
+#~ msgid ""
+#~ "Keywords in URL are a small ranking factor for Google (<a href=\"https://"
+#~ "twitter.com/JohnMu/status/1070634500022001666\">source</a>), but it will "
+#~ "help your users understand the organisation of your website (/?product=50 "
+#~ "talk less than /products/camping/). On the other hand Bing says : "
+#~ "\"<i>URL structure and keyword usage - keep it clean and keyword rich "
+#~ "when possible</i>\" (<a href=\"https://www.bing.com/webmaster/help/"
+#~ "webmaster-guidelines-30fba23a\">source</a>)."
+#~ msgstr ""
+#~ "Les mots-clés dans l'URL sont un petit facteur de classement pour Google "
+#~ "(<a href=\"https://twitter.com/JohnMu/"
+#~ "status/1070634500022001666\">source</a>), mais il aidera vos utilisateurs "
+#~ "à comprendre l'organisation de votre site web (/?product=50 talk less "
+#~ "than /products/camping/). D'autre part, Bing dit : \"<i>URL structure et "
+#~ "utilisation des mots-clés - gardez-le propre et riche en mots-clés "
+#~ "lorsque possible</i>\" (<a href=\"https://www.bing.com/webmaster/help/"
+#~ "webmaster-guidelines-30fba23a\">source</a>)."
+
+#~ msgid "No meta keywords"
+#~ msgstr "Pas de mots clefs meta"
+
+#~ msgid ""
+#~ "Meta keywords were important in this meta tag, however django-check-seo "
+#~ "uses these keywords to check all other tests related to keywords. You "
+#~ "will be flooded with problems and warnings and this SEO tool will not "
+#~ "work as well as it should if you don't add some keywords."
+#~ msgstr ""
+#~ "La présence de mots clefs était important dans ce meta tag, mais django-"
+#~ "check-seo utilise ces mots comme base pour vérifier tous les autres tests "
+#~ "relatifs à des mots clefs. Vous allez être submergé de problèmes & "
+#~ "d'avertissements, et cet outil de SEO ne fonctionnera pas aussi bien "
+#~ "qu'il le devrait si vous n'ajoutez pas quelques mots clefs."
+
+#~ msgid "Too many internal links"
+#~ msgstr "Trop de liens internes"
+
+#~ msgid ""
+#~ "Google is vague about the max number of internal links on your site. <a "
+#~ "href=\"https://neilpatel.com/blog/commandments-of-internal-linking/"
+#~ "\">Neil Patel</a> advises 3 to 4 internal links in the content of your "
+#~ "page (excluding header/footer), but he says that you can go up to 10-20 "
+#~ "links if your content is long enough."
+#~ msgstr ""
+#~ "Google est vague sur le nombre maximum de liens internes sur votre site. "
+#~ "<a href=\"https://neilpatel.com/blog/commandments-of-internal-linking/"
+#~ "\">Neil Patel</a> conseille 3 à 4 liens internes dans le contenu de votre "
+#~ "page (à l'exclusion de l'en-tête/pied de page), mais il dit que vous "
+#~ "pouvez aller jusqu'à 10-20 liens si votre contenu est assez long."
+
+#~ msgid ""
+#~ "Some recent SEO-related articles advise you to add some external links to "
+#~ "help SEO on other websites (<a href=\"https://yoast.com/outbound-links/"
+#~ "\">source</a>) while at the other end an old (2015) study found that "
+#~ "links to websites with an high authority help incresing websites ranking "
+#~ "(<a href=\"https://www.rebootonline.com/blog/long-term-outgoing-link-"
+#~ "experiment/\">source</a>)."
+#~ msgstr ""
+#~ "Certains articles récents sur le référencement vous conseillent d'ajouter "
+#~ "des liens externes pour aider le référencement sur d'autres sites Web (<a "
+#~ "href=\"https://yoast.com/outbound-links/\">source</a>) tandis qu'à "
+#~ "l'autre extrémité une vieille étude (2015) a constaté que les liens vers "
+#~ "des sites Web avec une haute autorité aident à augmenter le classement "
+#~ "des sites (< a href=\"https://www.rebootonline.com/blog/long-term-"
+#~ "outgoing-link-experiment/\">source</a>)."
+
+#~ msgid "Too many external links"
+#~ msgstr "Trop de liens externes"
+
+#~ msgid ""
+#~ "\"Thanks to updates like Google Penguin, Google now focuses on link "
+#~ "quality (not just link quantity)\". There's no need to have too many "
+#~ "external links on your main content, but the reputation of the websites "
+#~ "you are linking to is important."
+#~ msgstr ""
+#~ "\"Grâce à des mises à jour comme Google Penguin, Google se concentre "
+#~ "désormais sur la qualité des liens (pas seulement sur la quantité de "
+#~ "liens)\". Il n'est pas nécessaire d'avoir trop de liens externes sur "
+#~ "votre contenu principal, mais la réputation des sites vers lesquels vous "
+#~ "pointez est importante."
+
+#~ msgid ""
+#~ "Yoast advises to put a keyword in the first sentence of your content. The "
+#~ "person who reads it will be relieved because he will quickly retrieve the "
+#~ "keyword he was looking for (<a href=\"https://yoast.com/text-structure-"
+#~ "important-seo/\">source</a>)."
+#~ msgstr ""
+#~ "Yoast vous conseille de mettre un mot-clé dans la première phrase de "
+#~ "votre contenu. La personne qui le lit sera soulagée car elle retrouvera "
+#~ "rapidement le mot-clé qu'elle cherchait (<a href=\"https://yoast.com/text-"
+#~ "structure-important-seo/\">source</a>)."
 
 #~ msgid "&gt;{rule} chars, found {words}"
 #~ msgstr "&gt;{rule} caractères, {words} trouvés"

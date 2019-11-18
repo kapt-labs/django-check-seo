@@ -25,12 +25,12 @@ def run(site):
 
     too_few_name = _("No h1 tag")
     too_few_settings = _("exactly 1")
-    too_few_description = "H1 is the most visually notable content of your page for your users, and will help Search Engines to better understand the subject of your page."
+    too_few_description = "H1 tag is the most visually notable content of your page for your users, and will help Search Engines to better understand the subject of your page."
 
     keywords_name = _("No keyword in h1")
     keywords_settings = _("at least 1")
     keywords_description = _(
-        "H1 represent the main title of your page, and you may populate them with appropriate content in order to ensure that users (and search engines!) will understand correctly your page."
+        "The H1 tag represent the main title of your page, and you may populate it with appropriate content in order to ensure that users (and search engines!) will understand correctly your page."
     )
 
     h1 = site.soup.find_all("h1")
