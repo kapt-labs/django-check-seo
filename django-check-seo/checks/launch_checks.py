@@ -6,6 +6,14 @@ import sys
 from . import *  # noqa: F403,F401
 
 
+try:
+    from checks import *  # noqa: F403,F401
+
+    nomodules = False
+except ModuleNotFoundError:
+    nomodules = True
+
+
 def launch_checks(site):
     """All the checks are performed here. Called in get_context_data().
     All functions should do its test(s), then add a dict in site.problems or site.warnings.
@@ -21,7 +29,7 @@ def launch_checks(site):
         if (
             "django-check-seo.checks." in module_name
             and module_name != "django-check-seo.checks.launch_checks"
-        ):
+        ) or (module_name.startswith("checks.")):
             module = importlib.import_module(module_name)
             get_module_order = getattr(module, "importance")
 
