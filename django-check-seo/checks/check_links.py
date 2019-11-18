@@ -31,7 +31,7 @@ def run(site):
         site.settings.SEO_SETTINGS["external_links"]
     )
     ne_external_description = _(
-        "Des liens externes aident vos utilisateurs à vérifier votre propos, et peuvent leur éviter de faire des recherches supplémentaires."
+        "External links help your users to verify your point, and can save them from doing additional research."
     )
 
     links = bs4.element.ResultSet(None)
@@ -68,6 +68,7 @@ def run(site):
             {
                 "name": ne_external_name,
                 "settings": ne_external_settings,
+                "found": external_links,
                 "description": ne_external_description,
             }
         )
