@@ -1,4 +1,4 @@
-# django-check-SEO
+![image](https://user-images.githubusercontent.com/45763865/69130297-8def1800-0ab0-11ea-8e3f-973e0f97a080.png)
 
 Replacing some features of Yoast or SEMrush for django CMS users.
 
