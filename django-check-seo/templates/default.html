@@ -1,4 +1,4 @@
-{% load cms_tags i18n %}
+{% load cms_tags i18n static %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,7 +16,7 @@
     </style>
   </head>
   <body>
-    <h1>Django check SEO</h1>
+    <h1><img src="{% static "logo-small.png" %}" alt="Django Check SEO" /></h1>
 
     <p>{% trans "An app that will look at your content and help you solve your SEO problems." %}</p>
 
