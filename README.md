@@ -1,4 +1,4 @@
-![image](https://user-images.githubusercontent.com/45763865/69130297-8def1800-0ab0-11ea-8e3f-973e0f97a080.png)
+![Django Check SEO](https://user-images.githubusercontent.com/45763865/69130297-8def1800-0ab0-11ea-8e3f-973e0f97a080.png)
 
 Replacing some features of Yoast or SEMrush for django CMS users.
 
@@ -39,9 +39,11 @@ You will need `djangocms` & `djangocms_page_meta` in order to made this applicat
 
 ----
 
-## Want a screenshot?
+## Want a screenshot or two?
 
-![](https://i.imgur.com/3W0CK4b.png)
+![](https://i.imgur.com/ibjcb5U.png)
+
+*Other screenshots and videos are available on the [wiki](https://github.com/kapt-labs/django-check-seo/wiki/Medias).*
 
 ----
 

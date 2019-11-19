@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-18 16:54+0100\n"
-"PO-Revision-Date: 2019-11-18 16:55+0100\n"
+"POT-Creation-Date: 2019-11-19 15:42+0100\n"
+"PO-Revision-Date: 2019-11-19 15:42+0100\n"
 "Last-Translator: kapt <dev@kapt.mobi>\n"
 "Language-Team: français <dev@kapt.mobi>\n"
 "Language: fr\n"
@@ -272,7 +272,7 @@ msgstr "Le meta tag title est trop long"
 
 #: django-check-seo/checks/check_title.py:35
 #: django-check-seo/checks/check_url.py:18
-#: django-check-seo/checks/check_url.py:22
+#: django-check-seo/checks/check_url.py:26
 msgid "less than {}"
 msgstr "moins de {}"
 
@@ -303,7 +303,7 @@ msgstr ""
 msgid "Too many levels in path"
 msgstr "Trop de niveaux dans le chemin"
 
-#: django-check-seo/checks/check_url.py:19
+#: django-check-seo/checks/check_url.py:22
 msgid ""
 "Google recommand to organize your content by adding depth in your url, but "
 "advises against putting too much depth."
@@ -311,11 +311,11 @@ msgstr ""
 "Google recommande d'organiser votre contenu en ajoutant de la profondeur "
 "dans votre url, mais déconseille de trop en mettre."
 
-#: django-check-seo/checks/check_url.py:21
+#: django-check-seo/checks/check_url.py:25
 msgid "URL is too long"
 msgstr "L'URL est trop longue"
 
-#: django-check-seo/checks/check_url.py:23
+#: django-check-seo/checks/check_url.py:29
 msgid "Shorter URLs tend to rank better than long URLs."
 msgstr ""
 "Les URL plus courtes ont tendance à être mieux classées que les URL longues."
@@ -324,12 +324,12 @@ msgstr ""
 msgid "Content is too short"
 msgstr "Le contenu est trop court"
 
-#: django-check-seo/checks/content_words_number.py:18
+#: django-check-seo/checks/content_words_number.py:19
 #, python-brace-format
 msgid "at least {min} words, more than {min2} if possible"
 msgstr "au moins {min} mots, plus de {min2} si possible"
 
-#: django-check-seo/checks/content_words_number.py:19
+#: django-check-seo/checks/content_words_number.py:25
 msgid ""
 "Longer posts tend to be more highly ranked, but will require better writing "
 "skills than shorter articles."
@@ -354,62 +354,84 @@ msgstr ""
 "Le lecteur sera soulagé de trouver un de ses mots-clés dans le premier "
 "paragraphe de votre page, et la même logique s'applique à Google."
 
-#: django-check-seo/templates/default.html:21
-msgid ""
-"An app that will look at your content and help you solve your SEO problems."
-msgstr ""
-"Une application qui examinera votre contenu et vous aidera à résoudre vos "
-"problèmes de référencement."
-
-#: django-check-seo/templates/default.html:28
+#: django-check-seo/templates/default.html:16
 #, python-format
-msgid ""
-"\n"
-"%(nbproblems)s problem found,\n"
-msgid_plural ""
-"\n"
-"%(nbproblems)s problems found,\n"
-msgstr[0] ""
-"\n"
-"%(nbproblems)s problème trouvé,\n"
-msgstr[1] ""
-"\n"
-"%(nbproblems)s problèmes trouvés,\n"
+msgid "<strong class=\"red-bg\">%(nbproblems)s problem</strong> found,"
+msgid_plural "<strong class=\"red-bg\">%(nbproblems)s problems</strong> found,"
+msgstr[0] "<strong class=\"red-bg\">%(nbproblems)s problème</strong> trouvé,"
+msgstr[1] "<strong class=\"red-bg\">%(nbproblems)s problèmes</strong> trouvés,"
 
-#: django-check-seo/templates/default.html:33
+#: django-check-seo/templates/default.html:17
 #, python-format
-msgid ""
-"\n"
-"and %(nbwarnings)s warning raised.\n"
+msgid "and <strong class=\"yellow-bg\">%(nbwarnings)s warning</strong> raised"
 msgid_plural ""
-"\n"
-"and %(nbwarnings)s warnings raised.\n"
+"and <strong class=\"yellow-bg\">%(nbwarnings)s warnings</strong> raised"
 msgstr[0] ""
-"\n"
-"et %(nbwarnings)s avertissement levé.\n"
+"and <strong class=\"yellow-bg\">%(nbwarnings)s avertissement</strong> levé"
 msgstr[1] ""
-"\n"
-"et %(nbwarnings)s avertissements levés.\n"
+"and <strong class=\"yellow-bg\">%(nbwarnings)s avertissements</strong> levés"
 
-#: django-check-seo/templates/default.html:46
+#: django-check-seo/templates/default.html:24
 msgid "settings"
 msgstr "paramètres"
 
-#: django-check-seo/templates/default.html:46
+#: django-check-seo/templates/default.html:24
 msgid "found"
 msgstr "trouvé"
 
-#: django-check-seo/templates/default.html:68
+#: django-check-seo/templates/default.html:52
+msgid "About"
+msgstr "À propos"
+
+#: django-check-seo/templates/default.html:55
+msgid ""
+"The main objective of this application is to provide basic knowledge to "
+"users who do not necessarily have a solid understanding of basic SEO."
+msgstr ""
+"L'objectif principal de cette application est de fournir des connaissances "
+"de base aux utilisateurs qui n'ont pas nécessairement une bonne "
+"compréhension du référencement de base."
+
+#: django-check-seo/templates/default.html:62
+msgid "Documentation"
+msgstr "Documentation"
+
+#: django-check-seo/templates/default.html:65
+msgid ""
+"The documentation is available via the <a href=\\\"https://github.com/kapt-"
+"labs/django-check-seo/wiki\\\" target=\\\"_blank\\\">project wiki</a>."
+msgstr ""
+"La documentation est disponible via le <a href=\\\"https://github.com/kapt-"
+"labs/django-check-seo/wiki\\\" target=\\\"_blank\\\">wiki du projet</a>."
+
+#: django-check-seo/templates/default.html:74
+msgid ""
+"Raw data are here for debug purposes. Join at least your settings if you're "
+"submitting <a href=\\\"https://github.com/kapt-labs/django-check-seo/issues\\"
+"\">a new issue</a>."
+msgstr ""
+"Les données brutes sont affichées à des fins de débogage. Joignez au moins "
+"les paramètres si vous soumettez <a href=\\\"https://github.com/kapt-labs/"
+"django-check-seo/issues\\\">un nouveau ticket</a>."
+
+#: django-check-seo/templates/default.html:78
 msgid "See extracted html"
 msgstr "Voir html extrait"
 
-#: django-check-seo/templates/default.html:76
+#: django-check-seo/templates/default.html:84
 msgid "See extracted content"
 msgstr "Voir contenu extrait"
 
-#: django-check-seo/templates/default.html:84
+#: django-check-seo/templates/default.html:90
 msgid "See settings"
 msgstr "Voir les paramètres"
+
+#~ msgid ""
+#~ "An app that will look at your content and help you solve your SEO "
+#~ "problems."
+#~ msgstr ""
+#~ "Une application qui examinera votre contenu et vous aidera à résoudre vos "
+#~ "problèmes de référencement."
 
 #~ msgid ""
 #~ "Google recommand to organize your content by adding depth in your url, "
