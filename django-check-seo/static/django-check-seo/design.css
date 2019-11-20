@@ -188,7 +188,7 @@ details > summary::-webkit-details-marker {
 }
 
 .green-list summary:hover, .green-list summary:hover::before{
-  background-color: #9f5;
+  background-color: #af7;
 }
 
 .green-list strong{

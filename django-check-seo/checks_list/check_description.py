@@ -19,43 +19,87 @@ def importance():
 
 def run(site):
 
-    settings_length = _("between {rule_low} and {rule_high} chars ").format(
-        rule_low=site.settings.SEO_SETTINGS["meta_description_length"][0],
-        rule_high=site.settings.SEO_SETTINGS["meta_description_length"][1],
-    )
-    description = _(
-        "The meta description tag can be displayed in search results if it has the right length, and can influence users. Knowing that Google classifies sites according to user behaviour, it is important to have a relevant description."
-    )
-
-    name_length_short = custom_list.CustomList(
+    length_short = custom_list.CustomList(
         name=_("Meta description is too short"),
-        settings=settings_length,
-        description=description,
+        settings=_("between {rule_low} and {rule_high} chars ").format(
+            rule_low=site.settings.SEO_SETTINGS["meta_description_length"][0],
+            rule_high=site.settings.SEO_SETTINGS["meta_description_length"][1],
+        ),
+        description=_(
+            "The meta description tag can be displayed in search results if it has the right length, and can influence users. Knowing that Google classifies sites according to user behaviour, it is important to have a relevant description."
+        ),
     )
 
-    name_length_long = custom_list.CustomList(
+    length_long = custom_list.CustomList(
         name=_("Meta description is too long"),
-        settings=settings_length,
-        description=description,
+        settings=_("between {rule_low} and {rule_high} chars ").format(
+            rule_low=site.settings.SEO_SETTINGS["meta_description_length"][0],
+            rule_high=site.settings.SEO_SETTINGS["meta_description_length"][1],
+        ),
+        description=_(
+            "The meta description tag can be displayed in search results if it has the right length, and can influence users. Knowing that Google classifies sites according to user behaviour, it is important to have a relevant description."
+        ),
     )
 
-    name_keywords = _("No keyword in meta description")
-    description_keywords = _(
-        "The meta description tag can be displayed in search results, and the keywords present in the search will be in bold. All this can influence users, and Google ranks sites according to users behaviour."
+    length_success = custom_list.CustomList(
+        name=_("Meta description length is correct"),
+        settings=_("between {rule_low} and {rule_high} chars ").format(
+            rule_low=site.settings.SEO_SETTINGS["meta_description_length"][0],
+            rule_high=site.settings.SEO_SETTINGS["meta_description_length"][1],
+        ),
+        description=_(
+            "The meta description tag can be displayed in search results if it has the right length, and can influence users. Knowing that Google classifies sites according to user behaviour, it is important to have a relevant description."
+        ),
     )
-    settings_keywords = _("at least 1")
 
-    name_present = _("No meta description")
-    settings_present = _("needed")
-    found_present = pgettext("description", "none")
+    keywords_bad = custom_list.CustomList(
+        name=_("No keyword in meta description"),
+        settings=_("at least 1"),
+        description=_(
+            "The meta description tag can be displayed in search results, and the keywords present in the search will be in bold. All this can influence users, and Google ranks sites according to users behaviour."
+        ),
+    )
 
-    name_keywords_good = _("Keywords were found in description")
+    keywords_good = custom_list.CustomList(
+        name=_("Keywords were found in description"),
+        settings=_("at least 1"),
+        description=_(
+            "The meta description tag can be displayed in search results, and the keywords present in the search will be in bold. All this can influence users, and Google ranks sites according to users behaviour."
+        ),
+    )
 
     too_much_meta = custom_list.CustomList(
         name=_("Too much meta description tags"),
         settings=_("only one"),
         description=_(
             "Although some people write a meta description by targeted keyword, this is still an uncommon practice that is not yet recognized by all search engines."
+        ),
+    )
+
+    meta_description_only_one = custom_list.CustomList(
+        name=_("Only one meta description tag"),
+        settings=_("only one"),
+        found=pgettext("description", "one"),
+        description=_(
+            "Although some people write a meta description by targeted keyword, this is still an uncommon practice that is not yet recognized by all search engines."
+        ),
+    )
+
+    no_meta_description = custom_list.CustomList(
+        name=_("No meta description"),
+        settings=_("needed"),
+        found=pgettext("description", "none"),
+        description=_(
+            "The meta description tag can be displayed in search results if it has the right length, and can influence users. Knowing that Google classifies sites according to user behaviour, it is important to have a relevant description."
+        ),
+    )
+
+    meta_description_present = custom_list.CustomList(
+        name=_("Meta description is present"),
+        settings=_("needed"),
+        found=pgettext("description", "one"),
+        description=_(
+            "The meta description tag can be displayed in search results if it has the right length, and can influence users. Knowing that Google classifies sites according to user behaviour, it is important to have a relevant description."
         ),
     )
 
@@ -74,17 +118,26 @@ def run(site):
             found_meta_description = True
 
             length = len(tag.attrs["content"])
+
+            # too short
             if length < site.settings.SEO_SETTINGS["meta_description_length"][0]:
 
-                name_length_short.found = ngettext(
+                length_short.found = ngettext(
                     "%(words)d char", "%(words)d chars", length
                 ) % {"words": length}
-                site.problems.append(name_length_short)
+                site.problems.append(length_short)
 
+            # too long
             elif length > site.settings.SEO_SETTINGS["meta_description_length"][1]:
 
-                name_length_long.found = str(length)
-                site.problems.append(name_length_long)
+                length_long.found = str(length)
+                site.problems.append(length_long)
+
+            # perfect
+            else:
+
+                length_success.found = str(length)
+                site.success.append(length_success)
 
             occurence = []
             for keyword in site.keywords:
@@ -100,33 +153,30 @@ def run(site):
             # if no keyword is found in h1
             print(occurence)
             if not any(i > 0 for i in occurence):
-                site.warnings.append(
-                    {
-                        "name": name_keywords,
-                        "settings": settings_keywords,
-                        "found": 0,
-                        "description": description_keywords,
-                    }
-                )
+
+                keywords_bad.found = 0
+                site.warnings.append(keywords_bad)
+
+            # perfect
             else:
-                site.success.append(
-                    {
-                        "name": name_keywords_good,
-                        "settings": settings_present,
-                        "found": max(i for i in occurence),
-                        "description": description_keywords,
-                    }
-                )
+
+                keywords_good.found = max(i for i in occurence)
+                site.success.append(keywords_good)
+
+    # too many meta description
     if number_meta_description > 1:
+
         too_much_meta.found = number_meta_description
         site.warnings.append(too_much_meta)
 
+    # perfect
+    else:
+        site.success.append(meta_description_only_one)
+
+    # no meta description
     if not found_meta_description:
-        site.problems.append(
-            {
-                "name": name_present,
-                "settings": settings_present,
-                "found": found_present,
-                "description": description,
-            }
-        )
+        site.problems.append(no_meta_description)
+
+    # perfect
+    else:
+        site.success.append(meta_description_present)
