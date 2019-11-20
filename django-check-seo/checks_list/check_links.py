@@ -36,8 +36,9 @@ def run(site):
 
     links = bs4.element.ResultSet(None)
 
+    # only get links with href
     for c in site.content:
-        links = c.find_all("a")
+        links = c.find_all("a", href=True)
 
     internal_links = 0
     external_links = 0

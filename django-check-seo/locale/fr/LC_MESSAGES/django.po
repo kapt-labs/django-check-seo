@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-19 15:42+0100\n"
-"PO-Revision-Date: 2019-11-19 15:42+0100\n"
+"POT-Creation-Date: 2019-11-20 11:01+0100\n"
+"PO-Revision-Date: 2019-11-20 11:00+0100\n"
 "Last-Translator: kapt <dev@kapt.mobi>\n"
 "Language-Team: français <dev@kapt.mobi>\n"
 "Language: fr\n"
@@ -58,16 +58,53 @@ msgstr ""
 "cela peut influencer les utilisateurs et Google classe les sites en fonction "
 "de leur comportement."
 
+#: django-check-seo/checks/check_description.py:32
+#: django-check-seo/checks/check_h1.py:31
+#: django-check-seo/checks/check_h2.py:19
+#: django-check-seo/checks/check_h2.py:25
+#: django-check-seo/checks/check_keyword_url.py:23
+#: django-check-seo/checks/check_keywords.py:19
+#: django-check-seo/checks/check_title.py:19
+#: django-check-seo/checks/check_title.py:42
+msgid "at least 1"
+msgstr "au moins 1"
+
 #: django-check-seo/checks/check_description.py:34
 msgid "No meta description"
 msgstr "Pas de balise meta description"
 
+#: django-check-seo/checks/check_description.py:35
+msgid "needed"
+msgstr "requis(e)"
+
 #: django-check-seo/checks/check_description.py:36
 msgctxt "description"
 msgid "none"
-msgstr "aucun"
+msgstr "aucune"
 
-#: django-check-seo/checks/check_description.py:52
+#: django-check-seo/checks/check_description.py:38
+#, fuzzy
+#| msgid "No keyword in meta description"
+msgid "Keywords were found in description"
+msgstr "Pas de mot-clef dans la balise meta de description"
+
+#: django-check-seo/checks/check_description.py:40
+#, fuzzy
+#| msgid "No meta description"
+msgid "Too much meta description tags"
+msgstr "Pas de balise meta description"
+
+#: django-check-seo/checks/check_description.py:41
+msgid "only one"
+msgstr ""
+
+#: django-check-seo/checks/check_description.py:42
+msgid ""
+"Although some people write a meta description by targeted keyword, this is "
+"still an uncommon practice that is not yet recognized by all search engines."
+msgstr ""
+
+#: django-check-seo/checks/check_description.py:64
 #, python-format
 msgid "%(words)d char"
 msgid_plural "%(words)d chars"
@@ -100,16 +137,6 @@ msgstr "Pas de titre h1"
 #: django-check-seo/checks/check_h1.py:30
 msgid "No keyword in h1"
 msgstr "Pas de mot clef dans la balise H1"
-
-#: django-check-seo/checks/check_h1.py:31
-#: django-check-seo/checks/check_h2.py:19
-#: django-check-seo/checks/check_h2.py:25
-#: django-check-seo/checks/check_keyword_url.py:23
-#: django-check-seo/checks/check_keywords.py:19
-#: django-check-seo/checks/check_title.py:19
-#: django-check-seo/checks/check_title.py:42
-msgid "at least 1"
-msgstr "au moins 1"
 
 #: django-check-seo/checks/check_h1.py:33
 msgid ""
@@ -354,36 +381,21 @@ msgstr ""
 "Le lecteur sera soulagé de trouver un de ses mots-clés dans le premier "
 "paragraphe de votre page, et la même logique s'applique à Google."
 
-#: django-check-seo/templates/default.html:16
-#, python-format
-msgid "<strong class=\"red-bg\">%(nbproblems)s problem</strong> found,"
-msgid_plural "<strong class=\"red-bg\">%(nbproblems)s problems</strong> found,"
-msgstr[0] "<strong class=\"red-bg\">%(nbproblems)s problème</strong> trouvé,"
-msgstr[1] "<strong class=\"red-bg\">%(nbproblems)s problèmes</strong> trouvés,"
-
-#: django-check-seo/templates/default.html:17
-#, python-format
-msgid "and <strong class=\"yellow-bg\">%(nbwarnings)s warning</strong> raised"
-msgid_plural ""
-"and <strong class=\"yellow-bg\">%(nbwarnings)s warnings</strong> raised"
-msgstr[0] ""
-"and <strong class=\"yellow-bg\">%(nbwarnings)s avertissement</strong> levé"
-msgstr[1] ""
-"and <strong class=\"yellow-bg\">%(nbwarnings)s avertissements</strong> levés"
-
 #: django-check-seo/templates/default.html:24
 msgid "settings"
 msgstr "paramètres"
 
 #: django-check-seo/templates/default.html:24
+#: django-check-seo/templates/default.html:37
+#: django-check-seo/templates/default.html:53
 msgid "found"
 msgstr "trouvé"
 
-#: django-check-seo/templates/default.html:52
+#: django-check-seo/templates/default.html:70
 msgid "About"
 msgstr "À propos"
 
-#: django-check-seo/templates/default.html:55
+#: django-check-seo/templates/default.html:73
 msgid ""
 "The main objective of this application is to provide basic knowledge to "
 "users who do not necessarily have a solid understanding of basic SEO."
@@ -392,11 +404,11 @@ msgstr ""
 "de base aux utilisateurs qui n'ont pas nécessairement une bonne "
 "compréhension du référencement de base."
 
-#: django-check-seo/templates/default.html:62
+#: django-check-seo/templates/default.html:80
 msgid "Documentation"
 msgstr "Documentation"
 
-#: django-check-seo/templates/default.html:65
+#: django-check-seo/templates/default.html:83
 msgid ""
 "The documentation is available via the <a href=\\\"https://github.com/kapt-"
 "labs/django-check-seo/wiki\\\" target=\\\"_blank\\\">project wiki</a>."
@@ -404,7 +416,7 @@ msgstr ""
 "La documentation est disponible via le <a href=\\\"https://github.com/kapt-"
 "labs/django-check-seo/wiki\\\" target=\\\"_blank\\\">wiki du projet</a>."
 
-#: django-check-seo/templates/default.html:74
+#: django-check-seo/templates/default.html:92
 msgid ""
 "Raw data are here for debug purposes. Join at least your settings if you're "
 "submitting <a href=\\\"https://github.com/kapt-labs/django-check-seo/issues\\"
@@ -414,17 +426,66 @@ msgstr ""
 "les paramètres si vous soumettez <a href=\\\"https://github.com/kapt-labs/"
 "django-check-seo/issues\\\">un nouveau ticket</a>."
 
-#: django-check-seo/templates/default.html:78
+#: django-check-seo/templates/default.html:97
 msgid "See extracted html"
 msgstr "Voir html extrait"
 
-#: django-check-seo/templates/default.html:84
+#: django-check-seo/templates/default.html:103
 msgid "See extracted content"
 msgstr "Voir contenu extrait"
 
-#: django-check-seo/templates/default.html:90
+#: django-check-seo/templates/default.html:109
 msgid "See settings"
 msgstr "Voir les paramètres"
+
+#: django-check-seo/views.py:58
+#, fuzzy
+#| msgid "<strong class=\"red-bg\">%(nbproblems)s problem</strong> found,"
+#| msgid_plural ""
+#| "<strong class=\"red-bg\">%(nbproblems)s problems</strong> found,"
+msgid "<strong class=\"green-bg\">No problem</strong> was found on the page!"
+msgstr "<strong class=\"red-bg\">%(nbproblems)s problème</strong> trouvé,"
+
+#: django-check-seo/views.py:61
+#, fuzzy
+#| msgid "<strong class=\"red-bg\">%(nbproblems)s problem</strong> found,"
+#| msgid_plural ""
+#| "<strong class=\"red-bg\">%(nbproblems)s problems</strong> found,"
+msgid "<strong class=\"green-bg\">No problem</strong> found, and "
+msgstr "<strong class=\"red-bg\">%(nbproblems)s problème</strong> trouvé,"
+
+#: django-check-seo/views.py:64
+#, fuzzy, python-brace-format
+#| msgid "<strong class=\"red-bg\">%(nbproblems)s problem</strong> found,"
+#| msgid_plural ""
+#| "<strong class=\"red-bg\">%(nbproblems)s problems</strong> found,"
+msgid "{nb_problems} problem</strong> found, and "
+msgid_plural "{nb_problems} problems</strong> found, and "
+msgstr[0] "<strong class=\"red-bg\">%(nbproblems)s problème</strong> trouvé,"
+msgstr[1] "<strong class=\"red-bg\">%(nbproblems)s problèmes</strong> trouvés,"
+
+#: django-check-seo/views.py:67
+#, fuzzy
+#| msgid ""
+#| "and <strong class=\"yellow-bg\">%(nbwarnings)s warning</strong> raised"
+#| msgid_plural ""
+#| "and <strong class=\"yellow-bg\">%(nbwarnings)s warnings</strong> raised"
+msgid "<strong class=\"green-bg\">no warning</strong> raised"
+msgstr ""
+"et <strong class=\"yellow-bg\">%(nbwarnings)s avertissement</strong> levé"
+
+#: django-check-seo/views.py:70
+#, fuzzy, python-brace-format
+#| msgid ""
+#| "and <strong class=\"yellow-bg\">%(nbwarnings)s warning</strong> raised"
+#| msgid_plural ""
+#| "and <strong class=\"yellow-bg\">%(nbwarnings)s warnings</strong> raised"
+msgid "{nb_warnings} warning</strong> raised"
+msgid_plural "{nb_warnings} warnings</strong> raised"
+msgstr[0] ""
+"et <strong class=\"yellow-bg\">%(nbwarnings)s avertissement</strong> levé"
+msgstr[1] ""
+"et <strong class=\"yellow-bg\">%(nbwarnings)s avertissements</strong> levés"
 
 #~ msgid ""
 #~ "An app that will look at your content and help you solve your SEO "
@@ -676,9 +737,6 @@ msgstr "Voir les paramètres"
 #~ "mettra en gras les mots-clés recherchés par les utilisateurs, afin que "
 #~ "les utilisateurs puissent vérifier facilement que le contenu de votre "
 #~ "page correspond à leurs besoins."
-
-#~ msgid "needed"
-#~ msgstr "requis(e)"
 
 #~ msgid ""
 #~ "Even if search engines states that they don't use meta description for "

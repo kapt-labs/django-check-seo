@@ -12,16 +12,16 @@
       <main>
         <h1><img src="{% static "logo-small.png" %}" alt="Django Check SEO" /></h1>
         <article>
+
           <h2>
-      {% blocktrans count nbproblems=problems|length %}<strong class="red-bg">{{ nbproblems }} problem</strong> found,{% plural %}<strong class="red-bg">{{ nbproblems }} problems</strong> found,{% endblocktrans %}
-      {% blocktrans count nbwarnings=warnings|length %}and <strong class="yellow-bg">{{ nbwarnings }} warning</strong> raised{% plural %}and <strong class="yellow-bg">{{ nbwarnings }} warnings</strong> raised{% endblocktrans %}
+            {% autoescape off %}{{ nb_problems_warnings }}{% endautoescape %}
           </h2>
 
           <ul class="red-list list">
             {% for problem in problems %}
               <li>
                 <details>
-                  <summary><strong>{{ problem.name }}</strong> <i>({% trans "settings" %}: {% autoescape off %}{{ problem.settings }}, {% trans "found" %} {{ problem.found }})</i></summary>
+                  <summary><strong>{{ problem.name }}</strong> <i>({% trans "settings" %}: {% autoescape off %}{{ problem.settings }}, {% trans "found" %}: {{ problem.found }})</i></summary>
                   <p>
                     {{ problem.description }}{% endautoescape %}
                   </p>
@@ -34,7 +34,7 @@
             {% for warning in warnings %}
               <li>
                 <details>
-                  <summary><strong>{{ warning.name }}</strong> <i>(settings: {% autoescape off %}{{ warning.settings }})</i></summary>
+                  <summary><strong>{{ warning.name }}</strong> <i>(settings: {% autoescape off %}{{ warning.settings }}, {% trans "found" %}: {{ warning.found }})</i></summary>
                   <p>
                     {{ warning.description }}{% endautoescape %}
                   </p>
@@ -42,6 +42,24 @@
               </li>
             {% endfor %}
           </ul>
+
+          {% if success|length > 0 %}
+            <hr />
+            <ul class="green-list list">
+              <h2>Successful checks</h2>
+              {% for successful_check in success %}
+                <li>
+                  <details>
+                    <summary><strong>{{ successful_check.name }}</strong> <i>(settings: {% autoescape off %}{{ successful_check.settings }}, {% trans "found" %}: {{ successful_check.found }})</i></summary>
+                    <p>
+                      {{ successful_check.description }}{% endautoescape %}
+                    </p>
+                  </details>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+
         </article>
 
       </main>
@@ -68,30 +86,32 @@
 
         <hr />
 
-        <article class="grey-list list">
+        <article class="not-important grey-list">
           <h2>Raw data</h2>
 
           <p>{% blocktrans %}Raw data are here for debug purposes. Join at least your settings if you're submitting <a href=\"https://github.com/kapt-labs/django-check-seo/issues\">a new issue</a>.{% endblocktrans %}</p>
 
-          <details>
-            <summary>
-              {% trans "See extracted html" %}
-            </summary>
-            <pre>{{ html }}</pre>
-          </details>
-          <details>
-            <summary>
-              {% trans "See extracted content" %}
-            </summary>
-            <pre>{{ text }}</pre>
-          </details>
-          <details>
-            <summary>
-              {% trans "See settings" %}
-            </summary>
-            <pre>{{ settings }}</pre>
-          </details>
-        </article>
+          <div class="list">
+            <details>
+              <summary>
+                {% trans "See extracted html" %}
+              </summary>
+              <pre>{{ html }}</pre>
+            </details>
+            <details>
+              <summary>
+                {% trans "See extracted content" %}
+              </summary>
+              <pre>{{ text }}</pre>
+            </details>
+            <details>
+              <summary>
+                {% trans "See settings" %}
+              </summary>
+              <pre>{{ settings }}</pre>
+            </details>
+          </article>
+        </div>
 
       </aside>
 

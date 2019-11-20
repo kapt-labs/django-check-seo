@@ -7,7 +7,7 @@ from . import *  # noqa: F403,F401
 
 
 try:
-    from checks import *  # noqa: F403,F401
+    from checks_list import *  # noqa: F403,F401
 
     nomodules = False
 except ModuleNotFoundError:
@@ -27,9 +27,9 @@ def launch_checks(site):
     # only get modules in ...checks.*
     for module_name in sys.modules:
         if (
-            "django-check-seo.checks." in module_name
-            and module_name != "django-check-seo.checks.launch_checks"
-        ) or (module_name.startswith("checks.")):
+            "django-check-seo.checks_list." in module_name
+            and module_name != "django-check-seo.checks_list.launch_checks"
+        ) or (module_name.startswith("checks_list.")):
             module = importlib.import_module(module_name)
             get_module_order = getattr(module, "importance")
 
