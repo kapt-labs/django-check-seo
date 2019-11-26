@@ -38,7 +38,7 @@ def run(site):
     # check url depth
     # do not count first and last slashes (after domain name and at the end of the url), nor // in the "http://"
     url_without_two_points_slash_slash = site.full_url.replace("://", "")
-    number_of_slashes = url_without_two_points_slash_slash.count("/") - 2
+    number_of_slashes = url_without_two_points_slash_slash[:-1].count("/")
 
     deep_url.found = number_of_slashes
     if number_of_slashes > site.settings.SEO_SETTINGS["max_link_depth"]:
