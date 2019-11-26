@@ -21,7 +21,10 @@ def importance():
 
 
 def run(site):
-    """Check presence of keywords in url
+    """Check presence of keywords in url.
+
+    Arguments:
+        site {Site} -- Structure containing a good amount of resources from the targeted webpage.
     """
 
     no_keyword = custom_list.CustomList(

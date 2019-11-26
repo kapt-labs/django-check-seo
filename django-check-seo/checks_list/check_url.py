@@ -15,7 +15,10 @@ def importance():
 
 
 def run(site):
-    """All the url-related checks.
+    """Check the length of the url and the maximum depth.
+
+    Arguments:
+        site {Site} -- Structure containing a good amount of resources from the targeted webpage.
     """
 
     deep_url = custom_list.CustomList(

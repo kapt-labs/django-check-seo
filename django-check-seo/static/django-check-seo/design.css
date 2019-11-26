@@ -106,7 +106,7 @@ a:hover{
 }
 
 summary{
-  cursor: pointer;
+  cursor: help;
 }
 
 .red-bg, .yellow-bg, .green-bg{

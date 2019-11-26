@@ -15,7 +15,10 @@ def importance():
 
 
 def run(site):
-    """Get [keywords_in_first_words] first words of the content, and ensure that there is a keyword among them.
+    """Checks that at least one keyword is included in the first paragraph.
+
+    Arguments:
+        site {Site} -- Structure containing a good amount of resources from the targeted webpage.
     """
 
     no_keywords = custom_list.CustomList(

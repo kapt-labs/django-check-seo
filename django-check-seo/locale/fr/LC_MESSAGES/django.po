@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-26 09:54+0100\n"
-"PO-Revision-Date: 2019-11-26 09:54+0100\n"
+"POT-Creation-Date: 2019-11-26 13:41+0100\n"
+"PO-Revision-Date: 2019-11-26 13:42+0100\n"
 "Last-Translator: kapt <dev@kapt.mobi>\n"
 "Language-Team: français <dev@kapt.mobi>\n"
 "Language: fr\n"
@@ -121,15 +121,17 @@ msgid_plural "%(words)d chars"
 msgstr[0] "%(words)d caractère"
 msgstr[1] "%(words)d caractères"
 
-#: django-check-seo/checks_list/check_h1.py:23
+#: django-check-seo/checks_list/check_h1.py:24
 msgid "Too much h1 tags"
 msgstr "Trop de balises h1"
 
-#: django-check-seo/checks_list/check_h1.py:24
+#: django-check-seo/checks_list/check_h1.py:25
+#: django-check-seo/checks_list/check_h1.py:33
+#: django-check-seo/checks_list/check_h1.py:39
 msgid "exactly 1"
 msgstr "exactement 1"
 
-#: django-check-seo/checks_list/check_h1.py:26
+#: django-check-seo/checks_list/check_h1.py:27
 msgid ""
 "Google is not really concerned about the number of h1 tags on your page, but "
 "Bing clearly indicates in its guidelines for webmasters to use only one h1 "
@@ -139,30 +141,30 @@ msgstr ""
 "page, mais Bing indique clairement dans ses directives pour les webmasters "
 "d'utiliser une seule balise h1 par page."
 
-#: django-check-seo/checks_list/check_h1.py:31
+#: django-check-seo/checks_list/check_h1.py:32
 msgid "H1 tag found"
 msgstr "Balise H1 trouvée"
 
-#: django-check-seo/checks_list/check_h1.py:34
+#: django-check-seo/checks_list/check_h1.py:38
 msgid "No h1 tag"
 msgstr "Pas de balise h1"
 
-#: django-check-seo/checks_list/check_h1.py:37
+#: django-check-seo/checks_list/check_h1.py:44
 msgid "No keyword in h1"
 msgstr "Pas de mot clef dans la balise h1"
 
-#: django-check-seo/checks_list/check_h1.py:38
-#: django-check-seo/checks_list/check_h1.py:46
+#: django-check-seo/checks_list/check_h1.py:45
+#: django-check-seo/checks_list/check_h1.py:53
 #: django-check-seo/checks_list/check_h2.py:23
 #: django-check-seo/checks_list/check_h2.py:32
 #: django-check-seo/checks_list/check_h2.py:38
 #: django-check-seo/checks_list/check_h2.py:47
-#: django-check-seo/checks_list/check_title.py:69
-#: django-check-seo/checks_list/check_title.py:78
+#: django-check-seo/checks_list/check_title.py:67
+#: django-check-seo/checks_list/check_title.py:76
 msgid "at least one"
 msgstr "au moins un"
 
-#: django-check-seo/checks_list/check_h1.py:40
+#: django-check-seo/checks_list/check_h1.py:47
 msgid ""
 "The H1 tag represent the main title of your page, and you may populate it "
 "with appropriate content in order to ensure that users (and search engines!) "
@@ -172,23 +174,24 @@ msgstr ""
 "remplir avec le contenu approprié afin de vous assurer que les utilisateurs "
 "(et les moteurs de recherche !) comprendront correctement votre page."
 
-#: django-check-seo/checks_list/check_h1.py:45
+#: django-check-seo/checks_list/check_h1.py:52
 msgid "Keyword found in H1"
 msgstr "Des mots-clés ont été trouvés dans la balise h1"
 
-#: django-check-seo/checks_list/check_h1.py:56
+#: django-check-seo/checks_list/check_h1.py:64
 #: django-check-seo/checks_list/check_h2.py:24
 #: django-check-seo/checks_list/check_h2.py:39
 #: django-check-seo/checks_list/check_h2.py:48
 #: django-check-seo/checks_list/check_keyword_url.py:30
 #: django-check-seo/checks_list/check_keywords.py:25
+#: django-check-seo/checks_list/keyword_present_first_paragraph.py:28
 msgctxt "masculin"
 msgid "none"
 msgstr "aucun"
 
-#: django-check-seo/checks_list/check_h1.py:78
+#: django-check-seo/checks_list/check_h1.py:92
 #: django-check-seo/checks_list/check_title.py:24
-#: django-check-seo/checks_list/check_title.py:70
+#: django-check-seo/checks_list/check_title.py:68
 msgid "none"
 msgstr "aucun"
 
@@ -222,16 +225,16 @@ msgstr ""
 msgid "Keyword found in h2"
 msgstr "Des mots-clefs on été trouvés dans la balise h2"
 
-#: django-check-seo/checks_list/check_images.py:20
+#: django-check-seo/checks_list/check_images.py:21
 msgid "Img lack alt tag"
 msgstr "Il manque la balise alt sur une image"
 
-#: django-check-seo/checks_list/check_images.py:21
-#: django-check-seo/checks_list/check_images.py:30
+#: django-check-seo/checks_list/check_images.py:22
+#: django-check-seo/checks_list/check_images.py:31
 msgid "all images"
 msgstr "toutes les images"
 
-#: django-check-seo/checks_list/check_images.py:24
+#: django-check-seo/checks_list/check_images.py:25
 msgid ""
 "Your images should always have an alt tag, because it improves accessibility "
 "for visually impaired people. The name of the file is important too, because "
@@ -244,7 +247,7 @@ msgstr ""
 "parle votre image. Par exemple, vous pouvez renommer un fichier nommé "
 "\"IMG0001.jpg\" en \"arbre_avec_un_oiseau.jpg\"."
 
-#: django-check-seo/checks_list/check_images.py:29
+#: django-check-seo/checks_list/check_images.py:30
 msgid "Img have alt tag"
 msgstr "Chaque image a un tag alt"
 
@@ -288,18 +291,18 @@ msgstr ""
 msgid "Keywords found in meta keywords field"
 msgstr "Des mots-clef ont été trouvés dans la balise meta keywords"
 
-#: django-check-seo/checks_list/check_links.py:25
+#: django-check-seo/checks_list/check_links.py:26
 msgid "Not enough internal links"
 msgstr "Pas assez de liens internes"
 
-#: django-check-seo/checks_list/check_links.py:26
-#: django-check-seo/checks_list/check_links.py:36
-#: django-check-seo/checks_list/check_links.py:44
-#: django-check-seo/checks_list/check_links.py:54
+#: django-check-seo/checks_list/check_links.py:27
+#: django-check-seo/checks_list/check_links.py:35
+#: django-check-seo/checks_list/check_links.py:41
+#: django-check-seo/checks_list/check_links.py:49
 msgid "at least {}"
 msgstr "au moins {}"
 
-#: django-check-seo/checks_list/check_links.py:30
+#: django-check-seo/checks_list/check_links.py:29
 msgid ""
 "Internal links are useful because they can give the structure of your "
 "website to search engines, so they can create a hierarchy of your pages."
@@ -308,15 +311,15 @@ msgstr ""
 "votre site Web aux moteurs de recherche, ils peuvent ainsi créer une "
 "hiérarchie de vos pages."
 
-#: django-check-seo/checks_list/check_links.py:35
+#: django-check-seo/checks_list/check_links.py:34
 msgid "Internal links were found"
 msgstr "Des liens internes ont été trouvés"
 
-#: django-check-seo/checks_list/check_links.py:43
+#: django-check-seo/checks_list/check_links.py:40
 msgid "Not enough external links"
 msgstr "Pas assez de liens externes"
 
-#: django-check-seo/checks_list/check_links.py:48
+#: django-check-seo/checks_list/check_links.py:43
 msgid ""
 "External links help your users to check your topic and can save them from "
 "having to do additional research."
@@ -324,7 +327,7 @@ msgstr ""
 "Les liens externes aident vos utilisateurs à vérifier votre sujet et peuvent "
 "leur éviter de devoir faire des recherches supplémentaires."
 
-#: django-check-seo/checks_list/check_links.py:53
+#: django-check-seo/checks_list/check_links.py:48
 msgid "External links were found"
 msgstr "Des liens externes ont été trouvés"
 
@@ -373,21 +376,21 @@ msgstr ""
 msgid "Title tag have a good length"
 msgstr "Le contenu de la balise meta title est assez long"
 
-#: django-check-seo/checks_list/check_title.py:53
+#: django-check-seo/checks_list/check_title.py:52
 msgid "Titles tags need to describe the content of the page."
 msgstr "Le contenu de la balise meta title doit décrire le contenu de la page."
 
-#: django-check-seo/checks_list/check_title.py:58
+#: django-check-seo/checks_list/check_title.py:56
 msgid "Title tag is too long"
 msgstr "Le contenu de la balise meta title est trop long"
 
-#: django-check-seo/checks_list/check_title.py:60
+#: django-check-seo/checks_list/check_title.py:58
 #: django-check-seo/checks_list/check_url.py:23
-#: django-check-seo/checks_list/check_url.py:33
+#: django-check-seo/checks_list/check_url.py:31
 msgid "less than {}"
 msgstr "moins de {}"
 
-#: django-check-seo/checks_list/check_title.py:63
+#: django-check-seo/checks_list/check_title.py:61
 msgid ""
 "Only the first ~55-60 chars are displayed on modern search engines results. "
 "Writing a longer title is not really required and can lead to make the user "
@@ -398,11 +401,11 @@ msgstr ""
 "requis, et peut mener l'utilisateur à ne pas avoir accès à des informations "
 "qui seraient tronquées."
 
-#: django-check-seo/checks_list/check_title.py:68
+#: django-check-seo/checks_list/check_title.py:66
 msgid "Title do not contain any keyword"
 msgstr "Le contenu de la balise meta title ne contient aucun mot-clé"
 
-#: django-check-seo/checks_list/check_title.py:72
+#: django-check-seo/checks_list/check_title.py:70
 msgid ""
 "Titles tags need to contain at least one keyword, since they are one of the "
 "most important content of the page for search engines."
@@ -411,7 +414,7 @@ msgstr ""
 "puisqu'elles constituent l'un des contenus les plus importants de la page "
 "pour les moteurs de recherche."
 
-#: django-check-seo/checks_list/check_title.py:77
+#: django-check-seo/checks_list/check_title.py:75
 msgid "Keywords found in title"
 msgstr "Des mots-clef ont été trouvés dans le contenu de la balise meta title"
 
@@ -419,7 +422,7 @@ msgstr "Des mots-clef ont été trouvés dans le contenu de la balise meta title
 msgid "Too many levels in path"
 msgstr "Trop de niveaux dans le chemin de l'URL la page"
 
-#: django-check-seo/checks_list/check_url.py:27
+#: django-check-seo/checks_list/check_url.py:25
 msgid ""
 "Google recommand to organize your content by adding depth in your url, but "
 "advises against putting too much depth."
@@ -427,20 +430,20 @@ msgstr ""
 "Google recommande d'organiser votre contenu en ajoutant de la profondeur "
 "dans votre URL, mais déconseille de trop en mettre."
 
-#: django-check-seo/checks_list/check_url.py:32
+#: django-check-seo/checks_list/check_url.py:30
 msgid "URL is too long"
 msgstr "L'URL est trop longue"
 
-#: django-check-seo/checks_list/check_url.py:36
+#: django-check-seo/checks_list/check_url.py:32
 msgid "Shorter URLs tend to rank better than long URLs."
 msgstr ""
 "Les URL plus courtes ont tendance à être mieux classées que les URL longues."
 
-#: django-check-seo/checks_list/check_url.py:48
+#: django-check-seo/checks_list/check_url.py:44
 msgid "Right amount of level in path"
 msgstr "Profondeur de l'URL correcte"
 
-#: django-check-seo/checks_list/check_url.py:58
+#: django-check-seo/checks_list/check_url.py:54
 msgid "URL length is great"
 msgstr "Longueur de l'URL correcte"
 
@@ -448,12 +451,12 @@ msgstr "Longueur de l'URL correcte"
 msgid "Content is too short"
 msgstr "Le contenu est trop court"
 
-#: django-check-seo/checks_list/content_words_number.py:24
+#: django-check-seo/checks_list/content_words_number.py:23
 #, python-brace-format
 msgid "at least {min} words, more than {min2} if possible"
 msgstr "au moins {min} mots, plus de {min2} si possible"
 
-#: django-check-seo/checks_list/content_words_number.py:30
+#: django-check-seo/checks_list/content_words_number.py:28
 msgid ""
 "Longer articles tend to be better ranked, but will require better writing "
 "skills than shorter articles."
@@ -461,7 +464,7 @@ msgstr ""
 "Les articles plus longs ont tendance à être mieux classés, mais exigeront de "
 "meilleures compétences en rédaction que les articles plus courts."
 
-#: django-check-seo/checks_list/content_words_number.py:45
+#: django-check-seo/checks_list/content_words_number.py:43
 msgid "Content length is right"
 msgstr "La longueur du contenu est correcte"
 
@@ -474,7 +477,7 @@ msgstr "Aucun mot-clé dans le premier paragraphe"
 msgid "before {settings} words"
 msgstr "avant {settings} mots"
 
-#: django-check-seo/checks_list/keyword_present_first_paragraph.py:29
+#: django-check-seo/checks_list/keyword_present_first_paragraph.py:30
 msgid ""
 "The reader will be relieved to find one of his keywords in the first "
 "paragraph of your page, and the same logic applies to Google, which will "
@@ -484,7 +487,7 @@ msgstr ""
 "paragraphe de votre page, et la même logique s'applique à Google, qui jugera "
 "le contenu plus pertinent."
 
-#: django-check-seo/checks_list/keyword_present_first_paragraph.py:55
+#: django-check-seo/checks_list/keyword_present_first_paragraph.py:52
 msgid "Keywords found in first paragraph"
 msgstr "Des mots-clefs on été trouvés dans le premier paragraphe"
 
@@ -503,16 +506,14 @@ msgid "About"
 msgstr "À propos"
 
 #: django-check-seo/templates/default.html:73
-#| msgid ""
-#| "The main objective of this application is to provide basic knowledge to "
-#| "users who do not necessarily have a solid understanding of basic SEO."
 msgid ""
-"The main objective of this application is to provide basic knowledge to "
-"users who do not necessarily have a good understanding of SEO."
+"The main objective of this application is to check the aspects of the web "
+"pages involved in SEO, to ensure that the page content will be correctly "
+"crawled by search engines."
 msgstr ""
-"L'objectif principal de cette application est de fournir des connaissances "
-"de base aux utilisateurs qui n'ont pas nécessairement une bonne "
-"compréhension du référencement."
+"L'objectif principal de cette application est de vérifier les aspects des "
+"pages web impliqués dans le référencement, pour s'assurer que le contenu de "
+"la page sera correctement parcouru par les moteurs de recherche."
 
 #: django-check-seo/templates/default.html:80
 msgid "Documentation"
@@ -575,6 +576,17 @@ msgid "{nb_warnings} warning</strong> raised"
 msgid_plural "{nb_warnings} warnings</strong> raised"
 msgstr[0] "{nb_warnings} avertissement</strong> levé"
 msgstr[1] "{nb_warnings} avertissements</strong> levés"
+
+#~| msgid ""
+#~| "The main objective of this application is to provide basic knowledge to "
+#~| "users who do not necessarily have a solid understanding of basic SEO."
+#~ msgid ""
+#~ "The main objective of this application is to provide basic knowledge to "
+#~ "users who do not necessarily have a good understanding of SEO."
+#~ msgstr ""
+#~ "L'objectif principal de cette application est de fournir des "
+#~ "connaissances de base aux utilisateurs qui n'ont pas nécessairement une "
+#~ "bonne compréhension du référencement."
 
 #~ msgid "longer than {}"
 #~ msgstr "plus long que {}"

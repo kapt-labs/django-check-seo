@@ -15,8 +15,11 @@ def importance():
 
 
 def run(site):
-    """Ensure that meta tag exists and contain at least one keyword.
+    """Checks that meta tag exists and contain at least one keyword.
     Populate site.keywords list with keywords found.
+
+    Arguments:
+        site {Site} -- Structure containing a good amount of resources from the targeted webpage.
     """
 
     no_keywords = custom_list.CustomList(

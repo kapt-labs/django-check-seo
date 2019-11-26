@@ -19,7 +19,10 @@ def importance():
 
 
 def run(site):
-    """Check all link-related conditions
+    """Counts the number of internal and external links in the extracted content.
+
+    Arguments:
+        site {Site} -- Structure containing a good amount of resources from the targeted webpage.
     """
 
     not_enough_internal = custom_list.CustomList(

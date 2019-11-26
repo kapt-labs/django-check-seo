@@ -18,6 +18,12 @@ def importance():
 
 
 def run(site):
+    """Checks that h2 tags exist, and that at least one h2 contains at least one keyword.
+
+    Arguments:
+        site {Site} -- Structure containing a good amount of resources from the targeted webpage.
+    """
+
     no_h2 = custom_list.CustomList(
         name=_("No h2 tag"),
         settings=_("at least one"),

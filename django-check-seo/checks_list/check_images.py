@@ -16,6 +16,11 @@ def importance():
 
 
 def run(site):
+    """Checks that each image has a filled alt tag.
+
+    Arguments:
+        site {Site} -- Structure containing a good amount of resources from the targeted webpage.
+    """
 
     lack_alt = custom_list.CustomList(
         name=_("Img lack alt tag"),
@@ -33,7 +38,7 @@ def run(site):
         description=lack_alt.description,
     )
 
-    lack_alt_found = "image"
+    lack_alt_found = _("image")
 
     images = bs4.element.ResultSet(None)
 

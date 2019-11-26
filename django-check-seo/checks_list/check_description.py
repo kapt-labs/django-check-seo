@@ -18,10 +18,10 @@ def importance():
 
 
 def run(site):
-    """Check all description-related things.
+    """Checks that only one meta description tag is present in the page, that it is the right length and that it contains at least one keyword.
 
     Arguments:
-        site {Site} -- Page infos + problems/warnings/success.
+        site {Site} -- Structure containing a good amount of resources from the targeted webpage.
     """
     length_short = custom_list.CustomList(
         name=_("Meta description is too short"),

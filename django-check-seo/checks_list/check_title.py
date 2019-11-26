@@ -15,7 +15,10 @@ def importance():
 
 
 def run(site):
-    """Check all title-related conditions.
+    """Checks that only one title tag is present, that its content is within a certain range, and that it contains at least one keyword.
+
+    Arguments:
+        site {Site} -- Structure containing a good amount of resources from the targeted webpage.
     """
 
     no_title = custom_list.CustomList(
@@ -32,6 +35,14 @@ def run(site):
         settings=pgettext("masculin", "one"),
         found=pgettext("masculin", "one"),
         description=no_title.description,
+    )
+
+    too_much = custom_list.CustomList(
+        name=_("Too much title tags"),
+        settings=pgettext("masculin", "only one"),
+        description=_(
+            "Only the first title tag will be displayed on the tab space on your browser, and only one title tag will be displayed on the search results pages."
+        ),
     )
 
     short_title = custom_list.CustomList(
@@ -81,6 +92,11 @@ def run(site):
     if site.soup.title == "None" or not site.soup.title or not site.soup.title.string:
         site.problems.append(no_title)
         return
+
+    # multiple titles
+    elif site.soup.find_all("title") and len(site.soup.find_all("title")) > 1:
+        too_much.found = len(site.soup.find_all("title"))
+        site.problems.append(too_much)
 
     site.success.append(title_found)
 

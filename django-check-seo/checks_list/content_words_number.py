@@ -15,7 +15,10 @@ def importance():
 
 
 def run(site):
-    """Count number of words in content.
+    """Checks the number of words in the extracted content.
+
+    Arguments:
+        site {Site} -- Structure containing a good amount of resources from the targeted webpage.
     """
 
     short_content = custom_list.CustomList(

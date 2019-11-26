@@ -18,7 +18,10 @@ def importance():
 
 
 def run(site):
-    """Check all h1-related conditions
+    """Verifies that only one h1 tag is present, and that it contains at least one keyword.
+
+    Arguments:
+        site {Site} -- Structure containing a good amount of resources from the targeted webpage.
     """
     too_much_h1 = custom_list.CustomList(
         name=_("Too much h1 tags"),
@@ -55,6 +58,7 @@ def run(site):
     )
 
     h1 = site.soup.find_all("h1")
+
     if len(h1) > 1:
         too_much_h1.found = len(h1)
         site.problems.append(too_much_h1)
@@ -68,18 +72,23 @@ def run(site):
         right_number_h1.found = len(h1)
         site.success.append(right_number_h1)
 
+        # h1 text can be content of alt tag in img
+        if not h1[0].text and h1[0].find("img", {"alt": True}):
+            h1_text = h1[0].find("img")["alt"].lower()
+        # of it can be the text in h1
+        else:
+            h1_text = h1[0].text.lower()
+
         occurence = []
         for keyword in site.keywords:
-            for single_h1 in h1:
-                occurence.append(
-                    sum(
-                        1
-                        for _ in re.finditer(
-                            r"\b%s\b" % re.escape(keyword.lower()),
-                            single_h1.text.lower(),
-                        )
+            occurence.append(
+                sum(
+                    1
+                    for _ in re.finditer(
+                        r"\b%s\b" % re.escape(keyword.lower()), h1_text,
                     )
                 )
+            )
         # if no keyword is found in h1
         if not any(i > 0 for i in occurence):
             no_keywords.found = _("none")
