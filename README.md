@@ -25,8 +25,6 @@ In other words, django-check-seo will tell you if you have problems concerning a
 
 *Start your django CMS project, log in, you should see the "Check SEO..." button and everything should be okay.*
 
-*[Example output](https://gist.github.com/corentinbettiol/f1e4b6630b7ae9afe2f9023b2185f3db) when setting up a project with django-check-seo.*
-
 #### Without pipenv
 
 *coming soon* 📝
@@ -39,9 +37,9 @@ You will need `djangocms` & `djangocms_page_meta` in order to made this applicat
 
 ----
 
-## Want a screenshot or two?
+## Want a screenshot?
 
-![](https://i.imgur.com/ibjcb5U.png)
+![screenshot](https://user-images.githubusercontent.com/45763865/69637530-180f2180-1059-11ea-9d90-53ecf3b6c53b.png)
 
 *Other screenshots and videos are available on the [wiki](https://github.com/kapt-labs/django-check-seo/wiki/Medias).*
 
