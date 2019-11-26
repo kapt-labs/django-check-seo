@@ -11,7 +11,9 @@ In other words, django-check-seo will tell you if you have problems concerning a
 #### With pipenv
 
  * Add `django-check-seo = { git = 'https://github.com/kapt-labs/django-check-seo.git' }` to your Pipfile below `[packages]`, then run `pipenv install`,
- *or*
+
+**or**
+
  * Execute `pipenv install git+https://github.com/kapt-labs/django-check-seo#egg=django-check-seo` in your working directory,
 
 **and then**
