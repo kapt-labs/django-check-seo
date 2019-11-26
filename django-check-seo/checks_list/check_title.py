@@ -78,7 +78,7 @@ def run(site):
     )
 
     # title presence
-    if site.soup.title == "None" or not site.soup.title:
+    if site.soup.title == "None" or not site.soup.title or not site.soup.title.string:
         site.problems.append(no_title)
         return
 
