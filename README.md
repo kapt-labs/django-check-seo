@@ -19,10 +19,9 @@ In other words, django-check-seo will tell you if you have problems concerning a
 **and then**
 
  * add `django-check-seo.apps.DjangoCheckSEOConfig` to your `INSTALLED_APPS`,
-   * *optional since django-check-seo do not uses the django applications features*
  * add `django-check-seo/static/django-check-seo/` to your `STATICFILES_DIRS`,
  * add the file [`cms_toolbars.py`](https://github.com/kapt-labs/django-check-seo/wiki/Toolbar-shortcut#cms_toolbarspy) inside your `django_project_name` folder,
- * add `url(r"^django-check-seo/", include("django-check-seo.urls")),` to your `urlpatterns` in `urls.py`,
+ * add `url(r"^django-check-seo/", include("django-check-seo.urls")),` to your `urlpatterns` in `urls.py` (before `url(r'^', include('cms.urls')),` or it will not work),
  * export all the vars used in the application (or put them inside your [`.env`](https://gist.github.com/corentinbettiol/f1e4b6630b7ae9afe2f9023b2185f3db#file-env) file).
 
 *Start your django CMS project, log in, you should see the "Check SEO..." button and everything should be okay.*
