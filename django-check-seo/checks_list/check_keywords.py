@@ -1,5 +1,8 @@
 # Third party
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext as _, pgettext
+
+# Local application / specific library imports
+from ..checks import custom_list
 
 
 def importance():
@@ -15,11 +18,21 @@ def run(site):
     """Ensure that meta tag exists and contain at least one keyword.
     Populate site.keywords list with keywords found.
     """
-    no_keywords_name = _("No keywords in meta keywords field")
-    no_keywords_settings = _("at least 1")
-    no_keywords_found = _("none")
-    no_keywords_description = _(
-        "Django-check-seo uses the keywords in the meta keywords field to check all other tests related to the keywords. A series of problems and warnings are related to keywords, and will therefore systematically be activated if the keywords are not filled in."
+
+    no_keywords = custom_list.CustomList(
+        name=_("No keywords in meta keywords field"),
+        settings=pgettext("masculin", "at least one"),
+        found=pgettext("masculin", "none"),
+        description=_(
+            "Django-check-seo uses the keywords in the meta keywords field to check all other tests related to the keywords. A series of problems and warnings are related to keywords, and will therefore systematically be activated if the keywords are not filled in."
+        ),
+    )
+
+    keywords_found = custom_list.CustomList(
+        name=_("Keywords found in meta keywords field"),
+        settings=pgettext("masculin", "at least one"),
+        found="",
+        description=no_keywords.description,
     )
 
     meta = site.soup.find_all("meta")
@@ -34,12 +47,10 @@ def run(site):
             site.keywords = tag.attrs["content"].split(
                 ",  "
             )  # may be dangerous to hard code the case where keywords are separated with a comma and two spaces
+
+            keywords_found.found = tag.attrs["content"]
+            site.success.append(keywords_found)
+
             return
-    site.problems.append(
-        {
-            "name": no_keywords_name,
-            "settings": no_keywords_settings,
-            "found": no_keywords_found,
-            "description": no_keywords_description,
-        }
-    )
+
+    site.problems.append(no_keywords)

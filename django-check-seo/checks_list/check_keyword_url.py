@@ -1,10 +1,14 @@
 # Third party
 # Standard Library
+import re
 from urllib.parse import urlparse
 
 from django.conf import settings
-from django.utils import translation
-from django.utils.translation import gettext as _
+from django.conf.global_settings import LANGUAGES
+from django.utils.translation import gettext as _, pgettext
+
+# Local application / specific library imports
+from ..checks import custom_list
 
 
 def importance():
@@ -19,30 +23,49 @@ def importance():
 def run(site):
     """Check presence of keywords in url
     """
-    no_keyword_name = _("No keyword in URL")
-    no_keyword_settings = _("at least 1")
-    no_keyword_found = _("none")
-    no_keyword_description = _(
-        'Keywords in URL will help your users understand the organisation of your website, and are a small ranking factor for Google. On the other hand, Bing guidelines advises to "<i>keep [your URL] clean and keyword rich when possible</i>".'
+
+    no_keyword = custom_list.CustomList(
+        name=_("No keyword in URL"),
+        settings=pgettext("masculin", "at least one"),
+        found=pgettext("masculin", "none"),
+        description=_(
+            'Keywords in URL will help your users understand the organisation of your website, and are a small ranking factor for Google. On the other hand, Bing guidelines advises to "<i>keep [your URL] clean and keyword rich when possible</i>".'
+        ),
+    )
+
+    enough_keyword = custom_list.CustomList(
+        name=_("Keywords found in URL"),
+        settings=pgettext("masculin", "at least one"),
+        found="",
+        description=no_keyword.description,
     )
 
     # root url may contain str like "/fr/" or "/en/" if i18n is activated
     url_path = urlparse(site.full_url, "/").path
 
+    # list of languages from django LANGUAGES list: ['fr', 'en', 'br', 'ia', ...]
+    languages_list = [i[0] for i in LANGUAGES]
+
+    # do not check keywords in url for root URL
     if (
-        settings.USE_I18N
-        and url_path == "/{lang}/".format(lang=translation.get_language())
-    ) or url_path == "/":
+        (settings.USE_I18N and url_path.replace("/", "") in languages_list)
+        or url_path == "/"
+        or not url_path
+    ):
         return
 
+    keyword_found = False
+
     for keyword in site.keywords:
-        if keyword in site.full_url:
-            return
-    site.problems.append(
-        {
-            "name": no_keyword_name,
-            "settings": no_keyword_settings,
-            "found": no_keyword_found,
-            "description": no_keyword_description,
-        }
-    )
+        # extract keywords (ex: "my", "url" & "is_right" for url like "/my-url-is_right")
+        for url in re.compile(r"[/\-]+", re.UNICODE).split(site.full_url):
+            if keyword.lower() == url:
+                if keyword_found:
+                    enough_keyword.found += ", "
+                keyword_found = True
+                enough_keyword.found += keyword
+
+    if keyword_found:
+        site.success.append(enough_keyword)
+    else:
+        site.problems.append(no_keyword)

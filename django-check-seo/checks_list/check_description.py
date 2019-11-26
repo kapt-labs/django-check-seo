@@ -18,7 +18,11 @@ def importance():
 
 
 def run(site):
+    """Check all description-related things.
 
+    Arguments:
+        site {Site} -- Page infos + problems/warnings/success.
+    """
     length_short = custom_list.CustomList(
         name=_("Meta description is too short"),
         settings=_("between {rule_low} and {rule_high} chars ").format(
@@ -32,72 +36,54 @@ def run(site):
 
     length_long = custom_list.CustomList(
         name=_("Meta description is too long"),
-        settings=_("between {rule_low} and {rule_high} chars ").format(
-            rule_low=site.settings.SEO_SETTINGS["meta_description_length"][0],
-            rule_high=site.settings.SEO_SETTINGS["meta_description_length"][1],
-        ),
-        description=_(
-            "The meta description tag can be displayed in search results if it has the right length, and can influence users. Knowing that Google classifies sites according to user behaviour, it is important to have a relevant description."
-        ),
+        settings=length_short.settings,
+        description=length_short.description,
     )
 
     length_success = custom_list.CustomList(
         name=_("Meta description length is correct"),
-        settings=_("between {rule_low} and {rule_high} chars ").format(
-            rule_low=site.settings.SEO_SETTINGS["meta_description_length"][0],
-            rule_high=site.settings.SEO_SETTINGS["meta_description_length"][1],
-        ),
-        description=_(
-            "The meta description tag can be displayed in search results if it has the right length, and can influence users. Knowing that Google classifies sites according to user behaviour, it is important to have a relevant description."
-        ),
+        settings=length_short.settings,
+        description=length_short.description,
     )
 
     keywords_bad = custom_list.CustomList(
         name=_("No keyword in meta description"),
-        settings=_("at least 1"),
-        description=_(
-            "The meta description tag can be displayed in search results, and the keywords present in the search will be in bold. All this can influence users, and Google ranks sites according to users behaviour."
-        ),
+        settings=pgettext("masculin", "at least one"),
+        description=length_short.description,
     )
 
     keywords_good = custom_list.CustomList(
         name=_("Keywords were found in description"),
-        settings=_("at least 1"),
-        description=_(
-            "The meta description tag can be displayed in search results, and the keywords present in the search will be in bold. All this can influence users, and Google ranks sites according to users behaviour."
-        ),
+        settings=pgettext("masculin", "at least one"),
+        description=length_short.description,
     )
 
     too_much_meta = custom_list.CustomList(
         name=_("Too much meta description tags"),
-        settings=_("only one"),
+        settings=pgettext("feminin", "only one"),
         description=_(
-            "Although some people write a meta description by targeted keyword, this is still an uncommon practice that is not yet recognized by all search engines."
+            "Although some people write one meta description by targeted keyword, this is still an uncommon practice that is not yet recognized by all search engines."
         ),
     )
 
     meta_description_only_one = custom_list.CustomList(
         name=_("Only one meta description tag"),
-        settings=_("only one"),
-        found=pgettext("description", "one"),
-        description=_(
-            "Although some people write a meta description by targeted keyword, this is still an uncommon practice that is not yet recognized by all search engines."
-        ),
+        settings=pgettext("feminin", "only one"),
+        found=pgettext("feminin", "one"),
+        description=too_much_meta.description,
     )
 
     no_meta_description = custom_list.CustomList(
         name=_("No meta description"),
-        settings=_("needed"),
+        settings=pgettext("feminin", "needed"),
         found=pgettext("description", "none"),
-        description=_(
-            "The meta description tag can be displayed in search results if it has the right length, and can influence users. Knowing that Google classifies sites according to user behaviour, it is important to have a relevant description."
-        ),
+        description=length_short.description,
     )
 
     meta_description_present = custom_list.CustomList(
         name=_("Meta description is present"),
-        settings=_("needed"),
-        found=pgettext("description", "one"),
+        settings=pgettext("feminin", "needed"),
+        found=pgettext("feminin", "one"),
         description=_(
             "The meta description tag can be displayed in search results if it has the right length, and can influence users. Knowing that Google classifies sites according to user behaviour, it is important to have a relevant description."
         ),
@@ -151,7 +137,6 @@ def run(site):
                     )
                 )
             # if no keyword is found in h1
-            print(occurence)
             if not any(i > 0 for i in occurence):
 
                 keywords_bad.found = 0

@@ -2,7 +2,10 @@
 import re
 
 # Third party
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext as _, pgettext
+
+# Local application / specific library imports
+from ..checks import custom_list
 
 
 def importance():
@@ -15,29 +18,44 @@ def importance():
 
 
 def run(site):
-    no_h2_name = _("No h2 tag")
-    no_h2_settings = _("at least 1")
-    no_h2_description = _(
-        "H2 tags are useful because they are explored by search engines and can help them understand the subject of your page."
+    no_h2 = custom_list.CustomList(
+        name=_("No h2 tag"),
+        settings=_("at least one"),
+        found=pgettext("masculin", "none"),
+        description=_(
+            "H2 tags are useful because they are explored by search engines and can help them understand the subject of your page."
+        ),
     )
 
-    no_keywords_name = _("No keyword in h2")
-    no_keywords_settings = _("at least 1")
-    no_keywords_description = _(
-        "Google uses h2 tags to better understand the subjects of your page."
+    enough_h2 = custom_list.CustomList(
+        name=_("H2 tags were found"),
+        settings=_("at least one"),
+        description=no_h2.description,
+    )
+
+    no_keywords = custom_list.CustomList(
+        name=_("No keyword in h2"),
+        settings=_("at least one"),
+        found=pgettext("masculin", "none"),
+        description=_(
+            "Google uses h2 tags to better understand the subjects of your page."
+        ),
+    )
+
+    enough_keywords = custom_list.CustomList(
+        name=_("Keyword found in h2"),
+        settings=_("at least one"),
+        found=pgettext("masculin", "none"),
+        description=no_keywords.description,
     )
 
     h2 = site.soup.find_all("h2")
     if not h2:
-        site.warnings.append(
-            {
-                "name": no_h2_name,
-                "settings": no_h2_settings,
-                "found": _("none"),
-                "description": no_h2_description,
-            }
-        )
+        site.warnings.append(no_h2)
     else:
+        enough_h2.found = len(h2)
+        site.success.append(enough_h2)
+
         occurence = []
         # check if each keyword
         for keyword in site.keywords:
@@ -54,11 +72,7 @@ def run(site):
                 )
         # if no keyword is found in h2
         if not any(i > 0 for i in occurence):
-            site.warnings.append(
-                {
-                    "name": no_keywords_name,
-                    "settings": no_keywords_settings,
-                    "found": _("none"),
-                    "description": no_keywords_description,
-                }
-            )
+            site.warnings.append(no_keywords)
+        else:
+            enough_keywords.found = max(i for i in occurence)
+            site.success.append(enough_keywords)
