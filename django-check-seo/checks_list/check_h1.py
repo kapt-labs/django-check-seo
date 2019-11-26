@@ -28,11 +28,17 @@ def run(site):
         ),
     )
 
-    right_number_h1 = too_much_h1
-    right_number_h1.name = _("H1 tag found")
+    right_number_h1 = custom_list.CustomList(
+        name=_("H1 tag found"),
+        settings=_("exactly 1"),
+        description=too_much_h1.description,
+    )
 
-    not_enough_h1 = too_much_h1
-    not_enough_h1.name = _("No h1 tag")
+    not_enough_h1 = custom_list.CustomList(
+        name=_("No h1 tag"),
+        settings=_("exactly 1"),
+        description=too_much_h1.description,
+    )
 
     no_keywords = custom_list.CustomList(
         name=_("No keyword in h1"),
