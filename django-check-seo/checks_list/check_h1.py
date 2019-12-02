@@ -64,7 +64,7 @@ def run(site):
         site.problems.append(too_much_h1)
 
     elif not h1:
-        too_much_h1.found = pgettext("masculin", "none")
+        not_enough_h1.found = pgettext("masculin", "none")
         site.problems.append(not_enough_h1)
 
     else:
@@ -91,7 +91,7 @@ def run(site):
             )
         # if no keyword is found in h1
         if not any(i > 0 for i in occurence):
-            no_keywords.found = _("none")
+            no_keywords.found = pgettext("masculin", "none")
             site.problems.append(no_keywords)
         else:
             enough_keywords.found = max(i for i in occurence)
