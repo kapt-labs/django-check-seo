@@ -23,10 +23,8 @@ def run(site):
 
     no_keywords = custom_list.CustomList(
         name=_("No keyword in first paragraph"),
-        settings=_(
-            "before {settings} words".format(
-                settings=site.settings.SEO_SETTINGS["keywords_in_first_words"]
-            )
+        settings=_("before {settings} words").format(
+            settings=site.settings.SEO_SETTINGS["keywords_in_first_words"]
         ),
         found=pgettext("masculin", "none"),
         description=_(

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-02 14:00+0100\n"
-"PO-Revision-Date: 2019-12-02 14:00+0100\n"
+"POT-Creation-Date: 2019-12-02 14:23+0100\n"
+"PO-Revision-Date: 2019-12-02 14:24+0100\n"
 "Last-Translator: kapt <dev@kapt.mobi>\n"
 "Language-Team: français <dev@kapt.mobi>\n"
 "Language: fr\n"
@@ -184,7 +184,7 @@ msgstr "Des mots-clefs on été trouvés dans la balise h1"
 #: django-check-seo/checks_list/check_h2.py:54
 #: django-check-seo/checks_list/check_keyword_url.py:33
 #: django-check-seo/checks_list/check_keywords.py:28
-#: django-check-seo/checks_list/keyword_present_first_paragraph.py:31
+#: django-check-seo/checks_list/keyword_present_first_paragraph.py:29
 msgctxt "masculin"
 msgid "none"
 msgstr "aucun"
@@ -494,12 +494,12 @@ msgstr "La longueur du contenu est correcte"
 msgid "No keyword in first paragraph"
 msgstr "Aucun mot-clé dans le premier paragraphe"
 
-#: django-check-seo/checks_list/keyword_present_first_paragraph.py:27
+#: django-check-seo/checks_list/keyword_present_first_paragraph.py:26
 #, python-brace-format
 msgid "before {settings} words"
 msgstr "avant {settings} mots"
 
-#: django-check-seo/checks_list/keyword_present_first_paragraph.py:33
+#: django-check-seo/checks_list/keyword_present_first_paragraph.py:31
 msgid ""
 "The reader will be relieved to find one of his keywords in the first "
 "paragraph of your page, and the same logic applies to Google, which will "
@@ -509,7 +509,7 @@ msgstr ""
 "paragraphe de votre page, et la même logique s'applique à Google, qui jugera "
 "le contenu plus pertinent."
 
-#: django-check-seo/checks_list/keyword_present_first_paragraph.py:55
+#: django-check-seo/checks_list/keyword_present_first_paragraph.py:53
 msgid "Keywords found in first paragraph"
 msgstr "Des mots-clefs on été trouvés dans le premier paragraphe"
 
@@ -522,7 +522,6 @@ msgstr "paramètres"
 #: django-check-seo/templates/default.html:24
 #: django-check-seo/templates/default.html:37
 #: django-check-seo/templates/default.html:53
-#| msgid "found"
 msgctxt "checkseo"
 msgid "found"
 msgstr "trouvé"
