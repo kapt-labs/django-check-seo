@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-02 10:55+0100\n"
-"PO-Revision-Date: 2019-12-02 09:27+0100\n"
+"POT-Creation-Date: 2019-12-02 14:00+0100\n"
+"PO-Revision-Date: 2019-12-02 14:00+0100\n"
 "Last-Translator: kapt <dev@kapt.mobi>\n"
 "Language-Team: français <dev@kapt.mobi>\n"
 "Language: fr\n"
@@ -513,25 +513,29 @@ msgstr ""
 msgid "Keywords found in first paragraph"
 msgstr "Des mots-clefs on été trouvés dans le premier paragraphe"
 
-#: django-check-seo/templates/default.html:25
+#: django-check-seo/templates/default.html:24
+#: django-check-seo/templates/default.html:37
+#: django-check-seo/templates/default.html:53
 msgid "settings"
 msgstr "paramètres"
 
-#: django-check-seo/templates/default.html:25
-#: django-check-seo/templates/default.html:38
-#: django-check-seo/templates/default.html:54
+#: django-check-seo/templates/default.html:24
+#: django-check-seo/templates/default.html:37
+#: django-check-seo/templates/default.html:53
+#| msgid "found"
+msgctxt "checkseo"
 msgid "found"
 msgstr "trouvé"
 
-#: django-check-seo/templates/default.html:50
+#: django-check-seo/templates/default.html:49
 msgid "Successful checks"
 msgstr "Vérifications réussies"
 
-#: django-check-seo/templates/default.html:71
+#: django-check-seo/templates/default.html:70
 msgid "About"
 msgstr "À propos"
 
-#: django-check-seo/templates/default.html:74
+#: django-check-seo/templates/default.html:73
 msgid ""
 "The main objective of this application is to check the aspects of the web "
 "pages involved in SEO, to ensure that the page content will be correctly "
@@ -541,11 +545,11 @@ msgstr ""
 "pages web impliqués dans le référencement, pour s'assurer que le contenu de "
 "la page sera correctement parcouru par les moteurs de recherche."
 
-#: django-check-seo/templates/default.html:81
+#: django-check-seo/templates/default.html:80
 msgid "Documentation"
 msgstr "Documentation"
 
-#: django-check-seo/templates/default.html:84
+#: django-check-seo/templates/default.html:83
 msgid ""
 "The documentation is available via the <a href=\"https://github.com/kapt-"
 "labs/django-check-seo/wiki\" target=\"_blank\">project wiki</a>."
@@ -553,7 +557,7 @@ msgstr ""
 "La documentation est disponible via le <a href=\"https://github.com/kapt-"
 "labs/django-check-seo/wiki\" target=\"_blank\">wiki du projet</a>."
 
-#: django-check-seo/templates/default.html:93
+#: django-check-seo/templates/default.html:92
 msgid ""
 "Raw data are here for debug purposes. Join at least your settings if you're "
 "submitting <a href=\"https://github.com/kapt-labs/django-check-seo/issues"
@@ -563,15 +567,15 @@ msgstr ""
 "les paramètres si vous soumettez <a href=\"https://github.com/kapt-labs/"
 "django-check-seo/issues\">un nouveau ticket</a>."
 
-#: django-check-seo/templates/default.html:98
+#: django-check-seo/templates/default.html:97
 msgid "See extracted html"
 msgstr "Voir html extrait"
 
-#: django-check-seo/templates/default.html:104
+#: django-check-seo/templates/default.html:103
 msgid "See extracted content"
 msgstr "Voir contenu extrait"
 
-#: django-check-seo/templates/default.html:110
+#: django-check-seo/templates/default.html:109
 msgid "See settings"
 msgstr "Voir les paramètres"
 
