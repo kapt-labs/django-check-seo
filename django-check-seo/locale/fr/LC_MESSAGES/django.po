@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-02 14:23+0100\n"
-"PO-Revision-Date: 2019-12-02 14:24+0100\n"
+"POT-Creation-Date: 2019-12-02 15:10+0100\n"
+"PO-Revision-Date: 2019-12-02 15:10+0100\n"
 "Last-Translator: kapt <dev@kapt.mobi>\n"
 "Language-Team: français <dev@kapt.mobi>\n"
 "Language: fr\n"
@@ -179,19 +179,17 @@ msgid "Keyword found in h1"
 msgstr "Des mots-clefs on été trouvés dans la balise h1"
 
 #: django-check-seo/checks_list/check_h1.py:67
+#: django-check-seo/checks_list/check_h1.py:94
 #: django-check-seo/checks_list/check_h2.py:30
 #: django-check-seo/checks_list/check_h2.py:45
 #: django-check-seo/checks_list/check_h2.py:54
 #: django-check-seo/checks_list/check_keyword_url.py:33
 #: django-check-seo/checks_list/check_keywords.py:28
+#: django-check-seo/checks_list/check_links.py:45
+#: django-check-seo/checks_list/check_links.py:51
+#: django-check-seo/checks_list/check_links.py:52
 #: django-check-seo/checks_list/keyword_present_first_paragraph.py:29
 msgctxt "masculin"
-msgid "none"
-msgstr "aucun"
-
-#: django-check-seo/checks_list/check_h1.py:94
-#: django-check-seo/checks_list/check_title.py:27
-#: django-check-seo/checks_list/check_title.py:79
 msgid "none"
 msgstr "aucun"
 
@@ -295,18 +293,18 @@ msgstr ""
 msgid "Keywords found in meta keywords field"
 msgstr "Des mots-clef ont été trouvés dans la balise meta keywords"
 
-#: django-check-seo/checks_list/check_links.py:29
+#: django-check-seo/checks_list/check_links.py:30
 msgid "Not enough internal links"
 msgstr "Pas assez de liens internes"
 
-#: django-check-seo/checks_list/check_links.py:30
-#: django-check-seo/checks_list/check_links.py:38
-#: django-check-seo/checks_list/check_links.py:44
-#: django-check-seo/checks_list/check_links.py:52
+#: django-check-seo/checks_list/check_links.py:31
+#: django-check-seo/checks_list/check_links.py:39
+#: django-check-seo/checks_list/check_links.py:58
+#: django-check-seo/checks_list/check_links.py:66
 msgid "at least {}"
 msgstr "au moins {}"
 
-#: django-check-seo/checks_list/check_links.py:32
+#: django-check-seo/checks_list/check_links.py:33
 msgid ""
 "Internal links are useful because they can give the structure of your "
 "website to search engines, so they can create a hierarchy of your pages."
@@ -315,15 +313,31 @@ msgstr ""
 "votre site Web aux moteurs de recherche, ils peuvent ainsi créer une "
 "hiérarchie de vos pages."
 
-#: django-check-seo/checks_list/check_links.py:37
+#: django-check-seo/checks_list/check_links.py:38
 msgid "Internal links were found"
 msgstr "Des liens internes ont été trouvés"
 
-#: django-check-seo/checks_list/check_links.py:43
+#: django-check-seo/checks_list/check_links.py:44
+msgid "Found broken internal links"
+msgstr "Des liens internes cassés ont été trouvés"
+
+#: django-check-seo/checks_list/check_links.py:46
+msgid ""
+"Neither Google nor users like broken links. Consider setting up redirections "
+"rather than deleting content on your site."
+msgstr ""
+"Ni Google, ni les utilisateurs n'aiment les liens morts. Pensez à mettre en "
+"place des redirections plutôt que de supprimer un contenu sur votre site."
+
+#: django-check-seo/checks_list/check_links.py:50
+msgid "No broken internal link found"
+msgstr "Aucun lien interne cassé n'a été trouvé"
+
+#: django-check-seo/checks_list/check_links.py:57
 msgid "Not enough external links"
 msgstr "Pas assez de liens externes"
 
-#: django-check-seo/checks_list/check_links.py:46
+#: django-check-seo/checks_list/check_links.py:60
 msgid ""
 "External links help your users to check your topic and can save them from "
 "having to do additional research."
@@ -331,9 +345,13 @@ msgstr ""
 "Les liens externes aident vos utilisateurs à vérifier votre sujet et peuvent "
 "leur éviter de devoir faire des recherches supplémentaires."
 
-#: django-check-seo/checks_list/check_links.py:51
+#: django-check-seo/checks_list/check_links.py:65
 msgid "External links were found"
 msgstr "Des liens externes ont été trouvés"
+
+#: django-check-seo/checks_list/check_links.py:108
+msgid "link"
+msgstr "lien"
 
 #: django-check-seo/checks_list/check_title.py:25
 msgid "No title tag"
@@ -345,6 +363,11 @@ msgstr "Pas de balise meta title"
 msgctxt "masculin"
 msgid "one"
 msgstr "un"
+
+#: django-check-seo/checks_list/check_title.py:27
+#: django-check-seo/checks_list/check_title.py:79
+msgid "none"
+msgstr "aucun"
 
 #: django-check-seo/checks_list/check_title.py:29
 msgid ""
