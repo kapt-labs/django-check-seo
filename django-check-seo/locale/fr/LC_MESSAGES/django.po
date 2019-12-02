@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-26 14:50+0100\n"
-"PO-Revision-Date: 2019-11-26 14:52+0100\n"
+"POT-Creation-Date: 2019-12-02 10:55+0100\n"
+"PO-Revision-Date: 2019-12-02 09:27+0100\n"
 "Last-Translator: kapt <dev@kapt.mobi>\n"
 "Language-Team: français <dev@kapt.mobi>\n"
 "Language: fr\n"
@@ -175,8 +175,8 @@ msgstr ""
 "(et les moteurs de recherche !) comprendront correctement votre page."
 
 #: django-check-seo/checks_list/check_h1.py:55
-msgid "Keyword found in H1"
-msgstr "Des mots-clés ont été trouvés dans la balise h1"
+msgid "Keyword found in h1"
+msgstr "Des mots-clefs on été trouvés dans la balise h1"
 
 #: django-check-seo/checks_list/check_h1.py:67
 #: django-check-seo/checks_list/check_h2.py:30
@@ -252,7 +252,6 @@ msgid "Img have alt tag"
 msgstr "Chaque image a un tag alt"
 
 #: django-check-seo/checks_list/check_images.py:41
-#| msgid "all images"
 msgid "image"
 msgstr "image"
 
@@ -361,12 +360,10 @@ msgid "Found title tag"
 msgstr "La balise meta title a été trouvée"
 
 #: django-check-seo/checks_list/check_title.py:41
-#| msgid "Too much h1 tags"
 msgid "Too much title tags"
 msgstr "Trop de balises de titre"
 
 #: django-check-seo/checks_list/check_title.py:42
-#| msgid "only one"
 msgctxt "masculin"
 msgid "only one"
 msgstr "un seul"
@@ -550,21 +547,21 @@ msgstr "Documentation"
 
 #: django-check-seo/templates/default.html:84
 msgid ""
-"The documentation is available via the <a href=\\\"https://github.com/kapt-"
-"labs/django-check-seo/wiki\\\" target=\\\"_blank\\\">project wiki</a>."
+"The documentation is available via the <a href=\"https://github.com/kapt-"
+"labs/django-check-seo/wiki\" target=\"_blank\">project wiki</a>."
 msgstr ""
-"La documentation est disponible via le <a href=\\\"https://github.com/kapt-"
-"labs/django-check-seo/wiki\\\" target=\\\"_blank\\\">wiki du projet</a>."
+"La documentation est disponible via le <a href=\"https://github.com/kapt-"
+"labs/django-check-seo/wiki\" target=\"_blank\">wiki du projet</a>."
 
 #: django-check-seo/templates/default.html:93
 msgid ""
 "Raw data are here for debug purposes. Join at least your settings if you're "
-"submitting <a href=\\\"https://github.com/kapt-labs/django-check-seo/issues\\"
+"submitting <a href=\"https://github.com/kapt-labs/django-check-seo/issues"
 "\">a new issue</a>."
 msgstr ""
 "Les données brutes sont affichées à des fins de débogage. Joignez au moins "
-"les paramètres si vous soumettez <a href=\\\"https://github.com/kapt-labs/"
-"django-check-seo/issues\\\">un nouveau ticket</a>."
+"les paramètres si vous soumettez <a href=\"https://github.com/kapt-labs/"
+"django-check-seo/issues\">un nouveau ticket</a>."
 
 #: django-check-seo/templates/default.html:98
 msgid "See extracted html"
@@ -605,6 +602,9 @@ msgid "{nb_warnings} warning</strong> raised"
 msgid_plural "{nb_warnings} warnings</strong> raised"
 msgstr[0] "{nb_warnings} avertissement</strong> levé"
 msgstr[1] "{nb_warnings} avertissements</strong> levés"
+
+#~ msgid "Keyword found in H1"
+#~ msgstr "Des mots-clés ont été trouvés dans la balise h1"
 
 #~| msgid ""
 #~| "The main objective of this application is to provide basic knowledge to "
