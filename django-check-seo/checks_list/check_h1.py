@@ -52,7 +52,7 @@ def run(site):
     )
 
     enough_keywords = custom_list.CustomList(
-        name=_("Keyword found in H1"),
+        name=_("Keyword found in h1"),
         settings=_("at least one"),
         description=no_keywords.description,
     )
