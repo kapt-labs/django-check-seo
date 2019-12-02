@@ -4,7 +4,6 @@
   <head>
     <meta charset="utf-8" />
     <title>Django check SEO</title>
-    <title>HERE I AM</title>
     <link rel="stylesheet" type="text/css" href="{% static "django-check-seo/design.css" %}" />
   </head>
   <body>
@@ -22,7 +21,7 @@
             {% for problem in problems %}
               <li>
                 <details>
-                  <summary><strong>{{ problem.name }}</strong> <i>({% trans "settings" %}: {% autoescape off %}{{ problem.settings }}, {% trans "found" %}: {{ problem.found }})</i></summary>
+                  <summary><strong>{{ problem.name }}</strong> <i>({% trans "settings" %}: {% autoescape off %}{{ problem.settings }}, {% trans "found" context "checkseo" %}: {{ problem.found }})</i></summary>
                   <p>
                     {{ problem.description }}{% endautoescape %}
                   </p>
@@ -35,7 +34,7 @@
             {% for warning in warnings %}
               <li>
                 <details>
-                  <summary><strong>{{ warning.name }}</strong> <i>(settings: {% autoescape off %}{{ warning.settings }}, {% trans "found" %}: {{ warning.found }})</i></summary>
+                  <summary><strong>{{ warning.name }}</strong> <i>({% trans "settings" %}: {% autoescape off %}{{ warning.settings }}, {% trans "found" context "checkseo" %}: {{ warning.found }})</i></summary>
                   <p>
                     {{ warning.description }}{% endautoescape %}
                   </p>
@@ -51,7 +50,7 @@
               {% for successful_check in success %}
                 <li>
                   <details>
-                    <summary><strong>{{ successful_check.name }}</strong> <i>(settings: {% autoescape off %}{{ successful_check.settings }}, {% trans "found" %}: {{ successful_check.found }})</i></summary>
+                    <summary><strong>{{ successful_check.name }}</strong> <i>({% trans "settings" %}: {% autoescape off %}{{ successful_check.settings }}, {% trans "found" context "checkseo" %}: {{ successful_check.found }})</i></summary>
                     <p>
                       {{ successful_check.description }}{% endautoescape %}
                     </p>
