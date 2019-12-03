@@ -120,7 +120,6 @@ def run(site):
     title_readable = site.soup.title.string.lower()
 
     for kw in site.keywords:
-        print(kw)
         if kw.lower() in title_readable:
             if keyword_found:
                 keyword.found += ", "
