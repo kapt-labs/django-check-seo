@@ -3,8 +3,7 @@ import os
 
 # Third party
 import bs4
-from django.utils.translation import gettext as _, pgettext
-import requests
+from django.utils.translation import gettext as _
 
 # Local application / specific library imports
 from ..checks import custom_list
