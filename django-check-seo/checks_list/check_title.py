@@ -115,12 +115,20 @@ def run(site):
         title_okay.found = len(site.soup.title.string)
         site.success.append(title_okay)
 
-    title_words = site.soup.title.string.lower().split()
-    keywords = list(set([item.lower() for item in site.keywords]) & set(title_words))
+    keyword.found = ""
+    keyword_found = False
+    title_readable = site.soup.title.string.lower()
+
+    for kw in site.keywords:
+        print(kw)
+        if kw.lower() in title_readable:
+            if keyword_found:
+                keyword.found += ", "
+            keyword_found = True
+            keyword.found += kw
 
     # title do not contain any keyword
-    if len(keywords) == 0:
+    if keyword.found == "":
         site.problems.append(no_keyword)
     else:
-        keyword.found = ", ".join(keywords)
         site.success.append(keyword)
