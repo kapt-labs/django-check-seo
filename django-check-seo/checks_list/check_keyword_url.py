@@ -59,14 +59,15 @@ def run(site):
 
     keyword_found = False
 
+    # from "http://domain/design-thinking" to "http domain design thinking"
+    url_readable = re.sub("[^0-9a-zA-Z]+", " ", site.full_url)
+
     for keyword in site.keywords:
-        # extract keywords (ex: "my", "url" & "is_right" for url like "/my-url-is_right")
-        for url in re.compile(r"[/\-]+", re.UNICODE).split(site.full_url):
-            if keyword.lower() == url:
-                if keyword_found:
-                    enough_keyword.found += ", "
-                keyword_found = True
-                enough_keyword.found += keyword
+        if keyword.lower() in url_readable:
+            if keyword_found:
+                enough_keyword.found += ", "
+            keyword_found = True
+            enough_keyword.found += keyword
 
     if keyword_found:
         site.success.append(enough_keyword)
