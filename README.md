@@ -10,7 +10,7 @@ In other words, django-check-seo will tell you if you have problems concerning a
 
 #### With pipenv
 
- * Add `django-check-seo = { git = 'https://github.com/kapt-labs/django-check-seo.git' }` to your Pipfile below `[packages]`, then run `pipenv install`,
+ * Add `django-check-seo = { git = 'https://github.com/kapt-labs/django-check-seo.git' }` to your Pipfile below `[packages]` (and other [prerequisites](#prerequisites) if you don't have them), then run `pipenv install`,
 
 **or**
 
@@ -19,9 +19,9 @@ In other words, django-check-seo will tell you if you have problems concerning a
 **and then**
 
  * add `django-check-seo.apps.DjangoCheckSEOConfig` to your `INSTALLED_APPS`,
- * add the file [`cms_toolbars.py`](https://gist.githubusercontent.com/corentinbettiol/f1e4b6630b7ae9afe2f9023b2185f3db/raw/d8295436b105da966346cf754e51671f65409491/cms_toolbars.py) inside your `django_project_name` folder (at the same level as `settings.py` and `urls.py`),
  * add `url(r"^django-check-seo/", include("django-check-seo.urls")),` to your `urlpatterns` in `urls.py` (before `url(r'^', include('cms.urls')),` or it will not work),
- * (*optional*) export `DOMAIN_NAME` (used in the application), or put it inside your [`.env`](https://gist.github.com/corentinbettiol/f1e4b6630b7ae9afe2f9023b2185f3db#file-env) file
+   * or `path("django-check-seo/", include("django-check-seo.urls")),` if you're using path,
+ * put `DOMAIN_NAME` inside your [`.env`](https://gist.github.com/corentinbettiol/f1e4b6630b7ae9afe2f9023b2185f3db#file-env) file (the application don't really know your domain name)
 
 *Start your django CMS project, log in, you should see the "Check SEO..." button and everything should be okay.*
 
@@ -33,7 +33,7 @@ In other words, django-check-seo will tell you if you have problems concerning a
 
 ## Prerequisites
 
-You will need `djangocms` & `djangocms_page_meta` in order to made this application work.
+You will need `bs4` (BeautifulSoup4), `djangocms` & `djangocms_page_meta` in order to made this application work.
 
 ----
 

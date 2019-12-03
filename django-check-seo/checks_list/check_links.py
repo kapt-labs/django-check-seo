@@ -105,10 +105,23 @@ def run(site):
         enough_external.found = external_links
         site.success.append(enough_external)
 
+    # prevent using domain name for loading internal links when testing another website's page
+    if os.environ["DOMAIN_NAME"] not in site.full_url:
+        domain = site.full_url
+        if site.full_url.endswith("/"):
+            domain = domain[:-1]
+    else:
+        domain = "http://" + os.environ["DOMAIN_NAME"]
+
     # broken internal links
     broken_links = []
     link_text = _("link")
     for link in internal_links_list:
+
+        # prevent bugs if link is absolute and not relative
+        if link["href"].startswith("/"):
+            link["href"] = domain + link["href"]
+
         r = requests.get(link["href"]).status_code
 
         # status is not success or redirect
