@@ -36,6 +36,8 @@ def run(site):
     first_N_words = site.content_text.lower().split()[
         : site.settings.SEO_SETTINGS["keywords_in_first_words"]
     ]
+    # check text and not list of words in order that keywords like "this is a keyword" are found in text "words this is a keyword words"
+    first_N_words = " ".join(first_N_words)
 
     nb = 0
     kw = []
