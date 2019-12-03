@@ -40,21 +40,6 @@ def run(site):
         description=not_enough_internal.description,
     )
 
-    broken_internal = custom_list.CustomList(
-        name=_("Found broken internal links"),
-        settings=pgettext("masculin", "none"),
-        description=_(
-            "Neither Google nor users like broken links. Consider setting up redirections rather than deleting content on your site."
-        ),
-    )
-
-    working_internal = custom_list.CustomList(
-        name=_("No broken internal link found"),
-        settings=pgettext("masculin", "none"),
-        found=pgettext("masculin", "none"),
-        description=broken_internal.description,
-    )
-
     not_enough_external = custom_list.CustomList(
         name=_("Not enough external links"),
         settings=_("at least {}").format(site.settings.SEO_SETTINGS["external_links"]),
@@ -104,39 +89,3 @@ def run(site):
     else:
         enough_external.found = external_links
         site.success.append(enough_external)
-
-    # prevent using domain name for loading internal links when testing another website's page
-    if os.environ["DOMAIN_NAME"] not in site.full_url:
-        domain = site.full_url
-        if site.full_url.endswith("/"):
-            domain = domain[:-1]
-    else:
-        domain = "http://" + os.environ["DOMAIN_NAME"]
-
-    # broken internal links
-    broken_links = []
-    link_text = _("link")
-    for link in internal_links_list:
-
-        # prevent bugs if link is absolute and not relative
-        if link["href"].startswith("/"):
-            link["href"] = domain + link["href"]
-
-        r = requests.get(link["href"]).status_code
-
-        # status is not success or redirect
-        if r != 200 and r != 301 and r != 302:
-            broken_links.append(
-                '<a target="_blank" title="broken link" href="'
-                + link["href"]
-                + '">'
-                + link_text
-                + "</a>"
-            )
-
-    if len(broken_links) > 0:
-        broken_internal.found = str(len(broken_links)) + " - " + ", ".join(broken_links)
-        site.problems.append(broken_internal)
-
-    else:
-        site.success.append(working_internal)

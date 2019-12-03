@@ -136,7 +136,7 @@ def run(site):
                         )
                     )
                 )
-            # if no keyword is found in h1
+            # if no keyword is found in description
             if not any(i > 0 for i in occurence):
 
                 keywords_bad.found = 0
