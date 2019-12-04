@@ -1,10 +1,10 @@
 # Third party
 # Standard Library
-import re
 from urllib.parse import urlparse
 
 from django.conf import settings
 from django.conf.global_settings import LANGUAGES
+from django.utils.text import slugify
 from django.utils.translation import gettext as _, pgettext
 
 # Local application / specific library imports
@@ -59,11 +59,8 @@ def run(site):
 
     keyword_found = False
 
-    # from "http://domain/design-thinking" to "http domain design thinking"
-    url_readable = re.sub("[^0-9a-zA-Z]+", " ", site.full_url)
-
     for keyword in site.keywords:
-        if keyword.lower() in url_readable:
+        if slugify(keyword) in site.full_url:
             if keyword_found:
                 enough_keyword.found += ", "
             keyword_found = True
