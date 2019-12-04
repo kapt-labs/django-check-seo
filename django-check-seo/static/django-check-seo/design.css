@@ -78,6 +78,37 @@ h2{
   text-align: center;
 }
 
+.keywords{
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  margin-bottom: 3em;
+  list-style-type: none;
+}
+
+.keywords .title{
+  color: #888;
+  font-weight: 500;
+}
+
+.keywords li{
+  margin: 3px;
+  padding: 5px;
+  color: #666;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.keywords li:not(:first-child):not(.no-keywords){
+  font-family: monospace;
+  border: 1px solid #aaa;
+  box-shadow: 0 0 10px 1px #ddd;
+}
+
+.keywords .no-keywords{
+  font-style: italic;
+}
+
 strong{
   font-weight: 500;
 }

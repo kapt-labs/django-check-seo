@@ -51,6 +51,7 @@ class IndexView(generic.base.TemplateView):
         context["settings"] = json.dumps(settings.SEO_SETTINGS, indent=4)
         context["html"] = page_stats.content
         context["text"] = page_stats.content_text
+        context["keywords"] = page_stats.keywords
 
         nb_problems = len(context["problems"])
         nb_warnings = len(context["warnings"])

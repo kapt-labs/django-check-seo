@@ -13,6 +13,15 @@
         <h1><img src="{% static "django-check-seo/logo-small.png" %}" alt="Django Check SEO" /></h1>
         <article>
 
+          <ul class="keywords">
+            <li class="title">{% trans "Keywords:" %}</li>
+            {% if keywords|length > 0 %}
+              {{ keywords|unordered_list }}
+            {% else %}
+              <li class="no-keywords">{% trans "no keywords!" %}</li>
+            {% endif %}
+          </ul>
+
           <h2>
             {% autoescape off %}{{ nb_problems_warnings }}{% endautoescape %}
           </h2>
