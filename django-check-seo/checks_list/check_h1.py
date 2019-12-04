@@ -47,7 +47,7 @@ def run(site):
         name=_("No keyword in h1"),
         settings=_("at least one"),
         description=_(
-            "The H1 tag represent the main title of your page, and you may populate it with appropriate content in order to ensure that users (and search engines!) will understand correctly your page."
+            "The h1 tag represent the main title of your page, and you may populate it with appropriate content in order to ensure that users (and search engines!) will understand correctly your page."
         ),
     )
 

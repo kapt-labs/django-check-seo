@@ -78,12 +78,20 @@ h2{
   text-align: center;
 }
 
-.keywords{
+.keywords, .seached-in{
   margin: 0;
   padding: 0;
-  text-align: center;
-  margin-bottom: 3em;
   list-style-type: none;
+}
+
+.seached-in{
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.keywords{
+  margin-bottom: 3em;
+  text-align: center;
 }
 
 .keywords .title{
@@ -91,7 +99,7 @@ h2{
   font-weight: 500;
 }
 
-.keywords li{
+.keywords li, .seached-in li{
   margin: 3px;
   padding: 5px;
   color: #666;
@@ -99,13 +107,13 @@ h2{
   display: inline-block;
 }
 
-.keywords li:not(:first-child):not(.no-keywords){
+.keywords li:not(:first-child):not(.no-keywords), .seached-in li:not(:first-child):not(.no-data){
   font-family: monospace;
   border: 1px solid #aaa;
   box-shadow: 0 0 10px 1px #ddd;
 }
 
-.keywords .no-keywords{
+.keywords .no-keywords, .seached-in .no-data{
   font-style: italic;
 }
 
@@ -239,13 +247,13 @@ details > summary{
   padding: 5px;
 }
 
-details > p{
+details > div{
   margin: 0;
   color: #444;
-  padding: 10px 10px 10px 1.5em;
+  padding: 1px 10px 10px 1.5em;
 }
 
-details[open] > p{
+details[open] > div{
   background-color: white;
   box-shadow: 0 0 3px 1px #aaa inset;
 }

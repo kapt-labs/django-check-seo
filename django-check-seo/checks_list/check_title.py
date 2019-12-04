@@ -22,7 +22,7 @@ def run(site):
     """
 
     no_title = custom_list.CustomList(
-        name=_("No title tag"),
+        name=_("No meta title tag"),
         settings=pgettext("masculin", "one"),
         found=_("none"),
         description=_(
@@ -31,59 +31,59 @@ def run(site):
     )
 
     title_found = custom_list.CustomList(
-        name=_("Found title tag"),
+        name=_("Found meta title tag"),
         settings=pgettext("masculin", "one"),
         found=pgettext("masculin", "one"),
         description=no_title.description,
     )
 
     too_much = custom_list.CustomList(
-        name=_("Too much title tags"),
+        name=_("Too much meta title tags"),
         settings=pgettext("masculin", "only one"),
         description=_(
-            "Only the first title tag will be displayed on the tab space on your browser, and only one title tag will be displayed on the search results pages."
+            "Only the first meta title tag will be displayed on the tab space on your browser, and only one meta title tag will be displayed on the search results pages."
         ),
     )
 
     short_title = custom_list.CustomList(
-        name=_("Title tag is too short"),
+        name=_("Meta title tag is too short"),
         settings=_("more than {}").format(
             site.settings.SEO_SETTINGS["meta_title_length"][0]
         ),
         description=_(
-            "Titles tags need to describe the content of the page, and need to contain at least a few words."
+            "Meta titles tags need to describe the content of the page, and need to contain at least a few words."
         ),
     )
 
     title_okay = custom_list.CustomList(
-        name=_("Title tag have a good length"),
+        name=_("Meta title tag have a good length"),
         settings=_("more than {}").format(
             site.settings.SEO_SETTINGS["meta_title_length"][0]
         ),
-        description=_("Titles tags need to describe the content of the page."),
+        description=_("Meta titles tags need to describe the content of the page."),
     )
 
     long_title = custom_list.CustomList(
-        name=_("Title tag is too long"),
+        name=_("Meta title tag is too long"),
         settings=_(
             "less than {}".format(site.settings.SEO_SETTINGS["meta_title_length"][1])
         ),
         description=_(
-            "Only the first ~55-60 chars are displayed on modern search engines results. Writing a longer title is not really required and can lead to make the user miss informations."
+            "Only the first ~55-60 chars are displayed on modern search engines results. Writing a longer meta title is not really required and can lead to make the user miss informations."
         ),
     )
 
     no_keyword = custom_list.CustomList(
-        name=_("Title do not contain any keyword"),
+        name=_("Meta title tag do not contain any keyword"),
         settings=_("at least one"),
         found=_("none"),
         description=_(
-            "Titles tags need to contain at least one keyword, since they are one of the most important content of the page for search engines."
+            "Meta titles tags need to contain at least one keyword, since they are one of the most important content of the page for search engines."
         ),
     )
 
     keyword = custom_list.CustomList(
-        name=_("Keywords found in title"),
+        name=_("Keywords found in meta title tag"),
         settings=_("at least one"),
         description=no_keyword.description,
     )

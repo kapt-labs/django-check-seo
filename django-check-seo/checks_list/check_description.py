@@ -53,7 +53,7 @@ def run(site):
     )
 
     keywords_good = custom_list.CustomList(
-        name=_("Keywords were found in description"),
+        name=_("Keywords were found in meta description"),
         settings=pgettext("masculin", "at least one"),
         description=length_short.description,
     )
@@ -111,18 +111,21 @@ def run(site):
                 length_short.found = ngettext(
                     "%(words)d char", "%(words)d chars", length
                 ) % {"words": length}
+                length_short.searched_in = [tag.attrs["content"]]
                 site.problems.append(length_short)
 
             # too long
             elif length > site.settings.SEO_SETTINGS["meta_description_length"][1]:
 
                 length_long.found = str(length)
+                length_long.searched_in = [tag.attrs["content"]]
                 site.problems.append(length_long)
 
             # perfect
             else:
 
                 length_success.found = str(length)
+                length_success.searched_in = [tag.attrs["content"]]
                 site.success.append(length_success)
 
             occurence = []
@@ -140,22 +143,25 @@ def run(site):
             if not any(i > 0 for i in occurence):
 
                 keywords_bad.found = 0
+                keywords_bad.searched_in = [tag.attrs["content"]]
                 site.warnings.append(keywords_bad)
 
             # perfect
             else:
-
                 keywords_good.found = max(i for i in occurence)
+                keywords_good.searched_in = [tag.attrs["content"]]
                 site.success.append(keywords_good)
 
     # too many meta description
     if number_meta_description > 1:
 
         too_much_meta.found = number_meta_description
+        too_much_meta.searched_in = tag.attrs["content"]
         site.warnings.append(too_much_meta)
 
     # perfect
     else:
+        meta_description_only_one.searched_in = tag.attrs["content"]
         site.success.append(meta_description_only_one)
 
     # no meta description
@@ -164,4 +170,5 @@ def run(site):
 
     # perfect
     else:
+        meta_description_present = tag.attrs["content"]
         site.success.append(meta_description_present)

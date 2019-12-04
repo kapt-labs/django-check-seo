@@ -40,7 +40,7 @@ def run(site):
     )
 
     no_keywords = custom_list.CustomList(
-        name=_("No keyword in h2"),
+        name=_("No keyword in h2 tags"),
         settings=_("at least one"),
         found=pgettext("masculin", "none"),
         description=_(
@@ -49,7 +49,7 @@ def run(site):
     )
 
     enough_keywords = custom_list.CustomList(
-        name=_("Keyword found in h2"),
+        name=_("Keyword found in h2 tags"),
         settings=_("at least one"),
         found=pgettext("masculin", "none"),
         description=no_keywords.description,
@@ -78,7 +78,9 @@ def run(site):
                 )
         # if no keyword is found in h2
         if not any(i > 0 for i in occurence):
+            no_keywords.searched_in = [heading.text for heading in h2]
             site.warnings.append(no_keywords)
         else:
+            enough_keywords.searched_in = [heading.text for heading in h2]
             enough_keywords.found = max(i for i in occurence)
             site.success.append(enough_keywords)

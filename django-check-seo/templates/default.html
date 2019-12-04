@@ -28,27 +28,13 @@
 
           <ul class="red-list list">
             {% for problem in problems %}
-              <li>
-                <details>
-                  <summary><strong>{{ problem.name }}</strong> <i>({% trans "settings" %}: {% autoescape off %}{{ problem.settings }}, {% trans "found" context "checkseo" %}: {{ problem.found }})</i></summary>
-                  <p>
-                    {{ problem.description }}{% endautoescape %}
-                  </p>
-                </details>
-              </li>
+                {% include "element.html" with element=problem %}
             {% endfor %}
           </ul>
 
           <ul class="yellow-list list">
             {% for warning in warnings %}
-              <li>
-                <details>
-                  <summary><strong>{{ warning.name }}</strong> <i>({% trans "settings" %}: {% autoescape off %}{{ warning.settings }}, {% trans "found" context "checkseo" %}: {{ warning.found }})</i></summary>
-                  <p>
-                    {{ warning.description }}{% endautoescape %}
-                  </p>
-                </details>
-              </li>
+                {% include "element.html" with element=warning %}
             {% endfor %}
           </ul>
 
@@ -57,14 +43,7 @@
             <ul class="green-list list">
               <h2>{%trans "Successful checks" %}</h2>
               {% for successful_check in success %}
-                <li>
-                  <details>
-                    <summary><strong>{{ successful_check.name }}</strong> <i>({% trans "settings" %}: {% autoescape off %}{{ successful_check.settings }}, {% trans "found" context "checkseo" %}: {{ successful_check.found }})</i></summary>
-                    <p>
-                      {{ successful_check.description }}{% endautoescape %}
-                    </p>
-                  </details>
-                </li>
+                {% include "element.html" with element=successful_check %}
               {% endfor %}
             </ul>
           {% endif %}
