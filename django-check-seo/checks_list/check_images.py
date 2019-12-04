@@ -38,32 +38,37 @@ def run(site):
         description=lack_alt.description,
     )
 
-    lack_alt_found = _("image")
-
     images = bs4.element.ResultSet(None)
 
     for c in site.content:
         images += c.find_all("img")
 
-    problem = False
+    problem = 0
+    imgs = []
+    img_str = _("image")
 
     for image in images:
         if "alt" not in image.attrs or image.attrs["alt"] == "None":
-            if not problem:
-                problem = True
-            if len(lack_alt.found) > 0:
-                lack_alt.found += ", "
-            lack_alt.found += (
-                '<a target="_blank" href='
+            problem += 1
+            imgs.append(
+                '<b><u><a target="_blank" href='
                 + image.attrs["src"]
                 + ">"
-                + lack_alt_found
-                + "</a>"
+                + img_str
+                + "</a></u></b>"
             )
 
-    if problem:
+        else:
+            imgs.append(
+                '<a target="_blank" href=' + image.attrs["src"] + ">" + img_str + "</a>"
+            )
+
+    if problem > 0:
+        lack_alt.found = problem
+        lack_alt.searched_in = imgs
         site.problems.append(lack_alt)
     else:
         if len(images) > 0:
             enough_alt.found = len(images)
+            enough_alt.searched_in = imgs
             site.success.append(enough_alt)

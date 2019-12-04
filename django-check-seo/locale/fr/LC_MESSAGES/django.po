@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-04 16:30+0100\n"
-"PO-Revision-Date: 2019-12-04 17:06+0100\n"
+"POT-Creation-Date: 2019-12-04 17:13+0100\n"
+"PO-Revision-Date: 2019-12-04 17:13+0100\n"
 "Last-Translator: kapt <dev@kapt.mobi>\n"
 "Language-Team: français <dev@kapt.mobi>\n"
 "Language: fr\n"
@@ -54,6 +54,8 @@ msgstr "Pas de mot-clé dans la balise <em>meta description</em>"
 
 #: django-check-seo/checks_list/check_description.py:51
 #: django-check-seo/checks_list/check_description.py:57
+#: django-check-seo/checks_list/check_h2.py:44
+#: django-check-seo/checks_list/check_h2.py:53
 #: django-check-seo/checks_list/check_keyword_url.py:32
 #: django-check-seo/checks_list/check_keyword_url.py:41
 #: django-check-seo/checks_list/check_keywords.py:27
@@ -114,7 +116,7 @@ msgstr "aucune"
 msgid "Meta description is present"
 msgstr "La balise <em>meta description</em> est présente"
 
-#: django-check-seo/checks_list/check_description.py:112
+#: django-check-seo/checks_list/check_description.py:114
 #, python-format
 msgid "%(words)d char"
 msgid_plural "%(words)d chars"
@@ -156,9 +158,6 @@ msgstr "Pas de mot-clé dans la balise <em>h1</em>"
 #: django-check-seo/checks_list/check_h1.py:48
 #: django-check-seo/checks_list/check_h1.py:56
 #: django-check-seo/checks_list/check_h2.py:29
-#: django-check-seo/checks_list/check_h2.py:38
-#: django-check-seo/checks_list/check_h2.py:44
-#: django-check-seo/checks_list/check_h2.py:53
 #: django-check-seo/checks_list/check_title.py:78
 #: django-check-seo/checks_list/check_title.py:87
 msgid "at least one"
@@ -179,8 +178,8 @@ msgstr ""
 msgid "Keyword found in h1"
 msgstr "Des mots-clés on été trouvés dans la balise <em>h1</em>"
 
-#: django-check-seo/checks_list/check_h1.py:67
-#: django-check-seo/checks_list/check_h1.py:94
+#: django-check-seo/checks_list/check_h1.py:68
+#: django-check-seo/checks_list/check_h1.py:96
 #: django-check-seo/checks_list/check_h2.py:30
 #: django-check-seo/checks_list/check_h2.py:45
 #: django-check-seo/checks_list/check_h2.py:54
@@ -207,8 +206,13 @@ msgstr ""
 msgid "H2 tags were found"
 msgstr "Des balises <em>h2</em> ont été trouvées"
 
+#: django-check-seo/checks_list/check_h2.py:38
+#| msgid "at least one"
+msgctxt "feminin"
+msgid "at least one"
+msgstr "au moins une"
+
 #: django-check-seo/checks_list/check_h2.py:43
-#| msgid "No keyword in h2"
 msgid "No keyword in h2 tags"
 msgstr "Pas de mot-clé dans la balise <em>h2</em>"
 
@@ -219,7 +223,6 @@ msgstr ""
 "abordés sur votre page."
 
 #: django-check-seo/checks_list/check_h2.py:52
-#| msgid "Keyword found in h2"
 msgid "Keyword found in h2 tags"
 msgstr "Des mots-clés on été trouvés dans la balise <em>h2</em>"
 
@@ -364,7 +367,6 @@ msgid "Found meta title tag"
 msgstr "La balise <em>meta title</em> a été trouvée"
 
 #: django-check-seo/checks_list/check_title.py:41
-#| msgid "Too much title tags"
 msgid "Too much meta title tags"
 msgstr "Trop de balises <em>meta title</em>"
 
@@ -393,9 +395,6 @@ msgid "more than {}"
 msgstr "plus de {}"
 
 #: django-check-seo/checks_list/check_title.py:54
-#| msgid ""
-#| "Meta title tags need to describe the content of the page, and need to "
-#| "contain at least a few words."
 msgid ""
 "Meta titles tags need to describe the content of the page, and need to "
 "contain at least a few words."
@@ -404,19 +403,16 @@ msgstr ""
 "doivent contenir au moins quelques mots."
 
 #: django-check-seo/checks_list/check_title.py:59
-#| msgid "Title tag have a good length"
 msgid "Meta title tag have a good length"
 msgstr "Le contenu de la balise <em>meta title</em> est assez long"
 
 #: django-check-seo/checks_list/check_title.py:63
-#| msgid "Titles tags need to describe the content of the page."
 msgid "Meta titles tags need to describe the content of the page."
 msgstr ""
 "Le contenu de la balise <em>meta title</em> doit décrire le contenu de la "
 "page."
 
 #: django-check-seo/checks_list/check_title.py:67
-#| msgid "Meta title tag is too short"
 msgid "Meta title tag is too long"
 msgstr "Le contenu de la balise <em>meta title</em> est trop long"
 
@@ -427,10 +423,6 @@ msgid "less than {}"
 msgstr "moins de {}"
 
 #: django-check-seo/checks_list/check_title.py:72
-#| msgid ""
-#| "Only the first ~55-60 chars are displayed on modern search engines "
-#| "results. Writing a longer title is not really required and can lead to "
-#| "make the user miss informations."
 msgid ""
 "Only the first ~55-60 chars are displayed on modern search engines results. "
 "Writing a longer meta title is not really required and can lead to make the "
@@ -442,14 +434,10 @@ msgstr ""
 "qui seraient tronquées."
 
 #: django-check-seo/checks_list/check_title.py:77
-#| msgid "Title do not contain any keyword"
 msgid "Meta title tag do not contain any keyword"
 msgstr "Le contenu de la balise <em>meta title</em> ne contient aucun mot-clé"
 
 #: django-check-seo/checks_list/check_title.py:81
-#| msgid ""
-#| "Titles tags need to contain at least one keyword, since they are one of "
-#| "the most important content of the page for search engines."
 msgid ""
 "Meta titles tags need to contain at least one keyword, since they are one of "
 "the most important content of the page for search engines."
@@ -459,7 +447,6 @@ msgstr ""
 "page pour les moteurs de recherche."
 
 #: django-check-seo/checks_list/check_title.py:86
-#| msgid "Keywords found in title"
 msgid "Keywords found in meta title tag"
 msgstr ""
 "Des mots-clés ont été trouvés dans le contenu de la balise <em>meta title</"
@@ -603,16 +590,16 @@ msgstr "Voir le contenu extrait"
 msgid "See settings"
 msgstr "Voir les paramètres"
 
-#: django-check-seo/templates/element.html:4
+#: django-check-seo/templates/element.html:5
 msgid "settings"
 msgstr "paramètres"
 
-#: django-check-seo/templates/element.html:4
+#: django-check-seo/templates/element.html:5
 msgctxt "checkseo"
 msgid "found"
 msgstr "trouvé"
 
-#: django-check-seo/templates/element.html:10
+#: django-check-seo/templates/element.html:11
 msgid "Searched in:"
 msgstr "Recherché dans :"
 

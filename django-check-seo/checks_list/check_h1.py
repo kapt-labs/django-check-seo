@@ -61,6 +61,7 @@ def run(site):
 
     if len(h1) > 1:
         too_much_h1.found = len(h1)
+        too_much_h1.searched_in = [t.text for t in h1]
         site.problems.append(too_much_h1)
 
     elif not h1:
@@ -70,6 +71,7 @@ def run(site):
     else:
 
         right_number_h1.found = len(h1)
+        right_number_h1.searched_in = [t.text for t in h1]
         site.success.append(right_number_h1)
 
         # h1 text can be content of alt tag in img
@@ -92,7 +94,9 @@ def run(site):
         # if no keyword is found in h1
         if not any(i > 0 for i in occurence):
             no_keywords.found = pgettext("masculin", "none")
+            no_keywords.searched_in = [t.text for t in h1]
             site.problems.append(no_keywords)
         else:
             enough_keywords.found = max(i for i in occurence)
+            enough_keywords.searched_in = [t.text for t in h1]
             site.success.append(enough_keywords)
