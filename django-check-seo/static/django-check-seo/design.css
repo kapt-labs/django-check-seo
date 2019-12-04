@@ -1,31 +1,31 @@
 @font-face{
   font-family: 'Roboto';
   font-weight: 100;
-  src: url('/static/django-check-seo/fonts/Roboto-Thin.ttf') format('truetype');
+  src: url('fonts/Roboto-Thin.ttf') format('truetype');
 }
 
 @font-face{
   font-family: 'Roboto';
   font-weight: 400;
-  src: url('/static/django-check-seo/fonts/Roboto-Light.ttf') format('truetype');
+  src: url('fonts/Roboto-Light.ttf') format('truetype');
 }
 
 @font-face{
   font-family: 'Roboto';
   font-weight: 500;
-  src: url('/static/django-check-seo/fonts/Roboto-Regular.ttf') format('truetype');
+  src: url('fonts/Roboto-Regular.ttf') format('truetype');
 }
 
 @font-face{
   font-family: 'Roboto';
   font-weight: 700;
-  src: url('/static/django-check-seo/fonts/Roboto-Bold.ttf') format('truetype');
+  src: url('fonts/Roboto-Bold.ttf') format('truetype');
 }
 
 @font-face{
   font-family: 'Roboto';
   font-weight: 900;
-  src: url('/static/django-check-seo/fonts/Roboto-Black.ttf') format('truetype');
+  src: url('fonts/Roboto-Black.ttf') format('truetype');
 }
 
 *{
