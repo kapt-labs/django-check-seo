@@ -34,6 +34,7 @@ def run(site):
 
     nb_words = len(site.content_text.split())
     short_content.found = nb_words
+    short_content.searched_in = [site.content_text]
 
     # too few words
     if nb_words < site.settings.SEO_SETTINGS["content_words_number"][0]:

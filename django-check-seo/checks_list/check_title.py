@@ -23,23 +23,16 @@ def run(site):
 
     no_title = custom_list.CustomList(
         name=_("No meta title tag"),
-        settings=pgettext("masculin", "one"),
+        settings=pgettext("feminin", "one"),
         found=_("none"),
         description=_(
             "Titles tags are ones of the most important things to add to your pages, sinces they are the main text displayed on result search pages."
         ),
     )
 
-    title_found = custom_list.CustomList(
-        name=_("Found meta title tag"),
-        settings=pgettext("masculin", "one"),
-        found=pgettext("masculin", "one"),
-        description=no_title.description,
-    )
-
     too_much = custom_list.CustomList(
         name=_("Too much meta title tags"),
-        settings=pgettext("masculin", "only one"),
+        settings=pgettext("feminin", "only one"),
         description=_(
             "Only the first meta title tag will be displayed on the tab space on your browser, and only one meta title tag will be displayed on the search results pages."
         ),
@@ -65,8 +58,8 @@ def run(site):
 
     long_title = custom_list.CustomList(
         name=_("Meta title tag is too long"),
-        settings=_(
-            "less than {}".format(site.settings.SEO_SETTINGS["meta_title_length"][1])
+        settings=_("less than {}").format(
+            site.settings.SEO_SETTINGS["meta_title_length"][1]
         ),
         description=_(
             "Only the first ~55-60 chars are displayed on modern search engines results. Writing a longer meta title is not really required and can lead to make the user miss informations."
@@ -89,35 +82,36 @@ def run(site):
     )
 
     # title presence
-    if site.soup.title == "None" or not site.soup.title or not site.soup.title.string:
+    titles = site.soup.find_all("title")
+    if len(titles) < 1 or titles[0] is None or titles == "None":
         site.problems.append(no_title)
         return
 
     # multiple titles
-    elif site.soup.find_all("title") and len(site.soup.find_all("title")) > 1:
-        too_much.found = len(site.soup.find_all("title"))
+    elif titles and len(titles) > 1:
+        too_much.found = len(titles)
+        too_much.searched_in = [t.string for t in titles]
         site.problems.append(too_much)
 
-    site.success.append(title_found)
-
     # title length too short
-    if len(site.soup.title.string) < site.settings.SEO_SETTINGS["meta_title_length"][0]:
-        short_title.found = len(site.soup.title.string)
+    if len(titles[0].string) < site.settings.SEO_SETTINGS["meta_title_length"][0]:
+        short_title.found = len(titles[0].string)
+        short_title.searched_in = [titles[0].string]
         site.problems.append(short_title)
 
     # title length too long
-    elif (
-        len(site.soup.title.string) > site.settings.SEO_SETTINGS["meta_title_length"][1]
-    ):
-        long_title.found = len(site.soup.title.string)
+    elif len(titles[0].string) > site.settings.SEO_SETTINGS["meta_title_length"][1]:
+        long_title.found = len(titles[0].string)
+        long_title.searched_in = [titles[0].string]
         site.warnings.append(long_title)
     else:
-        title_okay.found = len(site.soup.title.string)
+        title_okay.found = len(titles[0].string)
+        title_okay.searched_in = [titles[0].string]
         site.success.append(title_okay)
 
     keyword.found = ""
     keyword_found = False
-    title_readable = site.soup.title.string.lower()
+    title_readable = titles[0].string.lower()
 
     for kw in site.keywords:
         if kw.lower() in title_readable:
@@ -128,6 +122,8 @@ def run(site):
 
     # title do not contain any keyword
     if keyword.found == "":
+        no_keyword.searched_in = [titles[0].string]
         site.problems.append(no_keyword)
     else:
+        keyword.searched_in = [titles[0].string]
         site.success.append(keyword)

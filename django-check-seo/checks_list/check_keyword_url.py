@@ -67,6 +67,8 @@ def run(site):
             enough_keyword.found += keyword
 
     if keyword_found:
+        enough_keyword.searched_in = [site.full_url]
         site.success.append(enough_keyword)
     else:
+        no_keyword = [site.full_url]
         site.problems.append(no_keyword)

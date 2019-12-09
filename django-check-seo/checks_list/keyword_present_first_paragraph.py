@@ -47,6 +47,8 @@ def run(site):
             kw.append(keyword)
         nb += 1
 
+    no_keywords.searched_in = [first_N_words]
+
     # no keyword was found in first paragraph
     if not found:
         site.problems.append(no_keywords)

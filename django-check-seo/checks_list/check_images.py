@@ -48,7 +48,13 @@ def run(site):
     img_str = _("image")
 
     for image in images:
-        if "alt" not in image.attrs or image.attrs["alt"] == "None":
+
+        # bold without alt tag content
+        if (
+            "alt" not in image.attrs
+            or image.attrs["alt"] == "None"
+            or image.attrs["alt"] == ""
+        ):
             problem += 1
             imgs.append(
                 '<b><u><a target="_blank" href='
@@ -58,9 +64,16 @@ def run(site):
                 + "</a></u></b>"
             )
 
+        # normal with alt tag content
         else:
             imgs.append(
-                '<a target="_blank" href=' + image.attrs["src"] + ">" + img_str + "</a>"
+                '<a target="_blank" href='
+                + image.attrs["src"]
+                + ">"
+                + img_str
+                + "</a> ("
+                + image.attrs["alt"]
+                + ")"
             )
 
     if problem > 0:

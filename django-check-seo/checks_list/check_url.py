@@ -41,6 +41,8 @@ def run(site):
     number_of_slashes = url_without_two_points_slash_slash[:-1].count("/")
 
     deep_url.found = number_of_slashes
+    deep_url.searched_in = [site.full_url]
+
     if number_of_slashes > site.settings.SEO_SETTINGS["max_link_depth"]:
         site.problems.append(deep_url)
     else:
@@ -50,6 +52,7 @@ def run(site):
     # check url length
     url_without_protocol = site.full_url.replace("http://", "").replace("https://", "")
     long_url.found = len(url_without_protocol)
+    long_url.searched_in = [url_without_protocol]
 
     if len(url_without_protocol) > site.settings.SEO_SETTINGS["max_url_length"]:
         site.warnings.append(long_url)

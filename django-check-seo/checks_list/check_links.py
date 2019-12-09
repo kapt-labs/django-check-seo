@@ -61,6 +61,7 @@ def run(site):
 
     internal_links = 0
     internal_links_list = []
+    external_links_list = []
     external_links = 0
 
     for link in links:
@@ -69,22 +70,31 @@ def run(site):
             "http"
         ):
             internal_links += 1
-            internal_links_list.append(link)
+            internal_links_list.append(
+                '<a href="' + link["href"] + '">' + link.text + "</a>"
+            )
         else:
             external_links += 1
+            external_links_list.append(
+                '<a href="' + link["href"] + '">' + link.text + "</a>"
+            )
 
     # not enough internal links
     if internal_links < site.settings.SEO_SETTINGS["internal_links"]:
         not_enough_internal.found = internal_links
+        not_enough_internal.searched_in = internal_links_list
         site.warnings.append(not_enough_internal)
     else:
         enough_internal.found = internal_links
+        enough_internal.searched_in = internal_links_list
         site.success.append(enough_internal)
 
     # not enough external links
     if external_links < site.settings.SEO_SETTINGS["external_links"]:
         not_enough_external.found = external_links
+        not_enough_external.searched_in = external_links_list
         site.warnings.append(not_enough_external)
     else:
         enough_external.found = external_links
+        enough_external.searched_in = external_links_list
         site.success.append(enough_external)
