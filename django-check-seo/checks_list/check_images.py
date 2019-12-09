@@ -48,21 +48,25 @@ def run(site):
     img_str = _("image")
 
     for image in images:
-
-        # bold without alt tag content
         if (
             "alt" not in image.attrs
             or image.attrs["alt"] == "None"
             or image.attrs["alt"] == ""
         ):
             problem += 1
-            imgs.append(
-                '<b><u><a target="_blank" href='
-                + image.attrs["src"]
-                + ">"
-                + img_str
-                + "</a></u></b>"
-            )
+
+            # bold without alt tag content
+            if image.attrs["src"] != "":
+                imgs.append(
+                    '<b><u><a target="_blank" href='
+                    + image.attrs["src"]
+                    + ">"
+                    + img_str
+                    + "</a></u></b>"
+                )
+            # bold without alt tag content & without src content (dead img ?)
+            else:
+                imgs.append("<b><u>unknown image</u></b>")
 
         # normal with alt tag content
         else:
