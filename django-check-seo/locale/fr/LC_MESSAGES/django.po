@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-09 10:28+0100\n"
-"PO-Revision-Date: 2019-12-09 09:35+0100\n"
+"POT-Creation-Date: 2019-12-18 12:54+0100\n"
+"PO-Revision-Date: 2019-12-18 12:55+0100\n"
 "Last-Translator: kapt <dev@kapt.mobi>\n"
 "Language-Team: français <dev@kapt.mobi>\n"
 "Language: fr\n"
@@ -587,6 +587,10 @@ msgstr "trouvé"
 #: django-check-seo/templates/element.html:11
 msgid "Searched in:"
 msgstr "Recherché dans :"
+
+#: django-check-seo/templates/element.html:15
+msgid "No data"
+msgstr "Aucune donnée"
 
 #: django-check-seo/views.py:62
 msgid "<strong class=\"green-bg\">No problem</strong> was found on the page!"

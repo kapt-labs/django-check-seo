@@ -12,7 +12,7 @@
         {% for seached_in in element.searched_in %}
           <li>{{ seached_in }}</li>
         {% empty %}
-          <li class="no-data">No data</li>
+          <li class="no-data">{% trans "No data" %}</li>
         {%endfor %}
       </ul>
   </details>
