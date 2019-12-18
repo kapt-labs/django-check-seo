@@ -1,9 +1,9 @@
 # Standard Library
 import json
-import os
 
 # Third party
 from bs4 import BeautifulSoup
+from django.contrib.sites.models import Site
 from django.utils.translation import gettext as _, ngettext
 from django.views import generic
 import requests
@@ -25,7 +25,7 @@ class IndexView(generic.base.TemplateView):
         if "http" not in self.request.GET.get("page", None):
             full_url = (
                 "http://"
-                + os.environ["DOMAIN_NAME"]
+                + Site.objects.get_current().domain
                 + self.request.GET.get("page", None)
             )
         else:
