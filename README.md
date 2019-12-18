@@ -10,13 +10,13 @@ In other words, django-check-seo will tell you if you have problems concerning a
 
 #### With pipenv
 
- * Add these packages to your Pipfile below `[packages]` (and other [prerequisites](#prerequisites) if you don't have them), then run `pipenv install`:
+ * Add these packages to your Pipfile below `[packages]`, then run `pipenv install`:
 
   ```
   django-check-seo = { git = 'https://github.com/kapt-labs/django-check-seo.git' }
   djangocms-page-meta = "*"
   requests = "*"
-  bs4 = "*"
+  beautifulsoup4 = "*"
   ```
 
 **and then**
@@ -36,7 +36,7 @@ In other words, django-check-seo will tell you if you have problems concerning a
 
 ## Prerequisites
 
-You will need `bs4` (BeautifulSoup4), `requests`, `djangocms` & `djangocms_page_meta` in order to made this application work.
+You will need `beautifulsoup4`, `requests`, `djangocms` & `djangocms_page_meta` in order to made this application work.
 
 ----
 
