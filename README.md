@@ -10,13 +10,16 @@ In other words, django-check-seo will tell you if you have problems concerning a
 
 #### With pipenv
 
- * Add these packages to your Pipfile below `[packages]`, then run `pipenv install`:
+ * Add this package to your Pipfile below `[packages]`, then run `pipenv install`:
 
   ```
   django-check-seo = { git = 'https://github.com/kapt-labs/django-check-seo.git' }
-  djangocms-page-meta = "*"
-  requests = "*"
-  beautifulsoup4 = "*"
+  ```
+
+ * *Or add it using this command:*
+
+  ```
+  pipenv install -e git+https://github.com/kapt-labs/django-check-seo.git#egg=django-check-seo
   ```
 
 **and then**
@@ -24,7 +27,7 @@ In other words, django-check-seo will tell you if you have problems concerning a
  * add `django-check-seo.apps.DjangoCheckSEOConfig` to your `INSTALLED_APPS`,
  * add `url(r"^django-check-seo/", include("django-check-seo.urls")),` to your `urlpatterns` in `urls.py` (before `url(r'^', include('cms.urls')),` or it will not work),
    * or `path("django-check-seo/", include("django-check-seo.urls")),` if you're using path,
- * put `DOMAIN_NAME` inside your [`.env`](https://gist.github.com/corentinbettiol/f1e4b6630b7ae9afe2f9023b2185f3db#file-env) file (the application don't know your domain name)
+ * update [site](https://i.imgur.com/pNRsKs7.png) parameters with correct url (*[example](https://i.imgur.com/IedF3xE.png)* for dev environment)
 
 *Start your django CMS project, log in, you should see the "Check SEO..." button and everything should be okay.*
 
