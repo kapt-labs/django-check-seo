@@ -13,13 +13,13 @@ In other words, django-check-seo will tell you if you have problems concerning a
  * Add this package to your Pipfile below `[packages]`, then run `pipenv install`:
 
   ```
-  django-check-seo = { git = 'https://github.com/kapt-labs/django-check-seo.git' }
+  django-check-seo = "*"
   ```
 
  * *Or add it using this command:*
 
   ```
-  pipenv install -e git+https://github.com/kapt-labs/django-check-seo.git#egg=django-check-seo
+  pipenv install django-check-seo
   ```
 
 **and then**
