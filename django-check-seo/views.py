@@ -31,9 +31,6 @@ class IndexView(generic.base.TemplateView):
         else:
             full_url = self.request.GET.get("page", None)
 
-        print(settings.DJANGO_CHECK_SEO_AUTH)
-        print(settings.SEO_SETTINGS)
-
         # use credentials if provided (pass through .htaccess auth)
         if (
             settings.DJANGO_CHECK_SEO_AUTH
