@@ -1,8 +1,6 @@
-# Standard Library
-import os
-
 # Third party
 import bs4
+from django.contrib.sites.models import Site
 from django.utils.translation import gettext as _
 
 # Local application / specific library imports
@@ -66,9 +64,9 @@ def run(site):
 
     for link in links:
         # internal links = absolute links that contains domain name or relative links
-        if os.environ["DOMAIN_NAME"] in link["href"] or not link["href"].startswith(
-            "http"
-        ):
+        if Site.objects.get_current().domain in link["href"] or not link[
+            "href"
+        ].startswith("http"):
             internal_links += 1
             internal_links_list.append(
                 '<a href="' + link["href"] + '">' + link.text + "</a>"
