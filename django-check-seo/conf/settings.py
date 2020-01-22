@@ -10,11 +10,15 @@ SEO_SETTINGS = {
     "meta_title_length": [30, 60],
     "meta_description_length": [50, 160],
     "keywords_in_first_words": 50,
-    "important_semanticals_tags": ["img", "em", "strong", "i", "b"],
-    "minimum_used_semantical_tags": 3,
     "max_link_depth": 3,
     "max_url_length": 70,
 }
 
 # update SEO settings with values from projectname/settings.py
 SEO_SETTINGS.update(getattr(settings, "DJANGO_CHECK_SEO_SETTINGS", {}))
+
+
+# define auth data (for .htaccess files)
+DJANGO_CHECK_SEO_AUTH = {}
+
+DJANGO_CHECK_SEO_AUTH.update(getattr(settings, "DJANGO_CHECK_SEO_AUTH", {}))
