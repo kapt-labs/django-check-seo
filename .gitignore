@@ -6,3 +6,4 @@ django_check_seo.egg-info/
 Pipfile
 Pipfile.lock
 .vscode/
+*.pyc

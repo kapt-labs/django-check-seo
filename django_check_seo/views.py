@@ -18,17 +18,25 @@ class IndexView(generic.base.TemplateView):
     template_name = "default.html"
 
     def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
+        context = super(generic.base.TemplateView, self).get_context_data(
+            *args, **kwargs
+        )
 
-        # get http content of the page
+        if settings.DJANGO_CHECK_SEO_FORCE_HTTP:
+            protocol = "http://"
+        else:
+            protocol = "https://"
 
-        if "http" not in self.request.GET.get("page", None):
+        # get content of the page
+        if "http" not in self.request.GET.get(
+            "page", None
+        ):  # url like "/fr/article-du-site/"
             full_url = (
-                "http://"
+                protocol
                 + Site.objects.get_current().domain
                 + self.request.GET.get("page", None)
             )
-        else:
+        else:  # url like "http://mydomain.ext/en/my-page-name/"
             full_url = self.request.GET.get("page", None)
 
         # use credentials if provided (pass through .htaccess auth)

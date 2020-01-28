@@ -6,7 +6,11 @@ In other words, django-check-seo will tell you if you have problems concerning a
 
 ----
 
-## Installation
+# Installation
+
+The following instructions are for an installation on a djangocms-based website using >=python3 & >=django2.
+
+For instruction on how to install django-check-seo on a djangocms-based website that runs on `python 2.7` and `django 1.8.15`, clic here: [![old instructions](https://user-images.githubusercontent.com/45763865/73279618-b486a900-41ed-11ea-90d2-b0dfa7b9dbd2.png)](https://github.com/kapt-labs/django-check-seo/wiki/install-on-python-2-and-django-1.8)
 
  1. Install module using pipenv:
  ```
@@ -18,15 +22,15 @@ In other words, django-check-seo will tell you if you have problems concerning a
  ```
  2. [Add it](https://i.imgur.com/clmjJoE.mp4) to your installed apps:
  ```
-     "django-check-seo.apps.DjangoCheckSEOConfig",
+     "django_check_seo",
  ```
  3. [Add it](https://user-images.githubusercontent.com/45763865/72879105-83453f00-3cfc-11ea-8f1f-933ce7af4964.png) to your `urls.py` *(before `url(r'^', include('cms.urls')),` or it will not work)*:
  ```
-     url(r"^django-check-seo/", include("django-check-seo.urls")),
+     url(r"^django-check-seo/", include("django_check_seo.urls")),
  ```
  * *Or add this if you're using path:*
  ```
-     path("django-check-seo/", include("django-check-seo.urls")),
+     path("django-check-seo/", include("django_check_seo.urls")),
  ```
  4. Update your [site](https://i.imgur.com/pNRsKs7.png) parameters with correct url (*[example](https://i.imgur.com/IedF3xE.png)* for dev environment)
 
@@ -34,15 +38,15 @@ In other words, django-check-seo will tell you if you have problems concerning a
 
 ----
 
-## Prerequisites
+# Prerequisites
 
 This application need `beautifulsoup4`, `requests`, `djangocms` & `djangocms_page_meta`.
 
 ----
 
-## Config
+# Config
 
-### Basic settings
+## Basic settings
 
 Basic config (used by default) is in [`django-check-seo/conf/settings.py`](https://github.com/kapt-labs/django-check-seo/blob/93110f7713d89768a474a704b30dac1536f8b7b9/django-check-seo/conf/settings.py#L6-L15):
 ```python
@@ -60,7 +64,7 @@ SEO_SETTINGS = {
 
 If you need to change something, just define it in your `mywebsite/settings.py` file in a dict named `DJANGO_CHECK_SEO_SETTINGS`.
 
-#### *Example:*
+### *Example:*
 
 If you put this in your `settings.py` file:
 
@@ -86,7 +90,23 @@ SEO_SETTINGS = {
 }
 ```
 
-### Authentication
+## Use `http` instead of `https`
+
+By default, the application will attempt to make requests in https.
+
+To enable plain http queries, you can add a variable named `DJANGO_CHECK_SEO_FORCE_HTTP` set to `True` in your settings.py.
+
+### *Example:*
+
+```python
+# Force HTTP
+DJANGO_CHECK_SEO_FORCE_HTTP = True
+
+# Force HTTPS (default case, same as not defining the variable)
+DJANGO_CHECK_SEO_FORCE_HTTP = False
+```
+
+## Authentication
 
 The website you want to test may require a prior connection due to a .htaccess file (or may use [wsgi-basic-auth](https://github.com/mvantellingen/wsgi-basic-auth)), which prevents django-check-seo from accessing its html code.
 
@@ -94,7 +114,7 @@ To prevent this, you can specify the login informations (username/password) in t
 
 This dictionary must contain two keys named `user` and `pass`.
 
-#### *Example:*
+### *Example:*
 
  * In `mywebsite/settings.py`:
  ```python
@@ -114,7 +134,7 @@ This dictionary must contain two keys named `user` and `pass`.
 
 ----
 
-## Want a screenshot?
+# Want a screenshot?
 
 ![screenshot](https://user-images.githubusercontent.com/45763865/72882024-2b113b80-3d02-11ea-8507-6cb48f9f34b3.png)
 
@@ -122,7 +142,7 @@ This dictionary must contain two keys named `user` and `pass`.
 
 ----
 
-## Interested in finding out more?
+# Interested in finding out more?
 
 Take a look at the [wiki](https://github.com/kapt-labs/django-check-seo/wiki/):
 

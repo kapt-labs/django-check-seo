@@ -1,6 +1,6 @@
 # Third party
 # Standard Library
-from urllib.parse import urlparse
+import sys
 
 from django.conf import settings
 from django.conf.global_settings import LANGUAGES
@@ -9,6 +9,13 @@ from django.utils.translation import gettext as _, pgettext
 
 # Local application / specific library imports
 from ..checks import custom_list
+
+
+# hacky trick to add python2 compatibility to a python3 project after python2 eol
+if sys.version_info.major == 2:
+    from urlparse import urlparse
+else:
+    from urllib.parse import urlparse
 
 
 def importance():
