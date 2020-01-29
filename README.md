@@ -20,7 +20,7 @@ For instruction on how to install django-check-seo on a djangocms-based website 
  ```
  pip install django-check-seo
  ```
- 2. [Add it](https://i.imgur.com/clmjJoE.mp4) to your installed apps:
+ 2. Add it to your installed apps:
  ```
      "django_check_seo",
  ```
