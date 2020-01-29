@@ -47,7 +47,6 @@ class IndexView(generic.base.TemplateView):
         ):
             r = requests.get(
                 full_url,
-                verify=False,
                 auth=(
                     settings.DJANGO_CHECK_SEO_AUTH["user"],
                     settings.DJANGO_CHECK_SEO_AUTH["pass"],
