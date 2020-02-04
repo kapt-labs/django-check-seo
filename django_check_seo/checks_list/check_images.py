@@ -58,9 +58,9 @@ def run(site):
             # bold without alt tag content
             if image.attrs["src"] != "":
                 imgs.append(
-                    '<b><u><a target="_blank" href='
+                    '<b><u><a target="_blank" href="'
                     + image.attrs["src"]
-                    + ">"
+                    + '">'
                     + img_str
                     + "</a></u></b>"
                 )
@@ -71,9 +71,9 @@ def run(site):
         # normal with alt tag content
         else:
             imgs.append(
-                '<a target="_blank" href='
+                '<a target="_blank" href="'
                 + image.attrs["src"]
-                + ">"
+                + '">'
                 + img_str
                 + "</a> ("
                 + image.attrs["alt"]

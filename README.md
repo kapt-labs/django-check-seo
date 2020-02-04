@@ -8,9 +8,7 @@ In other words, django-check-seo will tell you if you have problems concerning a
 
 # Installation
 
-The following instructions are for an installation on a djangocms-based website using >=python3 & >=django2.
-
-For instruction on how to install django-check-seo on a djangocms-based website that runs on `python 2.7` and `django 1.8.15`, clic here: [![old instructions](https://user-images.githubusercontent.com/45763865/73279618-b486a900-41ed-11ea-90d2-b0dfa7b9dbd2.png)](https://github.com/kapt-labs/django-check-seo/wiki/install-on-python-2-and-django-1.8)
+The following instructions are for an installation on a djangocms-based website using python >= 3 & django >= 2, or for a djangocms-based website using python >= 2.7 & django >= 1.8.15.
 
  1. Install module using pipenv:
  ```
@@ -34,7 +32,9 @@ For instruction on how to install django-check-seo on a djangocms-based website 
  ```
  4. Update your [site](https://i.imgur.com/pNRsKs7.png) parameters with correct url (*[example](https://i.imgur.com/IedF3xE.png)* for dev environment)
 
- 5. ![https://i.imgur.com/o2Tcd2E.png](https://i.imgur.com/o2Tcd2E.png)
+ 5. *(optional) Configure the settings, and/or force http instead of https, and/or add authentification (see [config](#config])).*
+
+ 6. ![that's all folks!](https://i.imgur.com/o2Tcd2E.png)
 
 ----
 
