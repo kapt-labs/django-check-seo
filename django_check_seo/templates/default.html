@@ -26,6 +26,8 @@
             {% autoescape off %}{{ nb_problems_warnings }}{% endautoescape %}
           </h2>
 
+          <h3>{% trans "on the public page" %}</h3>
+
           <ul class="red-list list">
             {% for problem in problems %}
                 {% include "element.html" with element=problem %}

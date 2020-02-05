@@ -71,11 +71,16 @@ h1{
   text-align: center;
 }
 
-h2{
-  margin-top: 0;
+h2 {
+  font-size : 1.7em;
+  margin-bottom: 0;
+}
+
+h2,
+h3 {
+  margin-top : 0;
   font-weight: 100;
-  font-size: 1.7em;
-  text-align: center;
+  text-align : center;
 }
 
 .keywords, .seached-in{
