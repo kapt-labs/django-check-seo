@@ -82,7 +82,7 @@ def run(site):
     )
 
     # title presence
-    titles = site.soup.find_all("title")
+    titles = site.soup.head.find_all("title")
     if len(titles) < 1 or titles[0] is None or titles == "None":
         site.problems.append(no_title)
         return
