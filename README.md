@@ -40,7 +40,7 @@ The following instructions are for an installation on a djangocms-based website 
 
 # Prerequisites
 
-This application need `beautifulsoup4`, `requests`, `djangocms` & `djangocms_page_meta`.
+This application need `beautifulsoup4`, `requests`, `djangocms` & `djangocms_page_meta` *(==0.8.5 if using django < 1.11)*.
 
 ----
 
