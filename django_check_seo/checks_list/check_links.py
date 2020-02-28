@@ -63,18 +63,30 @@ def run(site):
     external_links = 0
 
     for link in links:
+        # specify if there is text of no text
+        if link.text != "":
+            text = link.text
+        else:
+            childs = link.find_all()
+            if len(childs) > 0:
+                if childs[0].get("alt", False):
+                    text = childs[0]["alt"] + " (&lt;" + childs[0].name + "&gt;)"
+                else:
+                    text = str(childs[0]).replace("<", "&lt;").replace(">", "&gt;")
+            else:
+                text = _("[no content]")
         # internal links = absolute links that contains domain name or relative links
         if Site.objects.get_current().domain in link["href"] or not link[
             "href"
         ].startswith("http"):
             internal_links += 1
             internal_links_list.append(
-                '<a href="' + link["href"] + '">' + link.text + "</a>"
+                '<a href="' + link["href"] + '">' + text + "</a>"
             )
         else:
             external_links += 1
             external_links_list.append(
-                '<a href="' + link["href"] + '">' + link.text + "</a>"
+                '<a href="' + link["href"] + '">' + text + "</a>"
             )
 
     # not enough internal links

@@ -37,16 +37,35 @@ def run(site):
 
     # check url depth
     # do not count first and last slashes (after domain name and at the end of the url), nor // in the "http://"
-    url_without_two_points_slash_slash = site.full_url.replace("://", "")
+    url_without_two_points_slash_slash = site.full_url.replace("://", ":..")
     number_of_slashes = url_without_two_points_slash_slash[:-1].count("/")
 
     deep_url.found = number_of_slashes
-    deep_url.searched_in = [site.full_url]
+
+    # replace concernet / by underlined /, and put only too mush slashes in red background
+    deep_url.searched_in = [
+        url_without_two_points_slash_slash.replace(
+            "/", '<b><u class="problem">/</u></b>', number_of_slashes
+        )
+        .replace(":..", "://")
+        .replace(
+            '<u class="problem">', "<u>", site.settings.SEO_SETTINGS["max_link_depth"]
+        )
+    ]
 
     if number_of_slashes > site.settings.SEO_SETTINGS["max_link_depth"]:
         site.problems.append(deep_url)
     else:
         deep_url.name = _("Right amount of level in path")
+        deep_url.searched_in = [
+            url_without_two_points_slash_slash.replace(
+                "/", '<b><u class="good">/</u></b>', number_of_slashes
+            )
+            .replace(":..", "://")
+            .replace(
+                '<u class="problem">', "<u>", site.settings.SEO_SETTINGS["max_link_depth"]
+            )
+        ]
         site.success.append(deep_url)
 
     # check url length
@@ -56,6 +75,13 @@ def run(site):
 
     if len(url_without_protocol) > site.settings.SEO_SETTINGS["max_url_length"]:
         site.warnings.append(long_url)
+        long_url.searched_in = [
+            url_without_protocol[: site.settings.SEO_SETTINGS["max_url_length"]]
+            + '<b class="problem">'
+            + url_without_protocol[site.settings.SEO_SETTINGS["max_url_length"] :]
+            + "</b>"
+        ]
+
     else:
         long_url.name = _("URL length is great")
         site.success.append(long_url)

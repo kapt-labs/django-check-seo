@@ -57,46 +57,47 @@ def run(site):
         description=no_keywords.description,
     )
 
-    h1 = site.soup.find_all("h1")
+    h1_all = site.soup.find_all("h1")
 
-    if len(h1) > 1:
-        too_much_h1.found = len(h1)
-        too_much_h1.searched_in = [t.text for t in h1]
+    if len(h1_all) > 1:
+        too_much_h1.found = len(h1_all)
+        too_much_h1.searched_in = [t.text for t in h1_all]
         site.problems.append(too_much_h1)
 
-    elif not h1:
+    elif not h1_all:
         not_enough_h1.found = pgettext("masculin", "none")
         site.problems.append(not_enough_h1)
 
     else:
-
-        right_number_h1.found = len(h1)
-        right_number_h1.searched_in = [t.text for t in h1]
+        right_number_h1.found = len(h1_all)
+        right_number_h1.searched_in = [t.text for t in h1_all]
         site.success.append(right_number_h1)
 
+    h1_text_kw = []
+
+    occurence = []
+    for h1 in h1_all:
         # h1 text can be content of alt tag in img
-        if not h1[0].text and h1[0].find("img", {"alt": True}):
-            h1_text = h1[0].find("img")["alt"].lower()
+        if not h1.text and h1.find("img", {"alt": True}):
+            h1_text = h1.find("img")["alt"].lower()
         # of it can be the text in h1
         else:
-            h1_text = h1[0].text.lower()
+            h1_text = h1.text.lower()
 
-        occurence = []
         for keyword in site.keywords:
+            keyword = keyword.lower()
             occurence.append(
-                sum(
-                    1
-                    for _ in re.finditer(
-                        r"\b%s\b" % re.escape(keyword.lower()), h1_text,
-                    )
-                )
+                sum(1 for _ in re.finditer(r"\b%s\b" % re.escape(keyword), h1_text,))
             )
-        # if no keyword is found in h1
-        if not any(i > 0 for i in occurence):
-            no_keywords.found = pgettext("masculin", "none")
-            no_keywords.searched_in = [t.text for t in h1]
-            site.problems.append(no_keywords)
-        else:
-            enough_keywords.found = max(i for i in occurence)
-            enough_keywords.searched_in = [t.text for t in h1]
-            site.success.append(enough_keywords)
+            h1_text = h1_text.replace(keyword, '<b class="good">{}</b>'.format(keyword))
+        h1_text_kw.append(h1_text)
+
+    # if no keyword is found in h1
+    if not any(i > 0 for i in occurence):
+        no_keywords.found = pgettext("masculin", "none")
+        no_keywords.searched_in = [t.text for t in h1_all]
+        site.problems.append(no_keywords)
+    else:
+        enough_keywords.found = max(i for i in occurence)
+        enough_keywords.searched_in = h1_text_kw
+        site.success.append(enough_keywords)

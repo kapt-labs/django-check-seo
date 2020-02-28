@@ -65,16 +65,21 @@ def run(site):
         return
 
     keyword_found = False
+    slugified_url = slugify(site.full_url)
+    slugified_url_kw = slugified_url
 
     for keyword in site.keywords:
-        if slugify(keyword) in site.full_url:
+        if slugify(keyword) in slugified_url:
             if keyword_found:
                 enough_keyword.found += ", "
             keyword_found = True
             enough_keyword.found += keyword
+            slugified_url_kw = slugified_url_kw.replace(
+                slugify(keyword), '<b class="good">' + slugify(keyword) + "</b>"
+            )
 
     if keyword_found:
-        enough_keyword.searched_in = [site.full_url]
+        enough_keyword.searched_in = [slugified_url_kw]
         site.success.append(enough_keyword)
     else:
         no_keyword.searched_in = [site.full_url]

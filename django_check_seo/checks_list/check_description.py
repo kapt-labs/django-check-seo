@@ -131,6 +131,7 @@ def run(site):
                 site.success.append(length_success)
 
             occurence = []
+            meta_description_kw = []
             for keyword in site.keywords:
                 occurence.append(
                     sum(
@@ -139,6 +140,11 @@ def run(site):
                             r"\b%s\b" % re.escape(keyword.lower()),
                             tag.attrs["content"].lower(),
                         )
+                    )
+                )
+                meta_description_kw.append(
+                    meta_description[number_meta_description - 1].replace(
+                        keyword, '<b class="good">{}</b>'.format(keyword)
                     )
                 )
             # if no keyword is found in description
@@ -151,7 +157,7 @@ def run(site):
             # perfect
             else:
                 keywords_good.found = max(i for i in occurence)
-                keywords_good.searched_in = meta_description
+                keywords_good.searched_in = meta_description_kw
                 site.success.append(keywords_good)
 
     # too many meta description

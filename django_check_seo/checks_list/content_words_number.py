@@ -45,4 +45,18 @@ def run(site):
 
     else:
         short_content.name = _("Content length is right")
+        short_content.searched_in = [
+            " ".join(
+                site.content_text.split()[
+                    : site.settings.SEO_SETTINGS["content_words_number"][1]
+                ]
+            )
+            + '<span class="good">'
+            + " ".join(
+                site.content_text.split()[
+                    site.settings.SEO_SETTINGS["content_words_number"][1] :
+                ]
+            )
+            + "</span>"
+        ]
         site.success.append(short_content)

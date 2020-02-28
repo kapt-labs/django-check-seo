@@ -64,24 +64,32 @@ def run(site):
         site.success.append(enough_h2)
 
         occurence = []
-        # check if each keyword
-        for keyword in site.keywords:
-            # is present at least
-            for single_h2 in h2:
+        h2_kw = []
+
+        # for each h2...
+        for single_h2 in h2:
+            single_h2 = single_h2.text.lower()
+            # check if it contains at least 1 keyword
+            for keyword in site.keywords:
+                keyword = keyword.lower()
                 occurence.append(
                     sum(
                         1
                         for _ in re.finditer(
-                            r"\b%s\b" % re.escape(keyword.lower()),
-                            single_h2.text.lower(),
+                            r"\b%s\b" % re.escape(keyword.lower()), single_h2,
                         )
                     )
                 )
+                # and add bold in found keywords
+                single_h2 = single_h2.replace(
+                    keyword, '<b class="good">{}</b>'.format(keyword)
+                )
+            h2_kw.append(single_h2)
         # if no keyword is found in h2
         if not any(i > 0 for i in occurence):
             no_keywords.searched_in = [t.text for t in h2]
             site.warnings.append(no_keywords)
         else:
-            enough_keywords.searched_in = [t.text for t in h2]
+            enough_keywords.searched_in = h2_kw
             enough_keywords.found = max(i for i in occurence)
             site.success.append(enough_keywords)

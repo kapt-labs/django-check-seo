@@ -102,16 +102,27 @@ def run(site):
     # title length too long
     elif len(titles[0].string) > site.settings.SEO_SETTINGS["meta_title_length"][1]:
         long_title.found = len(titles[0].string)
-        long_title.searched_in = [titles[0].string]
+        long_title.searched_in = [
+            titles[0].string[: site.settings.SEO_SETTINGS["meta_title_length"][1]]
+            + '<b class="problem">'
+            + titles[0].string[site.settings.SEO_SETTINGS["meta_title_length"][1] :]
+            + "</b>"
+        ]
         site.warnings.append(long_title)
     else:
         title_okay.found = len(titles[0].string)
-        title_okay.searched_in = [titles[0].string]
+        title_okay.searched_in = [
+            titles[0].string[: site.settings.SEO_SETTINGS["meta_title_length"][0]]
+            + '<b class="good">'
+            + titles[0].string[site.settings.SEO_SETTINGS["meta_title_length"][0] :]
+            + "</b>"
+        ]
         site.success.append(title_okay)
 
     keyword.found = ""
     keyword_found = False
     title_readable = titles[0].string.lower()
+    title_readable_kw = title_readable
 
     for kw in site.keywords:
         if kw.lower() in title_readable:
@@ -119,11 +130,14 @@ def run(site):
                 keyword.found += ", "
             keyword_found = True
             keyword.found += kw
+            title_readable_kw = title_readable_kw.replace(
+                kw.lower(), '<b class="good">' + kw.lower() + "</b>"
+            )
 
     # title do not contain any keyword
     if keyword.found == "":
         no_keyword.searched_in = [titles[0].string]
         site.problems.append(no_keyword)
     else:
-        keyword.searched_in = [titles[0].string]
+        keyword.searched_in = [title_readable_kw]
         site.success.append(keyword)
