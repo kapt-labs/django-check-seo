@@ -10,7 +10,7 @@ SEO_SETTINGS = {
     "meta_title_length": [30, 60],
     "meta_description_length": [50, 160],
     "keywords_in_first_words": 50,
-    "max_link_depth": 3,
+    "max_link_depth": 4,
     "max_url_length": 70,
 }
 # update SEO settings with values from projectname/settings.py
