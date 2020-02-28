@@ -7,10 +7,10 @@
       <p>
         {{ element.description }}{% endautoescape %}
       </p>
-      <ul class="seached-in">
+      <ul class="searched-in">
         <li><b>{% trans "Searched in:" %}</b></li>
-        {% for seached_in in element.searched_in %}
-          <li>{{ seached_in }}</li>
+        {% for searched_in in element.searched_in %}
+          <li>{{ searched_in }}</li>
         {% empty %}
           <li class="no-data">{% trans "No data" %}</li>
         {%endfor %}

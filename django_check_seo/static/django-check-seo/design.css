@@ -83,15 +83,23 @@ h3 {
   text-align : center;
 }
 
-.keywords, .seached-in{
+.keywords, .searched-in{
   margin: 0;
   padding: 0;
   list-style-type: none;
 }
 
-.seached-in{
+.searched-in{
   display: inline-block;
   margin-right: 10px;
+}
+
+.searched-in .problem{
+  background-color: #fdd;
+}
+
+.searched-in .good{
+  background-color: #dfd;
 }
 
 .keywords{
@@ -104,7 +112,7 @@ h3 {
   font-weight: 500;
 }
 
-.keywords li, .seached-in li{
+.keywords li, .searched-in li{
   margin: 3px;
   padding: 5px;
   color: #666;
@@ -112,13 +120,13 @@ h3 {
   display: inline-block;
 }
 
-.keywords li:not(:first-child):not(.no-keywords), .seached-in li:not(:first-child):not(.no-data){
+.keywords li:not(:first-child):not(.no-keywords), .searched-in li:not(:first-child):not(.no-data){
   font-family: monospace;
   border: 1px solid #aaa;
   box-shadow: 0 0 10px 1px #ddd;
 }
 
-.keywords .no-keywords, .seached-in .no-data{
+.keywords .no-keywords, .searched-in .no-data{
   font-style: italic;
 }
 
