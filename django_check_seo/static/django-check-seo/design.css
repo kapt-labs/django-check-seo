@@ -158,7 +158,7 @@ a:hover{
 }
 
 summary{
-  cursor: help;
+  cursor: pointer;
 }
 
 .red-bg, .yellow-bg, .green-bg{
@@ -186,12 +186,8 @@ summary{
   padding: 0;
 }
 
-details > summary{
-  list-style: none;
-}
-
-details > summary::-webkit-details-marker {
-  display: none;
+details > summary::-webkit-details-marker, details > summary::marker{
+  color: #999;
 }
 
 .list summary::before{

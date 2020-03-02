@@ -6,6 +6,10 @@ In other words, django-check-seo will tell you if you have problems concerning a
 
 ----
 
+[![PyPI](https://img.shields.io/pypi/v/django-check-seo?color=%232a2)](https://pypi.org/project/django-check-seo/) [![PyPI - Downloads](https://img.shields.io/pypi/dm/django-check-seo)](https://pypi.org/project/django-check-seo/)
+
+----
+
 # Installation
 
 The following instructions are for an installation on a djangocms-based website using python >= 3 & django >= 2, or for a djangocms-based website using python >= 2.7 & django >= 1.8.15.
