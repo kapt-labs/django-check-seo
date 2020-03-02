@@ -2,8 +2,8 @@
 from django.conf import settings
 
 
-# define basic SEO settings
-SEO_SETTINGS = {
+# define basic SEO settings, see
+DJANGO_CHECK_SEO_SETTINGS = {
     "content_words_number": [300, 600],
     "internal_links": 1,
     "external_links": 1,
@@ -13,8 +13,8 @@ SEO_SETTINGS = {
     "max_link_depth": 4,
     "max_url_length": 70,
 }
-# update SEO settings with values from projectname/settings.py
-SEO_SETTINGS.update(getattr(settings, "DJANGO_CHECK_SEO_SETTINGS", {}))
+# update settings redefined in projectname/settings.py
+DJANGO_CHECK_SEO_SETTINGS.update(getattr(settings, "DJANGO_CHECK_SEO_SETTINGS", {}))
 
 
 # define auth data (for .htaccess files)
@@ -22,7 +22,20 @@ DJANGO_CHECK_SEO_AUTH = {}
 # update auth data with values from projectname/settings.py
 DJANGO_CHECK_SEO_AUTH.update(getattr(settings, "DJANGO_CHECK_SEO_AUTH", {}))
 
+
 # define http(s) settings (default = use https)
 DJANGO_CHECK_SEO_FORCE_HTTP = False
 # update http(s) settings with value from projectname/settings.py
 DJANGO_CHECK_SEO_FORCE_HTTP = getattr(settings, "DJANGO_CHECK_SEO_FORCE_HTTP", False)
+
+
+# define css selector to search content into (used for retrieving main content of the page)
+DJANGO_CHECK_SEO_SEARCH_IN = {
+    "type": "exclude",
+    "selectors": ["header", ".cover-section", "#footer"],
+}
+
+#
+DJANGO_CHECK_SEO_EXCLUDE_CONTENT = getattr(
+    settings, "DJANGO_CHECK_SEO_EXCLUDE_CONTENT", ""
+)

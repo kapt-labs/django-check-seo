@@ -23,7 +23,9 @@ def run(site):
 
     deep_url = custom_list.CustomList(
         name=_("Too many levels in path"),
-        settings=_("less than {}").format(site.settings.SEO_SETTINGS["max_link_depth"]),
+        settings=_("less than {}").format(
+            site.settings.DJANGO_CHECK_SEO_SETTINGS["max_link_depth"]
+        ),
         description=_(
             "Google recommand to organize your content by adding depth in your url, but advises against putting too much depth."
         ),
@@ -31,7 +33,9 @@ def run(site):
 
     long_url = custom_list.CustomList(
         name=_("URL is too long"),
-        settings=_("less than {}").format(site.settings.SEO_SETTINGS["max_url_length"]),
+        settings=_("less than {}").format(
+            site.settings.DJANGO_CHECK_SEO_SETTINGS["max_url_length"]
+        ),
         description=_("Shorter URLs tend to rank better than long URLs."),
     )
 
@@ -49,11 +53,13 @@ def run(site):
         )
         .replace(":..", "://")
         .replace(
-            '<u class="problem">', "<u>", site.settings.SEO_SETTINGS["max_link_depth"]
+            '<u class="problem">',
+            "<u>",
+            site.settings.DJANGO_CHECK_SEO_SETTINGS["max_link_depth"],
         )
     ]
 
-    if number_of_slashes > site.settings.SEO_SETTINGS["max_link_depth"]:
+    if number_of_slashes > site.settings.DJANGO_CHECK_SEO_SETTINGS["max_link_depth"]:
         site.problems.append(deep_url)
     else:
         deep_url.name = _("Right amount of level in path")
@@ -63,7 +69,9 @@ def run(site):
             )
             .replace(":..", "://")
             .replace(
-                '<u class="problem">', "<u>", site.settings.SEO_SETTINGS["max_link_depth"]
+                '<u class="problem">',
+                "<u>",
+                site.settings.DJANGO_CHECK_SEO_SETTINGS["max_link_depth"],
             )
         ]
         site.success.append(deep_url)
@@ -73,12 +81,19 @@ def run(site):
     long_url.found = len(url_without_protocol)
     long_url.searched_in = [url_without_protocol]
 
-    if len(url_without_protocol) > site.settings.SEO_SETTINGS["max_url_length"]:
+    if (
+        len(url_without_protocol)
+        > site.settings.DJANGO_CHECK_SEO_SETTINGS["max_url_length"]
+    ):
         site.warnings.append(long_url)
         long_url.searched_in = [
-            url_without_protocol[: site.settings.SEO_SETTINGS["max_url_length"]]
+            url_without_protocol[
+                : site.settings.DJANGO_CHECK_SEO_SETTINGS["max_url_length"]
+            ]
             + '<b class="problem">'
-            + url_without_protocol[site.settings.SEO_SETTINGS["max_url_length"] :]
+            + url_without_protocol[
+                site.settings.DJANGO_CHECK_SEO_SETTINGS["max_url_length"] :
+            ]
             + "</b>"
         ]
 

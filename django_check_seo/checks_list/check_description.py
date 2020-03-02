@@ -26,8 +26,12 @@ def run(site):
     length_short = custom_list.CustomList(
         name=_("Meta description is too short"),
         settings=_("between {rule_low} and {rule_high} chars ").format(
-            rule_low=site.settings.SEO_SETTINGS["meta_description_length"][0],
-            rule_high=site.settings.SEO_SETTINGS["meta_description_length"][1],
+            rule_low=site.settings.DJANGO_CHECK_SEO_SETTINGS["meta_description_length"][
+                0
+            ],
+            rule_high=site.settings.DJANGO_CHECK_SEO_SETTINGS[
+                "meta_description_length"
+            ][1],
         ),
         description=_(
             "The meta description tag can be displayed in search results if it has the right length, and can influence users. Knowing that Google classifies sites according to user behaviour, it is important to have a relevant description."
@@ -93,6 +97,7 @@ def run(site):
     found_meta_description = False
     number_meta_description = 0
     meta_description = []
+    meta_description_kw = []
 
     for tag in meta:
         if (
@@ -105,10 +110,14 @@ def run(site):
             found_meta_description = True
 
             meta_description.append(tag.attrs["content"])
+            meta_description_kw.append(meta_description[number_meta_description - 1])
             length = len(tag.attrs["content"])
 
             # too short
-            if length < site.settings.SEO_SETTINGS["meta_description_length"][0]:
+            if (
+                length
+                < site.settings.DJANGO_CHECK_SEO_SETTINGS["meta_description_length"][0]
+            ):
 
                 length_short.found = ngettext(
                     "%(words)d char", "%(words)d chars", length
@@ -117,7 +126,10 @@ def run(site):
                 site.problems.append(length_short)
 
             # too long
-            elif length > site.settings.SEO_SETTINGS["meta_description_length"][1]:
+            elif (
+                length
+                > site.settings.DJANGO_CHECK_SEO_SETTINGS["meta_description_length"][1]
+            ):
 
                 length_long.found = str(length)
                 length_long.searched_in = meta_description
@@ -131,7 +143,6 @@ def run(site):
                 site.success.append(length_success)
 
             occurence = []
-            meta_description_kw = []
             for keyword in site.keywords:
                 occurence.append(
                     sum(
@@ -142,11 +153,10 @@ def run(site):
                         )
                     )
                 )
-                meta_description_kw.append(
-                    meta_description[number_meta_description - 1].replace(
-                        keyword, '<b class="good">{}</b>'.format(keyword)
-                    )
-                )
+                # edit current meta description
+                meta_description_kw[number_meta_description - 1] = meta_description_kw[
+                    number_meta_description - 1
+                ].replace(keyword, '<b class="good">{}</b>'.format(keyword))
             # if no keyword is found in description
             if not any(i > 0 for i in occurence):
 

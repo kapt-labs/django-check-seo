@@ -24,7 +24,7 @@ def run(site):
     no_keywords = custom_list.CustomList(
         name=_("No keyword in first paragraph"),
         settings=_("before {settings} words").format(
-            settings=site.settings.SEO_SETTINGS["keywords_in_first_words"]
+            settings=site.settings.DJANGO_CHECK_SEO_SETTINGS["keywords_in_first_words"]
         ),
         found=pgettext("masculin", "none"),
         description=_(
@@ -34,7 +34,7 @@ def run(site):
 
     found = False
     first_N_words = site.content_text.lower().split()[
-        : site.settings.SEO_SETTINGS["keywords_in_first_words"]
+        : site.settings.DJANGO_CHECK_SEO_SETTINGS["keywords_in_first_words"]
     ]
     # check text and not list of words in order that keywords like "this is a keyword" are found in text "words this is a keyword words"
     first_N_words = " ".join(first_N_words)

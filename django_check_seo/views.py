@@ -64,13 +64,14 @@ class IndexView(generic.base.TemplateView):
         # magic happens here!
         launch_checks.launch_checks(page_stats)
 
+        # end of magic, get collected problems/warnings/success and put them inside the context
         (context["problems"], context["warnings"], context["success"]) = (
             page_stats.problems,
             page_stats.warnings,
             page_stats.success,
         )
 
-        context["settings"] = json.dumps(settings.SEO_SETTINGS, indent=4)
+        context["settings"] = json.dumps(settings.DJANGO_CHECK_SEO_SETTINGS, indent=4)
         context["html"] = page_stats.content
         context["text"] = page_stats.content_text
         context["keywords"] = page_stats.keywords

@@ -26,24 +26,16 @@ class Site:
 
         self.soup = soup
 
-        # remove footers
-        if self.soup.find("footer"):
-            self.soup.find("footer").extract()
+        # take all content
+        self.content = self.soup.find_all("body")
 
-        # remove menus
-        if self.soup.find("ul", {"class": "nav"}):
-            self.soup.find("ul", {"class": "nav"}).extract()
-        elif self.soup.find("ul", {"class": "navbar"}):
-            self.soup.find("ul", {"class": "navbar"}).extract()
-        elif self.soup.find("nav"):
-            self.soup.find("nav").extract()
-
-        # Search all content blocks of the page
-        self.content = self.soup.select(".container")
-
-        # If no content block is found, then select all the content
-        if self.content is None or self.content == []:
-            self.content = self.soup.find_all("body")
+        # if we have settings to remove unwanted blocks
+        if settings.DJANGO_CHECK_SEO_EXCLUDE_CONTENT != "":
+            # iterate through each body (should be only 1)
+            for body in self.content:
+                # and remove selecte blocks
+                for node in body.select(settings.DJANGO_CHECK_SEO_EXCLUDE_CONTENT):
+                    node.extract()
 
         # get content without doublewords thx to custom separator ("<h1>Title</h1><br /><p>Content</p>" -> TitleContent)
         self.content_text = ""

@@ -25,7 +25,7 @@ def run(site):
 
     not_enough_internal = custom_list.CustomList(
         name=_("Not enough internal links"),
-        settings=_("at least {}").format(site.settings.SEO_SETTINGS["internal_links"]),
+        settings=_("at least {}").format(site.settings.DJANGO_CHECK_SEO_SETTINGS["internal_links"]),
         description=_(
             "Internal links are useful because they can give the structure of your website to search engines, so they can create a hierarchy of your pages."
         ),
@@ -33,13 +33,13 @@ def run(site):
 
     enough_internal = custom_list.CustomList(
         name=_("Internal links were found"),
-        settings=_("at least {}").format(site.settings.SEO_SETTINGS["internal_links"]),
+        settings=_("at least {}").format(site.settings.DJANGO_CHECK_SEO_SETTINGS["internal_links"]),
         description=not_enough_internal.description,
     )
 
     not_enough_external = custom_list.CustomList(
         name=_("Not enough external links"),
-        settings=_("at least {}").format(site.settings.SEO_SETTINGS["external_links"]),
+        settings=_("at least {}").format(site.settings.DJANGO_CHECK_SEO_SETTINGS["external_links"]),
         description=_(
             "External links help your users to check your topic and can save them from having to do additional research."
         ),
@@ -47,7 +47,7 @@ def run(site):
 
     enough_external = custom_list.CustomList(
         name=_("External links were found"),
-        settings=_("at least {}").format(site.settings.SEO_SETTINGS["external_links"]),
+        settings=_("at least {}").format(site.settings.DJANGO_CHECK_SEO_SETTINGS["external_links"]),
         description=not_enough_external.description,
     )
 
@@ -90,7 +90,7 @@ def run(site):
             )
 
     # not enough internal links
-    if internal_links < site.settings.SEO_SETTINGS["internal_links"]:
+    if internal_links < site.settings.DJANGO_CHECK_SEO_SETTINGS["internal_links"]:
         not_enough_internal.found = internal_links
         not_enough_internal.searched_in = internal_links_list
         site.warnings.append(not_enough_internal)
@@ -100,7 +100,7 @@ def run(site):
         site.success.append(enough_internal)
 
     # not enough external links
-    if external_links < site.settings.SEO_SETTINGS["external_links"]:
+    if external_links < site.settings.DJANGO_CHECK_SEO_SETTINGS["external_links"]:
         not_enough_external.found = external_links
         not_enough_external.searched_in = external_links_list
         site.warnings.append(not_enough_external)

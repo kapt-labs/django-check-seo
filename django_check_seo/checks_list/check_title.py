@@ -41,7 +41,7 @@ def run(site):
     short_title = custom_list.CustomList(
         name=_("Meta title tag is too short"),
         settings=_("more than {}").format(
-            site.settings.SEO_SETTINGS["meta_title_length"][0]
+            site.settings.DJANGO_CHECK_SEO_SETTINGS["meta_title_length"][0]
         ),
         description=_(
             "Meta titles tags need to describe the content of the page, and need to contain at least a few words."
@@ -51,7 +51,7 @@ def run(site):
     title_okay = custom_list.CustomList(
         name=_("Meta title tag have a good length"),
         settings=_("more than {}").format(
-            site.settings.SEO_SETTINGS["meta_title_length"][0]
+            site.settings.DJANGO_CHECK_SEO_SETTINGS["meta_title_length"][0]
         ),
         description=_("Meta titles tags need to describe the content of the page."),
     )
@@ -59,7 +59,7 @@ def run(site):
     long_title = custom_list.CustomList(
         name=_("Meta title tag is too long"),
         settings=_("less than {}").format(
-            site.settings.SEO_SETTINGS["meta_title_length"][1]
+            site.settings.DJANGO_CHECK_SEO_SETTINGS["meta_title_length"][1]
         ),
         description=_(
             "Only the first ~55-60 chars are displayed on modern search engines results. Writing a longer meta title is not really required and can lead to make the user miss informations."
@@ -94,27 +94,41 @@ def run(site):
         site.problems.append(too_much)
 
     # title length too short
-    if len(titles[0].string) < site.settings.SEO_SETTINGS["meta_title_length"][0]:
+    if (
+        len(titles[0].string)
+        < site.settings.DJANGO_CHECK_SEO_SETTINGS["meta_title_length"][0]
+    ):
         short_title.found = len(titles[0].string)
         short_title.searched_in = [titles[0].string]
         site.problems.append(short_title)
 
     # title length too long
-    elif len(titles[0].string) > site.settings.SEO_SETTINGS["meta_title_length"][1]:
+    elif (
+        len(titles[0].string)
+        > site.settings.DJANGO_CHECK_SEO_SETTINGS["meta_title_length"][1]
+    ):
         long_title.found = len(titles[0].string)
         long_title.searched_in = [
-            titles[0].string[: site.settings.SEO_SETTINGS["meta_title_length"][1]]
+            titles[0].string[
+                : site.settings.DJANGO_CHECK_SEO_SETTINGS["meta_title_length"][1]
+            ]
             + '<b class="problem">'
-            + titles[0].string[site.settings.SEO_SETTINGS["meta_title_length"][1] :]
+            + titles[0].string[
+                site.settings.DJANGO_CHECK_SEO_SETTINGS["meta_title_length"][1] :
+            ]
             + "</b>"
         ]
         site.warnings.append(long_title)
     else:
         title_okay.found = len(titles[0].string)
         title_okay.searched_in = [
-            titles[0].string[: site.settings.SEO_SETTINGS["meta_title_length"][0]]
+            titles[0].string[
+                : site.settings.DJANGO_CHECK_SEO_SETTINGS["meta_title_length"][0]
+            ]
             + '<b class="good">'
-            + titles[0].string[site.settings.SEO_SETTINGS["meta_title_length"][0] :]
+            + titles[0].string[
+                site.settings.DJANGO_CHECK_SEO_SETTINGS["meta_title_length"][0] :
+            ]
             + "</b>"
         ]
         site.success.append(title_okay)

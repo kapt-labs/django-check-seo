@@ -52,9 +52,9 @@ This application need `beautifulsoup4`, `requests`, `djangocms` & `djangocms_pag
 
 ## Basic settings
 
-Basic config (used by default) is in [`django-check-seo/conf/settings.py`](https://github.com/kapt-labs/django-check-seo/blob/93110f7713d89768a474a704b30dac1536f8b7b9/django-check-seo/conf/settings.py#L6-L15):
+Basic config (used by default) is in [`django-check-seo/conf/settings.py`](https://github.com/kapt-labs/django-check-seo/blob/master/django_check_seo/conf/settings.py#L5-L15):
 ```python
-SEO_SETTINGS = {
+DJANGO_CHECK_SEO_SETTINGS = {
     "content_words_number": [300, 600],
     "internal_links": 1,
     "external_links": 1,
@@ -66,9 +66,9 @@ SEO_SETTINGS = {
 }
 ```
 
-If you need to change something, just define it in your `mywebsite/settings.py` file in a dict named `DJANGO_CHECK_SEO_SETTINGS`.
+If you need to change something, just define a dict named `DJANGO_CHECK_SEO_SETTINGS` in your settings.py.
 
-### *Example:*
+### *Custom settings example:*
 
 If you put this in your `settings.py` file:
 
@@ -82,7 +82,7 @@ DJANGO_CHECK_SEO_SETTINGS = {
 Then this will be the settings used by the application:
 
 ```python
-SEO_SETTINGS = {
+DJANGO_CHECK_SEO_SETTINGS = {
     "content_words_number": [300, 600],
     "internal_links": 25,
     "external_links": 1,
@@ -93,6 +93,28 @@ SEO_SETTINGS = {
     "max_url_length": 70,
 }
 ```
+
+*Want to know more ? See the wiki page [Settings explained](https://github.com/kapt-labs/django-check-seo/wiki/Settings-explained).*
+
+----
+
+## Select main content (exclude header/footer/...)
+
+Since django-check-seo will count things like number of words on the main content and the number of internal links, it is important to only select the *main* content of the page (an address in the footer is not the main content of your page).
+
+Django-check-seo use a string (named `DJANGO_CHECK_SEO_EXCLUDE_CONTENT`) of [css selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) to exclude unwanted html nodes from the html content:
+
+```
+DJANGO_CHECK_SEO_EXCLUDE_CONTENT = "tag, .class, #id, tag > .child_class"
+```
+
+*You can find a reference table of css selectors explained [here](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors#Reference_table_of_selectors) (on mdn docs).*
+
+### *Example:*
+
+See [this issue comment](https://github.com/kapt-labs/django-check-seo/issues/35#issuecomment-593429870) for an example.
+
+----
 
 ## Use `http` instead of `https`
 
@@ -109,6 +131,8 @@ DJANGO_CHECK_SEO_FORCE_HTTP = True
 # Force HTTPS (default case, same as not defining the variable)
 DJANGO_CHECK_SEO_FORCE_HTTP = False
 ```
+
+----
 
 ## Authentication
 
@@ -140,7 +164,7 @@ This dictionary must contain two keys named `user` and `pass`.
 
 # Want a screenshot?
 
-![screenshot](https://user-images.githubusercontent.com/45763865/72882024-2b113b80-3d02-11ea-8507-6cb48f9f34b3.png)
+![screenshot](https://i.imgur.com/hJGDvtw.png)
 
 *Other screenshots and videos are available on the [wiki](https://github.com/kapt-labs/django-check-seo/wiki/Medias).*
 
