@@ -110,7 +110,9 @@ def run(site):
             found_meta_description = True
 
             meta_description.append(tag.attrs["content"])
-            meta_description_kw.append(meta_description[number_meta_description - 1])
+            meta_description_kw.append(
+                meta_description[number_meta_description - 1].lower()
+            )
             length = len(tag.attrs["content"])
 
             # too short
