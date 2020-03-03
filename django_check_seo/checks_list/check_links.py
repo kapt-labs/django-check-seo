@@ -25,7 +25,9 @@ def run(site):
 
     not_enough_internal = custom_list.CustomList(
         name=_("Not enough internal links"),
-        settings=_("at least {}").format(site.settings.DJANGO_CHECK_SEO_SETTINGS["internal_links"]),
+        settings=_("at least {}").format(
+            site.settings.DJANGO_CHECK_SEO_SETTINGS["internal_links"]
+        ),
         description=_(
             "Internal links are useful because they can give the structure of your website to search engines, so they can create a hierarchy of your pages."
         ),
@@ -33,13 +35,17 @@ def run(site):
 
     enough_internal = custom_list.CustomList(
         name=_("Internal links were found"),
-        settings=_("at least {}").format(site.settings.DJANGO_CHECK_SEO_SETTINGS["internal_links"]),
+        settings=_("at least {}").format(
+            site.settings.DJANGO_CHECK_SEO_SETTINGS["internal_links"]
+        ),
         description=not_enough_internal.description,
     )
 
     not_enough_external = custom_list.CustomList(
         name=_("Not enough external links"),
-        settings=_("at least {}").format(site.settings.DJANGO_CHECK_SEO_SETTINGS["external_links"]),
+        settings=_("at least {}").format(
+            site.settings.DJANGO_CHECK_SEO_SETTINGS["external_links"]
+        ),
         description=_(
             "External links help your users to check your topic and can save them from having to do additional research."
         ),
@@ -47,7 +53,9 @@ def run(site):
 
     enough_external = custom_list.CustomList(
         name=_("External links were found"),
-        settings=_("at least {}").format(site.settings.DJANGO_CHECK_SEO_SETTINGS["external_links"]),
+        settings=_("at least {}").format(
+            site.settings.DJANGO_CHECK_SEO_SETTINGS["external_links"]
+        ),
         description=not_enough_external.description,
     )
 
@@ -64,7 +72,7 @@ def run(site):
 
     for link in links:
         # specify if there is text of no text
-        if link.text != "":
+        if link.text.strip() != "":
             text = link.text
         else:
             childs = link.find_all()
