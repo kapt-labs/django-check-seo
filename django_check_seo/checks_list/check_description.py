@@ -146,11 +146,12 @@ def run(site):
 
             occurence = []
             for keyword in site.keywords:
+                keyword_lower = keyword.lower()
                 occurence.append(
                     sum(
                         1
                         for _ in re.finditer(
-                            r"\b%s\b" % re.escape(keyword.lower()),
+                            r"\b%s\b" % re.escape(keyword_lower),
                             tag.attrs["content"].lower(),
                         )
                     )
@@ -158,7 +159,7 @@ def run(site):
                 # edit current meta description
                 meta_description_kw[number_meta_description - 1] = meta_description_kw[
                     number_meta_description - 1
-                ].replace(keyword, '<b class="good">' + keyword + "</b>")
+                ].replace(keyword_lower, '<b class="good">' + keyword_lower + "</b>")
             # if no keyword is found in description
             if not any(i > 0 for i in occurence):
 
