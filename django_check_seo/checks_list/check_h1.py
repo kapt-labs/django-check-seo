@@ -89,7 +89,7 @@ def run(site):
             occurence.append(
                 sum(1 for _ in re.finditer(r"\b%s\b" % re.escape(keyword), h1_text,))
             )
-            h1_text = h1_text.replace(keyword, '<b class="good">{}</b>'.format(keyword))
+            h1_text = h1_text.replace(keyword, '<b class="good">' + keyword + '</b>')
         h1_text_kw.append(h1_text)
 
     # if no keyword is found in h1

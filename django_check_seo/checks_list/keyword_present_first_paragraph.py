@@ -41,13 +41,18 @@ def run(site):
 
     nb = 0
     kw = []
+    first_N_words_kw = first_N_words
     for keyword in site.keywords:
-        if keyword.lower() in first_N_words:
+        keyword_lower = keyword.lower()
+        if keyword_lower in first_N_words:
             found = True
             kw.append(keyword)
         nb += 1
+        first_N_words_kw = first_N_words_kw.replace(
+            keyword_lower, '<b class="good">' + keyword_lower + "</b>"
+        )
 
-    no_keywords.searched_in = [first_N_words]
+    no_keywords.searched_in = [first_N_words_kw]
 
     # no keyword was found in first paragraph
     if not found:

@@ -82,7 +82,7 @@ def run(site):
                 )
                 # and add bold in found keywords
                 single_h2 = single_h2.replace(
-                    keyword, '<b class="good">{}</b>'.format(keyword)
+                    keyword, '<b class="good">' + keyword + "</b>"
                 )
             h2_kw.append(single_h2)
         # if no keyword is found in h2
