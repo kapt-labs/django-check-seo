@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-05 10:40+0000\n"
+"POT-Creation-Date: 2020-03-04 14:30+0000\n"
 "PO-Revision-Date: 2019-12-18 12:55+0100\n"
 "Last-Translator: kapt <dev@kapt.mobi>\n"
 "Language-Team: français <dev@kapt.mobi>\n"
@@ -28,8 +28,8 @@ msgstr "La balise <em>meta description</em> est trop courte"
 msgid "between {rule_low} and {rule_high} chars "
 msgstr "entre {rule_low} et {rule_high} caractères"
 
-#: django_check_seo/checks_list/check_description.py:33
-#: django_check_seo/checks_list/check_description.py:88
+#: django_check_seo/checks_list/check_description.py:37
+#: django_check_seo/checks_list/check_description.py:92
 msgid ""
 "The meta description tag can be displayed in search results if it has the "
 "right length, and can influence users. Knowing that Google classifies sites "
@@ -40,20 +40,20 @@ msgstr ""
 "Sachant que Google classe les sites en fonction du comportement des "
 "utilisateurs, il est important d'avoir une description pertinente."
 
-#: django_check_seo/checks_list/check_description.py:38
+#: django_check_seo/checks_list/check_description.py:42
 msgid "Meta description is too long"
 msgstr "La balise <em>meta description</em> est trop longue"
 
-#: django_check_seo/checks_list/check_description.py:44
+#: django_check_seo/checks_list/check_description.py:48
 msgid "Meta description length is correct"
 msgstr "La longueur de la balise <em>meta description</em> est bonne"
 
-#: django_check_seo/checks_list/check_description.py:50
+#: django_check_seo/checks_list/check_description.py:54
 msgid "No keyword in meta description"
 msgstr "Pas de mot-clé dans la balise <em>meta description</em>"
 
-#: django_check_seo/checks_list/check_description.py:51
-#: django_check_seo/checks_list/check_description.py:57
+#: django_check_seo/checks_list/check_description.py:55
+#: django_check_seo/checks_list/check_description.py:61
 #: django_check_seo/checks_list/check_h2.py:44
 #: django_check_seo/checks_list/check_h2.py:53
 #: django_check_seo/checks_list/check_keyword_url.py:39
@@ -64,22 +64,22 @@ msgctxt "masculin"
 msgid "at least one"
 msgstr "au moins un"
 
-#: django_check_seo/checks_list/check_description.py:56
+#: django_check_seo/checks_list/check_description.py:60
 msgid "Keywords were found in meta description"
 msgstr "Des mots-clés ont été trouvés dans la balise <em>meta description</em>"
 
-#: django_check_seo/checks_list/check_description.py:62
+#: django_check_seo/checks_list/check_description.py:66
 msgid "Too much meta description tags"
 msgstr "Trop de balises <em>meta description</em>"
 
-#: django_check_seo/checks_list/check_description.py:63
-#: django_check_seo/checks_list/check_description.py:71
+#: django_check_seo/checks_list/check_description.py:67
+#: django_check_seo/checks_list/check_description.py:75
 #: django_check_seo/checks_list/check_title.py:35
 msgctxt "feminin"
 msgid "only one"
 msgstr "une seule"
 
-#: django_check_seo/checks_list/check_description.py:65
+#: django_check_seo/checks_list/check_description.py:69
 msgid ""
 "Although some people write one meta description by targeted keyword, this is "
 "still an uncommon practice that is not yet recognized by all search engines."
@@ -88,37 +88,37 @@ msgstr ""
 "em> par mot-clé ciblé, il s'agit d'une pratique encore peu courante qui "
 "n'est pas encore reconnue par tous les moteurs de recherche."
 
-#: django_check_seo/checks_list/check_description.py:70
+#: django_check_seo/checks_list/check_description.py:74
 msgid "Only one meta description tag"
 msgstr "Une seule balise <em>meta description</em>"
 
-#: django_check_seo/checks_list/check_description.py:72
-#: django_check_seo/checks_list/check_description.py:86
+#: django_check_seo/checks_list/check_description.py:76
+#: django_check_seo/checks_list/check_description.py:90
 #: django_check_seo/checks_list/check_title.py:26
 msgctxt "feminin"
 msgid "one"
 msgstr "une"
 
-#: django_check_seo/checks_list/check_description.py:77
+#: django_check_seo/checks_list/check_description.py:81
 msgid "No meta description"
 msgstr "Pas de balise <em>meta description</em>"
 
-#: django_check_seo/checks_list/check_description.py:78
-#: django_check_seo/checks_list/check_description.py:85
+#: django_check_seo/checks_list/check_description.py:82
+#: django_check_seo/checks_list/check_description.py:89
 msgctxt "feminin"
 msgid "needed"
 msgstr "requise"
 
-#: django_check_seo/checks_list/check_description.py:79
+#: django_check_seo/checks_list/check_description.py:83
 msgctxt "description"
 msgid "none"
 msgstr "aucune"
 
-#: django_check_seo/checks_list/check_description.py:84
+#: django_check_seo/checks_list/check_description.py:88
 msgid "Meta description is present"
 msgstr "La balise <em>meta description</em> est présente"
 
-#: django_check_seo/checks_list/check_description.py:114
+#: django_check_seo/checks_list/check_description.py:125
 #, python-format
 msgid "%(words)d char"
 msgid_plural "%(words)d chars"
@@ -181,7 +181,7 @@ msgid "Keyword found in h1"
 msgstr "Des mots-clés on été trouvés dans la balise <em>h1</em>"
 
 #: django_check_seo/checks_list/check_h1.py:68
-#: django_check_seo/checks_list/check_h1.py:96
+#: django_check_seo/checks_list/check_h1.py:97
 #: django_check_seo/checks_list/check_h2.py:30
 #: django_check_seo/checks_list/check_h2.py:45
 #: django_check_seo/checks_list/check_h2.py:54
@@ -303,13 +303,13 @@ msgid "Not enough internal links"
 msgstr "Pas assez de liens internes"
 
 #: django_check_seo/checks_list/check_links.py:28
-#: django_check_seo/checks_list/check_links.py:36
-#: django_check_seo/checks_list/check_links.py:42
-#: django_check_seo/checks_list/check_links.py:50
+#: django_check_seo/checks_list/check_links.py:38
+#: django_check_seo/checks_list/check_links.py:46
+#: django_check_seo/checks_list/check_links.py:56
 msgid "at least {}"
 msgstr "au moins {}"
 
-#: django_check_seo/checks_list/check_links.py:30
+#: django_check_seo/checks_list/check_links.py:32
 msgid ""
 "Internal links are useful because they can give the structure of your "
 "website to search engines, so they can create a hierarchy of your pages."
@@ -318,15 +318,15 @@ msgstr ""
 "votre site Web aux moteurs de recherche, ils peuvent ainsi créer une "
 "hiérarchie de vos pages."
 
-#: django_check_seo/checks_list/check_links.py:35
+#: django_check_seo/checks_list/check_links.py:37
 msgid "Internal links were found"
 msgstr "Des liens internes ont été trouvés"
 
-#: django_check_seo/checks_list/check_links.py:41
+#: django_check_seo/checks_list/check_links.py:45
 msgid "Not enough external links"
 msgstr "Pas assez de liens externes"
 
-#: django_check_seo/checks_list/check_links.py:44
+#: django_check_seo/checks_list/check_links.py:50
 msgid ""
 "External links help your users to check your topic and can save them from "
 "having to do additional research."
@@ -334,9 +334,15 @@ msgstr ""
 "Les liens externes aident vos utilisateurs à vérifier votre sujet et peuvent "
 "leur éviter de devoir faire des recherches supplémentaires."
 
-#: django_check_seo/checks_list/check_links.py:49
+#: django_check_seo/checks_list/check_links.py:55
 msgid "External links were found"
 msgstr "Des liens externes ont été trouvés"
+
+#: django_check_seo/checks_list/check_links.py:85
+#: django_check_seo/checks_list/check_title.py:103
+#: django_check_seo/checks_list/check_title.py:156
+msgid "[no content]"
+msgstr "[pas de contenu]"
 
 #: django_check_seo/checks_list/check_title.py:25
 msgid "No meta title tag"
@@ -403,7 +409,7 @@ msgstr "Le contenu de la balise <em>meta title</em> est trop long"
 
 #: django_check_seo/checks_list/check_title.py:61
 #: django_check_seo/checks_list/check_url.py:26
-#: django_check_seo/checks_list/check_url.py:34
+#: django_check_seo/checks_list/check_url.py:36
 msgid "less than {}"
 msgstr "moins de {}"
 
@@ -441,7 +447,7 @@ msgstr ""
 msgid "Too many levels in path"
 msgstr "Trop de niveaux dans le chemin de l'<em>URL</em> la page"
 
-#: django_check_seo/checks_list/check_url.py:28
+#: django_check_seo/checks_list/check_url.py:30
 msgid ""
 "Google recommand to organize your content by adding depth in your url, but "
 "advises against putting too much depth."
@@ -449,21 +455,21 @@ msgstr ""
 "Google recommande d'organiser votre contenu en ajoutant de la profondeur "
 "dans votre <em>URL</em>, mais déconseille de trop en mettre."
 
-#: django_check_seo/checks_list/check_url.py:33
+#: django_check_seo/checks_list/check_url.py:35
 msgid "URL is too long"
 msgstr "L'<em>URL</em> est trop longue"
 
-#: django_check_seo/checks_list/check_url.py:35
+#: django_check_seo/checks_list/check_url.py:39
 msgid "Shorter URLs tend to rank better than long URLs."
 msgstr ""
 "Les <em>URL</em> plus courtes ont tendance à être mieux classées que les "
 "<em>URL</em> longues."
 
-#: django_check_seo/checks_list/check_url.py:49
+#: django_check_seo/checks_list/check_url.py:65
 msgid "Right amount of level in path"
 msgstr "Profondeur de l'<em>URL</em> correcte"
 
-#: django_check_seo/checks_list/check_url.py:60
+#: django_check_seo/checks_list/check_url.py:101
 msgid "URL length is great"
 msgstr "Longueur de l'<em>URL</em> correcte"
 
@@ -507,7 +513,7 @@ msgstr ""
 "paragraphe de votre page, et la même logique s'applique à Google, qui jugera "
 "le contenu plus pertinent."
 
-#: django_check_seo/checks_list/keyword_present_first_paragraph.py:57
+#: django_check_seo/checks_list/keyword_present_first_paragraph.py:62
 msgid "Keywords found in first paragraph"
 msgstr "Des mots-clés on été trouvés dans le premier paragraphe"
 
@@ -596,28 +602,28 @@ msgstr "Recherché dans :"
 msgid "No data"
 msgstr "Aucune donnée"
 
-#: django_check_seo/views.py:84
+#: django_check_seo/views.py:85
 msgid "<strong class=\"green-bg\">No problem</strong> was found on the page!"
 msgstr ""
 "<strong class=\"green-bg\">Aucun problème</strong> n'a été trouvé sur la "
 "page !"
 
-#: django_check_seo/views.py:89
+#: django_check_seo/views.py:90
 msgid "<strong class=\"green-bg\">No problem</strong> found, and "
 msgstr "<strong class=\"green-bg\">Aucun problème</strong> trouvé, et "
 
-#: django_check_seo/views.py:94
+#: django_check_seo/views.py:95
 #, python-brace-format
 msgid "{nb_problems} problem</strong> found, and "
 msgid_plural "{nb_problems} problems</strong> found, and "
 msgstr[0] "{nb_problems} problème</strong> trouvé, et "
 msgstr[1] "{nb_problems} problèmes</strong> trouvés, et "
 
-#: django_check_seo/views.py:101
+#: django_check_seo/views.py:102
 msgid "<strong class=\"green-bg\">no warning</strong> raised"
 msgstr "<strong class=\"green-bg\">pas d'avertissement</strong> levé"
 
-#: django_check_seo/views.py:106
+#: django_check_seo/views.py:107
 #, python-brace-format
 msgid "{nb_warnings} warning</strong> raised"
 msgid_plural "{nb_warnings} warnings</strong> raised"

@@ -83,12 +83,7 @@ def run(site):
 
     # title presence
     titles = site.soup.head.find_all("title")
-    if (
-        len(titles) < 1
-        or titles[0] is None
-        or titles == "None"
-        or titles[0] == "<title></title>"
-    ):
+    if len(titles) < 1 or titles[0] is None or titles == "None":
         site.problems.append(no_title)
         return
 
@@ -100,11 +95,13 @@ def run(site):
 
     # title length too short
     if (
-        len(titles[0].string)
+        len(titles[0].text)
         < site.settings.DJANGO_CHECK_SEO_SETTINGS["meta_title_length"][0]
     ):
-        short_title.found = len(titles[0].string)
-        short_title.searched_in = [titles[0].string]
+        short_title.found = len(titles[0].text)
+        short_title.searched_in = [
+            titles[0].text if len(titles[0].text) > 0 else _("[no content]")
+        ]
         site.problems.append(short_title)
 
     # title length too long
@@ -112,20 +109,20 @@ def run(site):
         len(titles[0].string)
         > site.settings.DJANGO_CHECK_SEO_SETTINGS["meta_title_length"][1]
     ):
-        long_title.found = len(titles[0].string)
+        long_title.found = len(titles[0].text)
         long_title.searched_in = [
-            titles[0].string[
+            titles[0].text[
                 : site.settings.DJANGO_CHECK_SEO_SETTINGS["meta_title_length"][1]
             ]
             + '<b class="problem">'
-            + titles[0].string[
+            + titles[0].text[
                 site.settings.DJANGO_CHECK_SEO_SETTINGS["meta_title_length"][1] :
             ]
             + "</b>"
         ]
         site.warnings.append(long_title)
     else:
-        title_okay.found = len(titles[0].string)
+        title_okay.found = len(titles[0].text)
         title_okay.searched_in = [
             titles[0].string[
                 : site.settings.DJANGO_CHECK_SEO_SETTINGS["meta_title_length"][0]
@@ -140,7 +137,7 @@ def run(site):
 
     keyword.found = ""
     keyword_found = False
-    title_readable = titles[0].string.lower()
+    title_readable = titles[0].text.lower()
     title_readable_kw = title_readable
 
     for kw in site.keywords:
@@ -155,7 +152,9 @@ def run(site):
 
     # title do not contain any keyword
     if keyword.found == "":
-        no_keyword.searched_in = [titles[0].string]
+        no_keyword.searched_in = [
+            titles[0].text if len(titles[0].text) > 0 else _("[no content]")
+        ]
         site.problems.append(no_keyword)
     else:
         keyword.searched_in = [title_readable_kw]
