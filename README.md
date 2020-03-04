@@ -6,7 +6,7 @@ In other words, django-check-seo will tell you if you have problems concerning a
 
 ----
 
-[![PyPI](https://img.shields.io/pypi/v/django-check-seo?color=%232a2)](https://pypi.org/project/django-check-seo/) [![PyPI - Downloads](https://img.shields.io/pypi/dm/django-check-seo)](https://pypi.org/project/django-check-seo/)
+[![PyPI](https://img.shields.io/pypi/v/django-check-seo?color=%232a2)](https://pypi.org/project/django-check-seo/) [![PyPI - Downloads](https://img.shields.io/pypi/dm/django-check-seo?color=%232a2)](https://pypi.org/project/django-check-seo/) [![GitHub last commit](https://img.shields.io/github/last-commit/kapt-labs/django-check-seo)](https://github.com/kapt-labs/django-check-seo)
 
 ----
 
@@ -36,7 +36,7 @@ The following instructions are for an installation on a djangocms-based website 
  ```
  4. Update your [site](https://i.imgur.com/pNRsKs7.png) parameters with correct url (*[example](https://i.imgur.com/IedF3xE.png)* for dev environment)
 
- 5. *(optional) Configure the settings, and/or force http instead of https, and/or add authentification (see [config](#config])).*
+ 5. *(optional) Configure the settings, and/or force http instead of https, and/or add authentification (see [config](#config)).*
 
  6. ![that's all folks!](https://i.imgur.com/o2Tcd2E.png)
 
@@ -44,7 +44,7 @@ The following instructions are for an installation on a djangocms-based website 
 
 # Prerequisites
 
-This application need `beautifulsoup4`, `requests`, `djangocms` & `djangocms_page_meta` *(==0.8.5 if using django < 1.11)*.
+This application need `beautifulsoup4` (>=4.7.0), `requests`, `djangocms` & `djangocms_page_meta` *(==0.8.5 if using django < 1.11)*.
 
 ----
 
