@@ -163,7 +163,7 @@ def run(site):
                 keyword_lower = keyword.lower()
                 nb_occurrences = len(
                     re.findall(
-                        r"(^| |\n|,|\.|!|\?)" + keyword_lower + "($| |\n|,|\.|!|\?)",
+                        r"(^| |\n|,|\.|!|\?)" + keyword_lower + r"($| |\n|,|\.|!|\?)",
                         tag.attrs["content"].lower(),
                     )
                 )
