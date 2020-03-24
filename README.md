@@ -174,7 +174,7 @@ This dictionary must contain two keys named `user` and `pass`.
 
 They are located in `tests` folder.
 
-The file `launch_tests.sh` is here to manage tests launching for you. You only need `python3-venv` in order to make it work ([example video](https://up.l3m.in//files/1584462369-launch_tests.webm)).
+The file `launch_tests.sh` is here to manage tests launching for you. You only need `python3-venv` (for python3 venv) and `virtualenv` (for **python2** venv) in order to make it work ([example video](https://up.l3m.in/files/1584462369-launch_tests.webm)).
 
 ----
 

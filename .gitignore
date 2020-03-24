@@ -7,5 +7,6 @@ Pipfile
 Pipfile.lock
 .vscode/
 *.pyc
-venv
+venv2
+venv3
 .coverage

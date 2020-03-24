@@ -1,3 +1,5 @@
+# coding: latin-1
+
 # Use ./launch_tests.sh to launch these tests.
 #
 #
@@ -52,9 +54,103 @@ html1 = """
 </html>
 """
 
-def test_init():
-        soup = BeautifulSoup(html1, features="lxml")
-        full_url = "https://localhost/fake-url/title-of-the-page/"
-        # populate class with data
-        page_stats = site.Site(soup, full_url)
 
+class init:
+    def __init__(self):
+        self.keywords = []
+        self.problems = []
+        self.warnings = []
+        self.success = []
+
+        self.soup = BeautifulSoup(html1, features="lxml")
+        self.full_url = "https://localhost/fake-url/title-of-the-page/"
+        # populate class with data
+        self.page_stats = site.Site(self.soup, self.full_url)
+
+
+def test_h1_1_nokw():
+    from django_check_seo.checks_list import check_h1
+
+    site = init()
+
+    check_h1.run(site)
+
+    for success in site.success:
+        assert success.name == "H1 tag found"
+        assert success.settings == "exactly 1"
+        assert success.found == 1
+        assert success.searched_in == ["Title of the page"]
+        assert (
+            success.description
+            == "Google is not really concerned about the number of h1 tags on your page, but Bing clearly indicates in its guidelines for webmasters to use only one h1 tag per page."
+        )
+
+
+def test_h1_2_nokw():
+    import copy
+
+    from django_check_seo.checks_list import check_h1
+
+    site = init()
+    site.soup.body.append(copy.copy(site.soup.find("h1")))
+
+    check_h1.run(site)
+
+    for problem in site.problems:
+        if problem.name == "Too much h1 tags":
+            assert problem.name == "Too much h1 tags"
+            assert problem.settings == "exactly 1"
+            assert problem.found == 2
+            assert problem.searched_in == ["Title of the page", "Title of the page"]
+            assert (
+                problem.description
+                == "Google is not really concerned about the number of h1 tags on your page, but Bing clearly indicates in its guidelines for webmasters to use only one h1 tag per page."
+            )
+
+
+def test_h1_0_nokw():
+    import copy
+
+    from django_check_seo.checks_list import check_h1
+
+    site = init()
+    site.soup.find("h1").decompose()
+    check_h1.run(site)
+
+    for problem in site.problems:
+        if problem.name == "No h1 tag":
+            assert problem.name == "No h1 tag"
+            assert problem.settings == "exactly 1"
+            assert problem.found == "none"
+            assert problem.searched_in == []
+            assert (
+                problem.description
+                == "Google is not really concerned about the number of h1 tags on your page, but Bing clearly indicates in its guidelines for webmasters to use only one h1 tag per page."
+            )
+
+
+def test_h1_1_nokw_image():
+    import copy
+
+    from django_check_seo.checks_list import check_h1
+
+    site = init()
+    site.soup.find("h1").decompose()
+    site.soup.body.append(
+        (
+            BeautifulSoup(
+                "<h1><img src='none' alt='Title of the page' /></h1>", features="lxml"
+            )
+        )
+    )
+    check_h1.run(site)
+
+    for success in site.success:
+        assert success.name == "H1 tag found"
+        assert success.settings == "exactly 1"
+        assert success.found == 1
+        assert success.searched_in == ["Title of the page"]
+        assert (
+            success.description
+            == "Google is not really concerned about the number of h1 tags on your page, but Bing clearly indicates in its guidelines for webmasters to use only one h1 tag per page."
+        )

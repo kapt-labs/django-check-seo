@@ -61,7 +61,7 @@ def run(site):
 
     if len(h1_all) > 1:
         too_much_h1.found = len(h1_all)
-        too_much_h1.searched_in = [t.text for t in h1_all]
+        too_much_h1.searched_in = [get_h1_text(t) for t in h1_all]
         site.problems.append(too_much_h1)
 
     elif not h1_all:
@@ -70,19 +70,14 @@ def run(site):
 
     else:
         right_number_h1.found = len(h1_all)
-        right_number_h1.searched_in = [t.text for t in h1_all]
+        right_number_h1.searched_in = [get_h1_text(t) for t in h1_all]
         site.success.append(right_number_h1)
 
     enough_keywords.found = ""
     h1_text_kw = []
     occurrence = []
     for h1 in h1_all:
-        # h1 text can be content of alt tag in img
-        if not h1.text and h1.find("img", {"alt": True}):
-            h1_text = h1.find("img")["alt"].lower()
-        # of it can be the text in h1
-        else:
-            h1_text = h1.text.lower()
+        h1_text = get_h1_text(h1).lower
 
         for keyword in site.keywords:
             keyword = keyword.lower()
@@ -109,3 +104,12 @@ def run(site):
     else:
         enough_keywords.searched_in = h1_text_kw
         site.success.append(enough_keywords)
+
+
+def get_h1_text(h1):
+    # h1 text can be content of alt tag in img
+    if not h1.text and h1.find("img", {"alt": True}):
+        return h1.find("img")["alt"]
+    # of it can be the text in h1
+    else:
+        return h1.text
