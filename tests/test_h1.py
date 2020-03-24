@@ -1,14 +1,6 @@
 # coding: utf-8
 
 # Use ./launch_tests.sh to launch these tests.
-#
-#
-#       ████████╗███████╗███████╗████████╗███████╗
-#       ╚══██╔══╝██╔════╝██╔════╝╚══██╔══╝██╔════╝
-#          ██║   █████╗  ███████╗   ██║   ███████╗
-#          ██║   ██╔══╝  ╚════██║   ██║   ╚════██║
-#          ██║   ███████╗███████║   ██║   ███████║
-#          ╚═╝   ╚══════╝╚══════╝   ╚═╝   ╚══════╝
 
 from django_check_seo.checks import site
 from django_check_seo.checks_list import launch_checks
