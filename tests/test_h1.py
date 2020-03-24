@@ -68,6 +68,14 @@ class init:
         self.page_stats = site.Site(self.soup, self.full_url)
 
 
+def test_h1_importance():
+    from django_check_seo.checks_list import check_h1
+
+    site = init()
+
+    assert check_h1.importance() == 1
+
+
 def test_h1_1_nokw():
     from django_check_seo.checks_list import check_h1
 
@@ -154,3 +162,71 @@ def test_h1_1_nokw_image():
             success.description
             == "Google is not really concerned about the number of h1 tags on your page, but Bing clearly indicates in its guidelines for webmasters to use only one h1 tag per page."
         )
+
+
+def test_h1_1_kw():
+    from django_check_seo.checks_list import check_h1
+    from django_check_seo.checks_list import check_keywords
+
+    site = init()
+
+    check_keywords.run(site)
+
+    check_h1.run(site)
+
+    for success in site.success:
+        if success.name == "Keyword found in h1":
+            assert success.name == "Keyword found in h1"
+            assert success.settings == "at least one"
+            assert success.found == "title"
+            assert success.searched_in == ['<b class="good">title</b> of the page']
+            assert (
+                success.description
+                == "The h1 tag represent the main title of your page, and you may populate it with appropriate content in order to ensure that users (and search engines!) will understand correctly your page."
+            )
+
+
+def test_h1_1_kws():
+    from django_check_seo.checks_list import check_h1
+    from django_check_seo.checks_list import check_keywords
+
+    site = init()
+    site.soup.find("h1").string = "Title of the page description"
+
+    check_keywords.run(site)
+
+    check_h1.run(site)
+
+    for success in site.success:
+        if success.name == "Keyword found in h1":
+            assert success.name == "Keyword found in h1"
+            assert success.settings == "at least one"
+            assert success.found == "description, title"
+            assert success.searched_in == [
+                '<b class="good">title</b> of the page <b class="good">description</b>'
+            ]
+            assert (
+                success.description
+                == "The h1 tag represent the main title of your page, and you may populate it with appropriate content in order to ensure that users (and search engines!) will understand correctly your page."
+            )
+
+
+def test_h1_1_kws_strange():
+    from django_check_seo.checks_list import check_h1
+    from django_check_seo.checks_list import check_keywords
+
+    site = init()
+    site.soup.select('meta[name="keywords"]')[0]["content"] = "@letics"
+
+    site.soup.find("h1").string = "word @letics another-word"
+
+    check_keywords.run(site)
+
+    check_h1.run(site)
+
+    for success in site.success:
+        if success.name == "Keyword found in h1":
+            assert success.found == "@letics"
+            assert success.searched_in == [
+                'word <b class="good">@letics</b> another-word'
+            ]

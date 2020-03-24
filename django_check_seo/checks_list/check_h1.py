@@ -77,14 +77,14 @@ def run(site):
     h1_text_kw = []
     occurrence = []
     for h1 in h1_all:
-        h1_text = get_h1_text(h1).lower
+        h1_text = get_h1_text(h1).lower()
 
         for keyword in site.keywords:
             keyword = keyword.lower()
             # ugly regex ? see example at https://github.com/kapt-labs/django-check-seo/issues/38#issuecomment-603108275
             nb_occurrences = len(
                 re.findall(
-                    r"(^| |\n|,|\.|!|\?)" + keyword + r"($| |\n|,|\.|!|\?)", h1_text
+                    r"(^| |\n|,|\.|!|\?)" + keyword + r"($| |\n|,|\.|!|\?)", h1_text,
                 )
             )
             occurrence.append(nb_occurrences)
