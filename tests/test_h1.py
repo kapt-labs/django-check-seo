@@ -15,7 +15,7 @@ from django_check_seo.checks_list import launch_checks
 from bs4 import BeautifulSoup
 
 
-html1 = """
+html_content = """
 <!doctype html>
 <html>
     <head>
@@ -62,7 +62,7 @@ class init:
         self.warnings = []
         self.success = []
 
-        self.soup = BeautifulSoup(html1, features="lxml")
+        self.soup = BeautifulSoup(html_content, features="lxml")
         self.full_url = "https://localhost/fake-url/title-of-the-page/"
         # populate class with data
         self.page_stats = site.Site(self.soup, self.full_url)

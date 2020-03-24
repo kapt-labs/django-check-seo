@@ -77,7 +77,7 @@ function launch_venv2_tests {
 
     echo -e "\e[1;32m✅ test venv2 found\e[0m"
     echo -e "\e[2m➡ launching tests...\e[0m"
-    . venv2/bin/activate && python2 -m pytest -s --cov=django_check_seo --cov-report term-missing && deactivate
+    . venv2/bin/activate && python2 -m pytest -s --cov-config=.coveragerc --cov=django_check_seo --cov-report term-missing && deactivate
 
 }
 
@@ -85,7 +85,7 @@ function launch_venv3_tests {
 
     echo -e "\e[1;32m✅ test venv3 found\e[0m"
     echo -e "\e[2m➡ launching tests...\e[0m"
-    . venv3/bin/activate && python3 -m pytest -s --cov=django_check_seo --cov-report term-missing && deactivate
+    . venv3/bin/activate && python3 -m pytest -s --cov-config=.coveragerc --cov=django_check_seo --cov-report term-missing && deactivate
 
 }
 
@@ -96,7 +96,7 @@ function create_venv2 {
     python2 -m virtualenv -p python2.7 venv2 1>/dev/null && . venv2/bin/activate && python2 -m pip install django bs4 lxml djangocms-page-meta requests pytest pytest-django pytest-cov 1>/dev/null && deactivate
     echo -e "\e[1;32m✅ venv2 created successfully\e[0m"
     echo -e "\e[2m➡ launching tests...\e[0m"
-    . venv2/bin/activate && python2 -m pytest -s --cov=django_check_seo --cov-report term-missing && deactivate
+    . venv2/bin/activate && python2 -m pytest -s --cov-config=.coveragerc --cov=django_check_seo --cov-report term-missing && deactivate
 
 }
 
@@ -107,7 +107,7 @@ function create_venv3 {
     python3 -m venv venv3 1>/dev/null && . venv3/bin/activate && python3 -m pip install django bs4 lxml djangocms-page-meta requests pytest pytest-django pytest-cov 1>/dev/null && deactivate
     echo -e "\e[1;32m✅ venv3 created successfully\e[0m"
     echo -e "\e[2m➡ launching tests...\e[0m"
-    . venv3/bin/activate && python3 -m pytest -s --cov=django_check_seo --cov-report term-missing && deactivate
+    . venv3/bin/activate && python3 -m pytest -s --cov-config=.coveragerc --cov=django_check_seo --cov-report term-missing && deactivate
 
 }
 

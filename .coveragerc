@@ -1,0 +1,10 @@
+[run]
+omit = django_check_seo/checks/*
+       django_check_seo/conf/*
+       */__init__.py
+       django_check_seo/urls.py
+       django_check_seo/urls.py
+       django_check_seo/views.py
+       django_check_seo/check_list/launch_checks.py
+       django_check_seo/apps.py
+       django_check_seo/cms_toolbars.py
