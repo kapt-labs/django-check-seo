@@ -33,26 +33,26 @@ def run(site):
     )
 
     found = False
-    first_N_words = site.content_text.lower().split()[
+    first_words = site.content_text.lower().split()[
         : site.settings.DJANGO_CHECK_SEO_SETTINGS["keywords_in_first_words"]
     ]
     # check text and not list of words in order that keywords like "this is a keyword" are found in text "words this is a keyword words"
-    first_N_words = " ".join(first_N_words)
+    first_words = " ".join(first_words)
 
     nb = 0
     kw = []
-    first_N_words_kw = first_N_words
+    first_words_kw = first_words
     for keyword in site.keywords:
         keyword_lower = keyword.lower()
-        if keyword_lower in first_N_words:
+        if keyword_lower in first_words:
             found = True
             kw.append(keyword)
         nb += 1
-        first_N_words_kw = first_N_words_kw.replace(
+        first_words_kw = first_words_kw.replace(
             keyword_lower, '<b class="good">' + keyword_lower + "</b>"
         )
 
-    no_keywords.searched_in = [first_N_words_kw]
+    no_keywords.searched_in = [first_words_kw]
 
     # no keyword was found in first paragraph
     if not found:

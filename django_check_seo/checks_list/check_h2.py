@@ -51,7 +51,7 @@ def run(site):
     enough_keywords = custom_list.CustomList(
         name=_("Keyword found in h2 tags"),
         settings=pgettext("masculin", "at least one"),
-        found=pgettext("masculin", "none"),
+        found="",
         description=no_keywords.description,
     )
 
@@ -63,7 +63,7 @@ def run(site):
         enough_h2.searched_in = [t.text for t in h2]
         site.success.append(enough_h2)
 
-        occurence = []
+        occurrence = []
         h2_kw = []
 
         # for each h2...
@@ -71,25 +71,33 @@ def run(site):
             single_h2 = single_h2.text.lower()
             # check if it contains at least 1 keyword
             for keyword in site.keywords:
-                keyword = keyword.lower()
-                occurence.append(
-                    sum(
-                        1
-                        for _ in re.finditer(
-                            r"\b%s\b" % re.escape(keyword.lower()), single_h2,
-                        )
+                keyword_lower = keyword.lower()
+                nb_occurrences = len(
+                    re.findall(
+                        r"(^| |\n|,|\.|!|\?)"
+                        + keyword_lower.lower()
+                        + "($| |\n|,|\.|!|\?)",
+                        single_h2,
                     )
                 )
+                occurrence.append(nb_occurrences)
                 # and add bold in found keywords
                 single_h2 = single_h2.replace(
-                    keyword, '<b class="good">' + keyword + "</b>"
+                    keyword_lower, '<b class="good">' + keyword_lower + "</b>"
                 )
+
+                # add kw in found
+                if nb_occurrences > 0:
+                    if enough_keywords.found != "":
+                        enough_keywords.found += ", "
+                    enough_keywords.found += keyword
+
             h2_kw.append(single_h2)
         # if no keyword is found in h2
-        if not any(i > 0 for i in occurence):
+        if not any(i > 0 for i in occurrence):
             no_keywords.searched_in = [t.text for t in h2]
+            no_keywords.found = pgettext("masculin", "none")
             site.warnings.append(no_keywords)
         else:
             enough_keywords.searched_in = h2_kw
-            enough_keywords.found = max(i for i in occurence)
             site.success.append(enough_keywords)

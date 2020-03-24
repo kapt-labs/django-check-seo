@@ -134,7 +134,20 @@ def run(site):
             ):
 
                 length_long.found = str(length)
-                length_long.searched_in = meta_description
+                length_long.searched_in = [
+                    tag.attrs["content"][
+                        : site.settings.DJANGO_CHECK_SEO_SETTINGS[
+                            "meta_description_length"
+                        ][1]
+                    ]
+                    + '<b class="problem">'
+                    + tag.attrs["content"][
+                        site.settings.DJANGO_CHECK_SEO_SETTINGS[
+                            "meta_description_length"
+                        ][1] :
+                    ]
+                    + "</b>"
+                ]
                 site.problems.append(length_long)
 
             # perfect
@@ -144,24 +157,30 @@ def run(site):
                 length_success.searched_in = meta_description
                 site.success.append(length_success)
 
-            occurence = []
+            occurrence = []
+            keywords_good.found = ""
             for keyword in site.keywords:
                 keyword_lower = keyword.lower()
-                occurence.append(
-                    sum(
-                        1
-                        for _ in re.finditer(
-                            r"\b%s\b" % re.escape(keyword_lower),
-                            tag.attrs["content"].lower(),
-                        )
+                nb_occurrences = len(
+                    re.findall(
+                        r"(^| |\n|,|\.|!|\?)" + keyword_lower + "($| |\n|,|\.|!|\?)",
+                        tag.attrs["content"].lower(),
                     )
                 )
+                occurrence.append(nb_occurrences)
                 # edit current meta description
                 meta_description_kw[number_meta_description - 1] = meta_description_kw[
                     number_meta_description - 1
                 ].replace(keyword_lower, '<b class="good">' + keyword_lower + "</b>")
+
+                # add kw in found keywords
+                if nb_occurrences > 0:
+                    if keywords_good.found != "":
+                        keywords_good.found += ", "
+                    keywords_good.found += keyword
+
             # if no keyword is found in description
-            if not any(i > 0 for i in occurence):
+            if not any(i > 0 for i in occurrence):
 
                 keywords_bad.found = 0
                 keywords_bad.searched_in = meta_description
@@ -169,7 +188,6 @@ def run(site):
 
             # perfect
             else:
-                keywords_good.found = max(i for i in occurence)
                 keywords_good.searched_in = meta_description_kw
                 site.success.append(keywords_good)
 

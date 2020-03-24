@@ -73,9 +73,9 @@ def run(site):
         right_number_h1.searched_in = [t.text for t in h1_all]
         site.success.append(right_number_h1)
 
+    enough_keywords.found = ""
     h1_text_kw = []
-
-    occurence = []
+    occurrence = []
     for h1 in h1_all:
         # h1 text can be content of alt tag in img
         if not h1.text and h1.find("img", {"alt": True}):
@@ -86,18 +86,26 @@ def run(site):
 
         for keyword in site.keywords:
             keyword = keyword.lower()
-            occurence.append(
-                sum(1 for _ in re.finditer(r"\b%s\b" % re.escape(keyword), h1_text,))
+            # ugly regex ? see example at https://github.com/kapt-labs/django-check-seo/issues/38#issuecomment-603108275
+            nb_occurrences = len(
+                re.findall(
+                    r"(^| |\n|,|\.|!|\?)" + keyword + "($| |\n|,|\.|!|\?)", h1_text
+                )
             )
-            h1_text = h1_text.replace(keyword, '<b class="good">' + keyword + '</b>')
+            occurrence.append(nb_occurrences)
+            h1_text = h1_text.replace(keyword, '<b class="good">' + keyword + "</b>")
+
+            if nb_occurrences > 0:
+                if enough_keywords.found != "":
+                    enough_keywords.found += ", "
+                enough_keywords.found += keyword
         h1_text_kw.append(h1_text)
 
     # if no keyword is found in h1
-    if not any(i > 0 for i in occurence):
+    if not any(i > 0 for i in occurrence):
         no_keywords.found = pgettext("masculin", "none")
         no_keywords.searched_in = [t.text for t in h1_all]
         site.problems.append(no_keywords)
     else:
-        enough_keywords.found = max(i for i in occurence)
         enough_keywords.searched_in = h1_text_kw
         site.success.append(enough_keywords)
