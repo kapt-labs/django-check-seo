@@ -1,4 +1,4 @@
-# coding: latin-1
+# coding: utf-8
 
 # Use ./launch_tests.sh to launch these tests.
 #
