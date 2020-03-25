@@ -60,7 +60,7 @@ def run(site):
         site.warnings.append(no_h2)
     else:
         enough_h2.found = len(h2)
-        enough_h2.searched_in = [t.text for t in h2]
+        enough_h2.searched_in = [get_h2_text(t) for t in h2]
         site.success.append(enough_h2)
 
         occurrence = []
@@ -68,7 +68,7 @@ def run(site):
 
         # for each h2...
         for single_h2 in h2:
-            single_h2 = single_h2.text.lower()
+            single_h2 = get_h2_text(single_h2).lower()
             # check if it contains at least 1 keyword
             for keyword in site.keywords:
                 keyword_lower = keyword.lower()
@@ -81,13 +81,13 @@ def run(site):
                     )
                 )
                 occurrence.append(nb_occurrences)
-                # and add bold in found keywords
-                single_h2 = single_h2.replace(
-                    keyword_lower, '<b class="good">' + keyword_lower + "</b>"
-                )
 
                 # add kw in found
                 if nb_occurrences > 0:
+                    # and add bold in found keywords
+                    single_h2 = single_h2.replace(
+                        keyword_lower, '<b class="good">' + keyword_lower + "</b>"
+                    )
                     if enough_keywords.found != "":
                         enough_keywords.found += ", "
                     enough_keywords.found += keyword
@@ -101,3 +101,12 @@ def run(site):
         else:
             enough_keywords.searched_in = h2_kw
             site.success.append(enough_keywords)
+
+
+def get_h2_text(h2):
+    # h2 text can be content of alt tag in img
+    if not h2.text and h2.find("img", {"alt": True}):
+        return h2.find("img")["alt"]
+    # of it can be the text in h2
+    else:
+        return h2.text

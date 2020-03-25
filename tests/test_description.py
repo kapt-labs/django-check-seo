@@ -253,7 +253,6 @@ def test_description_2():
     check_description.run(site)
 
     for warning in site.warnings:
-        print(warning.name)
         if warning.name == "Too much meta description tags":
             assert warning.name == "Too much meta description tags"
             assert warning.settings == "only one"
@@ -277,7 +276,6 @@ def test_description_0():
     check_description.run(site)
 
     for problem in site.problems:
-        print(problem.name)
         if problem.name == "No meta description":
             assert problem.name == "No meta description"
             assert problem.settings == "needed"

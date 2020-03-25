@@ -88,9 +88,11 @@ def run(site):
                 )
             )
             occurrence.append(nb_occurrences)
-            h1_text = h1_text.replace(keyword, '<b class="good">' + keyword + "</b>")
 
             if nb_occurrences > 0:
+                h1_text = h1_text.replace(
+                    keyword, '<b class="good">' + keyword + "</b>"
+                )
                 if enough_keywords.found != "":
                     enough_keywords.found += ", "
                 enough_keywords.found += keyword
