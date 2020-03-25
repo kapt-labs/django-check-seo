@@ -109,8 +109,6 @@ def test_h1_2_nokw():
 
 
 def test_h1_0_nokw():
-    import copy
-
     from django_check_seo.checks_list import check_h1
 
     site = init()
@@ -130,8 +128,6 @@ def test_h1_0_nokw():
 
 
 def test_h1_1_nokw_image():
-    import copy
-
     from django_check_seo.checks_list import check_h1
 
     site = init()
