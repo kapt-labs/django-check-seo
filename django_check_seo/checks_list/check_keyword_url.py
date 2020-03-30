@@ -71,7 +71,11 @@ def run(site):
 
     for keyword in site.keywords:
         keyword = keyword.lower()
-        keyword_unnaccented = unidecode.unidecode(keyword)
+        # needed for python2, see https://stackoverflow.com/a/21129492/6813732
+        if sys.version_info.major == 2:
+            keyword_unnaccented = unidecode.unidecode(unicode(keyword, "utf-8"))
+        else:
+            keyword_unnaccented = unidecode.unidecode(keyword)
         nb_occurrences = len(
             re.findall(
                 r"(^| |\n|,|\.|!|\?|/|-)" + keyword + r"($| |\n|,|\.|!|\?|/|-)",
