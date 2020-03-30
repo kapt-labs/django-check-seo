@@ -16,7 +16,7 @@ from ..checks import custom_list
 if sys.version_info.major == 2:
     from urlparse import urlparse  # pragma: no cover
 else:
-    from urllib.parse import urlparse
+    from urllib.parse import urlparse  # pragma: no cover
 
 
 def importance():
@@ -73,9 +73,11 @@ def run(site):
         keyword = keyword.lower()
         # needed for python2, see https://stackoverflow.com/a/21129492/6813732
         if sys.version_info.major == 2:
-            keyword_unnaccented = unidecode.unidecode(unicode(keyword, "utf-8"))
+            keyword_unnaccented = unidecode.unidecode(
+                unicode(keyword, "utf-8")
+            )  # pragma: no cover
         else:
-            keyword_unnaccented = unidecode.unidecode(keyword)
+            keyword_unnaccented = unidecode.unidecode(keyword)  # pragma: no cover
         nb_occurrences = len(
             re.findall(
                 r"(^| |\n|,|\.|!|\?|/|-)" + keyword + r"($| |\n|,|\.|!|\?|/|-)",
