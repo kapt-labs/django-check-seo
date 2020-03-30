@@ -1,16 +1,15 @@
 # Standard Library
-import sys
 import re
-import unidecode
+import sys
 
+import unidecode
 from django.conf import settings
 from django.conf.global_settings import LANGUAGES
-from django.utils.text import slugify
-from django.utils.translation import gettext as _, pgettext
+from django.utils.translation import gettext as _
+from django.utils.translation import pgettext
 
 # Local application / specific library imports
 from ..checks import custom_list
-
 
 # hacky trick to add python2 compatibility to a python3 project after python2 eol
 if sys.version_info.major == 2:
@@ -74,7 +73,7 @@ def run(site):
         # needed for python2, see https://stackoverflow.com/a/21129492/6813732
         if sys.version_info.major == 2:
             keyword_unnaccented = unidecode.unidecode(
-                unicode(keyword, "utf-8")
+                unicode(keyword, "utf-8")  # noqa F821
             )  # pragma: no cover
         else:
             keyword_unnaccented = unidecode.unidecode(keyword)  # pragma: no cover

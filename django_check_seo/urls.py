@@ -6,7 +6,6 @@ from django.contrib.admin.views.decorators import staff_member_required
 # Local application / specific library imports
 from . import views
 
-
 version = django.get_version()
 
 if version.startswith("2"):

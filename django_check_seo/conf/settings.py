@@ -1,7 +1,6 @@
 # Third party
 from django.conf import settings
 
-
 # define basic SEO settings, see
 DJANGO_CHECK_SEO_SETTINGS = {
     "content_words_number": [300, 600],

@@ -2,9 +2,8 @@
 
 # Use ./launch_tests.sh to launch these tests.
 
-from django_check_seo.checks import site
-from django_check_seo.checks_list import launch_checks
 from bs4 import BeautifulSoup
+from django_check_seo.checks import site
 
 html_content = """
 <!doctype html>
@@ -31,8 +30,6 @@ class init:
 
 def test_keyword_importance():
     from django_check_seo.checks_list import check_keywords
-
-    site = init()
 
     assert check_keywords.importance() == 5
 

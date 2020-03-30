@@ -2,9 +2,8 @@
 
 # Use ./launch_tests.sh to launch these tests.
 
-from django_check_seo.checks import site
-from django_check_seo.checks_list import launch_checks
 from bs4 import BeautifulSoup
+from django_check_seo.checks import site
 
 html_content = """
 <!doctype html>
@@ -40,13 +39,10 @@ class init:
 def test_title_importance():
     from django_check_seo.checks_list import check_title
 
-    site = init()
-
     assert check_title.importance() == 1
 
 
 def test_title_notitle():
-    from django.contrib.sites.models import Site
     from django_check_seo.checks_list import check_title
 
     site = init()
@@ -66,7 +62,6 @@ def test_title_notitle():
 
 
 def test_title_short():
-    from django.contrib.sites.models import Site
     from django_check_seo.checks_list import check_title
 
     site = init()
@@ -85,7 +80,6 @@ def test_title_short():
 
 
 def test_title_long():
-    from django.contrib.sites.models import Site
     from django_check_seo.checks_list import check_title
 
     site = init()
@@ -109,7 +103,6 @@ def test_title_long():
 
 
 def test_title_okay():
-    from django.contrib.sites.models import Site
     from django_check_seo.checks_list import check_title
 
     site = init()
@@ -151,7 +144,6 @@ def test_titles():
 
 
 def test_title_nokw():
-    from django.contrib.sites.models import Site
     from django_check_seo.checks_list import check_title
     from django_check_seo.checks_list import check_keywords
 
@@ -174,7 +166,6 @@ def test_title_nokw():
 
 
 def test_title_kw():
-    from django.contrib.sites.models import Site
     from django_check_seo.checks_list import check_title
     from django_check_seo.checks_list import check_keywords
 
@@ -196,7 +187,6 @@ def test_title_kw():
 
 
 def test_title_kws():
-    from django.contrib.sites.models import Site
     from django_check_seo.checks_list import check_title
     from django_check_seo.checks_list import check_keywords
 

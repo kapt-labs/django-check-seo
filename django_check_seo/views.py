@@ -1,14 +1,12 @@
-# Standard Library
 import json
 
-# Third party
+import requests
 from bs4 import BeautifulSoup
 from django.contrib.sites.models import Site
-from django.utils.translation import gettext as _, ngettext
+from django.utils.translation import gettext as _
+from django.utils.translation import ngettext
 from django.views import generic
-import requests
 
-# Local application / specific library imports
 from .checks import site
 from .checks_list import launch_checks
 from .conf import settings

@@ -2,9 +2,8 @@
 
 # Use ./launch_tests.sh to launch these tests.
 
-from django_check_seo.checks import site
-from django_check_seo.checks_list import launch_checks
 from bs4 import BeautifulSoup
+from django_check_seo.checks import site
 
 html_content = """
 <!doctype html>
@@ -41,13 +40,10 @@ class init:
 def test_url_importance():
     from django_check_seo.checks_list import check_url
 
-    site = init()
-
     assert check_url.importance() == 1
 
 
 def test_url_okay():
-    from django.contrib.sites.models import Site
     from django_check_seo.checks_list import check_url
 
     site = init()
@@ -78,7 +74,6 @@ def test_url_okay():
 
 
 def test_url_too_deep():
-    from django.contrib.sites.models import Site
     from django_check_seo.checks_list import check_url
 
     site = init()
@@ -96,7 +91,6 @@ def test_url_too_deep():
 
 
 def test_url_too_long():
-    from django.contrib.sites.models import Site
     from django_check_seo.checks_list import check_url
 
     site = init()

@@ -2,7 +2,8 @@
 import re
 
 # Third party
-from django.utils.translation import gettext as _, pgettext
+from django.utils.translation import gettext as _
+from django.utils.translation import pgettext
 
 # Local application / specific library imports
 from ..checks import custom_list

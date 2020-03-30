@@ -3,9 +3,9 @@
 # Use ./launch_tests.sh to launch these tests.
 
 import re
-from django_check_seo.checks import site
-from django_check_seo.checks_list import launch_checks
+
 from bs4 import BeautifulSoup
+from django_check_seo.checks import site
 
 html_content = """
 <!doctype html>
@@ -57,13 +57,10 @@ def get_content_text(soup):
 def test_url_importance():
     from django_check_seo.checks_list import content_words_number
 
-    site = init()
-
     assert content_words_number.importance() == 1
 
 
 def test_content_words_number_short():
-    from django.contrib.sites.models import Site
     from django_check_seo.checks_list import content_words_number
 
     site = init()
@@ -82,7 +79,6 @@ def test_content_words_number_short():
 
 
 def test_content_words_number_short2():
-    from django.contrib.sites.models import Site
     from django_check_seo.checks_list import content_words_number
 
     site = init()
@@ -109,7 +105,6 @@ def test_content_words_number_short2():
 
 
 def test_content_words_number_okay():
-    from django.contrib.sites.models import Site
     from django_check_seo.checks_list import content_words_number
 
     site = init()

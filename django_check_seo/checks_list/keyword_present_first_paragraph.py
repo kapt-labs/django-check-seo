@@ -1,7 +1,8 @@
 import re
 
 # Third party
-from django.utils.translation import gettext as _, pgettext
+from django.utils.translation import gettext as _
+from django.utils.translation import pgettext
 
 # Local application / specific library imports
 from ..checks import custom_list
@@ -34,7 +35,6 @@ def run(site):
         ),
     )
 
-    found = False
     first_words = site.content_text.lower().split()[
         : site.settings.DJANGO_CHECK_SEO_SETTINGS["keywords_in_first_words"]
     ]
@@ -42,8 +42,6 @@ def run(site):
     first_words = " ".join(first_words)
     first_words_text = first_words.lower()
 
-    nb = 0
-    kw = []
     occurrence = []
     first_words_kw = []
 

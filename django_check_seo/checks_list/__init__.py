@@ -2,7 +2,6 @@
 import glob
 from os.path import basename, dirname, isfile, join
 
-
 # list files
 modules = glob.glob(join(dirname(__file__), "*.py"))
 

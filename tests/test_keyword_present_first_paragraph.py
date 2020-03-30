@@ -3,9 +3,9 @@
 # Use ./launch_tests.sh to launch these tests.
 
 import re
-from django_check_seo.checks import site
-from django_check_seo.checks_list import launch_checks
+
 from bs4 import BeautifulSoup
+from django_check_seo.checks import site
 
 html_content = """
 <!doctype html>
@@ -57,13 +57,10 @@ def get_content_text(soup):
 def test_url_importance():
     from django_check_seo.checks_list import keyword_present_first_paragraph
 
-    site = init()
-
     assert keyword_present_first_paragraph.importance() == 1
 
 
 def test_keyword_present_first_paragraph_kw():
-    from django.contrib.sites.models import Site
     from django_check_seo.checks_list import check_keywords
     from django_check_seo.checks_list import keyword_present_first_paragraph
 
@@ -86,7 +83,6 @@ def test_keyword_present_first_paragraph_kw():
 
 
 def test_keyword_present_first_paragraph_nokw():
-    from django.contrib.sites.models import Site
     from django_check_seo.checks_list import check_keywords
     from django_check_seo.checks_list import keyword_present_first_paragraph
 
@@ -106,7 +102,6 @@ def test_keyword_present_first_paragraph_nokw():
 
 
 def test_keyword_present_first_paragraph_kws():
-    from django.contrib.sites.models import Site
     from django_check_seo.checks_list import check_keywords
     from django_check_seo.checks_list import keyword_present_first_paragraph
 

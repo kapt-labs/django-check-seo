@@ -2,9 +2,7 @@
 import importlib
 import sys
 
-# Local application / specific library imports
 from . import *  # noqa: F403,F401
-
 
 # hacky thing aiming to add python2 compatibility after eol of python2
 try:

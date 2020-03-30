@@ -2,9 +2,8 @@
 
 # Use ./launch_tests.sh to launch these tests.
 
-from django_check_seo.checks import site
-from django_check_seo.checks_list import launch_checks
 from bs4 import BeautifulSoup
+from django_check_seo.checks import site
 
 html_content = """
 <!doctype html>
@@ -48,8 +47,6 @@ class patch_get_content_class:
 
 def test_link_importance():
     from django_check_seo.checks_list import check_links
-
-    site = init()
 
     assert check_links.importance() == 1
 
