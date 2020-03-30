@@ -8,3 +8,4 @@ omit = django_check_seo/checks/*
        django_check_seo/check_list/launch_checks.py
        django_check_seo/apps.py
        django_check_seo/cms_toolbars.py
+       django_check_seo/checks_list/launch_checks.py

@@ -122,7 +122,6 @@ def test_content_words_number_okay():
     content_words_number.run(site)
 
     for success in site.success:
-        print(success.name)
         if success.name == "Content length is right":
             assert success.name == "Content length is right"
             assert success.settings == "at least 300 words, more than 600 if possible"
