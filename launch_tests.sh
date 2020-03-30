@@ -128,13 +128,13 @@ elif [[ $1 == "2" ]]; then
 
     create_and_launch_venv2
 
-    exit 1
+    exit $?
 
 elif [[ $1 == "3" ]]; then
 
     create_and_launch_venv3
 
-    exit 1
+    exit $?
 
 elif [[ "$#" -gt 0 ]]; then
 
@@ -147,4 +147,15 @@ fi
 
 create_and_launch_venv2
 
+exit1=$?
+
 create_and_launch_venv3
+
+exit2=$?
+
+if [ "$exit1" -eq "0" ] && [ "$exit2" -eq "0" ]
+then
+    exit 0
+else
+    exit 1
+fi
