@@ -37,7 +37,7 @@ class init:
         self.page_stats = site.Site(self.soup, self.full_url)
 
 
-def test_link_importance():
+def test_title_importance():
     from django_check_seo.checks_list import check_title
 
     site = init()
