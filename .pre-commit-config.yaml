@@ -24,3 +24,6 @@ repos:
     hooks:
     -   id: flake8
         files: ^.*\.py$
+
+script:
+  - entry: launch_checks.py
