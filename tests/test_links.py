@@ -179,6 +179,3 @@ def test_links_internal_empty(monkeypatch):
             assert success.settings == "at least 1"
             assert success.found == 1
             assert success.searched_in == ['<a href="/">[no content]</a>']
-
-    # <a href="https://otherdomain.com/link2">Link 2 !</a>
-    # <a href="/link3"><img src="none" alt="heyyy!" /></a>

@@ -1,3 +1,6 @@
+# Standard Library
+import re
+
 # Third party
 from django.utils.translation import gettext as _, pgettext
 
@@ -136,26 +139,30 @@ def run(site):
         site.success.append(title_okay)
 
     keyword.found = ""
-    keyword_found = False
-    title_readable = titles[0].text.lower()
-    title_readable_kw = title_readable
+    occurrence = []
+    title_text = titles[0].text.lower()
+    title_text_kw = []
 
     for kw in site.keywords:
-        if kw.lower() in title_readable:
-            if keyword_found:
-                keyword.found += ", "
-            keyword_found = True
-            keyword.found += kw
-            title_readable_kw = title_readable_kw.replace(
-                kw.lower(), '<b class="good">' + kw.lower() + "</b>"
+        kw = kw.lower()
+        nb_occurrences = len(
+            re.findall(r"(^| |\n|,|\.|!|\?)" + kw + r"($| |\n|,|\.|!|\?)", title_text,)
+        )
+        occurrence.append(nb_occurrences)
+
+        if nb_occurrences > 0:
+            title_text = title_text.replace(
+                kw, '<b class="good">' + kw.lower() + "</b>"
             )
+            if keyword.found != "":
+                keyword.found += ", "
+            keyword.found += kw
+    title_text_kw.append(title_text)
 
     # title do not contain any keyword
     if keyword.found == "":
-        no_keyword.searched_in = [
-            titles[0].text if len(titles[0].text) > 0 else _("[no content]")
-        ]
+        no_keyword.searched_in = title_text_kw
         site.problems.append(no_keyword)
     else:
-        keyword.searched_in = [title_readable_kw]
+        keyword.searched_in = title_text_kw
         site.success.append(keyword)
