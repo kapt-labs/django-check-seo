@@ -1,6 +1,7 @@
-# Third party
 # Standard Library
 import sys
+import re
+import unidecode
 
 from django.conf import settings
 from django.conf.global_settings import LANGUAGES
@@ -13,7 +14,7 @@ from ..checks import custom_list
 
 # hacky trick to add python2 compatibility to a python3 project after python2 eol
 if sys.version_info.major == 2:
-    from urlparse import urlparse
+    from urlparse import urlparse  # pragma: no cover
 else:
     from urllib.parse import urlparse
 
@@ -64,24 +65,50 @@ def run(site):
     ):
         return
 
-    keyword_found = False
-    slugified_url = slugify(site.full_url)
-    slugified_url_kw = slugified_url
+    full_url = site.full_url.lower()
+    occurrence = []
+    accented_occurrences = 0
 
     for keyword in site.keywords:
-        slugifies_kw = slugify(keyword)
-        if slugifies_kw in slugified_url:
-            if keyword_found:
-                enough_keyword.found += ", "
-            keyword_found = True
-            enough_keyword.found += keyword
-            slugified_url_kw = slugified_url_kw.replace(
-                slugifies_kw, '<b class="good">' + slugifies_kw + "</b>"
+        keyword = keyword.lower()
+        keyword_unnaccented = unidecode.unidecode(keyword)
+        nb_occurrences = len(
+            re.findall(
+                r"(^| |\n|,|\.|!|\?|/|-)" + keyword + r"($| |\n|,|\.|!|\?|/|-)",
+                full_url,
             )
+        )
+        if nb_occurrences == 0:
+            # retry with unnaccented kw
+            accented_occurrences = len(
+                re.findall(
+                    r"(^| |\n|,|\.|!|\?|/|-)"
+                    + keyword_unnaccented
+                    + r"($| |\n|,|\.|!|\?|/|-)",
+                    full_url,
+                )
+            )
+        occurrence.append(nb_occurrences + accented_occurrences)
 
-    if keyword_found:
-        enough_keyword.searched_in = [slugified_url_kw]
-        site.success.append(enough_keyword)
-    else:
-        no_keyword.searched_in = [site.full_url]
+        if nb_occurrences > 0:
+            full_url = full_url.replace(keyword, '<b class="good">' + keyword + "</b>")
+            if enough_keyword.found != "":
+                enough_keyword.found += ", "
+            enough_keyword.found += keyword
+            nb_occurrences = 0
+
+        if accented_occurrences > 0:
+            full_url = full_url.replace(
+                keyword_unnaccented, '<b class="good">' + keyword_unnaccented + "</b>"
+            )
+            if enough_keyword.found != "":
+                enough_keyword.found += ", "
+            enough_keyword.found += keyword
+            accented_occurrences = 0
+
+    if not any(i > 0 for i in occurrence):
+        no_keyword.searched_in = [full_url]
         site.problems.append(no_keyword)
+    else:
+        enough_keyword.searched_in = [full_url]
+        site.success.append(enough_keyword)

@@ -1,4 +1,4 @@
-# coding: utf-8
+# -*- coding: utf-8 -*-
 
 # Use ./launch_tests.sh to launch these tests.
 
@@ -172,7 +172,7 @@ def test_h1_1_kws():
             )
 
 
-def test_h1_1_kws_strange():
+def test_h1_1_kw_strange1():
     from django_check_seo.checks_list import check_h1
     from django_check_seo.checks_list import check_keywords
 
