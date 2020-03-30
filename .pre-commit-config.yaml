@@ -25,5 +25,10 @@ repos:
     -   id: flake8
         files: ^.*\.py$
 
-script:
-  - entry: launch_checks.py
+
+  - repo: local
+    hooks:
+    -   id: launch_tests
+        name: Unit tests
+        entry: ./launch_tests.sh
+        language: script

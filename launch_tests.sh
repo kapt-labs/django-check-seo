@@ -138,10 +138,13 @@ elif [[ $1 == "3" ]]; then
 
 elif [[ "$#" -gt 0 ]]; then
 
-    echo "Wrong arg."
-    echo ""
-    display_help
-    exit 1
+    if [[ $1 != ".pre-commit-config.yaml" || $2 != "launch_tests.sh" ]]
+    then
+        echo "Wrong arg."
+        echo ""
+        display_help
+        exit 1
+    fi
 
 fi
 
