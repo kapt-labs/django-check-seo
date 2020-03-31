@@ -31,4 +31,5 @@ repos:
     -   id: launch_tests
         name: Unit tests
         entry: ./launch_tests.sh
+        pass_filenames: false
         language: script

@@ -140,7 +140,8 @@ elif [[ "$#" -gt 0 ]]; then
 
     if [[ $1 != ".pre-commit-config.yaml" || $2 != "launch_tests.sh" ]]
     then
-        echo "Wrong arg."
+        echo "Wrong args:"
+        echo $@
         echo ""
         display_help
         exit 1
