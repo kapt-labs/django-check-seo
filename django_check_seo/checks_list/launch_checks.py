@@ -48,7 +48,6 @@ def launch_checks(site):
             "django_check_seo.checks_list." in module_name
             and module_name not in python_2_compatibility_array
         ) or (module_name.startswith("checks_list.")):
-            print(module_name)
             module = importlib.import_module(module_name)
             get_module_order = getattr(module, "importance")
 
