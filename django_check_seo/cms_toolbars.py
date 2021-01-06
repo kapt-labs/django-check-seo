@@ -12,9 +12,7 @@ class DjangoSeoToolbar(CMSToolbar):
         self.toolbar.add_sideframe_item(
             _("Check SEO"),  # text
             "/django-check-seo/?page="
-            + str(
-                self.request.path.encode("utf-8")
-            ),  # url (+ current page passed as a GET parameter)
+            + self.request.path,  # url (+ current page passed as a GET parameter)
         )
 
 
