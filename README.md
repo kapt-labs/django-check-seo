@@ -168,7 +168,7 @@ When you _really_ want django-check-seo to follow a redirection and you _really_
 DJANGO_CHECK_SEO_AUTH_FOLLOW_REDIRECTS = True
 ```
 
-***Warning!** This could be considered a bad practice to allow this by default, because if you create a redirection on your (authenticated-only accessible) website then the destination website will have access to the credentials by reading this `Authorization` header (see [CVE-2014-1829](https://nvd.nist.gov/vuln/detail/CVE-2014-1829)). See [this issue](https://github.com/kapt-labs/django-check-seo/issues/43#issue-839650874) for a ~valid~ usecase.*
+***Warning!** This could be considered a bad practice to allow this by default, because if you create a redirection on your (authenticated-only accessible) website, then the destination website will have access to the credentials by reading the `Authorization` header (see [CVE-2014-1829](https://nvd.nist.gov/vuln/detail/CVE-2014-1829)). See [this issue](https://github.com/kapt-labs/django-check-seo/issues/43#issue-839650874) for a valid usecase.*
 
 ----
 
