@@ -49,10 +49,10 @@ class IndexView(generic.base.TemplateView):
                     settings.DJANGO_CHECK_SEO_AUTH["user"],
                     settings.DJANGO_CHECK_SEO_AUTH["pass"],
                 ),
-                headers={"Cache-Control": "no-cache"},
+                headers={"Cache-Control": "no-store"},
             )
         else:
-            r = requests.get(full_url, headers={"Cache-Control": "no-cache"})
+            r = requests.get(full_url, headers={"Cache-Control": "no-store"})
 
         soup = BeautifulSoup(r.text, features="lxml")
 
