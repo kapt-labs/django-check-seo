@@ -22,6 +22,13 @@ DJANGO_CHECK_SEO_AUTH = {}
 DJANGO_CHECK_SEO_AUTH.update(getattr(settings, "DJANGO_CHECK_SEO_AUTH", {}))
 
 
+# see https://github.com/kapt-labs/django-check-seo/issues/43 for more informations
+DJANGO_CHECK_SEO_AUTH_FOLLOW_REDIRECTS = False
+# update redirect with authentication strategy with value from projectname/settings.py
+DJANGO_CHECK_SEO_AUTH_FOLLOW_REDIRECTS = getattr(
+    settings, "DJANGO_CHECK_SEO_AUTH_FOLLOW_REDIRECTS", False
+)
+
 # define http(s) settings (default = use https)
 DJANGO_CHECK_SEO_FORCE_HTTP = False
 # update http(s) settings with value from projectname/settings.py

@@ -50,7 +50,19 @@ class IndexView(generic.base.TemplateView):
                     settings.DJANGO_CHECK_SEO_AUTH["pass"],
                 ),
                 headers={"Cache-Control": "no-store"},
+                allow_redirects=False,
             )
+            if (
+                300 < r.status_code < 400
+                and settings.DJANGO_CHECK_SEO_AUTH_FOLLOW_REDIRECTS
+            ):
+                r = requests.get(
+                    r.headers["Location"],
+                    auth=(
+                        settings.DJANGO_CHECK_SEO_AUTH["user"],
+                        settings.DJANGO_CHECK_SEO_AUTH["pass"],
+                    ),
+                )
         else:
             r = requests.get(full_url, headers={"Cache-Control": "no-store"})
 

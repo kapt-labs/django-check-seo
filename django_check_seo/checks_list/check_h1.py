@@ -85,7 +85,8 @@ def run(site):
             # ugly regex ? see example at https://github.com/kapt-labs/django-check-seo/issues/38#issuecomment-603108275
             nb_occurrences = len(
                 re.findall(
-                    r"(^| |\n|,|\.|!|\?)" + keyword + r"($| |\n|,|\.|!|\?)", h1_text,
+                    r"(^| |\n|,|\.|!|\?)" + keyword + r"($| |\n|,|\.|!|\?)",
+                    h1_text,
                 )
             )
             occurrence.append(nb_occurrences)

@@ -125,7 +125,8 @@ def test_links_internal_img(monkeypatch):
     site.soup.body.append(
         (
             BeautifulSoup(
-                '<a href="/"><img src="none" alt="Hey!!!" /></a>', features="lxml",
+                '<a href="/"><img src="none" alt="Hey!!!" /></a>',
+                features="lxml",
             )
         )
     )
@@ -147,7 +148,12 @@ def test_links_internal_img_no_alt_tag(monkeypatch):
     site = init()
     site.soup.find("a").decompose()
     site.soup.body.append(
-        (BeautifulSoup('<a href="/"><img src="none" /></a>', features="lxml",))
+        (
+            BeautifulSoup(
+                '<a href="/"><img src="none" /></a>',
+                features="lxml",
+            )
+        )
     )
     monkeypatch.setattr(Site.objects, "get_current", patch_get_content_class)
     check_links.run(site)
@@ -166,7 +172,14 @@ def test_links_internal_empty(monkeypatch):
 
     site = init()
     site.soup.find("a").decompose()
-    site.soup.body.append((BeautifulSoup('<a href="/"></a>', features="lxml",)))
+    site.soup.body.append(
+        (
+            BeautifulSoup(
+                '<a href="/"></a>',
+                features="lxml",
+            )
+        )
+    )
     monkeypatch.setattr(Site.objects, "get_current", patch_get_content_class)
     check_links.run(site)
 

@@ -147,7 +147,10 @@ def run(site):
     for kw in site.keywords:
         kw = kw.lower()
         nb_occurrences = len(
-            re.findall(r"(^| |\n|,|\.|!|\?)" + kw + r"($| |\n|,|\.|!|\?)", title_text,)
+            re.findall(
+                r"(^| |\n|,|\.|!|\?)" + kw + r"($| |\n|,|\.|!|\?)",
+                title_text,
+            )
         )
         occurrence.append(nb_occurrences)
 
