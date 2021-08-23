@@ -73,10 +73,12 @@ def run(site):
         # needed for python2, see https://stackoverflow.com/a/21129492/6813732
         if sys.version_info.major == 2:
             keyword_unnaccented = unidecode.unidecode(
-                unicode(keyword, "utf-8")  # noqa F821
+                unicode(keyword, "utf-8").replace(" ", "-")  # noqa F821
             )  # pragma: no cover
         else:
-            keyword_unnaccented = unidecode.unidecode(keyword)  # pragma: no cover
+            keyword_unnaccented = unidecode.unidecode(keyword).replace(
+                " ", "-"
+            )  # pragma: no cover
         nb_occurrences = len(
             re.findall(
                 r"(^| |\n|,|\.|!|\?|/|-)" + keyword + r"($| |\n|,|\.|!|\?|/|-)",
