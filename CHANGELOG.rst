@@ -2,6 +2,19 @@ Changelog
 =========
 
 
+v0.4.1 (2021-08-23)
+-------------------
+
+Bug fixes
+~~~~~~~~~
+- Replace spaces by dash in keyword for url search [cb]
+
+Documentation
+~~~~~~~~~~~~~
+- Update readme [cb]
+- Update changelog [cb]
+
+
 v0.4.0 (2021-03-25)
 -------------------
 
