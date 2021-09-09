@@ -23,7 +23,7 @@ def run(site):
     """
 
     lack_alt = custom_list.CustomList(
-        name=_("Img lack alt tag"),
+        name=_("Images lack alt tag"),
         settings=_("all images"),
         found="",
         description=_(
@@ -32,7 +32,7 @@ def run(site):
     )
 
     enough_alt = custom_list.CustomList(
-        name=_("Img have alt tag"),
+        name=_("Images have alt tag"),
         settings=_("all images"),
         found="",
         description=lack_alt.description,
