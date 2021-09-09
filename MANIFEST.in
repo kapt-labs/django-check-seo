@@ -1,3 +1,7 @@
 include LICENSE
 include README.md
-recursive-include static templates checks conf locale checks
+include CONTRIBUTING.md
+include AUTHORS.md
+recursive-include django_check_seo/static/ *
+recursive-include django_check_seo/templates/ *.html
+recursive-include django_check_seo/locale/ *
