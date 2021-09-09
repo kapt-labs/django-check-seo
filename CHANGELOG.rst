@@ -2,6 +2,18 @@ Changelog
 =========
 
 
+v0.4.3 (2021-09-09)
+-------------------
+
+Documentation
+~~~~~~~~~~~~~
+- Update changelog [Adrien Delhorme]
+
+Maintenance
+~~~~~~~~~~~
+- Correct MANIFEST.in [Adrien Delhorme]
+
+
 v0.4.2 (2021-09-09)
 -------------------
 
