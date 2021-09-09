@@ -45,9 +45,9 @@ def run(site):
 
     problem = 0
     imgs = []
-    img_str = _("image")
 
     for image in images:
+        img_str = image.attrs["src"].split("/")[-1]
         if (
             "alt" not in image.attrs
             or image.attrs["alt"] == "None"
