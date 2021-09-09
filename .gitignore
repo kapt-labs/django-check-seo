@@ -10,3 +10,4 @@ Pipfile.lock
 venv2
 venv3
 .coverage
+.python-version
