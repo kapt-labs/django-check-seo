@@ -2,6 +2,31 @@ Changelog
 =========
 
 
+v0.4.2 (2021-09-09)
+-------------------
+
+Bug fixes
+~~~~~~~~~
+- Display file name instead of string "image" [Adrien Delhorme]
+- Misleading translation for image alt check [Adrien Delhorme]
+- Correct handling of unicode strings [Adrien Delhorme]
+- Check_keyword_url with accents [Adrien Delhorme]
+
+  When the keywords contained accents and spaces and the url contained
+  accents, the check was failing
+
+
+Documentation
+~~~~~~~~~~~~~
+- Update AUTHORS file [Adrien Delhorme]
+- Update logo in readme for dark theme [Corentin Bettiol]
+- Update changelog [cb]
+
+Maintenance
+~~~~~~~~~~~
+- Ignore .python-version file [Adrien Delhorme]
+
+
 v0.4.1 (2021-08-23)
 -------------------
 
