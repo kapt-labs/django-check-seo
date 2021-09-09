@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 # Standard Library
 import re
 import sys
@@ -70,13 +73,12 @@ def run(site):
 
     for keyword in site.keywords:
         keyword = keyword.lower().replace(" ", "-")
-        # needed for python2, see https://stackoverflow.com/a/21129492/6813732
-        if sys.version_info.major == 2:
-            keyword_unnaccented = unidecode.unidecode(
-                unicode(keyword, "utf-8")  # noqa F821
-            )  # pragma: no cover
-        else:
-            keyword_unnaccented = unidecode.unidecode(keyword)  # pragma: no cover
+
+        # remove apostrophes as they are generally removed from URLs
+        keyword = keyword.replace("'", "").replace("’", "")
+
+        keyword_unnaccented = unidecode.unidecode(keyword)  # pragma: no cover
+
         nb_occurrences = len(
             re.findall(
                 r"(^| |\n|,|\.|!|\?|/|-)" + keyword + r"($| |\n|,|\.|!|\?|/|-)",

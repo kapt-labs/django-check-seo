@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 # Standard Library
 import re
 
@@ -73,6 +76,11 @@ def run(site):
             # check if it contains at least 1 keyword
             for keyword in site.keywords:
                 keyword_lower = keyword.lower()
+
+                # standardize apostrophes
+                keyword_lower = keyword_lower.replace("'", "’")
+                single_h2 = single_h2.replace("'", "’")
+
                 nb_occurrences = len(
                     re.findall(
                         r"(^| |\n|,|\.|!|\?)"

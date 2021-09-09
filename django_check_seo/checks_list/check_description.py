@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # Standard Library
 import re
 
@@ -162,10 +164,15 @@ def run(site):
             keywords_good.found = ""
             for keyword in site.keywords:
                 keyword_lower = keyword.lower()
+
+                # standardize apostrophes
+                keyword_lower = keyword_lower.replace("'", "’")
+                content_lower = tag.attrs["content"].lower().replace("'", "’")
+
                 nb_occurrences = len(
                     re.findall(
                         r"(^| |\n|,|\.|!|\?)" + keyword_lower + r"($| |\n|,|\.|!|\?)",
-                        tag.attrs["content"].lower(),
+                        content_lower,
                     )
                 )
                 occurrence.append(nb_occurrences)

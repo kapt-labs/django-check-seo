@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+from bs4 import BeautifulSoup
+
+from django_check_seo.checks import site
 
 # Use ./launch_tests.sh to launch these tests.
 
-from bs4 import BeautifulSoup
-from django_check_seo.checks import site
 
 html_content = """
 <!doctype html>
@@ -35,8 +38,7 @@ def test_keyword_url_importance():
 
 
 def test_keyword_url_kw():
-    from django_check_seo.checks_list import check_keyword_url
-    from django_check_seo.checks_list import check_keywords
+    from django_check_seo.checks_list import check_keyword_url, check_keywords
 
     site = init()
 
@@ -58,8 +60,7 @@ def test_keyword_url_kw():
 
 
 def test_keyword_url_nokw():
-    from django_check_seo.checks_list import check_keyword_url
-    from django_check_seo.checks_list import check_keywords
+    from django_check_seo.checks_list import check_keyword_url, check_keywords
 
     site = init()
     check_keywords.run(site)
@@ -77,8 +78,7 @@ def test_keyword_url_nokw():
 
 
 def test_keyword_url_nokw_root():
-    from django_check_seo.checks_list import check_keyword_url
-    from django_check_seo.checks_list import check_keywords
+    from django_check_seo.checks_list import check_keyword_url, check_keywords
 
     site = init()
     check_keywords.run(site)
@@ -97,8 +97,7 @@ def test_keyword_url_nokw_root():
 
 
 def test_keyword_url_kws():
-    from django_check_seo.checks_list import check_keyword_url
-    from django_check_seo.checks_list import check_keywords
+    from django_check_seo.checks_list import check_keyword_url, check_keywords
 
     site = init()
     site.soup.select('meta[name="keywords"]')[0]["content"] = "title,  page"
@@ -119,8 +118,7 @@ def test_keyword_url_kws():
 
 
 def test_keyword_url_kw_accented():
-    from django_check_seo.checks_list import check_keyword_url
-    from django_check_seo.checks_list import check_keywords
+    from django_check_seo.checks_list import check_keyword_url, check_keywords
 
     site = init()
     site.soup.select('meta[name="keywords"]')[0]["content"] = "énergie"
@@ -141,8 +139,7 @@ def test_keyword_url_kw_accented():
 
 
 def test_keyword_url_kws_accented():
-    from django_check_seo.checks_list import check_keyword_url
-    from django_check_seo.checks_list import check_keywords
+    from django_check_seo.checks_list import check_keyword_url, check_keywords
 
     site = init()
     site.soup.select('meta[name="keywords"]')[0]["content"] = "énergie,  éééé"
@@ -163,8 +160,7 @@ def test_keyword_url_kws_accented():
 
 
 def test_keyword_url_kws_accented_unaccented():
-    from django_check_seo.checks_list import check_keyword_url
-    from django_check_seo.checks_list import check_keywords
+    from django_check_seo.checks_list import check_keyword_url, check_keywords
 
     site = init()
     site.soup.select('meta[name="keywords"]')[0]["content"] = "énergie,  title"

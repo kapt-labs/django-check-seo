@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 # Standard Library
 import re
 
@@ -82,6 +85,11 @@ def run(site):
 
         for keyword in site.keywords:
             keyword = keyword.lower()
+
+            # standardize apostrophes
+            keyword = keyword.replace("'", "’")
+            h1_text = h1_text.replace("'", "’")
+
             # ugly regex ? see example at https://github.com/kapt-labs/django-check-seo/issues/38#issuecomment-603108275
             nb_occurrences = len(
                 re.findall(
