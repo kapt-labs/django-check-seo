@@ -1,8 +1,7 @@
 import json
 
-import requests
 from bs4 import BeautifulSoup
-from django.contrib.sites.models import Site
+from django.test import Client
 from django.utils.translation import gettext as _
 from django.utils.translation import ngettext
 from django.views import generic
@@ -20,56 +19,14 @@ class IndexView(generic.base.TemplateView):
             *args, **kwargs
         )
 
-        if settings.DJANGO_CHECK_SEO_FORCE_HTTP:
-            protocol = "http://"
-        else:
-            protocol = "https://"
+        client = Client()
+        page = self.request.GET.get("page")
+        response = client.get(page)
 
-        # get content of the page
-        if "http" not in self.request.GET.get(
-            "page", None
-        ):  # url like "/fr/article-du-site/"
-            full_url = (
-                protocol
-                + Site.objects.get_current().domain
-                + self.request.GET.get("page", None)
-            )
-        else:  # url like "http://mydomain.ext/en/my-page-name/"
-            full_url = self.request.GET.get("page", None)
-
-        # use credentials if provided (pass through .htaccess auth)
-        if (
-            settings.DJANGO_CHECK_SEO_AUTH
-            and settings.DJANGO_CHECK_SEO_AUTH["user"] is not None
-            and settings.DJANGO_CHECK_SEO_AUTH["pass"] is not None
-        ):
-            r = requests.get(
-                full_url,
-                auth=(
-                    settings.DJANGO_CHECK_SEO_AUTH["user"],
-                    settings.DJANGO_CHECK_SEO_AUTH["pass"],
-                ),
-                headers={"Cache-Control": "no-store"},
-                allow_redirects=False,
-            )
-            if (
-                300 < r.status_code < 400
-                and settings.DJANGO_CHECK_SEO_AUTH_FOLLOW_REDIRECTS
-            ):
-                r = requests.get(
-                    r.headers["Location"],
-                    auth=(
-                        settings.DJANGO_CHECK_SEO_AUTH["user"],
-                        settings.DJANGO_CHECK_SEO_AUTH["pass"],
-                    ),
-                )
-        else:
-            r = requests.get(full_url, headers={"Cache-Control": "no-store"})
-
-        soup = BeautifulSoup(r.text, features="lxml")
+        soup = BeautifulSoup(response.content, features="lxml")
 
         # populate class with data
-        page_stats = site.Site(soup, full_url)
+        page_stats = site.Site(soup, page)
 
         # magic happens here!
         launch_checks.launch_checks(page_stats)
