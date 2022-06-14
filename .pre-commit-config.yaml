@@ -1,35 +1,38 @@
 repos:
   - repo: https://github.com/ambv/black
-    rev: 21.8b0
+    rev: 22.3.0
     hooks:
       - id: black
-        args: [--check]
         files: ^.*\.py$
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.0.1
+    rev: v4.1.0
     hooks:
       - id: check-added-large-files
       - id: check-merge-conflict
+      - id: debug-statements
 
-  - repo: https://github.com/pre-commit/mirrors-isort
-    rev: v5.9.3
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.10.1
     hooks:
     -   id: isort
-        args: [--check]
         files: ^.*\.py$
 
   - repo: https://gitlab.com/pycqa/flake8
-    rev: 3.9.2
+    rev: 4.0.1
     hooks:
     -   id: flake8
         files: ^.*\.py$
 
-
-  - repo: local
+  - repo: https://github.com/rtts/djhtml
+    rev: v1.5.0
     hooks:
-    -   id: launch_tests
-        name: Unit tests
-        entry: ./launch_tests.sh
-        pass_filenames: false
-        language: script
+    -   id: djhtml
+        args: [--tabwidth=2]
+        files: ^.*\.html$
+
+  - repo: https://gitlab.com/kapt/open-source/git-hooks
+    rev: v1.2.0
+    hooks:
+    -   id: commit-msg
+        always_run: true

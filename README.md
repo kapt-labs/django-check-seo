@@ -1,6 +1,6 @@
 ![Django Check SEO](https://user-images.githubusercontent.com/45763865/114545606-72178380-9c5c-11eb-99dd-1088bb2a0bd9.png)
 
-Replacing some features of Yoast or SEMrush for django CMS users.
+*Replacing some features of Yoast or SEMrush for django CMS users.*
 
 In other words, django-check-seo will tell you if you have problems concerning a broad range of SEO aspects of your pages.
 
@@ -10,41 +10,48 @@ In other words, django-check-seo will tell you if you have problems concerning a
 
 ----
 
-# Installation
+# Install
 
-The following instructions are for an installation on a djangocms-based website using python >= 3 & django >= 2, or for a djangocms-based website using python >= 2.7 & django >= 1.8.15.
+*(for django >= 1.8.15 & python >= 2.7)*
 
- 1. Install module using pipenv:
- ```
- pipenv install django-check-seo
- ```
- * *Or pip:*
- ```
- pip install django-check-seo
- ```
- 2. Add it to your installed apps:
- ```
-     "django_check_seo",
- ```
- 3. [Add it](https://user-images.githubusercontent.com/45763865/72879105-83453f00-3cfc-11ea-8f1f-933ce7af4964.png) to your `urls.py` *(before `url(r'^', include('cms.urls')),` or it will not work)*:
- ```
-     url(r"^django-check-seo/", include("django_check_seo.urls")),
- ```
- * *Or add this if you're using path:*
- ```
-     path("django-check-seo/", include("django_check_seo.urls")),
- ```
- 4. Update your [site](https://i.imgur.com/pNRsKs7.png) parameters with correct url (*[example](https://i.imgur.com/IedF3xE.png)* for dev environment)
+1. Install the module from [PyPI](https://pypi.org/project/django-check-seo/):
+    ```
+    python3 -m pip install django-check-seo
+    ```
+2. Add it in your `INSTALLED_APPS`:
+    ```
+        "django_check_seo",
+    ```
+3. Add this in your `urls.py` *(if you're using django-cms, put it before the `cms.urls` line or it will not work)*:
+    ```
+        path("django-check-seo/", include("django_check_seo.urls")),
+    ```
+    * *Or add this if you're still using `url` (you shouldn't):*
+        ```
+            url(r"^django-check-seo/", include("django_check_seo.urls")),
+        ```
+4. Update your Django [Site](https://i.imgur.com/pNRsKs7.png) object parameters with a working url (here's an [example](https://i.imgur.com/IedF3xE.png) for dev environment).
 
- 5. *(optional) Configure the settings, and/or force http instead of https, and/or add authentification (see [config](#config)).*
+5. *(optional) Configure the settings (see [config](#config)).*
 
- 6. ![that's all folks!](https://i.imgur.com/o2Tcd2E.png)
+6. ![that's all folks!](https://i.imgur.com/o2Tcd2E.png)
 
 ----
 
-# Prerequisites
+# Misc
 
-This application need `beautifulsoup4` (>=4.7.0), `djangocms` & `djangocms_page_meta` *(==0.8.5 if using django < 1.11)*.
+This application needs `beautifulsoup4` (>=4.7.0) and `djangocms_page_meta` *(==0.8.5 if using django < 1.11)*. It may be used with or without `django-cms` (a django-check-seo button will appear in the topbar if you're using django-cms).
+
+If you're not using Django CMS, here's the link format to access your pages reports:
+
+```
+https://example.com/django-check-seo/?page=/example-page/
+  -> will check https://example.com/example-page/
+
+https://example.com/fr/django-check-seo/?page=/example-page/
+  -> will check https://example.com/example-page/
+     (using localized url (if you add django-check-seo in i18n_patterns))
+```
 
 ----
 
@@ -52,7 +59,7 @@ This application need `beautifulsoup4` (>=4.7.0), `djangocms` & `djangocms_page_
 
 ## Basic settings
 
-Basic config (used by default) is in [`django-check-seo/conf/settings.py`](https://github.com/kapt-labs/django-check-seo/blob/master/django_check_seo/conf/settings.py#L5-L15):
+The basic config (used by default) is located in [`django-check-seo/conf/settings.py`](https://github.com/kapt-labs/django-check-seo/blob/master/django_check_seo/conf/settings.py#L5-L15) and looks like this:
 ```python
 DJANGO_CHECK_SEO_SETTINGS = {
     "content_words_number": [300, 600],
@@ -84,9 +91,9 @@ Then this will be the settings used by the application:
 ```python
 DJANGO_CHECK_SEO_SETTINGS = {
     "content_words_number": [300, 600],
-    "internal_links": 25,
+    "internal_links": 25,  # 1 if using default settings
     "external_links": 1,
-    "meta_title_length": [15,30],
+    "meta_title_length": [15,30],  # [30, 60] if using default settings
     "meta_description_length": [50, 160],
     "keywords_in_first_words": 50,
     "max_link_depth": 3,
@@ -110,9 +117,7 @@ DJANGO_CHECK_SEO_EXCLUDE_CONTENT = "tag, .class, #id, tag > .child_class"
 
 *You can find a reference table of css selectors explained [here](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors#Reference_table_of_selectors) (on mdn docs).*
 
-### *Example:*
-
-See [this issue comment](https://github.com/kapt-labs/django-check-seo/issues/35#issuecomment-593429870) for an example.
+### *Example: See [this issue's comment](https://github.com/kapt-labs/django-check-seo/issues/35#issuecomment-593429870) for an example.*
 
 ----
 
@@ -120,7 +125,7 @@ See [this issue comment](https://github.com/kapt-labs/django-check-seo/issues/35
 
 ![screenshot](https://i.imgur.com/hJGDvtw.png)
 
-*Other screenshots and videos are available on the [wiki](https://github.com/kapt-labs/django-check-seo/wiki/Medias).*
+*Other (older) screenshots and videos are available on the [wiki](https://github.com/kapt-labs/django-check-seo/wiki/Medias).*
 
 ----
 
@@ -128,7 +133,7 @@ See [this issue comment](https://github.com/kapt-labs/django-check-seo/issues/35
 
 They are located in `tests` folder.
 
-The file `launch_tests.sh` is here to manage tests launching for you. You only need `python3-venv` (for python3 venv) and `virtualenv` (for **python2** venv) in order to make it work ([example video](https://up.l3m.in/files/1584462369-launch_tests.webm)).
+The file `launch_tests.sh` is here to manage tests launching for you. You only need `python3-venv` (for python3 venv) and `virtualenv` (for **python2** venv) in order to make it work.
 
 ----
 
