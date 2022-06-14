@@ -7,7 +7,7 @@ from ..checks import custom_list
 
 
 def importance():
-    """Scripts with higher importance will be executed in first.
+    """Scripts with higher importance will be executed first.
 
     Returns:
         int -- Importance of the script.

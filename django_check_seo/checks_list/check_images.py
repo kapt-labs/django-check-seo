@@ -7,7 +7,7 @@ from ..checks import custom_list
 
 
 def importance():
-    """Scripts with higher importance will be executed in first.
+    """Scripts with higher importance will be executed first.
 
     Returns:
         int -- Importance of the script.
@@ -27,7 +27,7 @@ def run(site):
         settings=_("all images"),
         found="",
         description=_(
-            'Your images should always have an alt tag, because it improves accessibility for visually impaired people. The name of the file is important too, because it helps Google understand what your image is about. For example, you could rename a file named "IMG0001.jpg" to "tree_with_a_bird.jpg".'
+            'Your images should have an alt tag, because it improves accessibility for visually impaired people.<br />But "<i>sometimes there is non-text content that really is not meant to be seen or understood by the user</i>" (<a href="https://www.w3.org/WAI/WCAG21/Understanding/non-text-content.html">WCAG</a>). For this kind of non-text content, you can leave your alt tag empty.<br />The name of the file is important too, because it helps Google understand what your image is about. For example, you could rename a file named "IMG0001.jpg" to "tree_with_a_bird.jpg".'
         ),
     )
 
@@ -43,7 +43,7 @@ def run(site):
     for c in site.content:
         images += c.find_all("img")
 
-    problem = 0
+    warning = 0
     imgs = []
 
     for image in images:
@@ -53,7 +53,7 @@ def run(site):
             or image.attrs["alt"] == "None"
             or image.attrs["alt"] == ""
         ):
-            problem += 1
+            warning += 1
 
             # bold without alt tag content
             if image.attrs["src"] != "":
@@ -80,10 +80,10 @@ def run(site):
                 + ")"
             )
 
-    if problem > 0:
-        lack_alt.found = problem
+    if warning > 0:
+        lack_alt.found = warning
         lack_alt.searched_in = imgs
-        site.problems.append(lack_alt)
+        site.warnings.append(lack_alt)
     else:
         if len(images) > 0:
             enough_alt.found = len(images)
