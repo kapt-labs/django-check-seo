@@ -15,26 +15,6 @@ DJANGO_CHECK_SEO_SETTINGS = {
 # update settings redefined in projectname/settings.py
 DJANGO_CHECK_SEO_SETTINGS.update(getattr(settings, "DJANGO_CHECK_SEO_SETTINGS", {}))
 
-
-# define auth data (for .htaccess files)
-DJANGO_CHECK_SEO_AUTH = {}
-# update auth data with values from projectname/settings.py
-DJANGO_CHECK_SEO_AUTH.update(getattr(settings, "DJANGO_CHECK_SEO_AUTH", {}))
-
-
-# see https://github.com/kapt-labs/django-check-seo/issues/43 for more informations
-DJANGO_CHECK_SEO_AUTH_FOLLOW_REDIRECTS = False
-# update redirect with authentication strategy with value from projectname/settings.py
-DJANGO_CHECK_SEO_AUTH_FOLLOW_REDIRECTS = getattr(
-    settings, "DJANGO_CHECK_SEO_AUTH_FOLLOW_REDIRECTS", False
-)
-
-# define http(s) settings (default = use https)
-DJANGO_CHECK_SEO_FORCE_HTTP = False
-# update http(s) settings with value from projectname/settings.py
-DJANGO_CHECK_SEO_FORCE_HTTP = getattr(settings, "DJANGO_CHECK_SEO_FORCE_HTTP", False)
-
-
 # define css selector to search content into (used for retrieving main content of the page)
 DJANGO_CHECK_SEO_SEARCH_IN = {
     "type": "exclude",

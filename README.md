@@ -44,7 +44,7 @@ The following instructions are for an installation on a djangocms-based website 
 
 # Prerequisites
 
-This application need `beautifulsoup4` (>=4.7.0), `requests`, `djangocms` & `djangocms_page_meta` *(==0.8.5 if using django < 1.11)*.
+This application need `beautifulsoup4` (>=4.7.0), `djangocms` & `djangocms_page_meta` *(==0.8.5 if using django < 1.11)*.
 
 ----
 
@@ -113,62 +113,6 @@ DJANGO_CHECK_SEO_EXCLUDE_CONTENT = "tag, .class, #id, tag > .child_class"
 ### *Example:*
 
 See [this issue comment](https://github.com/kapt-labs/django-check-seo/issues/35#issuecomment-593429870) for an example.
-
-----
-
-## Use `http` instead of `https`
-
-By default, the application will attempt to make requests in https.
-
-To enable plain http queries, you can add a variable named `DJANGO_CHECK_SEO_FORCE_HTTP` set to `True` in your settings.py.
-
-### *Example:*
-
-```python
-# Force HTTP
-DJANGO_CHECK_SEO_FORCE_HTTP = True
-
-# Force HTTPS (default case, same as not defining the variable)
-DJANGO_CHECK_SEO_FORCE_HTTP = False
-```
-
-----
-
-## Authentication
-
-The website you want to test may require a prior connection due to a .htaccess file (or may use [wsgi-basic-auth](https://github.com/mvantellingen/wsgi-basic-auth)), which prevents django-check-seo from accessing its html code.
-
-To prevent this, you can specify the login informations (username/password) in the `DJANGO_CHECK_SEO_AUTH` dictionnary (in your website settings).
-
-This dictionary must contain two keys named `user` and `pass`.
-
-### *Example:*
-
- * In `mywebsite/settings.py`:
- ```python
- DJANGO_CHECK_SEO_AUTH = {
-     "user": os.getenv("HTACCESS_USER"),
-     "pass": os.getenv("HTACCESS_PASS"),
- }
- ```
-
- * In `.env` file:
- ```
- export HTACCESS_USER=myusername
- export HTACCESS_PASS=mypassword
-
- WSGI_AUTH_CREDENTIALS=$HTACCESS_USER:$HTACCESS_PASS
- ```
-
-### Authentication and redirections
-
-When you _really_ want django-check-seo to follow a redirection and you _really_ want to authenticate on the redirected site using the `DJANGO_CHECK_SEO_AUTH` credentials, you can set this config var to `True` in your site settings:
-
-```
-DJANGO_CHECK_SEO_AUTH_FOLLOW_REDIRECTS = True
-```
-
-***Warning!** This could be considered a bad practice to allow this by default, because if you create a redirection on your (authenticated-only accessible) website, then the destination website will have access to the credentials by reading the `Authorization` header (see [CVE-2014-1829](https://nvd.nist.gov/vuln/detail/CVE-2014-1829)). See [this issue](https://github.com/kapt-labs/django-check-seo/issues/43#issue-839650874) for a valid usecase.*
 
 ----
 
