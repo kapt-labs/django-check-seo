@@ -205,16 +205,14 @@ def run(site):
         too_much_meta.found = number_meta_description
         too_much_meta.searched_in = meta_description
         site.warnings.append(too_much_meta)
-
     # perfect
-    else:
+    elif number_meta_description == 1:
+        site.problems.append(no_meta_description)
         meta_description_only_one.searched_in = meta_description
         site.success.append(meta_description_only_one)
 
-    # no meta description
     if not found_meta_description:
         site.problems.append(no_meta_description)
-
     # perfect
     else:
         meta_description_present.searched_in = meta_description
