@@ -93,7 +93,7 @@ function create_venv2 {
 
     echo -e "\e[1;31m❌ test venv2 not found\e[0m"
     echo -e "\e[2m➡ creating venv2...\e[0m"
-    python2 -m virtualenv -p python2.7 venv2 1>/dev/null && . venv2/bin/activate && python2 -m pip install django bs4 lxml djangocms-page-meta requests pytest pytest-django pytest-cov 1>/dev/null && deactivate
+    python2 -m virtualenv -p python2.7 venv2 1>/dev/null && . venv2/bin/activate && python2 -m pip install "django<3" bs4 lxml "easy-thumbnails==2.3" "djangocms-page-meta==0.8.5" requests pytest pytest-django pytest-cov 1>/dev/null && deactivate
     echo -e "\e[1;32m✅ venv2 created successfully\e[0m"
     echo -e "\e[2m➡ launching tests...\e[0m"
     . venv2/bin/activate && python2 -m pytest -s --cov-config=.coveragerc --cov=django_check_seo --cov-report term-missing && deactivate
