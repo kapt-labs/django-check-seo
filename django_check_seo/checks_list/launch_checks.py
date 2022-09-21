@@ -40,6 +40,7 @@ def launch_checks(site):
         "django_check_seo.checks_list.urlparse",
         "django_check_seo.checks_list.django",
         "django_check_seo.checks_list.unidecode",
+        "django_check_seo.checks_list.__future__",
     ]
 
     # only get modules in ...checks.*
