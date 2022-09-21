@@ -7,8 +7,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from . import views
 
 version = django.get_version()
-
-if version.startswith("2"):
+if int(version[0]) > 1:
     from django.urls import path
 
     urlpatterns = [
