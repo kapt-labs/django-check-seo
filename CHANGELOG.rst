@@ -2,6 +2,23 @@ Changelog
 =========
 
 
+v0.6.0 (2023-03-03)
+-------------------
+
+Documentation
+~~~~~~~~~~~~~
+- Update readme [Corentin Bettiol]
+- Update changelog [Corentin Bettiol]
+
+Other
+~~~~~
+- #55 Support both new and old versions of Django still using
+  ugettext_lazy [Marco Bonetti]
+- Dont report missing description if we have exactly one [Marco Bonetti]
+- Django 4: ugettext_lazy was removed in favor of gettext_lazy [Marco
+  Bonetti]
+
+
 v0.5.2 (2022-09-21)
 -------------------
 
