@@ -1,6 +1,6 @@
 ![Django Check SEO](https://user-images.githubusercontent.com/45763865/114545606-72178380-9c5c-11eb-99dd-1088bb2a0bd9.png)
 
-*Replacing some features of Yoast or SEMrush for django CMS users.*
+*Replacing some features of Yoast or SEMrush for Django & Django-CMS users.*
 
 In other words, django-check-seo will tell you if you have problems concerning a broad range of SEO aspects of your pages.
 
@@ -12,16 +12,18 @@ In other words, django-check-seo will tell you if you have problems concerning a
 
 # Install
 
-*(for django >= 1.8.15 & python >= 2.7)*
+*(compatible with django >= 1.8.15 & python >= 2.7)*
 
 1. Install the module from [PyPI](https://pypi.org/project/django-check-seo/):
     ```
     python3 -m pip install django-check-seo
     ```
+
 2. Add it in your `INSTALLED_APPS`:
     ```
         "django_check_seo",
     ```
+
 3. Add this in your `urls.py` *(if you're using django-cms, put it before the `cms.urls` line or it will not work)*:
     ```
         path("django-check-seo/", include("django_check_seo.urls")),
@@ -30,9 +32,13 @@ In other words, django-check-seo will tell you if you have problems concerning a
         ```
             url(r"^django-check-seo/", include("django_check_seo.urls")),
         ```
+
 4. Update your Django [Site](https://i.imgur.com/pNRsKs7.png) object parameters with a working url (here's an [example](https://i.imgur.com/IedF3xE.png) for dev environment).
+
 5. Add `testserver` to your `ALLOWED_HOSTS` list in your settings.py (django-check-seo uses the Test Framework in order to get content, instead of doing an HTTP request).
+
 6. *(optional) Configure the settings (see [config](#config)).*
+
 7. ![that's all folks!](https://i.imgur.com/o2Tcd2E.png)
 
 ----
@@ -116,7 +122,7 @@ DJANGO_CHECK_SEO_EXCLUDE_CONTENT = "tag, .class, #id, tag > .child_class"
 
 *You can find a reference table of css selectors explained [here](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors#Reference_table_of_selectors) (on mdn docs).*
 
-### *Example: See [this issue's comment](https://github.com/kapt-labs/django-check-seo/issues/35#issuecomment-593429870) for an example.*
+## *Example: See [this issue's comment](https://github.com/kapt-labs/django-check-seo/issues/35#issuecomment-593429870) for an example.*
 
 ----
 
