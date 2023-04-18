@@ -2,6 +2,19 @@ Changelog
 =========
 
 
+v0.6.1 (2023-04-18)
+-------------------
+
+Documentation
+~~~~~~~~~~~~~
+- Update readme [Corentin Bettiol]
+- Update changelog [Corentin Bettiol]
+
+Other
+~~~~~
+- Have the test-client follow redirects on requests [Marco Bonetti]
+
+
 v0.6.0 (2023-03-03)
 -------------------
 
