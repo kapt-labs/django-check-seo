@@ -21,7 +21,7 @@ class IndexView(generic.base.TemplateView):
 
         client = Client()
         page = self.request.GET.get("page")
-        response = client.get(page)
+        response = client.get(page, follow=True)
 
         soup = BeautifulSoup(response.content, features="lxml")
 
