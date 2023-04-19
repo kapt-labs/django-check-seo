@@ -48,9 +48,7 @@ def run(site):
             and tag.attrs["content"] != ""
         ):
             # get keywords for next checks
-            site.keywords = tag.attrs["content"].split(
-                ",  "
-            )  # may be dangerous to hard code the case where keywords are separated with a comma and two spaces
+            site.keywords = list(map(str.strip, tag.attrs["content"].split(",")))
 
             keywords_found.found = len(site.keywords)
             keywords_found.searched_in = site.keywords
