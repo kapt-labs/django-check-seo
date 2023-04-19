@@ -2,6 +2,22 @@ Changelog
 =========
 
 
+v0.6.2 (2023-04-19)
+-------------------
+
+Documentation
+~~~~~~~~~~~~~
+- Update changelog [Corentin Bettiol]
+
+Other
+~~~~~
+- An issue when splitting the keywords [Ahmed Shawky]
+
+  Keywords must be separated by ",  " a comma followed by two empty spaces, which will fail in most cases.
+  Split by, then removing empty spaces should solve the issue
+
+
+
 v0.6.1 (2023-04-18)
 -------------------
 
