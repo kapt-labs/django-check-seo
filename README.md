@@ -35,7 +35,7 @@ In other words, django-check-seo will tell you if you have problems concerning a
 
 4. Update your Django [Site](https://i.imgur.com/pNRsKs7.png) object parameters with a working url (here's an [example](https://i.imgur.com/IedF3xE.png) for dev environment).
 
-5. Add `testserver` to your `ALLOWED_HOSTS` list in your settings.py (django-check-seo uses the Test Framework in order to get content, instead of doing an HTTP request).
+5. Add `testserver` (and maybe `www.testserver`) to your `ALLOWED_HOSTS` list in your settings.py (django-check-seo uses the Test Framework in order to get content, instead of doing an HTTP request).
 
 6. *(optional) Configure the settings (see [config](#config)).*
 
