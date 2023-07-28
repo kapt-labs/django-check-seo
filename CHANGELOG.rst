@@ -2,6 +2,18 @@ Changelog
 =========
 
 
+v0.6.3 (2023-07-28)
+-------------------
+
+Bug fixes
+~~~~~~~~~
+- Fix #58 - remove unused load cms_tags [Corentin Bettiol]
+
+Documentation
+~~~~~~~~~~~~~
+- Update changelog [Corentin Bettiol]
+
+
 v0.6.2 (2023-04-19)
 -------------------
 
