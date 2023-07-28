@@ -1,4 +1,4 @@
-{% load cms_tags i18n static %}
+{% load i18n static %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -30,13 +30,13 @@
 
           <ul class="red-list list">
             {% for problem in problems %}
-                {% include "element.html" with element=problem %}
+              {% include "element.html" with element=problem %}
             {% endfor %}
           </ul>
 
           <ul class="yellow-list list">
             {% for warning in warnings %}
-                {% include "element.html" with element=warning %}
+              {% include "element.html" with element=warning %}
             {% endfor %}
           </ul>
 
@@ -70,7 +70,9 @@
           <h2>{% trans "Documentation" %}</h2>
 
           <p>
-            {% blocktrans %}The documentation is available via the <a href="https://github.com/kapt-labs/django-check-seo/wiki" target="_blank">project wiki</a>.{% endblocktrans %}
+            {% blocktrans %}
+              The documentation is available via the <a href="https://github.com/kapt-labs/django-check-seo/wiki" target="_blank">project wiki</a>.
+            {% endblocktrans %}
           </p>
         </article>
 

@@ -47,7 +47,7 @@ In other words, django-check-seo will tell you if you have problems concerning a
 
 This application needs `beautifulsoup4` (>=4.7.0) and `djangocms_page_meta` *(==0.8.5 if using django < 1.11)*. It may be used with or without `django-cms` (a django-check-seo button will appear in the topbar if you're using django-cms).
 
-If you're not using Django CMS, here's the link format to access your pages reports:
+If you're not using Django CMS (only Django), here's the link format to access your pages reports:
 
 ```
 https://example.com/django-check-seo/?page=/example-page/
