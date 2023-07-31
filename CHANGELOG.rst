@@ -2,6 +2,19 @@ Changelog
 =========
 
 
+v0.6.4 (2023-07-31)
+-------------------
+
+Bug fixes
+~~~~~~~~~
+- Add missing dependency [Corentin Bettiol]
+
+Documentation
+~~~~~~~~~~~~~
+- Update README [Corentin Bettiol]
+- Update changelog [Corentin Bettiol]
+
+
 v0.6.3 (2023-07-28)
 -------------------
 
