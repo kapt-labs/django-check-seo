@@ -1,1 +1,4 @@
-default_app_config = "django_check_seo.apps.DjangoCheckSEOConfig"
+import django
+
+if django.VERSION <= (3, 2):
+  default_app_config = "django_check_seo.apps.DjangoCheckSEOConfig"
