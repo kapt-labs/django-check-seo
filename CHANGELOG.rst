@@ -2,6 +2,23 @@ Changelog
 =========
 
 
+v0.6.5 (2023-12-18)
+-------------------
+
+Bug fixes
+~~~~~~~~~
+- The default_app_config application configuration variable is removed.
+  [Dmytro Litvinov]
+
+Documentation
+~~~~~~~~~~~~~
+- Update changelog [Corentin Bettiol]
+
+Maintenance
+~~~~~~~~~~~
+- Update .pre-commit-config [Corentin Bettiol]
+
+
 v0.6.4 (2023-07-31)
 -------------------
 

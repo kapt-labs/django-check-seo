@@ -77,29 +77,29 @@ ignore_regexps = [
 ## ``subject_process`` (or ``body_process``) to do some changes to the subject,
 ## whenever you are tweaking this variable.
 ##
-scop_regex = r'([\(|\[].*[\)|\]])' 
+scop_regex = r'([\(|\[].*[\)|\]])'
 
 section_regexps = [
     ('Breaking changes', [
-        r'^((?i)BREAK)\s*' + scop_regex + '?\s*:\s*([^\n]*)$',
+        r'(?i)^(BREAK)\s*' + scop_regex + '?\s*:\s*([^\n]*)$',
     ]),
     ('Features', [
-        r'^((?i)FEAT)\s*' + scop_regex + '?\s*:\s*([^\n]*)$',
+        r'(?i)^(FEAT)\s*' + scop_regex + '?\s*:\s*([^\n]*)$',
     ]),
     ('Bug fixes', [
-        r'^((?i)FIX)\s*' + scop_regex + '?\s*:\s*([^\n]*)$',
+        r'(?i)^(FIX)\s*' + scop_regex + '?\s*:\s*([^\n]*)$',
     ]),
     ('Documentation', [
-        r'^((?i)DOCS?)\s*' + scop_regex + '?\s*:\s*([^\n]*)$',
+        r'(?i)^(DOCS?)\s*' + scop_regex + '?\s*:\s*([^\n]*)$',
     ]),
     ('Maintenance', [
-        r'^((?i)MAINT)\s*' + scop_regex + '?\s*:\s*([^\n]*)$',
+        r'(?i)^(MAINT)\s*' + scop_regex + '?\s*:\s*([^\n]*)$',
     ]),
     ('Format', [
-        r'^((?i)FORMAT)\s*' + scop_regex + '?\s*:\s*([^\n]*)$',
+        r'(?i)^(FORMAT)\s*' + scop_regex + '?\s*:\s*([^\n]*)$',
     ]),
     ('Tests', [
-        r'^((?i)TEST)\s*' + scop_regex + '?\s*:\s*([^\n]*)$',
+        r'(?i)^(TEST)\s*' + scop_regex + '?\s*:\s*([^\n]*)$',
     ]),
     ('Other', None ## Match all lines
     ),
@@ -147,7 +147,7 @@ body_process = strip | ReSub(r'(.$)', '\n')
 ##
 ## Available constructs are those listed in ``body_process`` doc.
 subject_process = (strip |
-    ReSub(r'^((?i)FIX|(?i)FEAT|(?i)DOCS?|(?i)MAINT|(?i)BREAK|(?i)FORMAT|(?i)TEST)\s*' + scop_regex + '?\s*:?\s*([^\n@]*)(@[a-z]+\s+)*$', r'\3') |
+    ReSub(r'(?i)^(FIX|FEAT|DOCS?|MAINT|BREAK|FORMAT|TEST)\s*' + scop_regex + '?\s*:?\s*([^\n@]*)(@[a-z]+\s+)*$', r'\3') |
     SetIfEmpty("No summary") | ucfirst)
 
 
