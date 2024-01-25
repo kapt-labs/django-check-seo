@@ -37,9 +37,11 @@ In other words, django-check-seo will tell you if you have problems concerning a
 
 5. Add `testserver` (and maybe `www.testserver`) to your `ALLOWED_HOSTS` list in your settings.py (django-check-seo uses the Test Framework in order to get content, instead of doing an HTTP request).
 
-6. *(optional) Configure the settings (see [config](#config)).*
+6. ![**new in 1.0.0**](https://img.shields.io/badge/new_in-1.0.0-green) Add the permission (`use_django_check_seo`) to the users/groups you want to give access to.
 
-7. ![that's all folks!](https://i.imgur.com/o2Tcd2E.png)
+7. *(optional) Configure the settings (see [config](#config)).*
+
+8. ![that's all folks!](https://i.imgur.com/o2Tcd2E.png)
 
 ----
 
