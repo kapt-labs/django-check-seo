@@ -12,7 +12,7 @@ from .conf import settings
 
 
 class IndexView(generic.base.TemplateView):
-    template_name = "default.html"
+    template_name = "django_check_seo/default.html"
 
     def get_context_data(self, *args, **kwargs):
         context = super(generic.base.TemplateView, self).get_context_data(

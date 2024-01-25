@@ -1,0 +1,21 @@
+{% load i18n %}
+{% autoescape off %}
+  <li>
+    <details>
+      <summary><strong>{{ element.name }}</strong> <i>({% trans "settings" %}: {% autoescape off %}{{ element.settings }}, {% trans "found" context "checkseo" %}: {{ element.found }})</i></summary>
+        <div>
+          <p>
+            {{ element.description }}{% endautoescape %}
+      </p>
+        <ul class="searched-in">
+          <li><b>{% trans "Searched in:" %}</b></li>
+          {% for searched_in in element.searched_in %}
+            <li>{{ searched_in }}</li>
+          {% empty %}
+            <li class="no-data">{% trans "No data" %}</li>
+          {%endfor %}
+        </ul>
+      </div>
+    </details>
+  </li>
+{% endautoescape %}

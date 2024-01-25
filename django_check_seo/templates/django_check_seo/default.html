@@ -30,13 +30,13 @@
 
           <ul class="red-list list">
             {% for problem in problems %}
-              {% include "element.html" with element=problem %}
+              {% include "django_check_seo/element.html" with element=problem %}
             {% endfor %}
           </ul>
 
           <ul class="yellow-list list">
             {% for warning in warnings %}
-              {% include "element.html" with element=warning %}
+              {% include "django_check_seo/element.html" with element=warning %}
             {% endfor %}
           </ul>
 
@@ -45,7 +45,7 @@
             <ul class="green-list list">
               <h2>{%trans "Successful checks" %}</h2>
               {% for successful_check in success %}
-                {% include "element.html" with element=successful_check %}
+                {% include "django_check_seo/element.html" with element=successful_check %}
               {% endfor %}
             </ul>
           {% endif %}
