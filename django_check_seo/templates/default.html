@@ -54,57 +54,58 @@
 
       </main>
 
+      {% block seo_aside %}
+        <aside>
+          <article>
+            <h2>{% trans "About" %}</h2>
 
-      <aside>
-        <article>
-          <h2>{% trans "About" %}</h2>
+            <p>
+              {% trans "The main objective of this application is to check the aspects of the web pages involved in SEO, to ensure that the page content will be correctly crawled by search engines." %}
+            </p>
+          </article>
 
-          <p>
-            {% trans "The main objective of this application is to check the aspects of the web pages involved in SEO, to ensure that the page content will be correctly crawled by search engines." %}
-          </p>
-        </article>
+          <hr />
 
-        <hr />
+          <article>
+            <h2>{% trans "Documentation" %}</h2>
 
-        <article>
-          <h2>{% trans "Documentation" %}</h2>
+            <p>
+              {% blocktrans %}
+                The documentation is available via the <a href="https://github.com/kapt-labs/django-check-seo/wiki" target="_blank">project wiki</a>.
+              {% endblocktrans %}
+            </p>
+          </article>
 
-          <p>
-            {% blocktrans %}
-              The documentation is available via the <a href="https://github.com/kapt-labs/django-check-seo/wiki" target="_blank">project wiki</a>.
-            {% endblocktrans %}
-          </p>
-        </article>
+          <hr />
 
-        <hr />
+          <article class="not-important grey-list">
+            <h2>Raw data</h2>
 
-        <article class="not-important grey-list">
-          <h2>Raw data</h2>
+            <p>{% blocktrans %}Raw data are here for debug purposes. Join at least your settings if you're submitting <a href="https://github.com/kapt-labs/django-check-seo/issues">a new issue</a>.{% endblocktrans %}</p>
 
-          <p>{% blocktrans %}Raw data are here for debug purposes. Join at least your settings if you're submitting <a href="https://github.com/kapt-labs/django-check-seo/issues">a new issue</a>.{% endblocktrans %}</p>
-
-          <div class="list">
-            <details>
-              <summary>
-                {% trans "See extracted html" %}
-              </summary>
-              <pre>{{ html }}</pre>
-            </details>
-            <details>
-              <summary>
-                {% trans "See extracted content" %}
-              </summary>
-              <pre>{{ text }}</pre>
-            </details>
-            <details>
-              <summary>
-                {% trans "See settings" %}
-              </summary>
-              <pre>{{ settings }}</pre>
-            </details>
-          </div>
-        </article>
-      </aside>
+            <div class="list">
+              <details>
+                <summary>
+                  {% trans "See extracted html" %}
+                </summary>
+                <pre>{{ html }}</pre>
+              </details>
+              <details>
+                <summary>
+                  {% trans "See extracted content" %}
+                </summary>
+                <pre>{{ text }}</pre>
+              </details>
+              <details>
+                <summary>
+                  {% trans "See settings" %}
+                </summary>
+                <pre>{{ settings }}</pre>
+              </details>
+            </div>
+          </article>
+        </aside>
+      {% endblock seo_aside %}
 
     </div>
 
