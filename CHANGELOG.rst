@@ -2,6 +2,32 @@ Changelog
 =========
 
 
+v0.6.6 (2024-01-25)
+-------------------
+
+Features
+~~~~~~~~
+- Add block in default template [Corentin Bettiol]
+
+  close #5
+
+
+Documentation
+~~~~~~~~~~~~~
+- Improve README [Corentin Bettiol]
+
+  Add instructions to replace template "seo_aside" block in README
+
+- Update changelog [Corentin Bettiol]
+
+Maintenance
+~~~~~~~~~~~
+- Move templates in their own folder [Corentin Bettiol]
+
+  No more `templates/default.html` for django_check_seo
+
+
+
 v0.6.5 (2023-12-18)
 -------------------
 
