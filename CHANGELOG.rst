@@ -2,6 +2,19 @@ Changelog
 =========
 
 
+v1.0.0 (2024-01-25)
+-------------------
+
+Features
+~~~~~~~~
+- Add permission "use_django_check_seo" [Corentin Bettiol]
+
+Documentation
+~~~~~~~~~~~~~
+- Add permission explanation in README [Corentin Bettiol]
+- Update changelog [Corentin Bettiol]
+
+
 v0.6.6 (2024-01-25)
 -------------------
 
