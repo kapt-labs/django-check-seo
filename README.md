@@ -108,6 +108,19 @@ DJANGO_CHECK_SEO_SETTINGS = {
 
 *Want to know more ? See the wiki page [Settings explained](https://github.com/kapt-labs/django-check-seo/wiki/Settings-explained).*
 
+## Templates
+
+The `django_check_seo/default.html` template have an `<aside>` block named `seo_aside` that you can replace if you want, using the `extends` & `{% block seo_aside %}` instructions, like this:
+
+```jinja2
+{% extends "django_check_seo/default.html" %}
+
+{% block seo_aside %}
+    Hi!
+{% endblock seo_aside %}
+```
+> This template will remplace all the `About`/`Documentation` & `Raw data` (content on the `<aside>` block) by "Hi!".
+
 ----
 
 ## Select main content (exclude header/footer/...)
