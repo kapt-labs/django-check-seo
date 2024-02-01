@@ -2,6 +2,18 @@ Changelog
 =========
 
 
+v0.5.4 (2024-02-01)
+-------------------
+
+Bug fixes
+~~~~~~~~~
+- Meta description check [Corentin Bettiol]
+
+Documentation
+~~~~~~~~~~~~~
+- Update changelog [Corentin Bettiol]
+
+
 v0.5.3 (2024-02-01)
 -------------------
 
