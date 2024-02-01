@@ -1,25 +1,26 @@
 repos:
   - repo: https://github.com/ambv/black
-    rev: 22.3.0
+    rev: 23.11.0
     hooks:
       - id: black
         files: ^.*\.py$
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.1.0
+    rev: v4.5.0
     hooks:
       - id: check-added-large-files
       - id: check-merge-conflict
       - id: debug-statements
 
   - repo: https://github.com/PyCQA/isort
-    rev: 5.10.1
+    rev: 5.12.0
     hooks:
     -   id: isort
         files: ^.*\.py$
+        args: ["--profile", "black"]
 
-  - repo: https://gitlab.com/pycqa/flake8
-    rev: 4.0.1
+  - repo: https://github.com/PyCQA/flake8
+    rev: 6.1.0
     hooks:
     -   id: flake8
         files: ^.*\.py$
