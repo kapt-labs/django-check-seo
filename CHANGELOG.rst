@@ -2,6 +2,200 @@ Changelog
 =========
 
 
+v0.5.3 (2024-02-01)
+-------------------
+
+Bug fixes
+~~~~~~~~~
+- 'NoneType' object has no attribute 'find' in python2 [Corentin
+  Bettiol]
+
+  - update pre-commit-confi
+
+
+
+v1.0.0 (2024-01-25)
+-------------------
+
+Features
+~~~~~~~~
+- Add permission "use_django_check_seo" [Corentin Bettiol]
+
+Documentation
+~~~~~~~~~~~~~
+- Add permission explanation in README [Corentin Bettiol]
+- Update changelog [Corentin Bettiol]
+
+
+v0.6.6 (2024-01-25)
+-------------------
+
+Features
+~~~~~~~~
+- Add block in default template [Corentin Bettiol]
+
+  close #5
+
+
+Documentation
+~~~~~~~~~~~~~
+- Improve README [Corentin Bettiol]
+
+  Add instructions to replace template "seo_aside" block in README
+
+- Update changelog [Corentin Bettiol]
+
+Maintenance
+~~~~~~~~~~~
+- Move templates in their own folder [Corentin Bettiol]
+
+  No more `templates/default.html` for django_check_seo
+
+
+
+v0.6.5 (2023-12-18)
+-------------------
+
+Bug fixes
+~~~~~~~~~
+- The default_app_config application configuration variable is removed.
+  [Dmytro Litvinov]
+
+Documentation
+~~~~~~~~~~~~~
+- Update changelog [Corentin Bettiol]
+
+Maintenance
+~~~~~~~~~~~
+- Update .pre-commit-config [Corentin Bettiol]
+
+
+v0.6.4 (2023-07-31)
+-------------------
+
+Bug fixes
+~~~~~~~~~
+- Add missing dependency [Corentin Bettiol]
+
+Documentation
+~~~~~~~~~~~~~
+- Update README [Corentin Bettiol]
+- Update changelog [Corentin Bettiol]
+
+
+v0.6.3 (2023-07-28)
+-------------------
+
+Bug fixes
+~~~~~~~~~
+- Fix #58 - remove unused load cms_tags [Corentin Bettiol]
+
+Documentation
+~~~~~~~~~~~~~
+- Update changelog [Corentin Bettiol]
+
+
+v0.6.2 (2023-04-19)
+-------------------
+
+Documentation
+~~~~~~~~~~~~~
+- Update changelog [Corentin Bettiol]
+
+Other
+~~~~~
+- An issue when splitting the keywords [Ahmed Shawky]
+
+  Keywords must be separated by ",  " a comma followed by two empty spaces, which will fail in most cases.
+  Split by, then removing empty spaces should solve the issue
+
+
+
+v0.6.1 (2023-04-18)
+-------------------
+
+Documentation
+~~~~~~~~~~~~~
+- Update readme [Corentin Bettiol]
+- Update changelog [Corentin Bettiol]
+
+Other
+~~~~~
+- Have the test-client follow redirects on requests [Marco Bonetti]
+
+
+v0.6.0 (2023-03-03)
+-------------------
+
+Documentation
+~~~~~~~~~~~~~
+- Update readme [Corentin Bettiol]
+- Update changelog [Corentin Bettiol]
+
+Other
+~~~~~
+- #55 Support both new and old versions of Django still using
+  ugettext_lazy [Marco Bonetti]
+- Dont report missing description if we have exactly one [Marco Bonetti]
+- Django 4: ugettext_lazy was removed in favor of gettext_lazy [Marco
+  Bonetti]
+
+
+v0.5.2 (2022-09-21)
+-------------------
+
+Bug fixes
+~~~~~~~~~
+- Fix python2 tests [Corentin Bettiol]
+
+Maintenance
+~~~~~~~~~~~
+- Python2 (!!!) compat [Corentin Bettiol]
+- Improve (?) django 3 compat [Corentin Bettiol]
+
+  replace a check "startswith 2" by "> 1" in order to handle django
+  version 3 and mor
+
+
+
+v0.5.1 (2022-06-17)
+-------------------
+
+Bug fixes
+~~~~~~~~~
+- Fix #45 Meta description check is now working [Corentin Bettiol]
+
+
+v0.5.0 (2022-06-14)
+-------------------
+
+Features
+~~~~~~~~
+- Fix #48 [Corentin Bettiol]
+
+  Fix typo in comments.
+
+  Update image check: image lacking alt tags are creating a "warning" and
+  not an "error" anymore, since there are valid usecases where you won't
+  add an alt tag (non-text content).
+
+  Update of translations
+
+
+Documentation
+~~~~~~~~~~~~~
+- Update readme [Corentin Bettiol]
+
+  update pre-commit-confi
+
+- Update changelog [Adrien Delhorme]
+
+Other
+~~~~~
+- Remove requests as a requirement, use django.test.Client [Jeffrey de
+  Lange]
+
+
 v0.4.3 (2021-09-09)
 -------------------
 
