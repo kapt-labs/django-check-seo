@@ -45,23 +45,33 @@ def run(site):
     occurrence = []
     first_words_kw = []
 
-    for keyword in site.keywords:
-        keyword = keyword.lower()
-        nb_occurrences = len(
-            re.findall(
-                r"(^| |\n|,|\.|!|\?)" + keyword + r"($| |\n|,|\.|!|\?)",
-                first_words,
-            )
-        )
-        occurrence.append(nb_occurrences)
+    nb_occurrences = sum(
+        [kw in first_words_text for kw in site.keywords[0].split(", ")]
+    )
 
-        if nb_occurrences > 0:
-            first_words_text = first_words_text.replace(
+    if nb_occurrences > 0:
+        occurrence.append(nb_occurrences)
+    else:
+        for keyword in site.keywords:
+            keyword = keyword.lower()
+            nb_occurrences = len(
+                re.findall(
+                    r"(^| |\n|,|\.|!|\?)" + keyword + r"($| |\n|,|\.|!|\?)",
+                    first_words,
+                )
+            )
+            occurrence.append(nb_occurrences)
+
+    if nb_occurrences > 0:
+        for keyword in site.keywords[0].split(", "):
+            new_first_words_text = first_words_text.replace(
                 keyword, '<b class="good">' + keyword + "</b>"
             )
-            if no_keywords.found != "":
-                no_keywords.found += ", "
-            no_keywords.found += keyword
+            if new_first_words_text != first_words_text:
+                if no_keywords.found != "":
+                    no_keywords.found += ", "
+                no_keywords.found += keyword
+            first_words_text = new_first_words_text
     first_words_kw.append(first_words_text)
 
     no_keywords.searched_in = first_words_kw

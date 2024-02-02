@@ -83,21 +83,28 @@ def run(site):
     for h1 in h1_all:
         h1_text = get_h1_text(h1).lower()
 
-        for keyword in site.keywords:
+        for keyword in site.keywords[0].split(", "):
             keyword = keyword.lower()
 
             # standardize apostrophes
             keyword = keyword.replace("'", "’")
             h1_text = h1_text.replace("'", "’")
 
-            # ugly regex ? see example at https://github.com/kapt-labs/django-check-seo/issues/38#issuecomment-603108275
-            nb_occurrences = len(
-                re.findall(
-                    r"(^| |\n|,|\.|!|\?)" + keyword + r"($| |\n|,|\.|!|\?)",
-                    h1_text,
+            # check unicode strings like this
+            if keyword in h1_text:
+                nb_occurrences = 1
+                occurrence.append(nb_occurrences)
+            # check special chars strings like this (hope that I will never get utf-8 AND special chars :C)
+            else:
+                # ugly regex ? see example at https://github.com/kapt-labs/django-check-seo/issues/38#issuecomment-603108275
+                nb_occurrences = len(
+                    re.findall(
+                        r"(^| |\n|,|\.|!|\?)" + r"%s" % keyword + r"($| |\n|,|\.|!|\?)",
+                        h1_text,
+                        flags=re.UNICODE,
+                    )
                 )
-            )
-            occurrence.append(nb_occurrences)
+                occurrence.append(nb_occurrences)
 
             if nb_occurrences > 0:
                 h1_text = h1_text.replace(
