@@ -10,13 +10,15 @@ In other words, django-check-seo will tell you if you have problems concerning a
 
 ----
 
+**You are on the README for the Python 2 version**
+
 # Install
 
-*(for django >= 1.8.15 & python >= 2.7)*
+*(for django >= 1.8.15 & python 2)*
 
 1. Install the module from [PyPI](https://pypi.org/project/django-check-seo/):
     ```
-    python3 -m pip install django-check-seo
+    python3 -m pip install "django-check-seo<0.6"
     ```
 2. Add it in your `INSTALLED_APPS`:
     ```
