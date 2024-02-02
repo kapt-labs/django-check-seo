@@ -2,6 +2,18 @@ Changelog
 =========
 
 
+v0.5.5 (2024-02-02)
+-------------------
+
+Bug fixes
+~~~~~~~~~
+- Fix bugs in kw count & discovery [Corentin Bettiol]
+
+Documentation
+~~~~~~~~~~~~~
+- Update changelog [Corentin Bettiol]
+
+
 v0.5.4 (2024-02-01)
 -------------------
 
