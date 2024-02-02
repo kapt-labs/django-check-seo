@@ -144,14 +144,18 @@ def run(site):
     title_text = titles[0].text.lower()
     title_text_kw = []
 
-    for kw in site.keywords:
+    for kw in site.keywords[0].split(", "):
         kw = kw.lower()
-        nb_occurrences = len(
-            re.findall(
-                r"(^| |\n|,|\.|!|\?)" + kw + r"($| |\n|,|\.|!|\?)",
-                title_text,
+
+        if kw in title_text:
+            nb_occurrences = 1
+        else:
+            nb_occurrences = len(
+                re.findall(
+                    r"(^| |\n|,|\.|!|\?)" + kw + r"($| |\n|,|\.|!|\?)",
+                    title_text,
+                )
             )
-        )
         occurrence.append(nb_occurrences)
 
         if nb_occurrences > 0:
