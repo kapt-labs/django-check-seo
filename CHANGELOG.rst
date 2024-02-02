@@ -2,6 +2,18 @@ Changelog
 =========
 
 
+v0.5.6 (2024-02-02)
+-------------------
+
+Bug fixes
+~~~~~~~~~
+- Fix keyword in title [Corentin Bettiol]
+
+Documentation
+~~~~~~~~~~~~~
+- Update changelog [Corentin Bettiol]
+
+
 v0.5.5 (2024-02-02)
 -------------------
 
