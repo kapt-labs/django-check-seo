@@ -12,7 +12,7 @@ In other words, django-check-seo will tell you if you have problems concerning a
 
 # Install
 
-*(compatible with django >= 1.8.15 & python >= 2.7)*
+*Only for django >= 2.2 & python >= 3.7, see [here](https://github.com/kapt-labs/django-check-seo/tree/python2) for a python2/django 1.8-1.11 version (tl;dr: install version <0.6).*
 
 1. Install the module from [PyPI](https://pypi.org/project/django-check-seo/):
     ```
@@ -28,11 +28,6 @@ In other words, django-check-seo will tell you if you have problems concerning a
     ```
         path("django-check-seo/", include("django_check_seo.urls")),
     ```
-    * *Or add this if you're still using `url` (you shouldn't):*
-        ```
-            url(r"^django-check-seo/", include("django_check_seo.urls")),
-        ```
-
 4. Update your Django [Site](https://i.imgur.com/pNRsKs7.png) object parameters with a working url (here's an [example](https://i.imgur.com/IedF3xE.png) for dev environment).
 
 5. Add `testserver` (and maybe `www.testserver`) to your `ALLOWED_HOSTS` list in your settings.py (django-check-seo uses the Test Framework in order to get content, instead of doing an HTTP request).
