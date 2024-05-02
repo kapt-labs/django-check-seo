@@ -154,7 +154,7 @@ The file `launch_tests.sh` is here to manage tests launching for you. You only n
 
 # Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md).
+See [CONTRIBUTING.md](https://github.com/kapt-labs/django-check-seo/blob/master/CONTRIBUTING.md).
 
 ----
 
