@@ -148,7 +148,7 @@ def run(site):
         kw = kw.lower()
         nb_occurrences = len(
             re.findall(
-                r"(^| |\n|,|\.|!|\?)" + kw + r"($| |\n|,|\.|!|\?)",
+                r"(^| |\n|,|\.|!|\?)" + kw + r"s?($| |\n|,|\.|!|\?)",
                 title_text,
             )
         )

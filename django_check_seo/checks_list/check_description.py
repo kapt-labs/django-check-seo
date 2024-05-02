@@ -123,7 +123,6 @@ def run(site):
                 length
                 < site.settings.DJANGO_CHECK_SEO_SETTINGS["meta_description_length"][0]
             ):
-
                 length_short.found = ngettext(
                     "%(words)d char", "%(words)d chars", length
                 ) % {"words": length}
@@ -135,7 +134,6 @@ def run(site):
                 length
                 > site.settings.DJANGO_CHECK_SEO_SETTINGS["meta_description_length"][1]
             ):
-
                 length_long.found = str(length)
                 length_long.searched_in = [
                     tag.attrs["content"][
@@ -155,7 +153,6 @@ def run(site):
 
             # perfect
             else:
-
                 length_success.found = str(length)
                 length_success.searched_in = meta_description
                 site.success.append(length_success)
@@ -171,7 +168,7 @@ def run(site):
 
                 nb_occurrences = len(
                     re.findall(
-                        r"(^| |\n|,|\.|!|\?)" + keyword_lower + r"($| |\n|,|\.|!|\?)",
+                        r"(^| |\n|,|\.|!|\?)" + keyword_lower + r"s?($| |\n|,|\.|!|\?)",
                         content_lower,
                     )
                 )
@@ -189,7 +186,6 @@ def run(site):
 
             # if no keyword is found in description
             if not any(i > 0 for i in occurrence):
-
                 keywords_bad.found = 0
                 keywords_bad.searched_in = meta_description
                 site.warnings.append(keywords_bad)
@@ -201,7 +197,6 @@ def run(site):
 
     # too many meta description
     if number_meta_description > 1:
-
         too_much_meta.found = number_meta_description
         too_much_meta.searched_in = meta_description
         site.warnings.append(too_much_meta)

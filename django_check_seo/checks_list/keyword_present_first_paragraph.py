@@ -49,7 +49,7 @@ def run(site):
         keyword = keyword.lower()
         nb_occurrences = len(
             re.findall(
-                r"(^| |\n|,|\.|!|\?)" + keyword + r"($| |\n|,|\.|!|\?)",
+                r"(^| |\n|,|\.|!|\?)" + keyword + r"s?($| |\n|,|\.|!|\?)",
                 first_words,
             )
         )

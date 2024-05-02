@@ -81,7 +81,7 @@ def run(site):
 
         nb_occurrences = len(
             re.findall(
-                r"(^| |\n|,|\.|!|\?|/|-)" + keyword + r"($| |\n|,|\.|!|\?|/|-)",
+                r"(^| |\n|,|\.|!|\?|/|-)" + keyword + r"s?($| |\n|,|\.|!|\?|/|-)",
                 full_url,
             )
         )
@@ -91,7 +91,7 @@ def run(site):
                 re.findall(
                     r"(^| |\n|,|\.|!|\?|/|-)"
                     + keyword_unnaccented
-                    + r"($| |\n|,|\.|!|\?|/|-)",
+                    + r"s?($| |\n|,|\.|!|\?|/|-)",
                     full_url,
                 )
             )

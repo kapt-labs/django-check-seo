@@ -85,7 +85,7 @@ def run(site):
                     re.findall(
                         r"(^| |\n|,|\.|!|\?)"
                         + keyword_lower.lower()
-                        + r"($| |\n|,|\.|!|\?)",
+                        + r"s?($| |\n|,|\.|!|\?)",
                         single_h2,
                     )
                 )
