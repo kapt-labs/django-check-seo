@@ -2,6 +2,25 @@ Changelog
 =========
 
 
+v1.0.1 (2024-05-02)
+-------------------
+
+Bug fixes
+~~~~~~~~~
+- Handle plural form in content [Corentin Bettiol]
+
+  When searching for a keyword in the document (meta description, h1, h2, early content), handle plural of keyword too.
+
+  For example, if the keyword is "destination", the checks will accept "destinations".
+  Work at least for fr/en/es/pt
+
+
+Documentation
+~~~~~~~~~~~~~
+- Update README [Corentin Bettiol]
+- Update changelog [Corentin Bettiol]
+
+
 v1.0.0 (2024-01-25)
 -------------------
 
