@@ -47,6 +47,8 @@ def run(site):
 
     nb_occurrences = sum(
         [kw in first_words_text for kw in site.keywords[0].split(", ")]
+        if site.keywords
+        else []
     )
 
     if nb_occurrences > 0:
