@@ -168,40 +168,43 @@ def run(site):
                 .decode("utf-8")
             )  # needed for python2 processing
 
-            for keyword in site.keywords[0].split(", "):
-                keyword_lower = keyword.lower()
+            if site.keywords:
+                for keyword in site.keywords[0].split(", "):
+                    keyword_lower = keyword.lower()
 
-                # standardize apostrophes
-                keyword_lower = (
-                    keyword_lower.encode("utf-8").replace("'", "’").decode("utf-8")
-                )
-
-                nb_occurrences = 0
-                if keyword_lower in content_lower:
-                    nb_occurrences = 1
-
-                if nb_occurrences > 0:
-                    occurrence.append(nb_occurrences)
-                else:
-                    nb_occurrences = len(
-                        re.findall(
-                            r"(^| |\n|,|\.|!|\?)"
-                            + keyword_lower
-                            + r"($| |\n|,|\.|!|\?)",
-                            content_lower,
-                        )
+                    # standardize apostrophes
+                    keyword_lower = (
+                        keyword_lower.encode("utf-8").replace("'", "’").decode("utf-8")
                     )
-                    occurrence.append(nb_occurrences)
-                # edit current meta description
-                meta_description_kw[number_meta_description - 1] = meta_description_kw[
-                    number_meta_description - 1
-                ].replace(keyword_lower, '<b class="good">' + keyword_lower + "</b>")
 
-                # add kw in found keywords
-                if nb_occurrences > 0:
-                    if keywords_good.found != "":
-                        keywords_good.found += ", "
-                    keywords_good.found += keyword
+                    nb_occurrences = 0
+                    if keyword_lower in content_lower:
+                        nb_occurrences = 1
+
+                    if nb_occurrences > 0:
+                        occurrence.append(nb_occurrences)
+                    else:
+                        nb_occurrences = len(
+                            re.findall(
+                                r"(^| |\n|,|\.|!|\?)"
+                                + keyword_lower
+                                + r"($| |\n|,|\.|!|\?)",
+                                content_lower,
+                            )
+                        )
+                        occurrence.append(nb_occurrences)
+                    # edit current meta description
+                    meta_description_kw[
+                        number_meta_description - 1
+                    ] = meta_description_kw[number_meta_description - 1].replace(
+                        keyword_lower, '<b class="good">' + keyword_lower + "</b>"
+                    )
+
+                    # add kw in found keywords
+                    if nb_occurrences > 0:
+                        if keywords_good.found != "":
+                            keywords_good.found += ", "
+                        keywords_good.found += keyword
 
             # if no keyword is found in description
             if not any(i > 0 for i in occurrence):
