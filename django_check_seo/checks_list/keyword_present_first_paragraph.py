@@ -1,6 +1,6 @@
 # Third party
 from django.utils.translation import gettext as _
-from django.utils.translation import pgettext
+from django.utils.translation import pgettext_lazy
 
 # Local application / specific library imports
 from ..checks import custom_list, utils
@@ -38,30 +38,15 @@ def run(site):
     ]
     # check text and not list of words in order to find keywords that looks like "this is a keyword" in text "words this is a keyword words"
     first_words = " ".join(first_words)
-    first_words_text = first_words.lower()
 
-    occurrence = []
-    first_words_kw = []
-
-    for keyword in site.keywords:
-        keyword = keyword.lower()
-        nb_occurrences = utils.count_keyword_occurrences(keyword, first_words)
-        occurrence.append(nb_occurrences)
-
-        if nb_occurrences > 0:
-            first_words_text = first_words_text.replace(
-                keyword, '<b class="good">' + keyword + "</b>"
-            )
-            if no_keywords.found != "":
-                no_keywords.found += ", "
-            no_keywords.found += keyword
-    first_words_kw.append(first_words_text)
-
-    no_keywords.searched_in = first_words_kw
+    highlighted, occurrence, found = utils.highlight_keywords_in_text(
+        first_words, site.keywords
+    )
+    no_keywords.searched_in = [highlighted]
 
     # no keyword was found in first paragraph
     if not any(i > 0 for i in occurrence):
-        no_keywords.found = pgettext("masculin", "none")
+        no_keywords.found = pgettext_lazy("masculin", "none")
         site.problems.append(no_keywords)
 
     else:

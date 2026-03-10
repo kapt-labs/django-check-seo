@@ -2,7 +2,7 @@
 
 # Third party
 from django.utils.translation import gettext as _
-from django.utils.translation import ngettext, pgettext
+from django.utils.translation import ngettext, pgettext_lazy
 
 # Local application / specific library imports
 from ..checks import custom_list, utils
@@ -52,19 +52,19 @@ def run(site):
 
     keywords_bad = custom_list.CustomList(
         name=_("No keyword in meta description"),
-        settings=pgettext("masculin", "at least one"),
+        settings=pgettext_lazy("masculin", "at least one"),
         description=length_short.description,
     )
 
     keywords_good = custom_list.CustomList(
         name=_("Keywords were found in meta description"),
-        settings=pgettext("masculin", "at least one"),
+        settings=pgettext_lazy("masculin", "at least one"),
         description=length_short.description,
     )
 
     too_much_meta = custom_list.CustomList(
         name=_("Too much meta description tags"),
-        settings=pgettext("feminin", "only one"),
+        settings=pgettext_lazy("feminin", "only one"),
         description=_(
             "Although some people write one meta description by targeted keyword, this is still an uncommon practice that is not yet recognized by all search engines."
         ),
@@ -72,22 +72,22 @@ def run(site):
 
     meta_description_only_one = custom_list.CustomList(
         name=_("Only one meta description tag"),
-        settings=pgettext("feminin", "only one"),
-        found=pgettext("feminin", "one"),
+        settings=pgettext_lazy("feminin", "only one"),
+        found=pgettext_lazy("feminin", "one"),
         description=too_much_meta.description,
     )
 
     no_meta_description = custom_list.CustomList(
         name=_("No meta description"),
-        settings=pgettext("feminin", "needed"),
-        found=pgettext("description", "none"),
+        settings=pgettext_lazy("feminin", "needed"),
+        found=pgettext_lazy("description", "none"),
         description=length_short.description,
     )
 
     meta_description_present = custom_list.CustomList(
         name=_("Meta description is present"),
-        settings=pgettext("feminin", "needed"),
-        found=pgettext("feminin", "one"),
+        settings=pgettext_lazy("feminin", "needed"),
+        found=pgettext_lazy("feminin", "one"),
         description=_(
             "The meta description tag can be displayed in search results if it has the right length, and can influence users. Knowing that Google classifies sites according to user behaviour, it is important to have a relevant description."
         ),
@@ -154,29 +154,12 @@ def run(site):
                 length_success.searched_in = meta_description
                 site.success.append(length_success)
 
-            occurrence = []
-            keywords_good.found = ""
-            for keyword in site.keywords:
-                keyword_lower = keyword.lower()
-
-                # standardize apostrophes
-                keyword_lower = keyword_lower.replace("'", "’")
-                content_lower = tag.attrs["content"].lower().replace("'", "’")
-
-                nb_occurrences = utils.count_keyword_occurrences(
-                    keyword_lower, content_lower
-                )
-                occurrence.append(nb_occurrences)
-                # edit current meta description
-                meta_description_kw[number_meta_description - 1] = meta_description_kw[
-                    number_meta_description - 1
-                ].replace(keyword_lower, '<b class="good">' + keyword_lower + "</b>")
-
-                # add kw in found keywords
-                if nb_occurrences > 0:
-                    if keywords_good.found != "":
-                        keywords_good.found += ", "
-                    keywords_good.found += keyword
+            content_lower = tag.attrs["content"].lower()
+            highlighted, occurrence, found = utils.highlight_keywords_in_text(
+                content_lower, site.keywords, normalize_apostrophes_flag=True
+            )
+            meta_description_kw[number_meta_description - 1] = highlighted
+            keywords_good.found = found
 
             # if no keyword is found in description
             if not any(i > 0 for i in occurrence):

@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 # Third party
 from django.utils.translation import gettext as _
-from django.utils.translation import pgettext
+from django.utils.translation import pgettext_lazy
 
 # Local application / specific library imports
 from ..checks import custom_list, utils
@@ -28,7 +28,7 @@ def run(site):
     no_h2 = custom_list.CustomList(
         name=_("No h2 tag"),
         settings=_("at least one"),
-        found=pgettext("masculin", "none"),
+        found=pgettext_lazy("masculin", "none"),
         description=_(
             "H2 tags are useful because they are explored by search engines and can help them understand the subject of your page."
         ),
@@ -36,14 +36,14 @@ def run(site):
 
     enough_h2 = custom_list.CustomList(
         name=_("H2 tags were found"),
-        settings=pgettext("feminin", "at least one"),
+        settings=pgettext_lazy("feminin", "at least one"),
         description=no_h2.description,
     )
 
     no_keywords = custom_list.CustomList(
         name=_("No keyword in h2 tags"),
-        settings=pgettext("masculin", "at least one"),
-        found=pgettext("masculin", "none"),
+        settings=pgettext_lazy("masculin", "at least one"),
+        found=pgettext_lazy("masculin", "none"),
         description=_(
             "Google uses h2 tags to better understand the subjects of your page."
         ),
@@ -51,7 +51,7 @@ def run(site):
 
     enough_keywords = custom_list.CustomList(
         name=_("Keyword found in h2 tags"),
-        settings=pgettext("masculin", "at least one"),
+        settings=pgettext_lazy("masculin", "at least one"),
         found="",
         description=no_keywords.description,
     )
@@ -61,53 +61,28 @@ def run(site):
         site.warnings.append(no_h2)
     else:
         enough_h2.found = len(h2)
-        enough_h2.searched_in = [get_h2_text(t) for t in h2]
+        enough_h2.searched_in = [utils.get_heading_text(t) for t in h2]
         site.success.append(enough_h2)
 
         occurrence = []
         h2_kw = []
 
         # for each h2...
-        for single_h2 in h2:
-            single_h2 = get_h2_text(single_h2).lower()
-            # check if it contains at least 1 keyword
-            for keyword in site.keywords:
-                keyword_lower = keyword.lower()
+        for single_h2_tag in h2:
+            text = utils.get_heading_text(single_h2_tag).lower()
+            highlighted, occ, found = utils.highlight_keywords_in_text(
+                text, site.keywords, normalize_apostrophes_flag=True
+            )
+            occurrence.extend(occ)
+            h2_kw.append(highlighted)
+            if found:
+                enough_keywords.found += (", " if enough_keywords.found else "") + found
 
-                # standardize apostrophes
-                keyword_lower = keyword_lower.replace("'", "’")
-                single_h2 = single_h2.replace("'", "’")
-
-                nb_occurrences = utils.count_keyword_occurrences(
-                    keyword_lower, single_h2
-                )
-                occurrence.append(nb_occurrences)
-
-                # add kw in found
-                if nb_occurrences > 0:
-                    # and add bold in found keywords
-                    single_h2 = single_h2.replace(
-                        keyword_lower, '<b class="good">' + keyword_lower + "</b>"
-                    )
-                    if enough_keywords.found != "":
-                        enough_keywords.found += ", "
-                    enough_keywords.found += keyword
-
-            h2_kw.append(single_h2)
         # if no keyword is found in h2
         if not any(i > 0 for i in occurrence):
             no_keywords.searched_in = [t.text for t in h2]
-            no_keywords.found = pgettext("masculin", "none")
+            no_keywords.found = pgettext_lazy("masculin", "none")
             site.warnings.append(no_keywords)
         else:
             enough_keywords.searched_in = h2_kw
             site.success.append(enough_keywords)
-
-
-def get_h2_text(h2):
-    # h2 text can be content of alt tag in img
-    if not h2.text and h2.find("img", {"alt": True}):
-        return h2.find("img")["alt"]
-    # of it can be the text in h2
-    else:
-        return h2.text

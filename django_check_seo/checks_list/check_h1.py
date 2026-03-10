@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 # Third party
 from django.utils.translation import gettext as _
-from django.utils.translation import pgettext
+from django.utils.translation import pgettext_lazy
 
 # Local application / specific library imports
 from ..checks import custom_list, utils
@@ -62,57 +62,37 @@ def run(site):
 
     if len(h1_all) > 1:
         too_much_h1.found = len(h1_all)
-        too_much_h1.searched_in = [get_h1_text(t) for t in h1_all]
+        too_much_h1.searched_in = [utils.get_heading_text(t) for t in h1_all]
         site.problems.append(too_much_h1)
 
     elif not h1_all:
-        not_enough_h1.found = pgettext("masculin", "none")
+        not_enough_h1.found = pgettext_lazy("masculin", "none")
         site.problems.append(not_enough_h1)
 
     else:
         right_number_h1.found = len(h1_all)
-        right_number_h1.searched_in = [get_h1_text(t) for t in h1_all]
+        right_number_h1.searched_in = [utils.get_heading_text(t) for t in h1_all]
         site.success.append(right_number_h1)
 
     enough_keywords.found = ""
     h1_text_kw = []
     occurrence = []
     for h1 in h1_all:
-        h1_text = get_h1_text(h1).lower()
+        text = utils.get_heading_text(h1).lower()
 
-        for keyword in site.keywords:
-            keyword = keyword.lower()
-
-            # standardize apostrophes
-            keyword = keyword.replace("'", "’")
-            h1_text = h1_text.lower().replace("'", "’")
-
-            nb_occurrences = utils.count_keyword_occurrences(keyword, h1_text)
-            occurrence.append(nb_occurrences)
-
-            if nb_occurrences > 0:
-                h1_text = h1_text.replace(
-                    keyword, '<b class="good">' + keyword + "</b>"
-                )
-                if enough_keywords.found != "":
-                    enough_keywords.found += ", "
-                enough_keywords.found += keyword
-        h1_text_kw.append(h1_text)
+        highlighted, occ, found = utils.highlight_keywords_in_text(
+            text, site.keywords, normalize_apostrophes_flag=True
+        )
+        occurrence.extend(occ)
+        h1_text_kw.append(highlighted)
+        if found:
+            enough_keywords.found += (", " if enough_keywords.found else "") + found
 
     # if no keyword is found in h1
     if not any(i > 0 for i in occurrence):
-        no_keywords.found = pgettext("masculin", "none")
+        no_keywords.found = pgettext_lazy("masculin", "none")
         no_keywords.searched_in = [t.text for t in h1_all]
         site.problems.append(no_keywords)
     else:
         enough_keywords.searched_in = h1_text_kw
         site.success.append(enough_keywords)
-
-
-def get_h1_text(h1):
-    # h1 text can be content of alt tag in img
-    if not h1.text and h1.find("img", {"alt": True}):
-        return h1.find("img")["alt"]
-    # of it can be the text in h1
-    else:
-        return h1.text

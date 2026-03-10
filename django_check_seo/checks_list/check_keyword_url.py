@@ -8,7 +8,7 @@ import unidecode
 from django.conf import settings
 from django.conf.global_settings import LANGUAGES
 from django.utils.translation import gettext as _
-from django.utils.translation import pgettext
+from django.utils.translation import pgettext_lazy
 
 # Local application / specific library imports
 from ..checks import custom_list, utils
@@ -38,8 +38,8 @@ def run(site):
 
     no_keyword = custom_list.CustomList(
         name=_("No keyword in URL"),
-        settings=pgettext("masculin", "at least one"),
-        found=pgettext("masculin", "none"),
+        settings=pgettext_lazy("masculin", "at least one"),
+        found=pgettext_lazy("masculin", "none"),
         description=_(
             'Keywords in URL will help your users understand the organisation of your website, and are a small ranking factor for Google. On the other hand, Bing guidelines advises to "<i>keep [your URL] clean and keyword rich when possible</i>".<br />Warning, Django Check SEO will try to find keywords in the URL without apostrophes ("pour-lenergie" will be found, but not "pour-l-energie").'
         ),
@@ -47,7 +47,7 @@ def run(site):
 
     enough_keyword = custom_list.CustomList(
         name=_("Keywords found in URL"),
-        settings=pgettext("masculin", "at least one"),
+        settings=pgettext_lazy("masculin", "at least one"),
         found="",
         description=no_keyword.description,
     )

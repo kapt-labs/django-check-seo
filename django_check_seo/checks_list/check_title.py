@@ -1,6 +1,6 @@
 # Third party
 from django.utils.translation import gettext as _
-from django.utils.translation import pgettext
+from django.utils.translation import pgettext_lazy
 
 # Local application / specific library imports
 from ..checks import custom_list, utils
@@ -24,7 +24,7 @@ def run(site):
 
     no_title = custom_list.CustomList(
         name=_("No meta title tag"),
-        settings=pgettext("feminin", "one"),
+        settings=pgettext_lazy("feminin", "one"),
         found=_("none"),
         description=_(
             "Titles tags are ones of the most important things to add to your pages, sinces they are the main text displayed on result search pages."
@@ -33,7 +33,7 @@ def run(site):
 
     too_much = custom_list.CustomList(
         name=_("Too much meta title tags"),
-        settings=pgettext("feminin", "only one"),
+        settings=pgettext_lazy("feminin", "only one"),
         description=_(
             "Only the first meta title tag will be displayed on the tab space on your browser, and only one meta title tag will be displayed on the search results pages."
         ),
@@ -136,27 +136,15 @@ def run(site):
         ]
         site.success.append(title_okay)
 
-    keyword.found = ""
-    occurrence = []
     title_text = titles[0].text.lower()
-    title_text_kw = []
-
-    for kw in site.keywords:
-        kw = kw.lower()
-        nb_occurrences = utils.count_keyword_occurrences(kw, title_text)
-        occurrence.append(nb_occurrences)
-
-        if nb_occurrences > 0:
-            title_text = title_text.replace(
-                kw, '<b class="good">' + kw.lower() + "</b>"
-            )
-            if keyword.found != "":
-                keyword.found += ", "
-            keyword.found += kw
-    title_text_kw.append(title_text)
+    highlighted, occurrence, found = utils.highlight_keywords_in_text(
+        title_text, site.keywords
+    )
+    title_text_kw = [highlighted]
+    keyword.found = found
 
     # title do not contain any keyword
-    if keyword.found == "":
+    if not any(i > 0 for i in occurrence):
         no_keyword.searched_in = title_text_kw
         site.problems.append(no_keyword)
     else:

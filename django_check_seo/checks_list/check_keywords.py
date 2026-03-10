@@ -1,6 +1,6 @@
 # Third party
 from django.utils.translation import gettext as _
-from django.utils.translation import pgettext
+from django.utils.translation import pgettext_lazy
 
 # Local application / specific library imports
 from ..checks import custom_list
@@ -25,8 +25,8 @@ def run(site):
 
     no_keywords = custom_list.CustomList(
         name=_("No keywords in meta keywords field"),
-        settings=pgettext("masculin", "at least one"),
-        found=pgettext("masculin", "none"),
+        settings=pgettext_lazy("masculin", "at least one"),
+        found=pgettext_lazy("masculin", "none"),
         description=_(
             "Django-check-seo uses the keywords in the meta keywords field to check all other tests related to the keywords. A series of problems and warnings are related to keywords, and will therefore systematically be activated if the keywords are not filled in."
         ),
@@ -34,7 +34,7 @@ def run(site):
 
     keywords_found = custom_list.CustomList(
         name=_("Keywords found in meta keywords field"),
-        settings=pgettext("masculin", "at least one"),
+        settings=pgettext_lazy("masculin", "at least one"),
         found="",
         description=no_keywords.description,
     )
