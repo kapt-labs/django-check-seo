@@ -1,8 +1,5 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 # Standard Library
-import sys
+from urllib.parse import urlparse
 
 import unidecode
 from django.conf import settings
@@ -12,12 +9,6 @@ from django.utils.translation import pgettext_lazy
 
 # Local application / specific library imports
 from ..checks import custom_list, utils
-
-# hacky trick to add python2 compatibility to a python3 project after python2 eol
-if sys.version_info.major == 2:
-    from urlparse import urlparse  # pragma: no cover
-else:
-    from urllib.parse import urlparse  # pragma: no cover
 
 
 def importance():
@@ -76,7 +67,7 @@ def run(site):
         # remove apostrophes as they are removed from URLs
         keyword = keyword.replace("'", "").replace("’", "")
 
-        keyword_unnaccented = unidecode.unidecode(keyword)  # pragma: no cover
+        keyword_unnaccented = unidecode.unidecode(keyword)
 
         nb_occurrences = utils.count_keyword_occurrences(
             keyword, full_url, for_url=True

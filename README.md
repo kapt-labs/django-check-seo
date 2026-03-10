@@ -148,7 +148,17 @@ DJANGO_CHECK_SEO_EXCLUDE_CONTENT = "tag, .class, #id, tag > .child_class"
 
 They are located in `tests` folder.
 
-The file `launch_tests.sh` is here to manage tests launching for you. You only need `python3-venv` (for python3 venv) and `virtualenv` (for **python2** venv) in order to make it work.
+## Create test venv
+
+```sh
+python3 -m venv .venv && . .venv/bin/activate && python3 -m pip install django bs4 lxml djangocms-page-meta requests pytest pytest-django pytest-cov
+```
+
+## Launch tests
+
+```sh
+. venv3/bin/activate && python3 -m pytest -s --cov-config=.coveragerc --cov=django_check_seo --cov-report term-missing
+```
 
 ----
 

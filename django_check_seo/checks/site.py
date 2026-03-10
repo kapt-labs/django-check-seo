@@ -33,7 +33,7 @@ class Site:
         if settings.DJANGO_CHECK_SEO_EXCLUDE_CONTENT != "":
             # iterate through each body (should be only 1)
             for body in self.content:
-                # and remove selecte blocks
+                # and remove selected blocks
                 for node in body.select(settings.DJANGO_CHECK_SEO_EXCLUDE_CONTENT):
                     node.extract()
 

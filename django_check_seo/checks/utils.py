@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 """
 Shared utilities for SEO checks.
 """
-
-from __future__ import unicode_literals
 
 import re
 

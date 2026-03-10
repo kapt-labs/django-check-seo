@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Use ./launch_tests.sh to launch these tests.
 
 import re

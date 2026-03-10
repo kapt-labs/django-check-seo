@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from bs4 import BeautifulSoup
 
 from django_check_seo.checks import site

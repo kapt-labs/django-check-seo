@@ -17,7 +17,6 @@ You can help by picking an issue, or choosing to add a new test/feature (create 
 2. Install pre-commit & unit tests dependencies.
     ```bash
     python3 -m pip install pre-commit python3-venv
-    python2 -m pip install virtualenv
     ```
 
 3. Install pre-commit hooks.

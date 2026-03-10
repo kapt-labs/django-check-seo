@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 # Third party
 from django.utils.translation import gettext as _
 from django.utils.translation import pgettext_lazy
