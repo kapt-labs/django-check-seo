@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-# Standard Library
-import re
-
 # Third party
 from django.utils.translation import gettext as _
 from django.utils.translation import pgettext
 
 # Local application / specific library imports
-from ..checks import custom_list
+from ..checks import custom_list, utils
 
 
 def importance():
@@ -88,15 +85,9 @@ def run(site):
 
             # standardize apostrophes
             keyword = keyword.replace("'", "’")
-            h1_text = h1_text.replace("'", "’")
+            h1_text = h1_text.lower().replace("'", "’")
 
-            # ugly regex ? see example at https://github.com/kapt-labs/django-check-seo/issues/38#issuecomment-603108275
-            nb_occurrences = len(
-                re.findall(
-                    r"(^| |\n|,|\.|!|\?)" + keyword + r"s?($| |\n|,|\.|!|\?)",
-                    h1_text,
-                )
-            )
+            nb_occurrences = utils.count_keyword_occurrences(keyword, h1_text)
             occurrence.append(nb_occurrences)
 
             if nb_occurrences > 0:

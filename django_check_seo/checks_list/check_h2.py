@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-# Standard Library
-import re
-
 # Third party
 from django.utils.translation import gettext as _
 from django.utils.translation import pgettext
 
 # Local application / specific library imports
-from ..checks import custom_list
+from ..checks import custom_list, utils
 
 
 def importance():
@@ -81,13 +78,8 @@ def run(site):
                 keyword_lower = keyword_lower.replace("'", "’")
                 single_h2 = single_h2.replace("'", "’")
 
-                nb_occurrences = len(
-                    re.findall(
-                        r"(^| |\n|,|\.|!|\?)"
-                        + keyword_lower.lower()
-                        + r"s?($| |\n|,|\.|!|\?)",
-                        single_h2,
-                    )
+                nb_occurrences = utils.count_keyword_occurrences(
+                    keyword_lower, single_h2
                 )
                 occurrence.append(nb_occurrences)
 

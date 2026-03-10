@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 
-# Standard Library
-import re
-
 # Third party
 from django.utils.translation import gettext as _
 from django.utils.translation import ngettext, pgettext
 
 # Local application / specific library imports
-from ..checks import custom_list
+from ..checks import custom_list, utils
 
 
 def importance():
@@ -166,11 +163,8 @@ def run(site):
                 keyword_lower = keyword_lower.replace("'", "’")
                 content_lower = tag.attrs["content"].lower().replace("'", "’")
 
-                nb_occurrences = len(
-                    re.findall(
-                        r"(^| |\n|,|\.|!|\?)" + keyword_lower + r"s?($| |\n|,|\.|!|\?)",
-                        content_lower,
-                    )
+                nb_occurrences = utils.count_keyword_occurrences(
+                    keyword_lower, content_lower
                 )
                 occurrence.append(nb_occurrences)
                 # edit current meta description

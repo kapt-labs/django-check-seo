@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 # Standard Library
-import re
 import sys
 
 import unidecode
@@ -12,7 +11,7 @@ from django.utils.translation import gettext as _
 from django.utils.translation import pgettext
 
 # Local application / specific library imports
-from ..checks import custom_list
+from ..checks import custom_list, utils
 
 # hacky trick to add python2 compatibility to a python3 project after python2 eol
 if sys.version_info.major == 2:
@@ -42,7 +41,7 @@ def run(site):
         settings=pgettext("masculin", "at least one"),
         found=pgettext("masculin", "none"),
         description=_(
-            'Keywords in URL will help your users understand the organisation of your website, and are a small ranking factor for Google. On the other hand, Bing guidelines advises to "<i>keep [your URL] clean and keyword rich when possible</i>".'
+            'Keywords in URL will help your users understand the organisation of your website, and are a small ranking factor for Google. On the other hand, Bing guidelines advises to "<i>keep [your URL] clean and keyword rich when possible</i>".<br />Warning, Django Check SEO will try to find keywords in the URL without apostrophes ("pour-lenergie" will be found, but not "pour-l-energie").'
         ),
     )
 
@@ -74,26 +73,18 @@ def run(site):
     for keyword in site.keywords:
         keyword = keyword.lower().replace(" ", "-")
 
-        # remove apostrophes as they are generally removed from URLs
+        # remove apostrophes as they are removed from URLs
         keyword = keyword.replace("'", "").replace("’", "")
 
         keyword_unnaccented = unidecode.unidecode(keyword)  # pragma: no cover
 
-        nb_occurrences = len(
-            re.findall(
-                r"(^| |\n|,|\.|!|\?|/|-)" + keyword + r"s?($| |\n|,|\.|!|\?|/|-)",
-                full_url,
-            )
+        nb_occurrences = utils.count_keyword_occurrences(
+            keyword, full_url, for_url=True
         )
         if nb_occurrences == 0:
             # retry with unnaccented kw
-            accented_occurrences = len(
-                re.findall(
-                    r"(^| |\n|,|\.|!|\?|/|-)"
-                    + keyword_unnaccented
-                    + r"s?($| |\n|,|\.|!|\?|/|-)",
-                    full_url,
-                )
+            accented_occurrences = utils.count_keyword_occurrences(
+                keyword_unnaccented, full_url, for_url=True
             )
         occurrence.append(nb_occurrences + accented_occurrences)
 

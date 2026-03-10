@@ -1,11 +1,9 @@
-import re
-
 # Third party
 from django.utils.translation import gettext as _
 from django.utils.translation import pgettext
 
 # Local application / specific library imports
-from ..checks import custom_list
+from ..checks import custom_list, utils
 
 
 def importance():
@@ -47,12 +45,7 @@ def run(site):
 
     for keyword in site.keywords:
         keyword = keyword.lower()
-        nb_occurrences = len(
-            re.findall(
-                r"(^| |\n|,|\.|!|\?)" + keyword + r"s?($| |\n|,|\.|!|\?)",
-                first_words,
-            )
-        )
+        nb_occurrences = utils.count_keyword_occurrences(keyword, first_words)
         occurrence.append(nb_occurrences)
 
         if nb_occurrences > 0:

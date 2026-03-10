@@ -46,7 +46,7 @@ def run(site):
 
     deep_url.found = number_of_slashes
 
-    # replace concernet / by underlined /, and put only too mush slashes in red background
+    # replace concerned / by underlined /, and put only too many slashes in red background
     deep_url.searched_in = [
         url_without_two_points_slash_slash.replace(
             "/", '<b><u class="problem">/</u></b>', number_of_slashes
