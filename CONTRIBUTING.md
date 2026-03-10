@@ -37,7 +37,7 @@ You can help by picking an issue, or choosing to add a new test/feature (create 
 7. Add yourself in [AUTHORS.md](AUTHORS.md).
 
 8. Commit, push.  
-    *Make sure that pre-commit runs isort, black, flake8 & `launch_checks.sh`. [Example](https://github.com/kapt-labs/django-check-seo/commit/da1d0be5d3ebe6734585cd5dd7027186d432ccd0#commitcomment-38147459).*
+    *Make sure that pre-commit runs ruff (format + lint) & `launch_checks.sh`. [Example](https://github.com/kapt-labs/django-check-seo/commit/da1d0be5d3ebe6734585cd5dd7027186d432ccd0#commitcomment-38147459).*
 
 9. Create a [Pull Request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 
