@@ -3,6 +3,7 @@
 # Use ./launch_tests.sh to launch these tests.
 
 from bs4 import BeautifulSoup
+
 from django_check_seo.checks import site
 
 html_content = """
@@ -53,6 +54,7 @@ def test_link_importance():
 
 def test_links_internal_noexternal(monkeypatch):
     from django.contrib.sites.models import Site
+
     from django_check_seo.checks_list import check_links
 
     site = init()
@@ -84,6 +86,7 @@ def test_links_internal_noexternal(monkeypatch):
 
 def test_links_nointernal_external(monkeypatch):
     from django.contrib.sites.models import Site
+
     from django_check_seo.checks_list import check_links
 
     site = init()
@@ -118,6 +121,7 @@ def test_links_nointernal_external(monkeypatch):
 
 def test_links_internal_img(monkeypatch):
     from django.contrib.sites.models import Site
+
     from django_check_seo.checks_list import check_links
 
     site = init()
@@ -143,6 +147,7 @@ def test_links_internal_img(monkeypatch):
 
 def test_links_internal_img_no_alt_tag(monkeypatch):
     from django.contrib.sites.models import Site
+
     from django_check_seo.checks_list import check_links
 
     site = init()
@@ -168,6 +173,7 @@ def test_links_internal_img_no_alt_tag(monkeypatch):
 
 def test_links_internal_empty(monkeypatch):
     from django.contrib.sites.models import Site
+
     from django_check_seo.checks_list import check_links
 
     site = init()

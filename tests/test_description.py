@@ -3,6 +3,7 @@
 # Use ./launch_tests.sh to launch these tests.
 
 from bs4 import BeautifulSoup
+
 from django_check_seo.checks import site
 
 html_content = """
@@ -91,9 +92,9 @@ def test_description_1_nokw_too_short_49():
 
     site = init()
 
-    site.soup.select('meta[name="description"]')[0][
-        "content"
-    ] = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    site.soup.select('meta[name="description"]')[0]["content"] = (
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    )
     check_description.run(site)
 
     for problem in site.problems:
@@ -111,9 +112,9 @@ def test_description_1_nokw_too_long_160():
 
     site = init()
 
-    site.soup.select('meta[name="description"]')[0][
-        "content"
-    ] = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    site.soup.select('meta[name="description"]')[0]["content"] = (
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    )
     check_description.run(site)
 
     for problem in site.problems:
@@ -130,9 +131,9 @@ def test_description_1_nokw_too_long_161():
 
     site = init()
 
-    site.soup.select('meta[name="description"]')[0][
-        "content"
-    ] = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab"
+    site.soup.select('meta[name="description"]')[0]["content"] = (
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab"
+    )
     check_description.run(site)
 
     for problem in site.problems:
@@ -145,14 +146,13 @@ def test_description_1_nokw_too_long_161():
 
 
 def test_description_1_kw():
-    from django_check_seo.checks_list import check_keywords
-    from django_check_seo.checks_list import check_description
+    from django_check_seo.checks_list import check_description, check_keywords
 
     site = init()
 
-    site.soup.select('meta[name="description"]')[0][
-        "content"
-    ] = "Here is the description of the page."
+    site.soup.select('meta[name="description"]')[0]["content"] = (
+        "Here is the description of the page."
+    )
 
     check_keywords.run(site)
     check_description.run(site)
@@ -167,14 +167,13 @@ def test_description_1_kw():
 
 
 def test_description_1_kws():
-    from django_check_seo.checks_list import check_keywords
-    from django_check_seo.checks_list import check_description
+    from django_check_seo.checks_list import check_description, check_keywords
 
     site = init()
 
-    site.soup.select('meta[name="description"]')[0][
-        "content"
-    ] = "Here is the description of the page without title."
+    site.soup.select('meta[name="description"]')[0]["content"] = (
+        "Here is the description of the page without title."
+    )
 
     check_keywords.run(site)
     check_description.run(site)
@@ -193,9 +192,9 @@ def test_description_1_length():
 
     site = init()
 
-    site.soup.select('meta[name="description"]')[0][
-        "content"
-    ] = "Here is the description of the page without title."
+    site.soup.select('meta[name="description"]')[0]["content"] = (
+        "Here is the description of the page without title."
+    )
     check_description.run(site)
 
     for success in site.success:
@@ -214,6 +213,7 @@ def test_description_1_length():
 
 def test_description_2():
     import copy
+
     from django_check_seo.checks_list import check_description
 
     site = init()

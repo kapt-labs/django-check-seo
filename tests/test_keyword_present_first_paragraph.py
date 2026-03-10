@@ -5,6 +5,7 @@
 import re
 
 from bs4 import BeautifulSoup
+
 from django_check_seo.checks import site
 
 html_content = """
@@ -61,8 +62,10 @@ def test_url_importance():
 
 
 def test_keyword_present_first_paragraph_kw():
-    from django_check_seo.checks_list import check_keywords
-    from django_check_seo.checks_list import keyword_present_first_paragraph
+    from django_check_seo.checks_list import (
+        check_keywords,
+        keyword_present_first_paragraph,
+    )
 
     site = init()
     check_keywords.run(site)
@@ -83,8 +86,10 @@ def test_keyword_present_first_paragraph_kw():
 
 
 def test_keyword_present_first_paragraph_nokw():
-    from django_check_seo.checks_list import check_keywords
-    from django_check_seo.checks_list import keyword_present_first_paragraph
+    from django_check_seo.checks_list import (
+        check_keywords,
+        keyword_present_first_paragraph,
+    )
 
     site = init()
     site.soup.find("p").string = "There is no keyword inside first 50 words."
@@ -102,8 +107,10 @@ def test_keyword_present_first_paragraph_nokw():
 
 
 def test_keyword_present_first_paragraph_kws():
-    from django_check_seo.checks_list import check_keywords
-    from django_check_seo.checks_list import keyword_present_first_paragraph
+    from django_check_seo.checks_list import (
+        check_keywords,
+        keyword_present_first_paragraph,
+    )
 
     site = init()
     site.soup.find(

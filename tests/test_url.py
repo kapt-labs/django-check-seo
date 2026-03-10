@@ -3,6 +3,7 @@
 # Use ./launch_tests.sh to launch these tests.
 
 from bs4 import BeautifulSoup
+
 from django_check_seo.checks import site
 
 html_content = """

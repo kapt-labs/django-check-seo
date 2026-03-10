@@ -3,6 +3,7 @@
 # Use ./launch_tests.sh to launch these tests.
 
 from bs4 import BeautifulSoup
+
 from django_check_seo.checks import site
 
 html_content = """
@@ -125,6 +126,7 @@ def test_title_okay():
 
 def test_titles():
     import copy
+
     from django_check_seo.checks_list import check_title
 
     site = init()
@@ -144,8 +146,7 @@ def test_titles():
 
 
 def test_title_nokw():
-    from django_check_seo.checks_list import check_title
-    from django_check_seo.checks_list import check_keywords
+    from django_check_seo.checks_list import check_keywords, check_title
 
     site = init()
     check_keywords.run(site)
@@ -166,8 +167,7 @@ def test_title_nokw():
 
 
 def test_title_kw():
-    from django_check_seo.checks_list import check_title
-    from django_check_seo.checks_list import check_keywords
+    from django_check_seo.checks_list import check_keywords, check_title
 
     site = init()
     check_keywords.run(site)
@@ -187,8 +187,7 @@ def test_title_kw():
 
 
 def test_title_kws():
-    from django_check_seo.checks_list import check_title
-    from django_check_seo.checks_list import check_keywords
+    from django_check_seo.checks_list import check_keywords, check_title
 
     site = init()
     check_keywords.run(site)

@@ -5,6 +5,7 @@
 import re
 
 from bs4 import BeautifulSoup
+
 from django_check_seo.checks import site
 
 html_content = """

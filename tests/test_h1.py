@@ -3,6 +3,7 @@
 # Use ./launch_tests.sh to launch these tests.
 
 from bs4 import BeautifulSoup
+
 from django_check_seo.checks import site
 
 html_content = """
@@ -122,8 +123,7 @@ def test_h1_1_nokw_image():
 
 
 def test_h1_1_kw():
-    from django_check_seo.checks_list import check_h1
-    from django_check_seo.checks_list import check_keywords
+    from django_check_seo.checks_list import check_h1, check_keywords
 
     site = init()
 
@@ -144,8 +144,7 @@ def test_h1_1_kw():
 
 
 def test_h1_1_kws():
-    from django_check_seo.checks_list import check_h1
-    from django_check_seo.checks_list import check_keywords
+    from django_check_seo.checks_list import check_h1, check_keywords
 
     site = init()
     site.soup.find("h1").string = "Title of the page description"
@@ -169,8 +168,7 @@ def test_h1_1_kws():
 
 
 def test_h1_1_kw_strange1():
-    from django_check_seo.checks_list import check_h1
-    from django_check_seo.checks_list import check_keywords
+    from django_check_seo.checks_list import check_h1, check_keywords
 
     site = init()
     site.soup.select('meta[name="keywords"]')[0]["content"] = "@letics"

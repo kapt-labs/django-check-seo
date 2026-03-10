@@ -3,6 +3,7 @@
 # Use ./launch_tests.sh to launch these tests.
 
 from bs4 import BeautifulSoup
+
 from django_check_seo.checks import site
 
 html_content = """
@@ -58,6 +59,7 @@ def test_image_okay():
 
 def test_images_okay():
     import copy
+
     from django_check_seo.checks_list import check_images
 
     site = init()
@@ -98,6 +100,7 @@ def test_image_missing():
 
 def test_images_missing():
     import copy
+
     from django_check_seo.checks_list import check_images
 
     site = init()
