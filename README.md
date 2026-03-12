@@ -154,6 +154,12 @@ The `django_check_seo/default.html` template have an `<aside>` block named `seo_
 
 ----
 
+# Want a video?
+
+https://github.com/user-attachments/assets/a12dd23c-548d-4566-b1e8-4f300c80be7c
+
+> How the keywords works.
+
 # Want a screenshot?
 
 ![screenshot](https://i.imgur.com/hJGDvtw.png)
