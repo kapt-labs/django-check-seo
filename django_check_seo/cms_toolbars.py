@@ -12,12 +12,12 @@ except ImportError:
 
 class DjangoSeoToolbar(CMSToolbar):
     def populate(self):
-
-        self.toolbar.add_sideframe_item(
-            _("Check SEO"),  # text
-            "/django-check-seo/?page="
-            + self.request.path,  # url (+ current page passed as a GET parameter)
-        )
+        # display only if user has permission to access the django-check-seo app
+        if self.request.user.has_perm("django_check_seo.use_django_check_seo"):
+            self.toolbar.add_sideframe_item(
+                _("Check SEO"),
+                "/django-check-seo/?page=" + self.request.path,
+            )
 
 
 # register the toolbar
