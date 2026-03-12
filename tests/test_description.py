@@ -5,6 +5,7 @@
 from bs4 import BeautifulSoup
 
 from django_check_seo.checks import site
+from django_check_seo.utils.keywords_discovery import meta_keywords
 
 html_content = """
 <!doctype html>
@@ -154,6 +155,7 @@ def test_description_1_kw():
         "Here is the description of the page."
     )
 
+    meta_keywords(site)
     check_keywords.run(site)
     check_description.run(site)
 
@@ -175,6 +177,7 @@ def test_description_1_kws():
         "Here is the description of the page without title."
     )
 
+    meta_keywords(site)
     check_keywords.run(site)
     check_description.run(site)
 

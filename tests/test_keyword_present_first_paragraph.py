@@ -5,6 +5,7 @@ import re
 from bs4 import BeautifulSoup
 
 from django_check_seo.checks import site
+from django_check_seo.utils.keywords_discovery import meta_keywords
 
 html_content = """
 <!doctype html>
@@ -66,6 +67,7 @@ def test_keyword_present_first_paragraph_kw():
     )
 
     site = init()
+    meta_keywords(site)
     check_keywords.run(site)
     keyword_present_first_paragraph.run(site)
 
@@ -93,6 +95,7 @@ def test_keyword_present_first_paragraph_nokw():
     site.soup.find("p").string = "There is no keyword inside first 50 words."
     site.content_text = get_content_text(site.soup.find_all("body"))
 
+    meta_keywords(site)
     check_keywords.run(site)
     keyword_present_first_paragraph.run(site)
 
@@ -116,6 +119,7 @@ def test_keyword_present_first_paragraph_kws():
     ).string = "There are two kw inside the first paragraph: title and description."
     site.content_text = get_content_text(site.soup.find_all("body"))
 
+    meta_keywords(site)
     check_keywords.run(site)
     keyword_present_first_paragraph.run(site)
 

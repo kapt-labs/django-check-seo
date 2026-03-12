@@ -3,6 +3,7 @@
 from bs4 import BeautifulSoup
 
 from django_check_seo.checks import site
+from django_check_seo.utils.keywords_discovery import meta_keywords
 
 html_content = """
 <!doctype html>
@@ -125,6 +126,7 @@ def test_h1_1_kw():
 
     site = init()
 
+    meta_keywords(site)
     check_keywords.run(site)
 
     check_h1.run(site)
@@ -147,6 +149,7 @@ def test_h1_1_kws():
     site = init()
     site.soup.find("h1").string = "Title of the page description"
 
+    meta_keywords(site)
     check_keywords.run(site)
 
     check_h1.run(site)
@@ -173,6 +176,7 @@ def test_h1_1_kw_strange1():
 
     site.soup.find("h1").string = "word @letics another-word"
 
+    meta_keywords(site)
     check_keywords.run(site)
 
     check_h1.run(site)

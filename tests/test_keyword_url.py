@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 
 from django_check_seo.checks import site
+from django_check_seo.utils.keywords_discovery import meta_keywords
 
 # Use ./launch_tests.sh to launch these tests.
 
@@ -39,6 +40,7 @@ def test_keyword_url_kw():
 
     site = init()
 
+    meta_keywords(site)
     check_keywords.run(site)
     check_keyword_url.run(site)
 
@@ -60,6 +62,7 @@ def test_keyword_url_nokw():
     from django_check_seo.checks_list import check_keyword_url, check_keywords
 
     site = init()
+    meta_keywords(site)
     check_keywords.run(site)
     site.full_url = "https://localhost/fake-url/notitle-of-the-page"
     check_keyword_url.run(site)
@@ -78,6 +81,7 @@ def test_keyword_url_nokw_root():
     from django_check_seo.checks_list import check_keyword_url, check_keywords
 
     site = init()
+    meta_keywords(site)
     check_keywords.run(site)
     site.full_url = "https://localhost/"
     check_keyword_url.run(site)
@@ -99,6 +103,7 @@ def test_keyword_url_kws():
     site = init()
     site.soup.select('meta[name="keywords"]')[0]["content"] = "title,  page"
 
+    meta_keywords(site)
     check_keywords.run(site)
     site.full_url = "https://localhost/fake-url/title-of-the-page"
 
@@ -120,6 +125,7 @@ def test_keyword_url_kw_accented():
     site = init()
     site.soup.select('meta[name="keywords"]')[0]["content"] = "énergie"
 
+    meta_keywords(site)
     check_keywords.run(site)
     site.full_url = "https://localhost/fake-url/title-of-energie"
 
@@ -141,6 +147,7 @@ def test_keyword_url_kws_accented():
     site = init()
     site.soup.select('meta[name="keywords"]')[0]["content"] = "énergie,  éééé"
 
+    meta_keywords(site)
     check_keywords.run(site)
     site.full_url = "https://localhost/fake-url/title-eeee-energie"
 
@@ -162,6 +169,7 @@ def test_keyword_url_kws_accented_unaccented():
     site = init()
     site.soup.select('meta[name="keywords"]')[0]["content"] = "énergie,  title"
 
+    meta_keywords(site)
     check_keywords.run(site)
     site.full_url = "https://localhost/fake-url/title-of-energie"
 

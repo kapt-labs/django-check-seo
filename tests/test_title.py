@@ -3,6 +3,7 @@
 from bs4 import BeautifulSoup
 
 from django_check_seo.checks import site
+from django_check_seo.utils.keywords_discovery import meta_keywords
 
 html_content = """
 <!doctype html>
@@ -147,6 +148,7 @@ def test_title_nokw():
     from django_check_seo.checks_list import check_keywords, check_title
 
     site = init()
+    meta_keywords(site)
     check_keywords.run(site)
 
     site.soup.find("title").string = "There is notitle on this page."
@@ -168,6 +170,7 @@ def test_title_kw():
     from django_check_seo.checks_list import check_keywords, check_title
 
     site = init()
+    meta_keywords(site)
     check_keywords.run(site)
 
     check_title.run(site)
@@ -188,6 +191,7 @@ def test_title_kws():
     from django_check_seo.checks_list import check_keywords, check_title
 
     site = init()
+    meta_keywords(site)
     check_keywords.run(site)
 
     site.soup.find("title").string = "This title have a description."

@@ -13,6 +13,7 @@ INSTALLED_APPS = (
     "django.contrib.sitemaps",
     "django.contrib.staticfiles",
     "django.contrib.messages",
+    "django_check_seo",
 )
 
 ROOT_URLCONF = "base_urls"

@@ -25,3 +25,17 @@ DJANGO_CHECK_SEO_SEARCH_IN = {
 DJANGO_CHECK_SEO_EXCLUDE_CONTENT = getattr(
     settings, "DJANGO_CHECK_SEO_EXCLUDE_CONTENT", ""
 )
+
+# Keywords discovery: import path to a function (site) -> None that sets site.keywords.
+# Built-in: django_check_seo.utils.keywords_discovery.meta_keywords (from meta tag),
+#          django_check_seo.utils.keywords_discovery.model_keywords (from Page/Keyword models).
+DJANGO_CHECK_SEO_KEYWORDS_DISCOVERY_METHOD = getattr(
+    settings,
+    "DJANGO_CHECK_SEO_KEYWORDS_DISCOVERY_METHOD",
+    "django_check_seo.utils.keywords_discovery.meta_keywords",
+)
+
+# When True and discovery is model_keywords, show editable keywords form on Check SEO page.
+DJANGO_CHECK_SEO_KEYWORDS_EDITABLE = getattr(
+    settings, "DJANGO_CHECK_SEO_KEYWORDS_EDITABLE", False
+)

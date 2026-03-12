@@ -1,0 +1,28 @@
+{% load i18n %}
+<h2>
+  {% autoescape off %}{{ nb_problems_warnings }}{% endautoescape %}
+</h2>
+
+<h3>{% translate "on the public page" %}</h3>
+
+<ul class="red-list list">
+  {% for problem in problems %}
+    {% include "django_check_seo/element.html" with element=problem %}
+  {% endfor %}
+</ul>
+
+<ul class="yellow-list list">
+  {% for warning in warnings %}
+    {% include "django_check_seo/element.html" with element=warning %}
+  {% endfor %}
+</ul>
+
+{% if success|length > 0 %}
+  <hr />
+  <ul class="green-list list">
+    <h2>{% translate "Successful checks" %}</h2>
+    {% for successful_check in success %}
+      {% include "django_check_seo/element.html" with element=successful_check %}
+    {% endfor %}
+  </ul>
+{% endif %}

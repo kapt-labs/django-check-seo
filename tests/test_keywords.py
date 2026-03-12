@@ -3,6 +3,7 @@
 from bs4 import BeautifulSoup
 
 from django_check_seo.checks import site
+from django_check_seo.utils.keywords_discovery import meta_keywords
 
 html_content = """
 <!doctype html>
@@ -36,37 +37,51 @@ def test_keyword_importance():
 def test_keyword_kw():
     from django_check_seo.checks_list import check_keywords
 
-    site = init()
+    site_obj = init()
+    meta_keywords(site_obj)
+    check_keywords.run(site_obj)
 
-    check_keywords.run(site)
-
-    for success in site.success:
-        if success.name == "Keywords found in meta keywords field":
-            assert success.name == "Keywords found in meta keywords field"
+    for success in site_obj.success:
+        if success.name == "Keywords found":
+            assert success.name == "Keywords found"
             assert success.settings == "at least one"
             assert success.found == 2
             assert success.searched_in == ["description", "title"]
-            assert (
-                success.description
-                == "Django-check-seo uses the keywords in the meta keywords field to check all other tests related to the keywords. A series of problems and warnings are related to keywords, and will therefore systematically be activated if the keywords are not filled in."
-            )
+            assert "Django-check-seo uses the keywords" in success.description
+            return
+    assert False, "Expected 'Keywords found' in success"
 
 
 def test_keyword_nokw():
     from django_check_seo.checks_list import check_keywords
 
-    site = init()
-    site.soup.select('meta[name="keywords"]')[0]["content"] = ""
+    site_obj = init()
+    site_obj.soup.select('meta[name="keywords"]')[0]["content"] = ""
+    meta_keywords(site_obj)
+    check_keywords.run(site_obj)
 
-    check_keywords.run(site)
-
-    for problem in site.problems:
-        if problem.name == "No keywords in meta keywords field":
-            assert problem.name == "No keywords in meta keywords field"
+    for problem in site_obj.problems:
+        if problem.name == "No keywords defined for this page":
+            assert problem.name == "No keywords defined for this page"
             assert problem.settings == "at least one"
             assert problem.found == "none"
             assert problem.searched_in == []
-            assert (
-                problem.description
-                == "Django-check-seo uses the keywords in the meta keywords field to check all other tests related to the keywords. A series of problems and warnings are related to keywords, and will therefore systematically be activated if the keywords are not filled in."
-            )
+            assert "Django-check-seo uses the keywords" in problem.description
+            return
+    assert False, "Expected 'No keywords defined for this page' in problems"
+
+
+def test_meta_keywords_discovery():
+    """meta_keywords(site) populates site.keywords from meta tag."""
+    site_obj = init()
+    assert site_obj.keywords == []
+    meta_keywords(site_obj)
+    assert site_obj.keywords == ["description", "title"]
+
+
+def test_meta_keywords_discovery_empty():
+    """meta_keywords leaves site.keywords empty when meta is missing or empty."""
+    site_obj = init()
+    site_obj.soup.select('meta[name="keywords"]')[0]["content"] = ""
+    meta_keywords(site_obj)
+    assert site_obj.keywords == []

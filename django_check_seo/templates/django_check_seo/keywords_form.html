@@ -1,0 +1,64 @@
+{% load i18n %}
+<div id="keywords-block">
+  {% if message_success %}
+    <p class="keywords-message keywords-message-fade">{% translate "Update completed." %}</p>
+  {% endif %}
+  <div class="keywords-with-actions">
+    <datalist id="keywords-datalist">
+      {% for kw in all_keywords %}
+        <option value="{{ kw }}">
+      {% endfor %}
+    </datalist>
+    <p class="keywords-tags-label">{% translate "Keywords:" %}</p>
+    <ul class="keywords keywords-tags-list">
+      {% for kw in keywords %}
+        <li class="keyword-item">
+          <span class="keyword-tag" data-keyword="{{ kw }}" tabindex="0" role="button" title="{% translate 'Edit keyword' %}">{{ kw }}</span>
+          <div class="keyword-edit-inline" style="display: none;">
+            <form class="keyword-edit-form" method="post" action="{{ keywords_edit_url }}"
+                  hx-post="{{ keywords_edit_url }}"
+                  hx-target="#keywords-block"
+                  hx-swap="innerHTML">
+              {% csrf_token %}
+              <input type="hidden" name="path" value="{{ current_page_path }}" />
+              <input type="hidden" name="action" value="update" />
+              <input type="hidden" name="old_keyword" value="{{ kw }}" />
+              <input type="text" class="keyword-edit-input" name="new_keyword" value="{{ kw }}" list="keywords-datalist" />
+              <button type="submit" class="dcs-btn dcs-btn-ok">{% translate "OK" %}</button>
+            </form>
+            <form class="keyword-remove-form" method="post" action="{{ keywords_edit_url }}"
+                  hx-post="{{ keywords_edit_url }}"
+                  hx-target="#keywords-block"
+                  hx-confirm="{% translate 'Are you sure you want to delete this keyword?' %}"
+                  hx-swap="innerHTML">
+              {% csrf_token %}
+              <input type="hidden" name="path" value="{{ current_page_path }}" />
+              <input type="hidden" name="action" value="remove" />
+              <input type="hidden" name="keyword" value="{{ kw }}" />
+              <button type="submit" class="dcs-btn dcs-btn-remove">{% translate "Delete" %}</button>
+            </form>
+          </div>
+        </li>
+      {% empty %}
+        <li class="keyword-item keyword-item-empty">
+          <span class="no-keywords">{% translate "No keywords defined for this page." %}</span>
+        </li>
+      {% endfor %}
+    </ul>
+    <div class="keyword-add-inline" style="display: none;">
+      <form class="keyword-add-form" method="post" action="{{ keywords_edit_url }}"
+            hx-post="{{ keywords_edit_url }}"
+            hx-target="#keywords-block"
+            hx-swap="innerHTML">
+        {% csrf_token %}
+        <input type="hidden" name="path" value="{{ current_page_path }}" />
+        <input type="hidden" name="action" value="add" />
+        <input type="text" class="keyword-edit-input" name="keyword" value="" list="keywords-datalist" placeholder="{% translate 'keyword' %}" />
+        <button type="submit" class="dcs-btn dcs-btn-ok">{% translate "OK" %}</button>
+      </form>
+    </div>
+    <p class="keywords-edit-actions">
+      <button type="button" class="dcs-btn dcs-btn-outline dcs-btn-add">{% translate "Add" %}</button>
+    </p>
+  </div>
+</div>

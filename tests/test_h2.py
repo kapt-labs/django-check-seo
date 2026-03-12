@@ -5,6 +5,7 @@
 from bs4 import BeautifulSoup
 
 from django_check_seo.checks import site
+from django_check_seo.utils.keywords_discovery import meta_keywords
 
 html_content = """
 <!doctype html>
@@ -123,6 +124,7 @@ def test_h2_1_kw():
 
     site = init()
 
+    meta_keywords(site)
     check_keywords.run(site)
     site.soup.find("h2").string = "Title of the page"
 
@@ -147,6 +149,7 @@ def test_h2_2_kw():
 
     site = init()
 
+    meta_keywords(site)
     check_keywords.run(site)
     site.soup.find("h2").string = "Title of the page"
     site.soup.body.append(copy.copy(site.soup.find("h2")))
@@ -173,6 +176,7 @@ def test_h2_1_kws():
 
     site = init()
 
+    meta_keywords(site)
     check_keywords.run(site)
     site.soup.find("h2").string = "Title of the page description"
 
@@ -195,6 +199,7 @@ def test_h2_2_kws():
 
     site = init()
 
+    meta_keywords(site)
     check_keywords.run(site)
     site.soup.body.append(copy.copy(site.soup.find("h2")))
     site.soup.find("h2").string = "Title of the page description"

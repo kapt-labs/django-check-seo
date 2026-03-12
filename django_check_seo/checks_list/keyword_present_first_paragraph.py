@@ -40,8 +40,9 @@ def run(site):
     first_words = " ".join(first_words)
 
     highlighted, occurrence, found = utils.highlight_keywords_in_text(
-        first_words, site.keywords
+        first_words, site.keywords, normalize_apostrophes_flag=True
     )
+
     no_keywords.searched_in = [highlighted]
 
     # no keyword was found in first paragraph

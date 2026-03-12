@@ -120,14 +120,259 @@ h3 {
   display: inline-block;
 }
 
-.keywords li:not(:first-child):not(.no-keywords), .searched-in li:not(:first-child):not(.no-data){
+.keywords li:not(.no-keywords), .searched-in li:not(.no-data){
   font-family: monospace;
-  border: 1px solid #aaa;
-  box-shadow: 0 0 10px 1px #ddd;
 }
 
 .keywords .no-keywords, .searched-in .no-data{
   font-style: italic;
+}
+
+/* Keywords edit form (not inside .keywords list) */
+.keywords-edit-form {
+  margin-bottom: 3em;
+  text-align: center;
+}
+.keywords-edit-form-title {
+  color: #888;
+  font-weight: 500;
+  margin-bottom: 0.75em;
+}
+.keywords-edit-form-title-hint {
+  font-style: italic;
+  font-weight: 400;
+  color: #666;
+  margin-left: 0.35em;
+}
+.keywords-edit-form-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 12px 16px;
+}
+.keywords-edit-form-field {
+  margin: 0;
+  text-align: left;
+}
+.keywords-edit-form-field label {
+  display: block;
+  margin-bottom: 0.25em;
+  color: #666;
+  font-size: 0.95em;
+}
+.keywords-edit-textarea {
+  width: 100%;
+  min-width: 260px;
+  max-width: 400px;
+  padding: 8px 10px;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: 1em;
+  color: #666;
+  background-color: #fefefe;
+  box-sizing: border-box;
+  box-shadow: 0 0 10px 1px #ddd;
+  resize: vertical;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.keywords-edit-textarea:focus {
+  outline: none;
+  border-color: #888;
+  box-shadow: 0 0 12px 2px #ddd;
+}
+.keywords-edit-form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding-top: 1.6em;
+}
+.keywords-edit-form-actions .dcs-btn {
+  margin: 0;
+}
+.keywords-edit-actions {
+  margin-top: 1em;
+}
+/* Keywords list + button on same row (view mode) */
+.keywords-with-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 12px;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+.keywords-tags-label {
+  color: #888;
+  font-weight: 500;
+  margin: 0 8px 0 0;
+}
+.keywords-tags-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+}
+.keyword-item {
+  display: inline-flex;
+  align-items: center;
+}
+.keyword-tag {
+  color: #444;
+  background-color: #f5f5f5;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 5px 8px;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px 0 #ddd;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.keyword-tag:hover {
+  color: #666;
+  box-shadow: none;
+}
+.keyword-edit-inline {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.keyword-edit-inline form {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+}
+.keyword-edit-input {
+  padding: 4px 8px;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: 0.95em;
+  color: #333;
+  background-color: #fff;
+  box-shadow: 0 0 8px 1px #eee;
+  min-width: 120px;
+  box-sizing: border-box;
+}
+.keyword-edit-input:focus {
+  outline: none;
+  border-color: #6ab;
+  box-shadow: 0 0 10px 2px #e0f0f5;
+}
+.dcs-btn-ok {
+  padding: 4px 12px;
+  background-color: #2a6a6a;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9em;
+  cursor: pointer;
+}
+.dcs-btn-ok:hover {
+  background-color: #245a5a;
+}
+.dcs-btn-remove {
+  padding: 4px 10px;
+  color: #444;
+  background-color: #f8f1f1;
+  border: 1px solid #dad1d1;
+  border-radius: 4px;
+  font-size: 0.9em;
+  cursor: pointer;
+}
+.dcs-btn-add{
+  padding: 2px 6px;
+  font-size: 0.9em;
+}
+.dcs-btn-remove:hover {
+  background-color: #f0e9e9;
+  border-color: #c4b8b8;
+}
+.keyword-add-inline form {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+}
+.keywords-with-actions .keywords-edit-actions {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.keywords-with-actions .keywords .no-keywords {
+  font-style: italic;
+  color: #666;
+}
+/* Message "Modifications effectuées" below keywords: small, italic, green, fades out after 5s */
+.keywords-message {
+  font-size: 0.85em;
+  font-style: italic;
+  color: #2a0;
+  margin: 0.5em;
+  text-align: center;
+}
+.keywords-message-fade {
+  animation: keywords-message-fade-out 0.5s ease-in 5s forwards;
+}
+@keyframes keywords-message-fade-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+.dcs-btn {
+  padding: 4px 6px;
+  margin: 0 4px;
+  border: none;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+.dcs-btn-primary {
+  background-color: #2a0;
+  color: white;
+  box-shadow: 0 0 10px 1px #ddd;
+}
+.dcs-btn-primary:hover {
+  background-color: #280;
+  box-shadow: 0 0 12px 2px #ccc;
+}
+.dcs-btn-outline {
+  background-color: #fff;
+  color: #444;
+  border: 1px solid #aaa;
+  box-shadow: none;
+}
+.dcs-btn-outline:hover {
+  background-color: #f8f8f8;
+  border-color: #888;
+}
+.dcs-btn-secondary {
+  background-color: #eee;
+  color: #444;
+  border: 1px solid #aaa;
+}
+.dcs-btn-secondary:hover {
+  background-color: #ddd;
+}
+.dcs-btn-cancel {
+  background-color: #fee;
+  color: #444;
+  border: 1px solid #ddd;
+}
+
+.dcs-btn-cancel:hover {
+  background-color: #edd;
+  border-color: #ccc;
 }
 
 strong{

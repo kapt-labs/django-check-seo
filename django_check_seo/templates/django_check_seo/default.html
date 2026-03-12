@@ -5,6 +5,9 @@
     <meta charset="utf-8" />
     <title>Django check SEO</title>
     <link rel="stylesheet" type="text/css" href="{% static "django-check-seo/design.css" %}" />
+    {% if keywords_editable %}
+      <script src="{% static "django-check-seo/htmx.2.0.8.min.js" %}" defer></script>
+    {% endif %}
   </head>
   <body>
     <div id="content">
@@ -13,20 +16,30 @@
         <h1><img src="{% static "django-check-seo/logo-small.png" %}" alt="Django Check SEO" /></h1>
         <article>
 
-          <ul class="keywords">
-            <li class="title">{% trans "Keywords:" %}</li>
-            {% if keywords|length > 0 %}
-              {{ keywords|unordered_list }}
-            {% else %}
-              <li class="no-keywords">{% trans "no keywords!" %}</li>
-            {% endif %}
-          </ul>
+          {% if keywords_editable %}
+            {% include "django_check_seo/keywords_form.html" with keywords=keywords current_page_path=current_page_path message_success=False keywords_edit_url=keywords_edit_url keywords_cancel_url=keywords_cancel_url all_keywords=all_keywords %}
+          {% else %}
+            <ul class="keywords">
+              <li class="title">{% translate "Keywords:" %}</li>
+              {% if keywords|length > 0 %}
+                {{ keywords|unordered_list }}
+              {% else %}
+                <li class="no-keywords">{% translate "no keywords!" %}</li>
+              {% endif %}
+            </ul>
+          {% endif %}
 
+          {% if keywords_editable %}
+            <div id="checks"
+                 hx-trigger="refreshChecks from:body"
+                 hx-get="{{ checks_refresh_url }}"
+                 hx-swap="innerHTML">
+          {% endif %}
           <h2>
             {% autoescape off %}{{ nb_problems_warnings }}{% endautoescape %}
           </h2>
 
-          <h3>{% trans "on the public page" %}</h3>
+          <h3>{% translate "on the public page" %}</h3>
 
           <ul class="red-list list">
             {% for problem in problems %}
@@ -43,11 +56,14 @@
           {% if success|length > 0 %}
             <hr />
             <ul class="green-list list">
-              <h2>{%trans "Successful checks" %}</h2>
+              <h2>{% translate "Successful checks" %}</h2>
               {% for successful_check in success %}
                 {% include "django_check_seo/element.html" with element=successful_check %}
               {% endfor %}
             </ul>
+          {% endif %}
+          {% if keywords_editable %}
+            </div>
           {% endif %}
 
         </article>
@@ -57,17 +73,17 @@
       {% block seo_aside %}
         <aside>
           <article>
-            <h2>{% trans "About" %}</h2>
+            <h2>{% translate "About" %}</h2>
 
             <p>
-              {% trans "The main objective of this application is to check the aspects of the web pages involved in SEO, to ensure that the page content will be correctly crawled by search engines." %}
+              {% translate "The main objective of this application is to check the aspects of the web pages involved in SEO, to ensure that the page content will be correctly crawled by search engines." %}
             </p>
           </article>
 
           <hr />
 
           <article>
-            <h2>{% trans "Documentation" %}</h2>
+            <h2>{% translate "Documentation" %}</h2>
 
             <p>
               {% blocktrans %}
@@ -86,19 +102,19 @@
             <div class="list">
               <details>
                 <summary>
-                  {% trans "See extracted html" %}
+                  {% translate "See extracted html" %}
                 </summary>
                 <pre>{{ html }}</pre>
               </details>
               <details>
                 <summary>
-                  {% trans "See extracted content" %}
+                  {% translate "See extracted content" %}
                 </summary>
                 <pre>{{ text }}</pre>
               </details>
               <details>
                 <summary>
-                  {% trans "See settings" %}
+                  {% translate "See settings" %}
                 </summary>
                 <pre>{{ settings }}</pre>
               </details>
@@ -108,6 +124,74 @@
       {% endblock seo_aside %}
 
     </div>
+
+    {% if keywords_editable %}
+      <script>
+        (function() {
+          var block = document.getElementById('keywords-block');
+          if (!block) return;
+
+          function closeAllEditAndAdd() {
+            block.querySelectorAll('.keyword-edit-inline').forEach(function(inline) {
+              inline.style.display = 'none';
+              var item = inline.closest('.keyword-item');
+              if (item) {
+                var tag = item.querySelector('.keyword-tag');
+                if (tag) tag.style.display = '';
+              }
+            });
+            var addInline = block.querySelector('.keyword-add-inline');
+            var addBtn = block.querySelector('.dcs-btn-add');
+            var emptyItem = block.querySelector('.keyword-item-empty');
+            if (addInline) addInline.style.display = 'none';
+            if (addBtn) addBtn.style.display = '';
+            if (emptyItem) emptyItem.style.display = '';
+          }
+
+          block.addEventListener('click', function(e) {
+            var tag = e.target.closest('.keyword-tag');
+            if (tag) {
+              e.preventDefault();
+              var item = tag.closest('.keyword-item');
+              if (item && !item.classList.contains('keyword-item-empty')) {
+                var inline = item.querySelector('.keyword-edit-inline');
+                if (inline) {
+                  tag.style.display = 'none';
+                  inline.style.display = 'inline-flex';
+                  var input = inline.querySelector('.keyword-edit-input');
+                  if (input) { input.focus(); input.select(); }
+                }
+              }
+              return;
+            }
+            var addBtn = e.target.closest('.dcs-btn-add');
+            if (addBtn) {
+              e.preventDefault();
+              var addInline = block.querySelector('.keyword-add-inline');
+              var emptyItem = block.querySelector('.keyword-item-empty');
+              if (addInline) {
+                addInline.style.display = 'inline-flex';
+                var input = addInline.querySelector('.keyword-edit-input');
+                if (input) { input.value = ''; input.focus(); }
+              }
+              if (emptyItem) emptyItem.style.display = 'none';
+              addBtn.style.display = 'none';
+              return;
+            }
+          });
+
+          document.addEventListener('click', function(e) {
+            if (!block.contains(e.target)) {
+              closeAllEditAndAdd();
+              return;
+            }
+            if (e.target.closest('.keyword-tag') || e.target.closest('.dcs-btn-add')) return;
+            if (e.target.closest('.keyword-edit-inline') || e.target.closest('.keyword-add-inline')) return;
+            closeAllEditAndAdd();
+          });
+        })();
+      </script>
+    {% endif %}
 
   </body>
 </html>

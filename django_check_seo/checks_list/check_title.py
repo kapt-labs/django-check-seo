@@ -138,7 +138,7 @@ def run(site):
 
     title_text = titles[0].text.lower()
     highlighted, occurrence, found = utils.highlight_keywords_in_text(
-        title_text, site.keywords
+        title_text, site.keywords, normalize_apostrophes_flag=True
     )
     title_text_kw = [highlighted]
     keyword.found = found
