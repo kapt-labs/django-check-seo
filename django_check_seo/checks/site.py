@@ -1,6 +1,8 @@
 # Standard Library
 import re
 
+from bs4.element import Comment
+
 # Local application / specific library imports
 from ..conf import settings
 
@@ -28,6 +30,10 @@ class Site:
 
         # take all content
         self.content = self.soup.find_all("body")
+
+        # remove comments
+        for comment in self.soup.find_all(text=lambda text: isinstance(text, Comment)):
+            comment.extract()
 
         # if we have settings to remove unwanted blocks
         if settings.DJANGO_CHECK_SEO_EXCLUDE_CONTENT != "":
