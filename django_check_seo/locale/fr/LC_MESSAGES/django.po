@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-12 15:45+0100\n"
+"POT-Creation-Date: 2026-03-12 17:09+0100\n"
 "PO-Revision-Date: 2019-12-18 12:55+0100\n"
 "Last-Translator: kapt <dev@kapt.mobi>\n"
 "Language-Team: français <dev@kapt.mobi>\n"
@@ -293,6 +293,9 @@ msgstr "mot-clé"
 msgid "keywords"
 msgstr "mots-clés"
 
+msgid "Pages using this keyword"
+msgstr "Pages qui utilisent ce mot-clé"
+
 msgid "path"
 msgstr "chemin"
 
@@ -301,6 +304,9 @@ msgstr "page"
 
 msgid "pages"
 msgstr "pages"
+
+msgid "Number of keywords"
+msgstr "Nombre de mots-clés"
 
 msgid "View the Check SEO button (if using Django CMS) and use Django Check SEO"
 msgstr "Voir le bouton Check SEO (si utilisation de Django CMS) et utiliser Django Check SEO"

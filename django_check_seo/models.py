@@ -21,6 +21,8 @@ class Keyword(models.Model):
     def pages_using(self):
         return f"{', '.join([page.path for page in self.pages.all()])}"
 
+    pages_using.short_description = _("Pages using this keyword")
+
 
 class Page(models.Model):
     """Page identified by path (e.g. /fr/ma-page/). M2M to Keyword."""
@@ -42,6 +44,8 @@ class Page(models.Model):
 
     def nb_keywords(self):
         return self.keywords.count()
+
+    nb_keywords.short_description = _("Number of keywords")
 
 
 class DjangoCheckSEOPermissions(models.Model):
