@@ -18,6 +18,9 @@ class Keyword(models.Model):
     def __str__(self):
         return self.name
 
+    def pages_using(self):
+        return f"{', '.join([page.path for page in self.pages.all()])}"
+
 
 class Page(models.Model):
     """Page identified by path (e.g. /fr/ma-page/). M2M to Keyword."""
@@ -36,6 +39,9 @@ class Page(models.Model):
 
     def __str__(self):
         return self.path
+
+    def nb_keywords(self):
+        return self.keywords.count()
 
 
 class DjangoCheckSEOPermissions(models.Model):
