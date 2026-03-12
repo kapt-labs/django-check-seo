@@ -52,4 +52,5 @@ def run(site):
 
     else:
         no_keywords.name = _("Keywords found in first paragraph")
+        no_keywords.found = found
         site.success.append(no_keywords)

@@ -168,14 +168,14 @@ They are located in `tests` folder.
 
 ```sh
 # Create test venv & install dependencies
-python3 -m venv .venv && . .venv/bin/activate && python3 -m pip install django bs4 lxml djangocms-page-meta requests pytest pytest-django pytest-cov unidecode
+python3 -m venv .venv && . .venv/bin/activate && python3 -m pip install django bs4 lxml djangocms-page-meta requests pytest pytest-django pytest-cov unidecode "hypothesis[django]"
 ```
 
 ## Launch tests
 
 ```sh
-# Souce venv, launch tests (including coverage)
-. .venv/bin/activate && python3 -m pytest -s --cov-config=.coveragerc --cov=django_check_seo --cov-report term-missing
+# Souce venv, launch tests (including coverage & fuzzy testing)
+. .venv/bin/activate && python3 -m pytest -s --cov-config=.coveragerc --cov=django_check_seo --cov-report term-missing  # -s --hypothesis-verbosity=verbose  # if you want to see the values tested by hypothesis)
 ```
 
 ----

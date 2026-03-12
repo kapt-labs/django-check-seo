@@ -11,3 +11,4 @@ venv2
 venv3
 .coverage
 .python-version
+.hypothesis/

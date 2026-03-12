@@ -54,7 +54,7 @@ def test_keyword_url_kw():
             ]
             assert (
                 success.description
-                == 'Keywords in URL will help your users understand the organisation of your website, and are a small ranking factor for Google. On the other hand, Bing guidelines advises to "<i>keep [your URL] clean and keyword rich when possible</i>".'
+                == 'Keywords in URL will help your users understand the organisation of your website, and are a small ranking factor for Google. On the other hand, Bing guidelines advises to "<i>keep [your URL] clean and keyword rich when possible</i>".<br />Warning, Django Check SEO will try to find keywords in the URL without apostrophes ("pour-lenergie" will be found, but not "pour-l-energie").'
             )
 
 
