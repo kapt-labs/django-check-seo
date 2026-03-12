@@ -2,6 +2,79 @@ Changelog
 =========
 
 
+v2.0.0 (2026-03-12)
+-------------------
+
+Features
+~~~~~~~~
+- Add simple admin views for Page & Keyword models [Corentin Bettiol]
+- Lot of things! [Corentin Bettiol]
+
+  - close #54: django check seo can now handle kw!
+  - use htmx to add/update/rm kw on django check seo page
+  - add 3 new settings:
+    - 1) (default) keep old kw handling = find kw in html
+    - 2) (new) let django check seo handle keywords
+    - 3) (new, optional) display django check seo keywords handling in django check seo page
+  - update design
+  - fix checks for keywords in first paragraph & meta title
+  - add new test
+
+
+Bug fixes
+~~~~~~~~~
+- Fix names of columns in admin + update translations [Corentin Bettiol]
+- Fix tests, add hypothesis in tests (fuzzy testing) [Corentin Bettiol]
+
+  - update READM
+
+- Closes #53 [Corentin Bettiol]
+
+  - display "Check SEO" button in toolbar only if user has permission "django_check_seo.use_django_check_seo
+
+- Closes #44 [Corentin Bettiol]
+
+  - remove comments from content used by check
+
+- Run pre-commit on all files [Corentin Bettiol]
+- Closes #65 [Corentin Bettiol]
+
+  - fix words boundaries in keyword research
+  - move regex that's used for all kw research in it's own function (in checks/utils.py)
+  - update translation
+
+
+Documentation
+~~~~~~~~~~~~~
+- Add video in README showing how keywords work [Corentin Bettiol]
+- Update changelog [Corentin Bettiol]
+
+Maintenance
+~~~~~~~~~~~
+- Switch to ruff [Corentin Bettiol]
+- Refactor keyword checks and centralize helpers in utils [Corentin
+  Bettiol]
+
+  - add checks/utils.py helpers: normalize_apostrophes, get_heading_text, highlight_keywords_in_text
+  - use highlight_keywords_in_text in check_h1, check_title, check_h2, check_description, keyword_present_first_paragraph
+  - replace get_h1_text/get_h2_text by shared get_heading_text in check_h1 and check_h2
+  - replace pgettext by pgettext_lazy in all checks (check_h1, check_title, check_h2, check_description, check_keyword_url, check_keywords, keyword_present_first_paragraph
+
+
+Other
+~~~~~
+- REF: remove Python 2 support and update documentation [Corentin
+  Bettiol, dorian-adams]
+
+  - Deleted `launch_tests.sh` as it was no longer needed.
+  - Updated `CONTRIBUTING.md` to remove references to Python 2.
+  - Revised `README.md` to reflect new testing instructions without Python 2.
+  - Cleaned up `setup.cfg` by removing Python 2 specifications.
+  - Refactored URL routing in `urls.py` to eliminate Python 2 compatibility code.
+  - Made minor corrections in comments and documentation across various files
+
+
+
 v1.0.1 (2024-05-02)
 -------------------
 
