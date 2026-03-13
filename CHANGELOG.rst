@@ -2,6 +2,19 @@ Changelog
 =========
 
 
+v2.0.1 (2026-03-13)
+-------------------
+
+Bug fixes
+~~~~~~~~~
+- Fix style of keywords when not using django check seo's keywords
+  [Corentin Bettiol]
+
+Documentation
+~~~~~~~~~~~~~
+- Update changelog [Corentin Bettiol]
+
+
 v2.0.0 (2026-03-12)
 -------------------
 
