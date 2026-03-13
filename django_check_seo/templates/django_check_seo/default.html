@@ -22,7 +22,9 @@
             <ul class="keywords">
               <li class="title">{% translate "Keywords:" %}</li>
               {% if keywords|length > 0 %}
-                {{ keywords|unordered_list }}
+                {% for keyword in keywords %}
+                  <li class="dcs-btn-outline">{{ keyword }}</li>
+                {% endfor %}
               {% else %}
                 <li class="no-keywords">{% translate "no keywords!" %}</li>
               {% endif %}
