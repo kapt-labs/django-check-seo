@@ -2,6 +2,27 @@ Changelog
 =========
 
 
+v2.1.0 (2026-03-19)
+-------------------
+
+Features
+~~~~~~~~
+- Migrate configuration to pyproject.toml, remove deprecated files, and
+  add django CMS support to Page model [Corentin Bettiol]
+
+  - Moved configuration from setup.cfg, .flake8, .isort.cfg, and .coveragerc to pyproject.toml.
+  - Removed unused configuration files.
+  - Updated Page model to support CMS integration with new fields (cms_page_id, language) and added unique constraints.
+  - Enhanced keyword discovery methods to accommodate both path and CMS identifiers.
+  - Updated views and templates to handle CMS page analysis and keyword management.
+  - Added tests for CMS URL resolution and keyword discovery methods
+
+
+Documentation
+~~~~~~~~~~~~~
+- Update changelog [Corentin Bettiol]
+
+
 v2.0.1 (2026-03-13)
 -------------------
 
