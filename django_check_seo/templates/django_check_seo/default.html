@@ -14,10 +14,11 @@
 
       <main>
         <h1><img src="{% static "django-check-seo/logo-small.png" %}" alt="Django Check SEO" /></h1>
+        <p class="analysis-mode">{% if analysis_draft %}{% translate "Analysis of the draft page" %}{% else %}{% translate "Analysis of the published page" %}{% endif %}</p>
         <article>
 
           {% if keywords_editable %}
-            {% include "django_check_seo/keywords_form.html" with keywords=keywords current_page_path=current_page_path message_success=False keywords_edit_url=keywords_edit_url keywords_cancel_url=keywords_cancel_url all_keywords=all_keywords %}
+            {% include "django_check_seo/keywords_form.html" with keywords=keywords current_page_path=current_page_path use_cms_page_id=use_cms_page_id current_page_cms_id=current_page_cms_id current_page_language=current_page_language message_success=False keywords_edit_url=keywords_edit_url keywords_cancel_url=keywords_cancel_url all_keywords=all_keywords %}
           {% else %}
             <ul class="keywords">
               <li class="title">{% translate "Keywords:" %}</li>

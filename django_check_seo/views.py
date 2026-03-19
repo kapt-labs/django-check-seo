@@ -1,7 +1,7 @@
 import importlib
 import json
 import re
-from urllib.parse import quote
+from urllib.parse import quote, urlparse
 
 from bs4 import BeautifulSoup
 from django.contrib.auth.mixins import PermissionRequiredMixin
@@ -15,6 +15,11 @@ from .checks import site
 from .checks_list import launch_checks
 from .conf import settings
 from .models import Keyword, Page
+from .utils.cms_url_resolution import (
+    get_cms_url_for_check_seo,
+    get_preview_url_for_check_seo,
+)
+from .utils.keywords_discovery import get_cms_page_id_language_for_path
 
 
 def _quote_path(path):
@@ -30,16 +35,61 @@ def _parse_keywords_text(text):
     return [p.strip() for p in parts if p.strip()]
 
 
+def _normalize_path(path):
+    if not path:
+        return ""
+    path = (path or "").strip()
+    if path and not path.startswith("/"):
+        path = "/" + path
+    return path or "/"
+
+
 def _get_keywords_for_path(path):
     """Return list of keyword names for the given page path, or []."""
-    if not path:
+    path = _normalize_path(path)
+    if not path or path == "/":
         return []
-    path = path if path.startswith("/") else "/" + path
     try:
         page = Page.objects.get(path=path)
         return [kw.name for kw in page.keywords.all()]
     except Page.DoesNotExist:
         return []
+
+
+def _get_keywords_for_cms_page(cms_page_id, language):
+    """Return list of keyword names for the given (cms_page_id, language), or []."""
+    if cms_page_id is None:
+        return []
+    page = Page.objects.filter(cms_page_id=cms_page_id, language=language or "").first()
+    if not page:
+        return []
+    return [kw.name for kw in page.keywords.all()]
+
+
+def _get_keywords_for_page_identifier(path=None, cms_page_id=None, language=None):
+    """Return keyword names for the page identified by path or (cms_page_id, language)."""
+    if cms_page_id is not None:
+        return _get_keywords_for_cms_page(cms_page_id, language)
+    return _get_keywords_for_path(path or "")
+
+
+def _get_or_create_page_for_edit(path=None, cms_page_id=None, language=None):
+    """
+    Get or create Page by path or (cms_page_id, language). Return (page, path_display, use_cms_id).
+    """
+    if cms_page_id is not None:
+        page, _ = Page.objects.get_or_create(
+            cms_page_id=cms_page_id,
+            language=language or "",
+            defaults={"path": None},
+        )
+        path_display = page.path or f"/cms-page-{cms_page_id}/"
+        return (page, path_display, True)
+    path = _normalize_path(path)
+    if not path:
+        path = "/"
+    page, _ = Page.objects.get_or_create(path=path, defaults={})
+    return (page, path, False)
 
 
 def _get_all_keyword_names():
@@ -66,14 +116,26 @@ class IndexView(PermissionRequiredMixin, generic.base.TemplateView):
             *args, **kwargs
         )
 
-        client = Client()
         page = self.request.GET.get("page")
-        response = client.get(page, follow=True)
+        preview_url = get_preview_url_for_check_seo(page)
+        if preview_url:
+            url_to_fetch = preview_url
+            client = Client()
+            client.force_login(self.request.user)
+            response = client.get(url_to_fetch, follow=True)
+            analysis_draft = True
+        else:
+            url_to_fetch = get_cms_url_for_check_seo(page)
+            if url_to_fetch is None:
+                url_to_fetch = page
+            client = Client()
+            response = client.get(url_to_fetch, follow=True)
+            analysis_draft = False
 
         soup = BeautifulSoup(response.content, features="lxml")
 
-        # populate class with data
-        page_stats = site.Site(soup, page)
+        # populate class with data (use url_to_fetch so full_url is the page we actually checked)
+        page_stats = site.Site(soup, url_to_fetch)
 
         # populate keywords using configured discovery method (meta or model)
         discovery_func = _get_keywords_discovery_function()
@@ -89,26 +151,66 @@ class IndexView(PermissionRequiredMixin, generic.base.TemplateView):
             page_stats.success,
         )
 
+        context["analysis_draft"] = analysis_draft
         context["settings"] = json.dumps(settings.DJANGO_CHECK_SEO_SETTINGS, indent=4)
         context["html"] = page_stats.content
         context["text"] = page_stats.content_text
         context["keywords"] = page_stats.keywords
-        # Allow editing keywords on this page only when using model storage
         discovery_method = settings.DJANGO_CHECK_SEO_KEYWORDS_DISCOVERY_METHOD
-        context["keywords_editable"] = (
-            settings.DJANGO_CHECK_SEO_KEYWORDS_EDITABLE
-            and "model_keywords" in discovery_method
+        context["keywords_editable"] = settings.DJANGO_CHECK_SEO_KEYWORDS_EDITABLE and (
+            "model_keywords" in discovery_method
+            or "django_cms_model_keywords" in discovery_method
         )
-        context["current_page_path"] = page
+        # For form: identify page by path and/or (cms_page_id, language) when using django_cms_model_keywords
+        path_for_display = url_to_fetch
+        path_for_resolution = (
+            urlparse(url_to_fetch or "/").path if url_to_fetch else "/"
+        )
+        if not path_for_resolution or path_for_resolution == "/":
+            path_for_resolution = "/"
+        cms_page_id, cms_language = get_cms_page_id_language_for_path(
+            path_for_resolution
+        )
+        use_cms_page_id = (
+            context["keywords_editable"]
+            and "django_cms_model_keywords" in discovery_method
+            and cms_page_id is not None
+        )
+        context["current_page_path"] = path_for_display
+        context["use_cms_page_id"] = use_cms_page_id
+        context["current_page_cms_id"] = cms_page_id if use_cms_page_id else None
+        context["current_page_language"] = cms_language if use_cms_page_id else None
         if context["keywords_editable"]:
             base = self.request.path.rstrip("/")
             context["keywords_edit_url"] = base + "/keywords-edit/"
-            context["keywords_cancel_url"] = (
-                base + "/keywords-edit/?path=" + _quote_path(page) + "&show_form=0"
-            )
-            context["checks_refresh_url"] = (
-                self.request.path + "?page=" + _quote_path(page) + "&fragment=checks"
-            )
+            if use_cms_page_id:
+                context["keywords_cancel_url"] = (
+                    base
+                    + "/keywords-edit/?cms_page_id="
+                    + str(cms_page_id)
+                    + "&language="
+                    + quote(cms_language or "", safe="")
+                    + "&show_form=0"
+                )
+                context["checks_refresh_url"] = (
+                    self.request.path
+                    + "?page="
+                    + _quote_path(path_for_display)
+                    + "&fragment=checks"
+                )
+            else:
+                context["keywords_cancel_url"] = (
+                    base
+                    + "/keywords-edit/?path="
+                    + _quote_path(path_for_display)
+                    + "&show_form=0"
+                )
+                context["checks_refresh_url"] = (
+                    self.request.path
+                    + "?page="
+                    + _quote_path(path_for_display)
+                    + "&fragment=checks"
+                )
             context["all_keywords"] = _get_all_keyword_names()
 
         nb_problems = len(context["problems"])
@@ -156,15 +258,23 @@ class IndexView(PermissionRequiredMixin, generic.base.TemplateView):
         return super().render_to_response(context, **response_kwargs)
 
 
-def _base_urls(request, path_value):
+def _base_urls(request, path_value=None, cms_page_id=None, language=None):
     """Build keywords_edit_url and keywords_cancel_url for the fragment."""
     base = request.path
+    if cms_page_id is not None:
+        cancel = (
+            base
+            + "?cms_page_id="
+            + str(cms_page_id)
+            + "&language="
+            + quote(language or "", safe="")
+            + "&show_form=0"
+        )
+    else:
+        cancel = base + "?path=" + _quote_path(path_value or "") + "&show_form=0"
     return {
         "keywords_edit_url": base,
-        "keywords_cancel_url": base
-        + "?path="
-        + _quote_path(path_value)
-        + "&show_form=0",
+        "keywords_cancel_url": cancel,
     }
 
 
@@ -175,24 +285,52 @@ class KeywordsEditView(PermissionRequiredMixin, generic.View):
 
     def get(self, request):
         path_value = request.GET.get("path") or ""
-        keywords = _get_keywords_for_path(path_value)
+        cms_page_id = request.GET.get("cms_page_id")
+        if cms_page_id is not None:
+            try:
+                cms_page_id = int(cms_page_id)
+            except (TypeError, ValueError):
+                cms_page_id = None
+        language = request.GET.get("language") or ""
+        keywords = _get_keywords_for_page_identifier(
+            path=path_value or None,
+            cms_page_id=cms_page_id,
+            language=language,
+        )
+        use_cms = cms_page_id is not None
         context = {
             "keywords": keywords,
-            "current_page_path": path_value,
+            "current_page_path": path_value
+            or (f"/cms-page-{cms_page_id}/" if use_cms else ""),
             "message_success": False,
             "keywords_text": ", ".join(keywords),
             "all_keywords": _get_all_keyword_names(),
-            **_base_urls(request, path_value),
+            "use_cms_page_id": use_cms,
+            "current_page_cms_id": cms_page_id if use_cms else None,
+            "current_page_language": language if use_cms else None,
+            **_base_urls(
+                request,
+                path_value=path_value,
+                cms_page_id=cms_page_id,
+                language=language,
+            ),
         }
         return render(request, "django_check_seo/keywords_form.html", context)
 
     def post(self, request):
         path_value = (request.POST.get("path") or "").strip()
-        if not path_value:
-            path_value = "/"
-        if not path_value.startswith("/"):
-            path_value = "/" + path_value
-        page, _ = Page.objects.get_or_create(path=path_value, defaults={})
+        cms_page_id = request.POST.get("cms_page_id")
+        if cms_page_id is not None:
+            try:
+                cms_page_id = int(cms_page_id)
+            except (TypeError, ValueError):
+                cms_page_id = None
+        language = (request.POST.get("language") or "").strip()
+        page, path_display, use_cms = _get_or_create_page_for_edit(
+            path=path_value if path_value else None,
+            cms_page_id=cms_page_id,
+            language=language,
+        )
         action = (request.POST.get("action") or "").strip()
 
         if action == "update":
@@ -234,11 +372,19 @@ class KeywordsEditView(PermissionRequiredMixin, generic.View):
         keywords = [kw.name for kw in page.keywords.all()]
         context = {
             "keywords": keywords,
-            "current_page_path": path_value,
+            "current_page_path": path_display,
             "message_success": True,
             "keywords_text": "",
             "all_keywords": _get_all_keyword_names(),
-            **_base_urls(request, path_value),
+            "use_cms_page_id": use_cms,
+            "current_page_cms_id": page.cms_page_id if use_cms else None,
+            "current_page_language": page.language if use_cms else None,
+            **_base_urls(
+                request,
+                path_value=path_display,
+                cms_page_id=page.cms_page_id if use_cms else None,
+                language=page.language if use_cms else None,
+            ),
         }
         response = render(request, "django_check_seo/keywords_form.html", context)
         response["HX-Trigger"] = "refreshChecks"

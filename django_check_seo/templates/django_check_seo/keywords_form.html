@@ -20,7 +20,12 @@
                   hx-target="#keywords-block"
                   hx-swap="innerHTML">
               {% csrf_token %}
-              <input type="hidden" name="path" value="{{ current_page_path }}" />
+              {% if use_cms_page_id %}
+                <input type="hidden" name="cms_page_id" value="{{ current_page_cms_id }}" />
+                <input type="hidden" name="language" value="{{ current_page_language }}" />
+              {% else %}
+                <input type="hidden" name="path" value="{{ current_page_path }}" />
+              {% endif %}
               <input type="hidden" name="action" value="update" />
               <input type="hidden" name="old_keyword" value="{{ kw }}" />
               <input type="text" class="keyword-edit-input" name="new_keyword" value="{{ kw }}" list="keywords-datalist" />
@@ -32,7 +37,12 @@
                   hx-confirm="{% translate 'Are you sure you want to delete this keyword?' %}"
                   hx-swap="innerHTML">
               {% csrf_token %}
-              <input type="hidden" name="path" value="{{ current_page_path }}" />
+              {% if use_cms_page_id %}
+                <input type="hidden" name="cms_page_id" value="{{ current_page_cms_id }}" />
+                <input type="hidden" name="language" value="{{ current_page_language }}" />
+              {% else %}
+                <input type="hidden" name="path" value="{{ current_page_path }}" />
+              {% endif %}
               <input type="hidden" name="action" value="remove" />
               <input type="hidden" name="keyword" value="{{ kw }}" />
               <button type="submit" class="dcs-btn dcs-btn-remove">{% translate "Delete" %}</button>
@@ -51,7 +61,12 @@
             hx-target="#keywords-block"
             hx-swap="innerHTML">
         {% csrf_token %}
-        <input type="hidden" name="path" value="{{ current_page_path }}" />
+        {% if use_cms_page_id %}
+          <input type="hidden" name="cms_page_id" value="{{ current_page_cms_id }}" />
+          <input type="hidden" name="language" value="{{ current_page_language }}" />
+        {% else %}
+          <input type="hidden" name="path" value="{{ current_page_path }}" />
+        {% endif %}
         <input type="hidden" name="action" value="add" />
         <input type="text" class="keyword-edit-input" name="keyword" value="" list="keywords-datalist" placeholder="{% translate 'keyword' %}" />
         <button type="submit" class="dcs-btn dcs-btn-ok">{% translate "OK" %}</button>

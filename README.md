@@ -11,14 +11,13 @@ In other words, django-check-seo will tell you if you have problems concerning a
 
 # Requirements
 
-- Python 3.8+ & Django 2.2+  
+- Python 3.8+ & Django 2.2+ (*optional: django CMS 4+*)  
     > *Still using Python 2? Version <0.6 [from this branch](https://github.com/kapt-labs/django-check-seo/tree/python2) is for you!*
-- Django Check SEO relies on Django site framework + define a new permission
-- beautifulsoup4 (>= 4.7.0)
-- htmx (a version is included in Django Check SEO static files)
+- Django Check SEO relies on [Django Site framework](https://docs.djangoproject.com/en/5.2/ref/contrib/sites/) + [permissions](https://docs.djangoproject.com/en/5.2/topics/auth/default/#permissions-and-authorization)
+- [beautifulsoup4](https://beautiful-soup-4.readthedocs.io/en/latest/) (>= 4.7.0)
+- [htmx](https://htmx.org/) (a version is included in Django Check SEO static files)
 
 # Install
-
 
 1. Install the module from [PyPI](https://pypi.org/project/django-check-seo/):
     ```
@@ -40,7 +39,7 @@ In other words, django-check-seo will tell you if you have problems concerning a
 
 6. Add the permission (`use_django_check_seo`) to the users/groups you want to let access Django Check SEO.
 
-7. *(optional) Configure the settings (see [config](#config) below).*
+7. *(optional) Configure the settings (see [below](#settings) ).*
 
 8. ![that's all folks!](https://i.imgur.com/o2Tcd2E.png)
 
@@ -48,13 +47,13 @@ In other words, django-check-seo will tell you if you have problems concerning a
 
 # Misc
 
-This application may be used with or without `django-cms` (a "Check SEO" button will appear in the CMS toolbar if you're using django-cms).
+This application may be used with or without [django CMS](https://www.django-cms.org/en/) (a "Check SEO" button will appear in the CMS toolbar if you're using django-cms).
 
-If you're not using Django CMS (only Django), here's the link format to access your pages reports (with or without using i18n):
+If you're not using Django CMS (only Django), here's the link format you need to use in order to access your pages reports (with or without using i18n):
 
 ```
-https://example.com/django-check-seo/?page=/example-page/
-https://example.com/fr/django-check-seo/?page=/example-page/
+https://example.com/django-check-seo/?page=/slug-of-page-to-check/
+https://example.com/en/django-check-seo/?page=/slug-of-page-to-check/
 ```
 
 ----
@@ -63,10 +62,10 @@ https://example.com/fr/django-check-seo/?page=/example-page/
 
 ## Keywords handling ![**new in 2.0.0**](https://img.shields.io/badge/new_in-2.0.0-green)
 
-Keywords are discovered via a configurable function. Set it's import path in your settings:
+Keywords are discovered via a configurable function. Set its import path in your settings:
 
 ```py
-# Default: read from html page <meta name="keywords" content="..."> (comma-separated)
+# This is the default if not set: read from html page <meta name="keywords" content="..."> (comma-separated)
 DJANGO_CHECK_SEO_KEYWORDS_DISCOVERY_METHOD = "django_check_seo.utils.keywords_discovery.meta_keywords"
 ```
 
@@ -77,6 +76,17 @@ DJANGO_CHECK_SEO_KEYWORDS_DISCOVERY_METHOD = "django_check_seo.utils.keywords_di
 # Set/update keywords through Django Check SEO page:
 DJANGO_CHECK_SEO_KEYWORDS_EDITABLE = True
 ```
+
+For **Django CMS** projects, you can use identification by CMS page id + language so that changing a page slug does not break the link to its keywords:
+
+```py
+DJANGO_CHECK_SEO_KEYWORDS_DISCOVERY_METHOD = "django_check_seo.utils.keywords_discovery.django_cms_model_keywords"
+DJANGO_CHECK_SEO_KEYWORDS_EDITABLE = True
+```
+
+This method is **hybrid**: CMS pages are identified by `(cms_page_id, language)`; apphooks or other non-CMS URLs are still identified by path. On non-translated sites, `language` can be left empty or set to your single language code.
+
+**Django CMS edit and preview URLs**: When the URL you pass to Check SEO is a CMS edit or preview URL (e.g. `/en/admin/cms/placeholder/object/3/edit/372/`), django-check-seo detects it and either fetches the **draft** content (preview URL, using your session so no extra login) or the **published** page (by resolving to the public URL via PageContent/Page models). The result page shows whether the analysis is for the draft or the published page. Optional setting: `DJANGO_CHECK_SEO_CMS_EDIT_URL_TO_PUBLIC` (default `True`) to enable resolving edit/preview URLs to the public URL when not using draft.
 
 You're free to implement your own solution to handle keywords.
 
@@ -181,7 +191,7 @@ python3 -m venv .venv && . .venv/bin/activate && python3 -m pip install django b
 
 ```sh
 # Souce venv, launch tests (including coverage & fuzzy testing)
-. .venv/bin/activate && python3 -m pytest -s --cov-config=.coveragerc --cov=django_check_seo --cov-report term-missing  # -s --hypothesis-verbosity=verbose  # if you want to see the values tested by hypothesis)
+. .venv/bin/activate && python3 -m pytest -s --cov=django_check_seo --cov-report term-missing  # -s --hypothesis-verbosity=verbose  # if you want to see the values tested by hypothesis)
 ```
 
 ----

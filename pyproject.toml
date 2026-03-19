@@ -1,6 +1,61 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "django-check-seo"
+version = "2.0.1"
+description = "Django Check SEO will check the SEO aspects of your site for you, and will provide advice in case of problems."
+readme = "README.md"
+license = { text = "GPL-3.0" }
+requires-python = ">=3.7"
+authors = [
+    { name = "Dev Kapt", email = "dev@kapt.mobi" },
+]
+keywords = ["django", "seo", "check"]
+classifiers = [
+    "Environment :: Web Environment",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Framework :: Django",
+    "Development Status :: 5 - Production/Stable",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+]
+dependencies = [
+    "beautifulsoup4",
+    "lxml",
+    "unidecode",
+]
+
+[project.urls]
+Homepage = "https://github.com/kapt-labs/django-check-seo"
+
+[tool.setuptools.packages.find]
+include = ["django_check_seo*"]
+
 [tool.ruff]
 line-length = 88
 target-version = "py37"
 
 [tool.ruff.lint]
 extend-select = ["I"]  # isort (import sorting)
+
+[tool.pytest.ini_options]
+python_files = ["tests.py", "test_*.py", "*_tests.py"]
+DJANGO_SETTINGS_MODULE = "tests_settings"
+
+[tool.coverage.run]
+omit = [
+    "django_check_seo/checks/*",
+    "django_check_seo/conf/*",
+    "*/__init__.py",
+    "django_check_seo/urls.py",
+    "django_check_seo/views.py",
+    "django_check_seo/check_list/launch_checks.py",
+    "django_check_seo/apps.py",
+    "django_check_seo/cms_toolbars.py",
+    "django_check_seo/checks_list/launch_checks.py",
+]

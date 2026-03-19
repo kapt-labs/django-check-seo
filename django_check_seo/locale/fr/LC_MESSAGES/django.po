@@ -320,6 +320,12 @@ msgstr "aucun mot-clé !"
 msgid "on the public page"
 msgstr "sur la page publique"
 
+msgid "Analysis of the draft page"
+msgstr "Analyse du brouillon"
+
+msgid "Analysis of the published page"
+msgstr "Analyse de la page publiée"
+
 msgid "Successful checks"
 msgstr "Vérifications réussies"
 

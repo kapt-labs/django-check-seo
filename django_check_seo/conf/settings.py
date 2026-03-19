@@ -28,14 +28,21 @@ DJANGO_CHECK_SEO_EXCLUDE_CONTENT = getattr(
 
 # Keywords discovery: import path to a function (site) -> None that sets site.keywords.
 # Built-in: django_check_seo.utils.keywords_discovery.meta_keywords (from meta tag),
-#          django_check_seo.utils.keywords_discovery.model_keywords (from Page/Keyword models).
+#          django_check_seo.utils.keywords_discovery.model_keywords (from Page/Keyword by path),
+#          django_check_seo.utils.keywords_discovery.django_cms_model_keywords (by cms_page_id+language, fallback path).
 DJANGO_CHECK_SEO_KEYWORDS_DISCOVERY_METHOD = getattr(
     settings,
     "DJANGO_CHECK_SEO_KEYWORDS_DISCOVERY_METHOD",
     "django_check_seo.utils.keywords_discovery.meta_keywords",
 )
 
-# When True and discovery is model_keywords, show editable keywords form on Check SEO page.
+# When True and discovery is model_keywords or django_cms_model_keywords, show editable keywords form.
 DJANGO_CHECK_SEO_KEYWORDS_EDITABLE = getattr(
     settings, "DJANGO_CHECK_SEO_KEYWORDS_EDITABLE", False
+)
+
+# When True, resolve Django CMS edit/preview URLs to the public page URL for SEO checks (default True).
+# When the "page" param is a CMS edit or preview URL, it is resolved via PageContent/Page models.
+DJANGO_CHECK_SEO_CMS_EDIT_URL_TO_PUBLIC = getattr(
+    settings, "DJANGO_CHECK_SEO_CMS_EDIT_URL_TO_PUBLIC", True
 )

@@ -71,6 +71,15 @@ h1{
   text-align: center;
 }
 
+.analysis-mode {
+  font-weight: 100;
+  text-align: center;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 0.25em;
+  margin-bottom: 1em;
+}
+
 h2 {
   font-size : 1.7em;
   margin-bottom: 0;
