@@ -1,7 +1,7 @@
 import importlib
 import json
 import re
-from urllib.parse import quote, urlparse
+from urllib.parse import quote
 
 from bs4 import BeautifulSoup
 from django.contrib.auth.mixins import PermissionRequiredMixin
@@ -16,10 +16,10 @@ from .checks_list import launch_checks
 from .conf import settings
 from .models import Keyword, Page
 from .utils.cms_url_resolution import (
+    get_cms_page_id_language,
     get_cms_url_for_check_seo,
     get_preview_url_for_check_seo,
 )
-from .utils.keywords_discovery import get_cms_page_id_language_for_path
 
 
 def _quote_path(path):
@@ -134,8 +134,23 @@ class IndexView(PermissionRequiredMixin, generic.base.TemplateView):
 
         soup = BeautifulSoup(response.content, features="lxml")
 
-        # populate class with data (use url_to_fetch so full_url is the page we actually checked)
-        page_stats = site.Site(soup, url_to_fetch)
+        # full_url is the canonical public URL for SEO checks (URL length, keywords in URL, …).
+        # In draft mode we still fetch preview HTML but compare against the published path.
+        if analysis_draft:
+            public_url_for_checks = get_cms_url_for_check_seo(page)
+            full_url_for_checks = (
+                public_url_for_checks if public_url_for_checks else url_to_fetch
+            )
+        else:
+            full_url_for_checks = url_to_fetch
+
+        page_stats = site.Site(soup, full_url_for_checks)
+
+        # Resolve (cms_page_id, language) from the same URL used for checks (public when available)
+        cms_page_id, cms_language = get_cms_page_id_language(full_url_for_checks)
+        if cms_page_id is not None:
+            page_stats.cms_page_id = cms_page_id
+            page_stats.cms_language = cms_language or ""
 
         # populate keywords using configured discovery method (meta or model)
         discovery_func = _get_keywords_discovery_function()
@@ -163,14 +178,6 @@ class IndexView(PermissionRequiredMixin, generic.base.TemplateView):
         )
         # For form: identify page by path and/or (cms_page_id, language) when using django_cms_model_keywords
         path_for_display = url_to_fetch
-        path_for_resolution = (
-            urlparse(url_to_fetch or "/").path if url_to_fetch else "/"
-        )
-        if not path_for_resolution or path_for_resolution == "/":
-            path_for_resolution = "/"
-        cms_page_id, cms_language = get_cms_page_id_language_for_path(
-            path_for_resolution
-        )
         use_cms_page_id = (
             context["keywords_editable"]
             and "django_cms_model_keywords" in discovery_method

@@ -12,7 +12,7 @@ class Site:
     - the settings
     - the soup (from beautifulsoup)
     - the content (all html except header & menu)
-    - the full url
+    - the full url (canonical public URL for URL-based checks, even when HTML is from draft preview)
     - the keywords
     - the problems & warnings
     """
@@ -22,7 +22,7 @@ class Site:
 
         Arguments:
             soup {bs4.element} -- beautiful soup content (html)
-            full_url {str} -- full url
+            full_url {str} -- canonical URL used for SEO checks (e.g. public path, not CMS preview)
         """
         self.settings = settings
 

@@ -88,3 +88,17 @@ def test_django_cms_model_keywords_by_cms_id():
     # cms_page_id+language has keywords and get_display_identifier works.
     assert [kw.name for kw in p.keywords.all()] == ["cms-kw"]
     assert "42" in p.get_display_identifier() and "fr" in p.get_display_identifier()
+
+
+@pytest.mark.django_db
+def test_django_cms_model_keywords_uses_site_cms_id_when_set():
+    """When site.cms_page_id (and cms_language) are set (draft mode), use them."""
+    kw1 = Keyword.objects.create(name="draft-kw")
+    p = Page.objects.create(cms_page_id=10, language="en", path=None)
+    p.keywords.add(kw1)
+    # Simulate draft: full_url is a preview path (not in PageUrl), but site has cms ids.
+    site_obj = _make_site("/en/admin/cms/placeholder/object/3/preview/372/")
+    site_obj.cms_page_id = 10
+    site_obj.cms_language = "en"
+    django_cms_model_keywords(site_obj)
+    assert site_obj.keywords == ["draft-kw"]
