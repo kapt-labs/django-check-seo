@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "django-check-seo"
-version = "2.0.1"
+version = "2.1.0"
 description = "Django Check SEO will check the SEO aspects of your site for you, and will provide advice in case of problems."
 readme = "README.md"
 license = { text = "GPL-3.0" }
