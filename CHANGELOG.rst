@@ -2,6 +2,26 @@ Changelog
 =========
 
 
+v2.1.1 (2026-03-19)
+-------------------
+
+Bug fixes
+~~~~~~~~~
+- Fix CMS integration and URL handling in SEO checks for CMS preview
+  pages [Corentin Bettiol]
+
+  - Django check seo is now able to resolve (cms_page_id, language) from public URLs and draft previews of CMS pages.
+  - Update views to use canonical URLs for SEO checks (for keywords discovery) instead of the placeholder/21/preview/12345/ url.
+  - Remove deprecated code related to path resolution.
+  - Add tests for new CMS page ID and language resolution methods.
+  - Remove uv.lock from project
+
+
+Documentation
+~~~~~~~~~~~~~
+- Update changelog [Corentin Bettiol]
+
+
 v2.1.0 (2026-03-19)
 -------------------
 
